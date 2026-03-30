@@ -1153,6 +1153,142 @@
     }
     body.dark .pricing-card { background: var(--bg2); }
     body.dark .pricing-card--pilot { border-color: rgba(237,236,234,0.13); }
+
+  /* ══ MOBILE RESPONSIVE ══ */
+  @media (max-width: 768px) {
+
+    /* Landing */
+    #landing {
+      padding: 0 24px;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 30vh;
+    }
+    #brandLogoSvg {
+      width: 100% !important;
+      max-width: 320px;
+      height: auto;
+    }
+    .chat-btn {
+      margin-top: 32px;
+    }
+
+    /* Top bar & menu */
+    #topLogo {
+      width: 120px !important;
+    }
+    #menuWrap {
+      top: 20px !important;
+      right: 20px !important;
+    }
+    #dropMenu {
+      width: 220px !important;
+      right: 0 !important;
+      left: auto !important;
+    }
+
+    /* Pages */
+    .page-inner {
+      padding: 80px 24px 80px !important;
+      max-width: 100% !important;
+    }
+    .page-title {
+      font-size: clamp(28px, 8vw, 42px) !important;
+      line-height: 1.15 !important;
+    }
+    .page-eyebrow {
+      font-size: 9px !important;
+    }
+
+    /* Services grid — single column */
+    .services-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* About stats — stack */
+    .about-stat-row {
+      grid-template-columns: 1fr 1fr !important;
+      gap: 12px !important;
+    }
+
+    /* Pricing grid — single column */
+    .pricing-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* News items */
+    .news-item {
+      flex-direction: column !important;
+    }
+    .news-item-img {
+      width: 100% !important;
+      height: 180px !important;
+    }
+
+    /* Article stats */
+    .article-stats {
+      grid-template-columns: 1fr !important;
+      gap: 12px !important;
+    }
+
+    /* Article flow grid */
+    .article-flow-grid {
+      grid-template-columns: 1fr 1fr !important;
+    }
+
+    /* Article checklist grid */
+    .article-checklist-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Article items — stack date below */
+    .article-item {
+      flex-direction: column !important;
+      gap: 8px !important;
+    }
+    .article-item-date {
+      text-align: left !important;
+    }
+
+    /* Chat input */
+    .input-area {
+      padding: 12px 16px 20px !important;
+    }
+    .input-box {
+      padding: 12px 14px !important;
+    }
+
+    /* Method steps */
+    .method-row {
+      gap: 16px !important;
+    }
+
+    /* Back button */
+    #backBtn {
+      left: 20px !important;
+      top: 20px !important;
+    }
+
+    /* Contact form */
+    .contact-input {
+      font-size: 16px !important; /* prevents iOS zoom on focus */
+    }
+  }
+
+  @media (max-width: 420px) {
+    .page-title {
+      font-size: 26px !important;
+    }
+    .about-stat-row {
+      grid-template-columns: 1fr !important;
+    }
+    .article-flow-grid {
+      grid-template-columns: 1fr !important;
+    }
+    #brandLogoSvg {
+      max-width: 260px;
+    }
+  }
 </style>
 </head>
 <body>
