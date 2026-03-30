@@ -1154,140 +1154,270 @@
     body.dark .pricing-card { background: var(--bg2); }
     body.dark .pricing-card--pilot { border-color: rgba(237,236,234,0.13); }
 
-  /* ══ MOBILE RESPONSIVE ══ */
+  /* ════════════════════════════════════════
+     MOBILE — full audit, every element
+     ════════════════════════════════════════ */
   @media (max-width: 768px) {
 
-    /* Landing */
-    #landing {
-      padding: 0 24px;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 30vh;
+    /* ── TOP BAR
+       Desktop: height 100px, top/left/right 10px
+       Mobile: reduce to 60px so it doesn't eat the screen ── */
+    #topBar {
+      height: 60px !important;
+      top: 8px !important;
+      left: 8px !important;
+      right: 8px !important;
     }
-    #brandLogoSvg {
-      width: 100% !important;
-      max-width: 320px;
-      height: auto;
+
+    /* ── TOP LOGO
+       Desktop: right 65px, top 51px — way off screen on mobile
+       Mobile: right 16px, vertically centred in the 60px bar ── */
+    #topLogo {
+      top: 22px !important;
+      right: 16px !important;
+      left: auto !important;
+      height: 14px !important;
+      width: auto !important;
+    }
+
+    /* ── MENU ICON WRAP
+       Desktop: left 65px, top 44px — too far right
+       Mobile: left 16px, inside the bar ── */
+    #menuWrap {
+      top: 24px !important;
+      left: 16px !important;
+    }
+
+    /* ── DROP MENU
+       Desktop: fixed 260px wide, slides in from left
+       Mobile: full width panel, slides down from top bar
+       Also override the translateX animation to translateY ── */
+    #dropMenu {
+      top: 76px !important;
+      left: 8px !important;
+      right: 8px !important;
+      bottom: 8px !important;
+      width: auto !important;
+      transform: translateY(-16px) !important;
+    }
+    #menuWrap.open #dropMenu {
+      transform: translateY(0) !important;
+    }
+
+    /* ── BACK BUTTON
+       Desktop: bottom 50px, left 65px — completely wrong on mobile
+       Mobile: top of screen, left aligned with menu ── */
+    #backBtn {
+      bottom: auto !important;
+      top: 24px !important;
+      left: 16px !important;
+    }
+
+    /* ── LANDING PAGE
+       Desktop: brand-logo is position:absolute centered with translate(-50%, calc(-50% - 50px))
+       Desktop: chat-btn is position:absolute bottom:150px centered
+       Mobile: convert landing to flexbox column so children stack naturally ── */
+    #landing {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 40px !important;
+    }
+    .brand-logo {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      transform: none !important;
+      width: 78vw !important;
+      max-width: 300px !important;
+      height: auto !important;
     }
     .chat-btn {
-      margin-top: 32px;
-    }
-
-    /* Top bar & menu */
-    #topLogo {
-      width: 120px !important;
-    }
-    #menuWrap {
-      top: 20px !important;
-      right: 20px !important;
-    }
-    #dropMenu {
-      width: 220px !important;
-      right: 0 !important;
+      position: relative !important;
+      bottom: auto !important;
       left: auto !important;
+      transform: none !important;
     }
 
-    /* Pages */
+    /* ── PAGES
+       Desktop: padding 140px 65px 100px, max-width 900px
+       Mobile: tighter padding, full width ── */
     .page-inner {
-      padding: 80px 24px 80px !important;
+      padding: 80px 20px 80px !important;
       max-width: 100% !important;
     }
+
+    /* ── PAGE TITLE
+       Desktop: clamp(36px, 5vw, 56px) — 5vw on 375px = 18px (too small via clamp)
+       Actually at 375px, 5vw = 18.75px so clamp floor of 36px kicks in — that's fine
+       But padding was 65px desktop, now 20px — title fits.
+       Reduce max slightly for comfort ── */
     .page-title {
-      font-size: clamp(28px, 8vw, 42px) !important;
-      line-height: 1.15 !important;
-    }
-    .page-eyebrow {
-      font-size: 9px !important;
+      font-size: clamp(26px, 6.5vw, 42px) !important;
+      margin-bottom: 36px !important;
     }
 
-    /* Services grid — single column */
+    /* ── PAGE BODY
+       max-width: 580px is fine on mobile since page-inner is full width ── */
+    .page-body {
+      max-width: 100% !important;
+    }
+
+    /* ── PAGE DIVIDER — margin 64px both sides, reduce on mobile ── */
+    .page-divider {
+      margin: 40px 0 !important;
+    }
+
+    /* ── SERVICES GRID
+       Desktop: 2 columns
+       Mobile: 1 column ── */
     .services-grid {
       grid-template-columns: 1fr !important;
     }
 
-    /* About stats — stack */
+    /* ── METHOD STEPS — already 48px + 1fr, fine on mobile ── */
+
+    /* ── ABOUT STATS
+       Desktop: 3 columns
+       Mobile: 2 columns (values are short enough) ── */
     .about-stat-row {
       grid-template-columns: 1fr 1fr !important;
-      gap: 12px !important;
     }
 
-    /* Pricing grid — single column */
-    .pricing-grid {
-      grid-template-columns: 1fr !important;
+    /* ── NEWS CARDS
+       min-height: 400px — fine, but content padding was 32px 36px
+       Mobile: reduce padding ── */
+    .news-card-content {
+      padding: 20px 20px !important;
+    }
+    .news-card-title {
+      font-size: 22px !important;
+    }
+    .news-card-desc {
+      max-width: 100% !important;
     }
 
-    /* News items */
-    .news-item {
-      flex-direction: column !important;
-    }
-    .news-item-img {
-      width: 100% !important;
-      height: 180px !important;
+    /* ── ARTICLE PAGE TITLE
+       Desktop: clamp(40px, 6vw, 68px) — 6vw on 375px = 22px, clamp gives 40px
+       Reduce to something more comfortable ── */
+    .article-page-title {
+      font-size: clamp(28px, 7vw, 44px) !important;
     }
 
-    /* Article stats */
+    /* ── ARTICLE META — spans fine on mobile ── */
+
+    /* ── ARTICLE INTRO — fine as is ── */
+    .article-intro {
+      max-width: 100% !important;
+      font-size: 16px !important;
+    }
+
+    /* ── ARTICLE STATS
+       Desktop: 3 columns
+       Mobile: 2 columns ── */
     .article-stats {
-      grid-template-columns: 1fr !important;
-      gap: 12px !important;
+      grid-template-columns: 1fr 1fr !important;
+      margin: 28px 0 !important;
     }
 
-    /* Article flow grid */
+    /* ── ARTICLE TOPIC TITLE
+       Desktop: 36px
+       Mobile: reduce ── */
+    .article-topic-title {
+      font-size: 24px !important;
+      margin-bottom: 24px !important;
+    }
+
+    /* ── ARTICLE ITEM
+       Desktop: grid 1fr 100px (content + date column)
+       Mobile: single column, date below ── */
+    .article-item {
+      grid-template-columns: 1fr !important;
+      gap: 8px !important;
+      padding: 24px 0 !important;
+    }
+    .article-item-date {
+      text-align: left !important;
+      padding-top: 0 !important;
+    }
+
+    /* ── ARTICLE FLOW GRID
+       Desktop: 4 columns
+       Mobile: 2 columns ── */
     .article-flow-grid {
       grid-template-columns: 1fr 1fr !important;
     }
 
-    /* Article checklist grid */
+    /* ── ARTICLE CHECKLIST GRID
+       Desktop: 2 columns
+       Mobile: 1 column ── */
     .article-checklist-grid {
       grid-template-columns: 1fr !important;
     }
 
-    /* Article items — stack date below */
-    .article-item {
-      flex-direction: column !important;
-      gap: 8px !important;
-    }
-    .article-item-date {
-      text-align: left !important;
+    /* ── ARTICLE CALLOUT
+       padding may be wide — check ── */
+    .article-callout {
+      padding: 24px 20px !important;
     }
 
-    /* Chat input */
+    /* ── PRICING GRID
+       Desktop: 2 columns
+       Mobile: 1 column ── */
+    .pricing-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* ── CHAT MESSAGES
+       Desktop: width 800px, margin auto — overflows mobile!
+       Mobile: full width with side padding ── */
+    .messages {
+      width: 100% !important;
+      padding: 80px 16px 24px !important;
+      box-sizing: border-box !important;
+    }
+
+    /* ── USER MESSAGE BUBBLE
+       Desktop: max-width 72% — fine on mobile ── */
+
+    /* ── INPUT AREA
+       Desktop: padding 20px 0 44px, input-box width 800px — overflows!
+       Mobile: full width with side padding ── */
     .input-area {
-      padding: 12px 16px 20px !important;
+      padding: 8px 12px 28px !important;
     }
     .input-box {
-      padding: 12px 14px !important;
+      width: 100% !important;
+      min-height: 80px !important;
+      box-sizing: border-box !important;
     }
 
-    /* Method steps */
-    .method-row {
-      gap: 16px !important;
+    /* ── CONTACT FORM
+       font-size 16px prevents iOS auto-zoom on input focus ── */
+    .contact-input,
+    .contact-textarea,
+    textarea,
+    input[type="text"],
+    input[type="email"] {
+      font-size: 16px !important;
     }
 
-    /* Back button */
-    #backBtn {
-      left: 20px !important;
-      top: 20px !important;
-    }
-
-    /* Contact form */
-    .contact-input {
-      font-size: 16px !important; /* prevents iOS zoom on focus */
+    /* ── CONTACT SUBMIT — fine as is ── */
+    .contact-submit {
+      width: 100% !important;
+      padding: 14px 20px !important;
     }
   }
 
-  @media (max-width: 420px) {
-    .page-title {
-      font-size: 26px !important;
-    }
-    .about-stat-row {
-      grid-template-columns: 1fr !important;
-    }
-    .article-flow-grid {
-      grid-template-columns: 1fr !important;
-    }
-    #brandLogoSvg {
-      max-width: 260px;
-    }
+  /* ── SMALL PHONES (under 400px) ── */
+  @media (max-width: 400px) {
+    .brand-logo { width: 85vw !important; }
+    .page-title { font-size: 24px !important; }
+    .about-stat-row { grid-template-columns: 1fr !important; }
+    .article-stats { grid-template-columns: 1fr !important; }
+    .article-flow-grid { grid-template-columns: 1fr !important; }
+    .news-card { min-height: 300px !important; }
   }
 </style>
 </head>
