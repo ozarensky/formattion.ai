@@ -1,0 +1,2285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>formattion.ai — AI Automation for Construction</title>
+  <meta name="description" content="formattion.ai builds AI automation systems for UK construction subcontractors. Reduce admin, improve quality, and scale operations with intelligent workflows." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://formattion.ai" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="formattion.ai — AI Automation for Construction" />
+  <meta property="og:description" content="AI automation systems built for UK construction subcontractors." />
+  <meta property="og:url" content="https://formattion.ai" />
+  <meta property="og:type" content="website" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;1,300;1,400&family=DM+Mono:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* formattion.ai brand tokens v1.0 — light mode */
+      --bg:           #F4EFE6;
+      --bg2:          #ECE6DC;
+      --bg3:          #E2DBD0;
+      --ink:          #1C1814;
+      --ink-body:     #4A4038;
+      --muted:        #9A8F82;
+      --idle-border:  rgba(28,24,20,0.16);
+      --dim:          rgba(28,24,20,0.09);
+      --acc:          #4A6278;
+      --acc-lt:       #6E8299;
+      --sans:         'Helvetica Neue', Helvetica, Inter, sans-serif;
+      --dm:           'DM Mono', monospace;
+      --mono:         'DM Mono', monospace;
+    }
+
+    body.dark {
+      --bg:       #141618;
+      --bg2:      #1c1f22;
+      --bg3:      #242729;
+      --ink:      #edecea;
+      --ink-body: #b4b2ae;
+      --muted:    #7a7875;
+      --dim:      rgba(237,236,234,0.07);
+      --idle-border: rgba(237,236,234,0.12);
+      --acc:      #6e8299;
+      --acc-lt:   #8fa4bc;
+      background: #141618;
+      color: #edecea;
+    }
+    /* Dark mode component overrides */
+    body.dark .page { background: var(--bg); }
+    body.dark .page-inner, body.dark .page-body { color: var(--ink); }
+    body.dark .article-title, body.dark .article-body { color: var(--ink); }
+    body.dark h1, body.dark h2, body.dark h3, body.dark h4 { color: var(--ink); }
+    body.dark p, body.dark li { color: var(--ink-body); }
+    body.dark .messages { background: var(--bg); }
+    body.dark .message.bot { background: var(--bg2); color: var(--ink); }
+    body.dark .message.user span { background: var(--bg3); color: var(--ink); }
+    body.dark .input-box { background: var(--bg2); border-color: var(--dim); }
+    body.dark textarea { color: var(--ink); background: transparent; }
+    body.dark .drop-item { color: var(--ink); }
+    body.dark #dropMenu { background: rgba(20,22,24,0.30); }
+    body.dark .landing { background: var(--bg); }
+    body.dark #landing { background: var(--bg); }
+    body.dark .chat-btn { border-color: rgba(110,130,153,0.3); color: var(--acc); }
+    body.dark .service-cell, body.dark .pricing-cell, body.dark .news-item { background: var(--bg2); color: var(--ink); }
+    body.dark .about-stat, body.dark .article-stat, body.dark .article-flow-cell, body.dark .article-checklist-cell { background: var(--bg2); }
+    body.dark .page-eyebrow { color: var(--muted); }
+    body.dark .contact-input { color: var(--ink); border-color: var(--dim); }
+    body.dark .contact-input::placeholder { color: var(--muted); }
+    body.dark .contact-submit { border-color: var(--ink); color: var(--ink); }
+    body.dark .contact-submit:hover { background: var(--ink); color: var(--bg); }
+
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      font-family: var(--sans);
+      font-weight: 300;
+      color: var(--ink);
+      overflow: hidden;
+    }
+
+    /* ══ PAGES ══ */
+    .page {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 10;
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .page::-webkit-scrollbar { display: none; }
+    .page.visible { display: block; }
+
+    /* ── page inner layout ── */
+    .page-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 140px 65px 100px;
+    }
+
+    .page-eyebrow {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .page-eyebrow::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--dim);
+    }
+
+    .page-title {
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: clamp(36px, 5vw, 56px);
+      letter-spacing: -0.025em;
+      line-height: 1.0;
+      color: var(--ink);
+      margin-bottom: 64px;
+    }
+
+    .page-body {
+      font-family: var(--sans);
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1.75;
+      color: var(--ink-body);
+      max-width: 580px;
+    }
+    .page-body p { margin-bottom: 28px; }
+    .page-body p:last-child { margin-bottom: 0; }
+
+    .page-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--dim);
+      margin: 64px 0;
+    }
+
+    /* services grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .service-cell {
+      background: var(--bg2);
+      padding: 32px 28px;
+      border-radius: 12px;
+    }
+    .service-cell-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .service-cell-title {
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+    .service-cell-body {
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.75;
+      color: var(--ink-body);
+    }
+
+    /* methodology steps */
+    .method-steps {
+      border-top: 1px solid var(--dim);
+      margin-bottom: 64px;
+    }
+    .method-row {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--dim);
+      padding: 24px 0;
+    }
+    .method-n {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      padding-top: 3px;
+    }
+    .method-text { }
+    .method-name {
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: 18px;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+    .method-desc {
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--ink-body);
+      line-height: 1.75;
+    }
+
+    /* contact form */
+    .contact-field {
+      margin-bottom: 24px;
+    }
+    .contact-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+      display: block;
+    }
+    .contact-input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--dim);
+      padding: 12px 0;
+      font-family: var(--sans);
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--ink);
+      outline: none;
+      transition: border-color .2s ease;
+    }
+    .contact-input::placeholder { color: var(--muted); }
+    .contact-input:focus { border-bottom-color: var(--ink); }
+    .contact-textarea {
+      resize: none;
+      min-height: 120px;
+      line-height: 1.6;
+    }
+    .contact-submit {
+      margin-top: 32px;
+      padding: 8px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(74,98,120,0.3);
+      background: transparent;
+      font-family: var(--mono);
+      font-weight: 400;
+      font-size: 11px;
+      color: var(--acc);
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .contact-submit:hover { background: var(--acc); color: var(--bg); border-color: var(--acc); }
+
+    /* about section */
+    .about-stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 48px;
+    }
+    .about-stat {
+      background: var(--bg2);
+      padding: 28px 24px;
+      border-radius: 12px;
+    }
+    .about-stat-val {
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: 32px;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .about-stat-key {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* news listing */
+
+    .news-page-title {
+      font-family: 'Cormorant Infant', Georgia, serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(36px, 5vw, 56px);
+      letter-spacing: -0.02em;
+      line-height: 1.0;
+    }
+    /* ══ NEWS CARDS — Pattern 01: image as card background ══ */
+    .news-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .news-card {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      min-height: 400px;
+      background: #1c1814;
+      cursor: pointer;
+      display: flex;
+    }
+    .news-card {
+      min-height: 400px;
+    }
+    .news-card-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .news-card-geo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .news-card-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(28,24,20,0.97) 0%, rgba(28,24,20,0.55) 50%, rgba(28,24,20,0.1) 100%);
+    }
+    .news-card-content {
+      position: relative;
+      z-index: 2;
+      padding: 32px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      width: 100%;
+    }
+
+    .news-card-eyebrow {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(244,239,230,0.45);
+      margin-bottom: 12px;
+    }
+    .news-card-title {
+      font-family: 'Cormorant Infant', Georgia, serif;
+      font-weight: 400;
+      font-size: 28px;
+      color: #f4efe6;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 12px;
+    }
+
+    .news-card-desc {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(244,239,230,0.65);
+      line-height: 1.65;
+      margin-bottom: 20px;
+      max-width: 560px;
+    }
+
+    .news-card-footer {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .news-card-date {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: rgba(244,239,230,0.35);
+    }
+    .news-card-cta {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #f4efe6;
+      border: 1px solid rgba(244,239,230,0.3);
+      border-radius: 999px;
+      padding: 6px 16px;
+      transition: background .2s, border-color .2s;
+    }
+    .news-card:hover .news-card-cta {
+      background: rgba(244,239,230,0.1);
+      border-color: rgba(244,239,230,0.5);
+    }
+    .news-card:hover .news-card-title { opacity: 0.85; }
+
+    /* ══ ARTICLE PAGE ══ */
+    .article-page-title {
+      font-family: 'Cormorant Infant', Georgia, serif;
+      font-weight: 300;
+      font-size: clamp(40px, 6vw, 68px);
+      letter-spacing: -0.02em;
+      line-height: 1.0;
+      color: var(--ink);
+      margin-bottom: 40px;
+    }
+    .article-meta {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 64px;
+    }
+    .article-meta span + span::before { content: ' / '; margin: 0 8px; color: var(--dim); }
+    .article-intro {
+      font-family: var(--sans);
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.75;
+      color: var(--ink-body);
+      max-width: 640px;
+    }
+    .article-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 48px 0;
+    }
+    .article-stat {
+      background: var(--bg2);
+      padding: 24px 20px;
+      border-radius: 12px;
+    }
+    .article-stat-val {
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: 32px;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .article-stat-key {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .article-topic-eyebrow {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .article-topic-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--dim); }
+    .article-topic-title {
+      font-family: 'Cormorant Infant', Georgia, serif;
+      font-weight: 300;
+      font-size: 36px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 40px;
+    }
+    .article-item {
+      padding: 32px 0;
+      display: grid;
+      grid-template-columns: 1fr 100px;
+      gap: 40px;
+      align-items: start;
+    }
+    .article-item-title {
+      font-family: 'Cormorant Infant', Georgia, serif;
+      font-weight: 300;
+      font-size: 24px;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .article-item-desc {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--ink-body);
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+    .article-item-blurb {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.5;
+      padding-left: 12px;
+      border-left: 1px solid var(--dim);
+    }
+    .article-item-date {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-align: right;
+      padding-top: 4px;
+      line-height: 1.6;
+    }
+    .article-flow-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin: 16px 0 32px;
+    }
+    .article-flow-cell {
+      background: var(--bg2);
+      padding: 20px;
+      border-radius: 12px;
+    }
+    .article-flow-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .article-flow-title {
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: 15px;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .article-flow-desc {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--ink-body);
+      line-height: 1.75;
+    }
+    .article-callout {
+      background: var(--bg2);
+      border-top: 1px solid var(--dim);
+      border-bottom: 1px solid var(--dim);
+      padding: 48px 0;
+      margin: 64px 0;
+    }
+    .article-callout-text {
+      font-family: 'Cormorant Infant', Georgia, serif;
+      font-weight: 300;
+      font-size: 28px;
+      letter-spacing: -0.01em;
+      line-height: 1.4;
+      color: var(--ink);
+      font-style: italic;
+      max-width: 640px;
+    }
+    .article-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      margin-top: 48px;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+      transition: color .2s, border-color .2s;
+    }
+    .article-back:hover { color: var(--ink); border-bottom-color: var(--ink); }
+    .article-hero {
+      width: 100%;
+      aspect-ratio: 16/7;
+      overflow: hidden;
+      margin-bottom: 56px;
+    }
+    .article-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      -webkit-mask-image:
+        linear-gradient(to right, transparent 0px, black 30px, black calc(100% - 30px), transparent 100%),
+        linear-gradient(to bottom, transparent 0px, black 30px, black calc(100% - 30px), transparent 100%);
+      -webkit-mask-composite: source-in;
+      mask-image:
+        linear-gradient(to right, transparent 0px, black 30px, black calc(100% - 30px), transparent 100%),
+        linear-gradient(to bottom, transparent 0px, black 30px, black calc(100% - 30px), transparent 100%);
+      mask-composite: intersect;
+    }
+
+    .article-checklist-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin: 16px 0 32px;
+    }
+    .article-checklist-cell {
+      background: var(--bg2);
+      padding: 20px;
+      border-radius: 12px;
+    }
+    .article-checklist-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .article-checklist-title {
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: 15px;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+    .article-checklist-list {
+      list-style: none;
+      padding: 0;
+    }
+    .article-checklist-list li {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--ink-body);
+      line-height: 1.75;
+      padding: 5px 0;
+    }
+    .article-checklist-list li::before { content: '— '; color: var(--muted); font-family: var(--mono); font-size: 10px; }
+
+    #menuIcon {
+      color: var(--ink);
+    }
+    body.dark #menuIcon {
+      color: var(--ink);
+    }
+
+    /* ══ TOP BAR ══ */
+    #topBar {
+      position: fixed;
+      top: 10px; left: 10px; right: 10px;
+      height: 100px;
+      background: rgba(244,239,230,0.30);
+      backdrop-filter: blur(20px) saturate(100%);
+      -webkit-backdrop-filter: blur(20px) saturate(100%);
+      border-radius: 12px;
+      z-index: 300;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    #topBar::after {
+      content: "";
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      pointer-events: none;
+      opacity: .1;
+      border-radius: inherit;
+    }
+    body.dark #topBar {
+      background: rgba(20,22,24,0.30);
+    }
+
+    /* ══ TOP RIGHT LOGO ══ */
+    #topLogo {
+      position: fixed;
+      top: 51px; right: 65px;
+      height: 18px; width: auto;
+      z-index: 400;
+      cursor: pointer;
+      transition: opacity .2s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+    #topLogo.visible { opacity: 1; pointer-events: all; }
+    #topLogo:hover { opacity: 0.5; }
+    body.dark #topLogo { filter: invert(1); }
+
+    /* ══ MENU ══ */
+    #menuWrap {
+      position: fixed;
+      top: 44px; left: 65px;
+      z-index: 400;
+      user-select: none;
+    }
+    #menuIcon {
+      width: 32px; height: 32px;
+      cursor: pointer;
+      display: block;
+      transition: transform .35s cubic-bezier(.4,0,.2,1);
+      transform-origin: center center;
+      overflow: visible;
+    }
+    #menuWrap:hover #menuIcon,
+    #menuWrap.open #menuIcon { transform: rotate(45deg); }
+
+    #dropMenu {
+      position: fixed;
+      top: 120px; left: 10px; bottom: 10px;
+      width: 260px; height: auto;
+      background: rgba(244,239,230,0.30);
+      backdrop-filter: blur(20px) saturate(100%);
+      -webkit-backdrop-filter: blur(20px) saturate(100%);
+      border-radius: 12px;
+      z-index: 450;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-16px);
+      transition: opacity .3s ease, transform .3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding-top: 40px;
+      overflow: hidden;
+    }
+    #dropMenu::after {
+      content: "";
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      pointer-events: none;
+      opacity: .1;
+      border-radius: inherit;
+    }
+    body.dark #dropMenu {
+      background: rgba(20,22,24,0.30);
+    }
+    #menuWrap.open #dropMenu {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateX(0);
+    }
+
+    .drop-item {
+      display: block;
+      padding: 6px 0;
+      margin: 0 0 12px 32px;
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 22px;
+      color: var(--ink);
+      cursor: pointer;
+      line-height: 1;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: opacity .15s ease;
+      position: relative; z-index: 1;
+    }
+    body.dark .drop-item { color: #edecea; }
+    .drop-item:hover { opacity: 0.45; }
+
+    /* ══ LANDING ══ */
+    #landing {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 10;
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    #landing.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-18px);
+    }
+
+    .brand-logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, calc(-50% - 50px));
+      width: clamp(280px, 42vw, 600px);
+      height: auto;
+      transition: filter .3s ease;
+    }
+    body.dark .brand-logo .cls-1 { fill: #EDECEA; }
+    body.dark .brand-logo { filter: none; }
+
+    .chat-btn {
+      position: absolute;
+      bottom: 150px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 40px;
+      border-radius: 999px;
+      border: 1px solid var(--idle-border);
+      background: transparent;
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 15px;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: border-color .25s ease, background .25s ease;
+    }
+    .chat-btn:hover {
+      border-color: var(--ink);
+    }
+    body.dark .chat-btn {
+      border-color: rgba(237,236,234,0.2);
+      color: var(--ink);
+    }
+    body.dark .chat-btn:hover {
+      border-color: rgba(237,236,234,0.6);
+    }
+
+    /* ══ CHAT ══ */
+    #chat {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .45s ease .1s;
+    }
+    #chat.visible { opacity: 1; pointer-events: all; }
+
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 128px 0 32px;
+      display: flex;
+      flex-direction: column;
+      scrollbar-width: none;
+      width: 800px;
+      margin: 0 auto;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+    .messages-spacer { flex: 1; min-height: 0; }
+    .messages::-webkit-scrollbar { display: none; }
+
+    /* ── AI message ── */
+    .msg-ai {
+      width: 100%;
+      padding: 20px 0 28px;
+      animation: fadeUp .4s ease both;
+    }
+    .msg-ai .sender {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--acc);
+      margin-bottom: 12px;
+    }
+    .msg-ai .text {
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--ink-body);
+    }
+
+    /* typing indicator */
+    .msg-ai .typing {
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+      height: 20px;
+    }
+    .msg-ai .typing span {
+      width: 4px; height: 4px;
+      background: var(--muted);
+      border-radius: 50%;
+      animation: blink 1.2s infinite;
+    }
+    .msg-ai .typing span:nth-child(2) { animation-delay: .2s; }
+    .msg-ai .typing span:nth-child(3) { animation-delay: .4s; }
+    @keyframes blink {
+      0%,80%,100% { opacity: .2; transform: scale(1); }
+      40% { opacity: 1; transform: scale(1.3); }
+    }
+
+    /* ── User message ── */
+    .msg-user {
+      align-self: flex-end;
+      max-width: 72%;
+      margin: 20px 0;
+      animation: fadeUp .3s ease both;
+    }
+    .msg-user .bubble {
+      background: var(--bg2);
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--ink);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── INPUT BAR ── */
+    .input-area {
+      display: flex;
+      justify-content: center;
+      padding: 20px 0 44px;
+      flex-shrink: 0;
+      background: var(--bg);
+    }
+    .input-box {
+      width: 800px;
+      min-height: 100px;
+      max-height: 300px;
+      border-radius: 20px;
+      background: var(--bg2);
+      border: 1px solid var(--dim);
+      padding: 16px 0 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      box-sizing: border-box;
+      transition: border-color .2s ease;
+    }
+    .input-box:focus-within {
+      border-color: var(--idle-border);
+    }
+
+    textarea {
+      background: transparent;
+      border: none;
+      outline: none;
+      resize: none;
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 15px;
+      color: var(--ink);
+      line-height: 1.7;
+      width: 100%;
+      min-height: 28px;
+      max-height: 180px;
+      overflow-y: auto;
+      scrollbar-width: none;
+      padding: 0 20px;
+    }
+    textarea::-webkit-scrollbar { display: none; }
+    textarea::placeholder {
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .input-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      padding: 0 15px 15px;
+    }
+
+    .chat-icon {
+      width: 40px; height: 40px;
+      cursor: pointer;
+      color: var(--muted);
+      opacity: 0.5;
+      transition: opacity .2s, color .2s, border-color .2s;
+      background: none;
+      border: 1px solid transparent;
+      padding: 0;
+      margin: 0;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      overflow: visible;
+    }
+    .chat-icon:hover { opacity: 1; color: var(--ink); border-color: var(--idle-border); }
+
+    /* dark mode chat */
+    body.dark #chat { background: var(--bg); }
+    body.dark .input-area { background: var(--bg); }
+    body.dark .input-box { background: var(--bg2); border-color: var(--dim); }
+    body.dark .msg-user .bubble { background: var(--bg3); }
+
+    /* ── BACK BUTTON ── */
+    #backBtn {
+      position: fixed;
+      bottom: 50px;
+      left: 65px;
+      z-index: 400;
+      width: 32px;
+      height: 23px;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease;
+    }
+    #backBtn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #backBtn img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    #backBtn:hover {
+      opacity: 0.5;
+    }
+    body.dark #backBtn { filter: invert(1); }
+  
+    /* ══ PRICING PAGE ══ */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .pricing-card {
+      background: var(--bg2);
+      border-radius: 12px;
+      padding: 28px 28px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .pricing-card--pilot {
+      background: var(--bg2);
+      border: 1px solid var(--idle-border);
+    }
+    .pricing-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .pricing-tier-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .pricing-tag {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--dim);
+      border-radius: 4px;
+      padding: 3px 8px;
+    }
+    .pricing-tag--acc {
+      color: var(--acc);
+      border-color: rgba(74,98,120,0.3);
+    }
+    .pricing-price {
+      font-family: var(--sans);
+      font-size: 36px;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .pricing-price-unit {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0;
+    }
+    .pricing-setup {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 0;
+    }
+    .pricing-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--dim);
+      margin: 20px 0;
+    }
+    .pricing-desc {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--ink-body);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    .pricing-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      margin-top: auto;
+    }
+    .pricing-features li {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--muted);
+      padding: 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pricing-features li::before {
+      content: '';
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--acc);
+      flex-shrink: 0;
+    }
+    .pricing-footnote {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      line-height: 1.9;
+      margin: 32px 0 40px;
+    }
+    body.dark .pricing-card { background: var(--bg2); }
+    body.dark .pricing-card--pilot { border-color: rgba(237,236,234,0.13); }
+</style>
+</head>
+<body>
+
+  <!-- ═══ PAGES ═══ -->
+
+  <!-- SERVICES -->
+  <div class="page" id="page-services">
+    <div class="page-inner">
+      <div class="page-eyebrow">services</div>
+      <h1 class="page-title">Structured automation<br>for subcontract businesses.</h1>
+      <div class="page-body">
+        <p>Most subcontract businesses operate with fragmented systems and manual processes. formattion ai designs and implements automation infrastructure that standardises operations and removes administrative overhead.</p>
+      </div>
+
+      <div class="page-divider"></div>
+
+      <div class="services-grid">
+        <div class="service-cell">
+          <div class="service-cell-label">01</div>
+          <div class="service-cell-title">Lead Capture</div>
+          <div class="service-cell-body">Automated intake, qualification, and routing. Every enquiry is logged, assigned, and followed up — without manual intervention.</div>
+        </div>
+        <div class="service-cell">
+          <div class="service-cell-label">02</div>
+          <div class="service-cell-title">Quote Follow-Up</div>
+          <div class="service-cell-body">Systematic outreach sequences triggered by quote status. No chase-up falls through the gap.</div>
+        </div>
+        <div class="service-cell">
+          <div class="service-cell-label">03</div>
+          <div class="service-cell-title">Email Management</div>
+          <div class="service-cell-body">AI-sorted inboxes, templated responses, and escalation logic. Reduces daily administrative load to near zero.</div>
+        </div>
+        <div class="service-cell">
+          <div class="service-cell-label">04</div>
+          <div class="service-cell-title">Cashflow & Invoice</div>
+          <div class="service-cell-body">Invoice creation, dispatch, and payment tracking automated end to end. Your team stops chasing.</div>
+        </div>
+      </div>
+
+      <div class="page-divider"></div>
+
+      <div class="page-eyebrow">methodology</div>
+      <div class="method-steps">
+        <div class="method-row">
+          <div class="method-n">01</div>
+          <div class="method-text">
+            <div class="method-name">Assessment</div>
+            <div class="method-desc">Automation Opportunity Score — a structured audit of your current operational load.</div>
+          </div>
+        </div>
+        <div class="method-row">
+          <div class="method-n">02</div>
+          <div class="method-text">
+            <div class="method-name">Audit</div>
+            <div class="method-desc">Deep review of workflows, tools, and data flows. We identify what to automate first.</div>
+          </div>
+        </div>
+        <div class="method-row">
+          <div class="method-n">03</div>
+          <div class="method-text">
+            <div class="method-name">Roadmap</div>
+            <div class="method-desc">A sequenced implementation plan. Priorities set. Timeline confirmed. Scope fixed.</div>
+          </div>
+        </div>
+        <div class="method-row">
+          <div class="method-n">04</div>
+          <div class="method-text">
+            <div class="method-name">Implementation</div>
+            <div class="method-desc">Six-week build window. Tested. Integrated. Operational before we leave.</div>
+          </div>
+        </div>
+        <div class="method-row">
+          <div class="method-n">05</div>
+          <div class="method-text">
+            <div class="method-name">Continuous Optimisation</div>
+            <div class="method-desc">Monthly retainer. Systems monitored, adjusted, and expanded as the business grows.</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="contact-submit" onclick="document.getElementById('page-services').classList.remove('visible'); document.getElementById('page-contact').classList.add('visible');">find out your automation score →</button>
+    </div>
+  </div>
+
+  <!-- NEWS -->
+  <div class="page" id="page-news">
+    <div class="page-inner">
+      <div class="page-eyebrow">news</div>
+      <h1 class="page-title news-page-title">From the field.</h1>
+      <div class="page-body">
+        <p>Perspectives on automation, operational systems, and what's changing in the subcontract trades sector.</p>
+      </div>
+      <div class="page-divider"></div>
+
+      <div class="news-grid">
+
+        <!-- Card 01 — latest first: AI Deployment -->
+        <div class="news-card" onclick="showPage('page-article-ai-deployment')">
+          <svg class="news-card-geo" viewBox="0 0 900 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <rect width="900" height="400" fill="#1c1814"/>
+            <defs>
+              <linearGradient id="g2" x1="1" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#3a3028"/>
+                <stop offset="60%" stop-color="#2a2018"/>
+                <stop offset="100%" stop-color="#1a1612"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="900" height="400" fill="url(#g2)"/>
+            <line x1="0" y1="0" x2="900" y2="400" stroke="#9a8f82" stroke-width="0.6" opacity="0.18"/>
+            <line x1="120" y1="0" x2="900" y2="320" stroke="#9a8f82" stroke-width="0.4" opacity="0.13"/>
+            <line x1="240" y1="0" x2="900" y2="240" stroke="#9a8f82" stroke-width="0.4" opacity="0.1"/>
+            <rect x="380" y="30" width="180" height="340" fill="none" stroke="#c8bfb4" stroke-width="0.5" opacity="0.18"/>
+            <rect x="580" y="50" width="140" height="300" fill="none" stroke="#c8bfb4" stroke-width="0.5" opacity="0.13"/>
+            <rect x="740" y="70" width="100" height="260" fill="none" stroke="#c8bfb4" stroke-width="0.4" opacity="0.1"/>
+            <line x1="360" y1="0" x2="360" y2="400" stroke="#9a8f82" stroke-width="0.4" opacity="0.12"/>
+            <line x1="0" y1="200" x2="360" y2="200" stroke="#9a8f82" stroke-width="0.3" opacity="0.08"/>
+          </svg>
+          <div class="news-card-gradient"></div>
+          <div class="news-card-content">
+            <div>
+              <div class="news-card-eyebrow">deployment guide</div>
+              <div class="news-card-title">AI Agents in Construction: From Theory to First Deployment</div>
+              <div class="news-card-desc">Understanding why AI agents matter is one thing. Knowing exactly where to plug them in — which tools, which workflows, which 90-day pilots — is another. Practical, specific, and sequenced for a firm with limited IT resource and a full project pipeline.</div>
+            </div>
+            <div class="news-card-footer">
+              <span class="news-card-date">22 March 2026</span>
+              <span class="news-card-cta">Read article</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 02 — UK Construction -->
+        <div class="news-card" onclick="showPage('page-article-uk-construction')">
+          <svg class="news-card-geo" viewBox="0 0 900 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <rect width="900" height="400" fill="#1c1814"/>
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#2e2820"/>
+                <stop offset="50%" stop-color="#3a3028"/>
+                <stop offset="100%" stop-color="#1a1612"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="900" height="400" fill="url(#g1)"/>
+            <line x1="450" y1="0" x2="900" y2="400" stroke="#9a8f82" stroke-width="0.5" opacity="0.2"/>
+            <line x1="560" y1="0" x2="900" y2="280" stroke="#9a8f82" stroke-width="0.4" opacity="0.15"/>
+            <line x1="670" y1="0" x2="900" y2="160" stroke="#9a8f82" stroke-width="0.4" opacity="0.12"/>
+            <rect x="480" y="40" width="160" height="320" fill="none" stroke="#c8bfb4" stroke-width="0.5" opacity="0.2"/>
+            <rect x="660" y="60" width="120" height="280" fill="none" stroke="#c8bfb4" stroke-width="0.5" opacity="0.15"/>
+            <rect x="800" y="80" width="80" height="240" fill="none" stroke="#c8bfb4" stroke-width="0.4" opacity="0.1"/>
+            <line x1="440" y1="0" x2="440" y2="400" stroke="#9a8f82" stroke-width="0.4" opacity="0.15"/>
+            <line x1="0" y1="200" x2="440" y2="200" stroke="#9a8f82" stroke-width="0.3" opacity="0.1"/>
+          </svg>
+          <div class="news-card-gradient"></div>
+          <div class="news-card-content">
+            <div>
+              <div class="news-card-eyebrow">industry briefing</div>
+              <div class="news-card-title">Why UK Construction Subcontractors Must Act on AI Agents Now</div>
+              <div class="news-card-desc">The subcontractor tier — ground workers, M&amp;E firms, specialist fit-out trades — remains largely untouched by AI. That gap is closing fast. AI agents are no longer a technology story. They are a margin story, a compliance story, and increasingly, a survival story.</div>
+            </div>
+            <div class="news-card-footer">
+              <span class="news-card-date">22 March 2026</span>
+              <span class="news-card-cta">Read article</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /news-grid -->
+    </div>
+  </div>
+
+  <!-- ARTICLE: UK Construction AI Agents -->
+  <div class="page" id="page-article-uk-construction">
+    <div class="page-inner">
+      <div class="article-hero">
+        <img src="../.tmp/images/the_margin_squeeze_is_structural_and_agents_are_the_lever.webp" alt="Why UK Construction Subcontractors Must Act on AI Agents Now">
+      </div>
+      <div class="page-eyebrow">industry briefing</div>
+      <h1 class="article-page-title">Why UK Construction Subcontractors Must Act on AI Agents Now</h1>
+      <div class="article-meta">
+        <span>22 March 2026</span><span>6 topics</span><span>Industry Analysis</span><span>UK Construction</span>
+      </div>
+
+      <p class="article-intro">The UK construction industry is at an inflection point. While principal contractors and developers have begun exploring AI, the subcontractor tier — ground workers, M&amp;E firms, specialist fit-out trades — remains largely untouched. That gap is closing fast. AI agents and agentic workflows are no longer a technology story. They are a margin story, a compliance story, and increasingly, a survival story.</p>
+
+      <!-- Stats -->
+      <div class="article-stats">
+        <div class="article-stat">
+          <div class="article-stat-val">£4.7bn</div>
+          <div class="article-stat-key">Lost annually to admin overhead in UK construction SMEs</div>
+        </div>
+        <div class="article-stat">
+          <div class="article-stat-val">68%</div>
+          <div class="article-stat-key">of subcontractor disputes stem from document or comms failures</div>
+        </div>
+        <div class="article-stat">
+          <div class="article-stat-val">3.2x</div>
+          <div class="article-stat-key">Productivity uplift reported by early AI-adopting trade firms</div>
+        </div>
+      </div>
+
+      <!-- Topic 01 -->
+      <div class="article-topic-eyebrow">topic 01</div>
+      <h2 class="article-topic-title">The margin squeeze is structural — and agents are the lever</h2>
+      <div class="article-hero"><img src="../.tmp/images/the_margin_squeeze_is_structural_and_agents_are_the_lever.webp" alt="The margin squeeze is structural — and agents are the lever"></div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">UK subcontractors are operating on 2–4% net margins. AI agents can reclaim them.</div>
+          <p class="article-item-desc">The average UK specialist subcontractor runs net margins between 2 and 4 percent. Every hour of unbillable admin — RFI responses, programme updates, variation logs, RAMS preparation — erodes those margins directly. An AI agent doesn't sleep, doesn't forget context, and can draft, cross-reference, and submit documents in the time it takes a site manager to find the right email thread.</p>
+          <p class="article-item-blurb">Firms that automate back-office workflows first will have a structural cost advantage over slower competitors — and that gap compounds year on year.</p>
+        </div>
+        <div class="article-item-date">Analysis<br>Mar 2026</div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Variation claims: the single highest-value target for agentic automation</div>
+          <p class="article-item-desc">Construction subcontractors lose an estimated 30–40% of legitimate variation entitlements due to late or incomplete submissions. An agentic workflow can monitor instruction logs, cross-reference contract terms, draft preliminary notices, and flag submission deadlines — without human intervention. The agent acts as a tireless commercial assistant, preserving entitlement at every step.</p>
+          <p class="article-item-blurb">One missed variation notice on a £500k subcontract can cost more than a year of software subscriptions. The ROI case is not subtle.</p>
+        </div>
+        <div class="article-item-date">Commercial<br>Mar 2026</div>
+      </div>
+
+      <div class="page-divider"></div>
+
+      <!-- Topic 02 -->
+      <div class="article-topic-eyebrow">topic 02</div>
+      <h2 class="article-topic-title">What agentic AI actually means on a construction project</h2>
+      <div class="article-hero"><img src="../.tmp/images/what_agentic_ai_actually_means_on_a_construction_project.webp" alt="What agentic AI actually means on a construction project"></div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Beyond chatbots: understanding the agent difference</div>
+          <p class="article-item-desc">Most subcontractors who have experimented with AI have used it as a better search engine — ask a question, get an answer. Agentic AI is categorically different. An agent perceives its environment (emails, documents, project management platforms), reasons about what needs to happen next, takes actions (drafting, submitting, flagging), and iterates until a goal is achieved. It operates across a workflow, not just at a single prompt.</p>
+          <p class="article-item-blurb">The shift from AI-as-tool to AI-as-colleague is the distinction that changes the economics.</p>
+        </div>
+        <div class="article-item-date">Explainer<br>Mar 2026</div>
+      </div>
+
+      <div class="article-flow-grid">
+        <div class="article-flow-cell">
+          <div class="article-flow-label">Step 01</div>
+          <div class="article-flow-title">Perceive</div>
+          <div class="article-flow-desc">Agent reads incoming emails, updated drawings, RFI logs, and programme changes from connected systems.</div>
+        </div>
+        <div class="article-flow-cell">
+          <div class="article-flow-label">Step 02</div>
+          <div class="article-flow-title">Reason</div>
+          <div class="article-flow-desc">Agent identifies obligations, deadlines, and gaps — cross-referencing contract terms and prior correspondence.</div>
+        </div>
+        <div class="article-flow-cell">
+          <div class="article-flow-label">Step 03</div>
+          <div class="article-flow-title">Act</div>
+          <div class="article-flow-desc">Agent drafts responses, preliminary notices, or RAMS sections. Routes to the right person for approval.</div>
+        </div>
+        <div class="article-flow-cell">
+          <div class="article-flow-label">Step 04</div>
+          <div class="article-flow-title">Learn</div>
+          <div class="article-flow-desc">Feedback loops refine future outputs. The agent improves with each project cycle.</div>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">The tools already exist — the gap is deployment, not technology</div>
+          <p class="article-item-desc">Platforms like Procore, Asite, and Fieldwire increasingly expose APIs. AI models from Anthropic, OpenAI, and Google have reached production-grade reliability for document-heavy tasks. The barrier for subcontractors is no longer capability — it is knowing what workflows to target first, and having the operational change management to embed agents into daily practice.</p>
+        </div>
+        <div class="article-item-date">Technology<br>Mar 2026</div>
+      </div>
+
+      <div class="page-divider"></div>
+
+      <!-- Topic 03 -->
+      <div class="article-topic-eyebrow">topic 03</div>
+      <h2 class="article-topic-title">Compliance, safety, and the regulatory tailwind</h2>
+      <div class="article-hero"><img src="../.tmp/images/compliance_safety_and_the_regulatory_tailwind.webp" alt="Compliance, safety, and the regulatory tailwind"></div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">The Building Safety Act 2022 has made document management a legal liability</div>
+          <p class="article-item-desc">The Building Safety Act places significantly greater obligations on subcontractors working on higher-risk buildings to maintain accurate, traceable records throughout the project lifecycle. Manual document management systems are increasingly inadequate. AI agents that automatically version, tag, and audit-trail construction records are not a convenience — they are becoming a compliance necessity.</p>
+          <p class="article-item-blurb">The HSE is actively increasing inspection activity. Firms without robust digital audit trails face disproportionate regulatory exposure.</p>
+        </div>
+        <div class="article-item-date">Regulatory<br>Mar 2026</div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">RAMS generation: from a day's work to an hour's review</div>
+          <p class="article-item-desc">Risk assessments and method statements remain one of the most time-consuming pre-construction deliverables for subcontractors. An agentic workflow can generate a first draft from activity descriptions, site conditions, and past approved RAMS — condensing a full-day writing task into a one-hour review-and-approve cycle. Across a pipeline of 20+ projects per year, this is transformative.</p>
+        </div>
+        <div class="article-item-date">Safety<br>Mar 2026</div>
+      </div>
+
+      <div class="page-divider"></div>
+
+      <!-- Topic 04 -->
+      <div class="article-topic-eyebrow">topic 04</div>
+      <h2 class="article-topic-title">Tendering, estimating, and winning more work</h2>
+      <div class="article-hero"><img src="../.tmp/images/tendering_estimating_and_winning_more_work.webp" alt="Tendering, estimating, and winning more work"></div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Subcontractors that respond faster to tender invitations win more work — full stop</div>
+          <p class="article-item-desc">Speed and quality of tender response is a significant factor in subcontractor selection at principal contractor level. AI agents can parse incoming ITT documents, extract scope, identify risk items, flag programme conflicts, and assemble a structured bid response — in a fraction of the time a conventional estimating team requires. Smaller firms can now compete on responsiveness with larger rivals.</p>
+          <p class="article-item-blurb">The subcontractor who returns a well-structured, clearly reasoned tender in 48 hours consistently beats the one who takes 10 days, regardless of price.</p>
+        </div>
+        <div class="article-item-date">Tendering<br>Mar 2026</div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Historical data is the unfair advantage — agents know how to use it</div>
+          <p class="article-item-desc">Every completed project a subcontractor has delivered contains pricing intelligence — actual vs estimated costs, productivity rates by trade activity, material waste factors, delay patterns. Most firms have this data locked in spreadsheets and Sage exports, never systematically applied. An AI agent can ingest this history and surface it at the point of estimating, dramatically improving margin prediction accuracy.</p>
+        </div>
+        <div class="article-item-date">Estimating<br>Mar 2026</div>
+      </div>
+
+      <div class="page-divider"></div>
+
+      <!-- Topic 05 -->
+      <div class="article-topic-eyebrow">topic 05</div>
+      <h2 class="article-topic-title">The labour and skills crisis makes agents non-optional</h2>
+      <div class="article-hero"><img src="../.tmp/images/the_labour_and_skills_crisis_makes_agents_non_optional.webp" alt="The labour and skills crisis makes agents non-optional"></div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">UK construction faces a structural workforce shortfall — AI agents are the multiplier</div>
+          <p class="article-item-desc">The Construction Industry Training Board projects a shortfall of over 250,000 workers by 2027. For subcontractors, this manifests most acutely in experienced commercial and technical staff — quantity surveyors, project managers, site administrators. AI agents do not replace these roles, but they multiply the capacity of the people who hold them. One capable QS supported by agentic tools can manage a portfolio that would previously have required three.</p>
+          <p class="article-item-blurb">In a talent-scarce market, the firms that get most from the people they have will outcompete those simply trying to hire their way out of the problem.</p>
+        </div>
+        <div class="article-item-date">Workforce<br>Mar 2026</div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Knowledge retention: what happens when your best site manager leaves</div>
+          <p class="article-item-desc">One of the least-discussed risks in subcontracting is institutional knowledge walking out the door. An experienced project manager carries years of lessons — preferred supplier terms, client quirks, which drawing issue to reference for which application. AI agents trained on a firm's project history, communication patterns, and documented processes begin to encode and surface that knowledge systematically. It does not solve succession, but it dramatically reduces the cliff edge.</p>
+        </div>
+        <div class="article-item-date">Operations<br>Mar 2026</div>
+      </div>
+
+      <div class="page-divider"></div>
+
+      <!-- Topic 06 -->
+      <div class="article-topic-eyebrow">topic 06</div>
+      <h2 class="article-topic-title">Where to start: a practical framework for subcontractors</h2>
+      <div class="article-hero"><img src="../.tmp/images/where_to_start_a_practical_framework_for_subcontractors.webp" alt="Where to start: a practical framework for subcontractors"></div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Start with the highest-friction, most repeatable workflow in your business</div>
+          <p class="article-item-desc">The fastest path to measurable ROI is not the most ambitious implementation. Identify the workflow your team performs most often, that produces the most complaints, and that follows a relatively consistent pattern. For most subcontractors this will be one of: RAMS production, variation notice drafting, weekly progress report generation, or subcontract enquiry responses. Pick one. Run it as a 90-day pilot. Measure the time saved and quality delta. Then expand.</p>
+          <p class="article-item-blurb">The firms that stall are the ones trying to boil the ocean. The firms that win automate one thing completely before moving to the next.</p>
+        </div>
+        <div class="article-item-date">Strategy<br>Mar 2026</div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Buy vs build: the right question for most subcontractors</div>
+          <p class="article-item-desc">Most subcontractors do not need bespoke AI development. Off-the-shelf platforms with agent capabilities are maturing rapidly and increasingly offer construction-specific integrations. The framework is straightforward: if your workflow touches a major platform with an API (Procore, Asite, 4Projects), buy or configure. If your competitive advantage lives in a proprietary process — a unique estimating methodology, a specialist compliance workflow — consider building a purpose-fit agent on top of foundation models. The second path requires an implementation partner; the first does not.</p>
+        </div>
+        <div class="article-item-date">Technology<br>Mar 2026</div>
+      </div>
+
+      <!-- Callout -->
+      <div class="article-callout">
+        <p class="article-callout-text">"The question for UK construction subcontractors is no longer whether to implement AI agents. It is whether to do so before or after your competitors do."</p>
+      </div>
+
+      <!-- Back to news -->
+      <span class="article-back" onclick="showPage('page-news')">← back to news</span>
+
+    </div>
+  </div>
+
+  <!-- ARTICLE: AI Deployment (Issue 02) -->
+  <div class="page" id="page-article-ai-deployment">
+    <div class="page-inner">
+      <div class="article-hero">
+        <img src="../.tmp/images/cash_flow_and_payment_the_highest_stakes_admin_loop.webp" alt="AI Agents in Construction: From Theory to First Deployment">
+      </div>
+      <div class="page-eyebrow">practical guide &nbsp;/&nbsp; issue 02</div>
+      <h1 class="article-page-title">AI Agents in Construction: From Theory to First Deployment</h1>
+      <div class="article-meta">
+        <span>22 March 2026</span><span>6 topics</span><span>Practical Guide</span><span>UK Subcontractors</span>
+      </div>
+
+      <p class="article-intro">Understanding why AI agents matter is one thing. Knowing exactly where to plug them in — which tools, which workflows, which 90-day pilots — is another. This issue moves past the case for change and into the mechanics of getting started. Practical, specific, and sequenced for a firm with limited IT resource and a full project pipeline.</p>
+
+      <div class="article-stats">
+        <div class="article-stat">
+          <div class="article-stat-val">11 hrs</div>
+          <div class="article-stat-key">Average admin time saved per project with agentic document workflows</div>
+        </div>
+        <div class="article-stat">
+          <div class="article-stat-val">£38k</div>
+          <div class="article-stat-key">Average additional variation revenue recovered per £1m subcontract</div>
+        </div>
+        <div class="article-stat">
+          <div class="article-stat-val">6 wks</div>
+          <div class="article-stat-key">Typical time to first measurable ROI from a scoped agent pilot</div>
+        </div>
+      </div>
+
+      <!-- Topic 01 -->
+      <div class="article-topic-eyebrow">topic 01</div>
+      <h2 class="article-topic-title">Cash flow and payment: the highest-stakes admin loop</h2>
+      <div class="article-hero"><img src="../.tmp/images/cash_flow_and_payment_the_highest_stakes_admin_loop.webp" alt="Cash flow and payment: the highest-stakes admin loop"></div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Late payment costs UK subcontractors £700m per year — agents can close the gap</div>
+          <p class="article-item-desc">The Construction Act requires timely payment notices and pay-less notices to be issued within strict deadlines. In practice, subcontractors miss these windows constantly — not because they don't know the rules, but because their teams are overloaded and the deadlines fall through the cracks. An AI agent monitoring contract milestone dates, valuations, and correspondence can draft and flag payment applications the moment they fall due, with zero reliance on someone remembering.</p>
+          <p class="article-item-blurb">A payment application submitted on time and correctly formatted is one of the simplest interventions available. An agent makes it automatic.</p>
+        </div>
+        <div class="article-item-date">Finance<br>Mar 2026</div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Adjudication preparation: months of work, compressed to days</div>
+          <p class="article-item-desc">When a payment dispute reaches adjudication, the subcontractor typically has 28 days to prepare a referral or response. Pulling together a coherent, sequenced record of correspondence, instructions, contra-charges, and programme impacts from a chaotic project filing system can take weeks unaided. An agent pre-trained on the project record can assemble a structured chronology, surface supporting documents, and draft a preliminary position statement in a fraction of the time — turning a scramble into a managed process.</p>
+        </div>
+        <div class="article-item-date">Legal<br>Mar 2026</div>
+      </div>
+
+      <div class="page-divider"></div>
+
+      <!-- Topic 02 -->
+      <div class="article-topic-eyebrow">topic 02</div>
+      <h2 class="article-topic-title">Supply chain and procurement automation</h2>
+      <div class="article-hero"><img src="../.tmp/images/supply_chain_and_procurement_automation.webp" alt="Supply chain and procurement automation"></div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Material price volatility is manageable — if you have an agent watching the market</div>
+          <p class="article-item-desc">Timber, steel, copper, and concrete prices have moved dramatically over the past three years. Subcontractors tendering fixed-price work without real-time material intelligence are pricing blind. An agent can monitor supplier portals, track index benchmarks (BCIS, ONS construction output prices), and flag divergence from tender allowances — giving commercial teams the data to negotiate, re-price, or apply fluctuation clauses before the loss crystallises on site.</p>
+          <p class="article-item-blurb">The firms pricing work today with last quarter's material rates are not being competitive. They are being imprecise.</p>
+        </div>
+        <div class="article-item-date">Procurement<br>Mar 2026</div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Sub-subcontractor management: the coordination layer agents handle well</div>
+          <p class="article-item-desc">Specialist subcontractors managing their own supply chain — labour-only gangs, plant hire, material deliveries — spend disproportionate time on coordination emails, confirmation chasing, and attendance reconciliation. An agent connected to scheduling data, access records, and supplier confirmations can automate the daily coordination loop entirely: confirming attendances, flagging non-deliveries, and updating the programme with actual outputs against planned productivity.</p>
+        </div>
+        <div class="article-item-date">Operations<br>Mar 2026</div>
+      </div>
+
+      <div class="page-divider"></div>
+
+      <!-- Topic 03 -->
+      <div class="article-topic-eyebrow">topic 03</div>
+      <h2 class="article-topic-title">The tools that are ready to use today</h2>
+      <div class="article-hero"><img src="../.tmp/images/the_tools_that_are_ready_to_use_today.webp" alt="The tools that are ready to use today"></div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Platform-native AI is arriving in the tools subcontractors already use</div>
+          <p class="article-item-desc">Procore has embedded AI-assisted RFI drafting and risk flagging. Asite is building agentic document review into its CDE. Bluebeam Revu now offers AI-assisted quantity take-off and mark-up comparison. Most subcontractors are already paying for platforms that have deployed these capabilities — and not using them. The first practical step for many firms is not buying new software, but activating what they already have and building workflows around it.</p>
+        </div>
+        <div class="article-item-date">Technology<br>Mar 2026</div>
+      </div>
+
+      <div class="article-checklist-grid">
+        <div class="article-checklist-cell">
+          <div class="article-checklist-label">Quick wins — activate now</div>
+          <div class="article-checklist-title">Features in tools you already own</div>
+          <ul class="article-checklist-list">
+            <li>Procore AI RFI drafting</li>
+            <li>Bluebeam AI take-off comparison</li>
+            <li>Microsoft Copilot in Outlook/Word</li>
+            <li>Asite AI document review</li>
+            <li>Xero AI invoice reconciliation</li>
+          </ul>
+        </div>
+        <div class="article-checklist-cell">
+          <div class="article-checklist-label">Pilot candidates — 90-day scope</div>
+          <div class="article-checklist-title">Purpose-built agent workflows</div>
+          <ul class="article-checklist-list">
+            <li>RAMS generation agent</li>
+            <li>Variation notice drafting agent</li>
+            <li>Payment application tracker</li>
+            <li>Tender response assembler</li>
+            <li>Programme update summariser</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="page-divider"></div>
+
+      <!-- Topic 04 -->
+      <div class="article-topic-eyebrow">topic 04</div>
+      <h2 class="article-topic-title">Site coordination and delay management</h2>
+      <div class="article-hero"><img src="../.tmp/images/site_coordination_and_delay_management.webp" alt="Site coordination and delay management"></div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Early warning notices: the contractual tool most subcontractors use too late</div>
+          <p class="article-item-desc">NEC contracts require early warning notices to be issued as soon as a party becomes aware of a matter that could affect time, cost, or quality. In practice, subcontractors raise them reactively — after the delay has occurred and the entitlement window has partially closed. An agent monitoring daily site reports, drawing issue logs, and access records can identify early warning triggers the moment they appear and prompt the commercial team to issue notices before they become disputes.</p>
+          <p class="article-item-blurb">An early warning notice issued on day one is a conversation. The same notice issued on day 60 is a fight.</p>
+        </div>
+        <div class="article-item-date">Contracts<br>Mar 2026</div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Daily reporting transformed: from site diary to structured project intelligence</div>
+          <p class="article-item-desc">The site diary is one of the most underused assets in construction disputes — when it exists at all. Supervisors on busy sites rarely have time to produce detailed contemporaneous records. An agent that processes voice notes, photos, and brief text inputs from site staff can generate structured daily records — weather, workforce numbers, activities completed, access issues, instructions received — building a defensible project narrative automatically throughout the project lifecycle.</p>
+        </div>
+        <div class="article-item-date">Site Mgmt<br>Mar 2026</div>
+      </div>
+
+      <div class="page-divider"></div>
+
+      <!-- Topic 05 -->
+      <div class="article-topic-eyebrow">topic 05</div>
+      <h2 class="article-topic-title">The competitive landscape is shifting faster than most realise</h2>
+      <div class="article-hero"><img src="../.tmp/images/the_competitive_landscape_is_shifting_faster_than_most_realise.webp" alt="The competitive landscape is shifting faster than most realise"></div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Principal contractors are beginning to score subcontractors on digital capability</div>
+          <p class="article-item-desc">Tier 1 and Tier 2 principal contractors are increasingly including digital maturity criteria in subcontractor pre-qualification questionnaires. The ability to receive and process BIM data, respond to RFIs via platform rather than email, and demonstrate structured record-keeping is moving from desirable to baseline expectation. Subcontractors that have not invested in digital infrastructure — which increasingly means AI-augmented digital infrastructure — are beginning to fall off approved lists for major schemes.</p>
+          <p class="article-item-blurb">Being digitally capable used to be a differentiator. It is becoming a prerequisite for access to the best work.</p>
+        </div>
+        <div class="article-item-date">Market<br>Mar 2026</div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">The firms already doing this are not your largest competitors — they are your smallest</div>
+          <p class="article-item-desc">Early adoption of agentic workflows is disproportionately coming from smaller, leaner subcontractors — 5 to 30-person firms where the director is directly involved in technology decisions and can implement change without layers of approval. These firms are using AI to punch above their weight commercially: responding to more tenders, managing more projects with the same headcount, and presenting a more professional front to main contractors. If you are a mid-size subcontractor assuming the threat comes from the top, look again.</p>
+        </div>
+        <div class="article-item-date">Competition<br>Mar 2026</div>
+      </div>
+
+      <div class="page-divider"></div>
+
+      <!-- Topic 06 -->
+      <div class="article-topic-eyebrow">topic 06</div>
+      <h2 class="article-topic-title">Making the internal case: how to get sign-off and get started</h2>
+      <div class="article-hero"><img src="../.tmp/images/making_the_internal_case_how_to_get_sign_off_and_get_started.webp" alt="Making the internal case: how to get sign-off and get started"></div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">The business case that works: one workflow, one number, one pilot</div>
+          <p class="article-item-desc">The most common reason subcontractors stall on AI implementation is not scepticism — it is an inability to frame the investment. The business case that consistently wins internal approval is the narrowest possible one: identify one workflow, calculate the current cost in hours per month, estimate the reduction, express it in pounds, and propose a bounded 90-day pilot with a defined success metric. No grand transformation programme. No enterprise software procurement. One workflow, one number, one pilot.</p>
+          <p class="article-item-blurb">A RAMS agent that saves 40 hours per month at an average loaded cost of £45/hr pays for most mid-tier AI platforms in the first week of operation.</p>
+        </div>
+        <div class="article-item-date">Strategy<br>Mar 2026</div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">The implementation partner question: what to look for and what to avoid</div>
+          <p class="article-item-desc">A growing number of consultancies are positioning themselves as construction AI specialists. The quality is highly variable. The markers of a credible partner: they ask about your workflows before proposing a solution; they offer a fixed-scope pilot before a retainer; they have delivered within the construction supply chain specifically, not just adjacent industries; and they can show you a working agent, not a slide deck. Be especially cautious of firms leading with model comparisons or infrastructure discussions — the work that matters is workflow design, change management, and integration.</p>
+        </div>
+        <div class="article-item-date">Advisory<br>Mar 2026</div>
+      </div>
+
+      <div class="article-callout">
+        <p class="article-callout-text">"The subcontractors that will dominate the next decade are not the ones with the most people. They are the ones with the best-augmented people — and they are building that advantage right now."</p>
+      </div>
+
+      <span class="article-back" onclick="showPage('page-news')">← back to news</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="page" id="page-about">
+    <div class="page-inner">
+      <div class="page-eyebrow">about us</div>
+      <h1 class="page-title">We build systems<br>that hold.</h1>
+      <div class="page-body">
+        <p>formattion ai was founded by people who understand how subcontract businesses actually operate — the real administrative weight of running a site, managing a team, and chasing invoices at the same time.</p>
+        <p>Our focus is narrow by design. We work exclusively with UK subcontract trade businesses between £500k and £5m turnover. That specificity means our systems are built for real operational conditions, not general use cases.</p>
+        <p>We use n8n, OpenAI, and Airtable to build predictable, repeatable automation infrastructure. No proprietary lock-in. No black-box systems. Everything we build is documented and transferable.</p>
+      </div>
+
+      <div class="page-divider"></div>
+
+      <div class="about-stat-row">
+        <div class="about-stat">
+          <div class="about-stat-val">£500k–£5m</div>
+          <div class="about-stat-key">Target turnover range</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-val">6 weeks</div>
+          <div class="about-stat-key">Implementation window</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-val">UK only</div>
+          <div class="about-stat-key">Operating region</div>
+        </div>
+      </div>
+
+      <div class="page-eyebrow">our AI assistant</div>
+      <div class="page-body">
+        <p>For is the AI assistant embedded in formattion ai. Calm, direct, and efficient — For handles initial enquiries, qualification conversations, and system walkthroughs. For is not a chatbot. For is a structured operational interface.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="page" id="page-contact">
+    <div class="page-inner">
+      <div class="page-eyebrow">contact us</div>
+      <h1 class="page-title">Start with your<br>Automation Score.</h1>
+      <div class="page-body">
+        <p>We begin every engagement with a structured assessment of your current operational load. The Automation Opportunity Score takes under ten minutes and tells us exactly where to focus.</p>
+      </div>
+      <div class="page-divider"></div>
+      <div class="contact-field">
+        <label class="contact-label">Name</label>
+        <input type="text" class="contact-input" placeholder="Your name" />
+      </div>
+      <div class="contact-field">
+        <label class="contact-label">Business</label>
+        <input type="text" class="contact-input" placeholder="Company name" />
+      </div>
+      <div class="contact-field">
+        <label class="contact-label">Email</label>
+        <input type="email" class="contact-input" placeholder="you@company.com" />
+      </div>
+      <div class="contact-field">
+        <label class="contact-label">Approximate turnover</label>
+        <input type="text" class="contact-input" placeholder="£500k–£5m" />
+      </div>
+      <div class="contact-field">
+        <label class="contact-label">What's taking the most time right now</label>
+        <textarea class="contact-input contact-textarea" placeholder="Invoicing, quoting, email, scheduling…"></textarea>
+      </div>
+      <button class="contact-submit">send →</button>
+    </div>
+  </div>
+
+
+  <!-- ═══ BACK BUTTON ═══ -->
+  <div id="backBtn"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJMYXllcl8yIiBkYXRhLW5hbWU9IkxheWVyIDIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDM5LjQ4IDI4LjcxIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6IzFDMTgxNDt9PC9zdHlsZT48L2RlZnM+PGcgaWQ9IkxheWVyXzEtMiIgZGF0YS1uYW1lPSJMYXllciAxIj48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik01LjksMTEuNzRjLS40Ny40Ny0uMTQsMS4yNi41MiwxLjI2aDMxLjdjLjc1LDAsMS4zNi42MSwxLjM2LDEuMzZzLS42MSwxLjM2LTEuMzYsMS4zNkg2LjQyYy0uNjYsMC0uOTkuNzktLjUzLDEuMjYsMi44MiwyLjgyLDkuNDIsOS40Miw5LjQyLDkuNDIuNTMuNTMuNTMsMS4zOSwwLDEuOTJzLTEuMzkuNTMtMS45MiwwYzAsMC05Ljg1LTkuODUtMTMtMTMtLjUzLS41My0uNTMtMS4zOCwwLTEuOTFMMTMuNC40Yy41My0uNTMsMS4zOS0uNTMsMS45Miwwcy41MywxLjM5LDAsMS45Mkw1LjksMTEuNzRaIi8+PC9nPjwvc3ZnPg==" alt="back" /></div>
+
+    <div class="page" id="page-pricing">
+    <div class="page-inner">
+
+      <div class="page-eyebrow">pricing</div>
+      <h1 class="page-title">Straightforward.<br>No retainers until you're live.</h1>
+      <div class="page-body">
+        <p>Every engagement starts with a free build. You validate the system before committing to anything. Retainers only begin after deployment.</p>
+      </div>
+
+      <div class="page-divider"></div>
+
+      <!-- TIER CARDS -->
+      <div class="pricing-grid">
+
+        <!-- Pilot -->
+        <div class="pricing-card pricing-card--pilot">
+          <div class="pricing-card-header">
+            <span class="pricing-tier-label">Pilot</span>
+            <span class="pricing-tag">Free build</span>
+          </div>
+          <div class="pricing-price">£500<span class="pricing-price-unit"> / mo after deployment</span></div>
+          <div class="pricing-divider"></div>
+          <p class="pricing-desc">Validate the system before committing. We build, you approve. The retainer only starts once you go live.</p>
+          <ul class="pricing-features">
+            <li>One automation workflow</li>
+            <li>Full deployment included</li>
+            <li>Monthly optimisation retainer</li>
+          </ul>
+        </div>
+
+        <!-- Founding -->
+        <div class="pricing-card">
+          <div class="pricing-card-header">
+            <span class="pricing-tier-label">Founding</span>
+            <span class="pricing-tag pricing-tag--acc">4 clients only</span>
+          </div>
+          <div class="pricing-price">£600<span class="pricing-price-unit"> / mo</span></div>
+          <div class="pricing-setup">£750 – £1,500 setup</div>
+          <div class="pricing-divider"></div>
+          <p class="pricing-desc">Scope-dependent setup fee. Founding rate locked for the life of the engagement.</p>
+          <ul class="pricing-features">
+            <li>Full automation suite</li>
+            <li>Dedicated implementation lead</li>
+            <li>Monthly retainer + support</li>
+          </ul>
+        </div>
+
+        <!-- Primary -->
+        <div class="pricing-card">
+          <div class="pricing-card-header">
+            <span class="pricing-tier-label">Primary</span>
+            <span class="pricing-tag">Next 5 clients</span>
+          </div>
+          <div class="pricing-price">£900<span class="pricing-price-unit"> / mo</span></div>
+          <div class="pricing-setup">£1,500 – £3,000 setup</div>
+          <div class="pricing-divider"></div>
+          <p class="pricing-desc">After founding tier closes. Same methodology, full scope, standard rate.</p>
+          <ul class="pricing-features">
+            <li>Full automation suite</li>
+            <li>Dedicated implementation lead</li>
+            <li>Monthly retainer + support</li>
+          </ul>
+        </div>
+
+        <!-- Authority -->
+        <div class="pricing-card">
+          <div class="pricing-card-header">
+            <span class="pricing-tier-label">Authority</span>
+            <span class="pricing-tag">10+ clients</span>
+          </div>
+          <div class="pricing-price">£1,250<span class="pricing-price-unit"> / mo</span></div>
+          <div class="pricing-setup">£2,500 – £5,000 setup</div>
+          <div class="pricing-divider"></div>
+          <p class="pricing-desc">Full-scale implementation. Multi-workflow infrastructure. Enterprise-grade delivery within a lean model.</p>
+          <ul class="pricing-features">
+            <li>Multi-workflow build</li>
+            <li>Dedicated implementation lead</li>
+            <li>Priority retainer + support</li>
+          </ul>
+        </div>
+
+      </div><!-- /pricing-grid -->
+
+      <div class="pricing-footnote">
+        All retainers include system maintenance, optimisation, and ongoing support.
+        <br>Setup fees are fixed at scoping. No surprise costs.
+      </div>
+
+      <button class="contact-submit" onclick="document.getElementById('page-pricing').classList.remove('visible'); document.getElementById('page-contact').classList.add('visible');">get your automation score →</button>
+
+    </div>
+  </div>
+
+  <!-- ═══ TOP BAR ═══ -->
+  <div id="topBar"></div>
+
+  <!-- ═══ TOP RIGHT LOGO ═══ -->
+  <img id="topLogo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMiIgZGF0YS1uYW1lPSJMYXllciAyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMzYuMDYgMzAiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGZpbGw6ICMxQzE4MTQ7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxnIGlkPSJMYXllcl8xLTIiIGRhdGEtbmFtZT0iTGF5ZXIgMSI+CiAgICA8Zz4KICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjYuMzUsOC4zNmM2LjE5LDAsMTAuMjUsMy45MSwxMC4yNSwxMC44MnMtNC4wNiwxMC44Mi0xMC4yNSwxMC44Mi0xMC4yMy0zLjkxLTEwLjIzLTEwLjgyLDQuMDYtMTAuODIsMTAuMjMtMTAuODJaTTI2LjM1LDI3LjdjNC41MSwwLDcuNTYtMi45OSw3LjU2LTguNTJzLTMuMDUtOC41Mi03LjU2LTguNTItNy41NiwyLjk5LTcuNTYsOC41MiwzLjA3LDguNTIsNy41Niw4LjUyWiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00NC4yMyw5LjA4djEuNzRjMCwuMjguMzguNC41Mi4xNS44OC0xLjUsMi4zOC0yLjI2LDUuMDctMi4yNmgyLjZjLjE2LDAsLjI5LjEzLjI5LjI5djEuODFjMCwuMTYtLjEzLjI5LS4yOS4yOWgtMi40OGMtNC4xNCwwLTUuNjQsMi4zNi01LjY0LDYuNzh2MTEuMjljMCwuMTYtLjEzLjI5LS4yOS4yOWgtMi4wNWMtLjE2LDAtLjI5LS4xMy0uMjktLjI5VjkuMDhjMC0uMTYuMTMtLjI5LjI5LS4yOWgxLjk3Yy4xNiwwLC4yOS4xMy4yOS4yOVoiLz4KICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNzkuNzYsOC4zOGM0LjE0LDAsNi45MSwyLjA5LDYuOTEsNi42NHYxNC4yYzAsLjE2LS4xMy4yOC0uMjguMjhoLTIuMDNjLS4xNiwwLS4yOC0uMTMtLjI4LS4yOHYtMTMuOThjMC0zLjAzLTEuNjQtNC41Ny00Ljc5LTQuNTctMy42MSwwLTYuMTEsMi4xMy02LjExLDYuNTZ2MTEuOTljMCwuMTYtLjEzLjI4LS4yOC4yOGgtMi4wM2MtLjE2LDAtLjI4LS4xMy0uMjgtLjI4di0xMy45OGMwLTMuMDMtMS41Ni00LjU3LTQuOC00LjU3LTMuNjEsMC02LjExLDIuMTMtNi4xMSw2LjU2djExLjk5YzAsLjE2LS4xMy4yOC0uMjguMjhoLTIuMDNjLS4xNiwwLS4yOC0uMTMtLjI4LS4yOFY5LjE0YzAtLjE2LjEzLS4yOC4yOC0uMjhoMS45NWMuMTYsMCwuMjguMTMuMjguMjh2MS43MWMwLC4yNy4zNC4zOS41LjE3LDEuMS0xLjUsMi44OS0yLjYzLDYuMjQtMi42Myw0LjIzLDAsNS42MywyLjEsNi4wOSwzLjI3LjA5LjIzLjQuMjUuNTEuMDMuNjItMS4xNiwyLjM4LTMuMyw2Ljg0LTMuM1oiLz4KICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTYxLjk0LDguMzZjNi4xOSwwLDEwLjI1LDMuOTEsMTAuMjUsMTAuODJzLTQuMDYsMTAuODItMTAuMjUsMTAuODItMTAuMjMtMy45MS0xMC4yMy0xMC44Miw0LjA2LTEwLjgyLDEwLjIzLTEwLjgyWk0xNjEuOTQsMjcuN2M0LjUxLDAsNy41Ni0yLjk5LDcuNTYtOC41MnMtMy4wNS04LjUyLTcuNTYtOC41Mi03LjU2LDIuOTktNy41Niw4LjUyLDMuMDcsOC41Miw3LjU2LDguNTJaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTE3OS41Miw4Ljg1Yy4xNiwwLC4yOC4xMy4yOC4yOHYyLjJjMCwuMjguMzYuMzkuNTMuMTYsMS42OC0yLjQyLDQuMjctMy4xMSw3LjAzLTMuMTEsNC43MywwLDcuNzUsMi4zNiw3Ljc1LDcuMzh2MTMuNDZjMCwuMTYtLjEzLjI4LS4yOC4yOGgtMi4wNWMtLjE2LDAtLjI4LS4xMy0uMjgtLjI4di0xMy4xOGMwLTMuNzctMi4wMy01LjM1LTUuNTktNS4zNS0zLjkxLDAtNy4wMSwyLjM2LTcuMDEsNy4yN3YxMS4yNWMwLC4xNi0uMTMuMjgtLjI4LjI4aC0yLjA1Yy0uMTYsMC0uMjgtLjEzLS4yOC0uMjhWOS4xNGMwLS4xNi4xMy0uMjguMjgtLjI4aDEuOTdaIi8+CiAgICAgIDxnPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTE0Ni42Niw5LjE0djIwLjA5YzAsLjE2LS4xMy4yOC0uMjguMjhoLTIuMDZjLS4xNiwwLS4yOC0uMTMtLjI4LS4yOFY5LjE0YzAtLjE2LjEzLS4yOC4yOC0uMjhoMi4wNmMuMTYsMCwuMjguMTMuMjguMjhaIi8+CiAgICAgICAgPGNpcmNsZSBjbGFzcz0iY2xzLTEiIGN4PSIxNDUuMzQiIGN5PSIzLjE5IiByPSIxLjc5Ii8+CiAgICAgIDwvZz4KICAgICAgPGc+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjM1LjU4LDkuMTR2MjAuMDljMCwuMTYtLjEzLjI4LS4yOC4yOGgtMi4wNmMtLjE2LDAtLjI4LS4xMy0uMjgtLjI4VjkuMTRjMC0uMTYuMTMtLjI4LjI4LS4yOGgyLjA2Yy4xNiwwLC4yOC4xMy4yOC4yOFoiLz4KICAgICAgICA8Y2lyY2xlIGNsYXNzPSJjbHMtMSIgY3g9IjIzNC4yNyIgY3k9IjMuMTkiIHI9IjEuNzkiLz4KICAgICAgPC9nPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yMTguNiw4LjM4Yy00Ljk5LDAtOC4zOCwyLjA5LTguODUsNi4yNC0uMDMuMjYuMTkuNDkuNDUuNWgxLjY1Yy4yMywwLC40MS0uMTYuNDUtLjM5LjQ3LTIuNzgsMi42Ny00LjA5LDYuMjItNC4wOXM1LjQxLDEuNTcsNS41OCwzLjgzYy4wNi43NC0uMTEsMS4zOC0uNTksMS44OC0uMzIuMy0uNzkuNDgtLjk1LjUzLS4xNS4wNS0uNC4xMS0uNjYuMTYtLjI2LjA1LS40OC4xLS42Ni4xMi0uMTguMDMtLjQ1LjA2LS44Mi4xLS4zNy4wNC0uNTcuMDctLjkuMS0uMjMuMDItLjU5LjA2LTEuMDkuMS0uNDkuMDQtLjg3LjA4LTEuMTUuMS01LjIyLjU1LTguNDgsMi43My04LjQ4LDYuNTIsMCwxLjg2LjYxLDMuMzEsMS44Miw0LjM1czIuOSwxLjU2LDUuMDYsMS41NmMzLjE4LDAsNi4xOC0xLjE1LDguMDQtMy40NS4xNy0uMjEuNS0uMDkuNS4xN3YyLjM1YzAsLjI1LjIuNDYuNDYuNDZoMS41N2MuMjUsMCwuNDYtLjIuNDYtLjQ2di0xMy40NGMwLTQuOTQtMi45Ny03LjI1LTguMTEtNy4yNVpNMjI0LjE4LDIwLjJjMCwyLjYtLjk1LDQuNjUtMi4zNCw1Ljg0LTEuMzksMS4xOS0zLjE4LDEuNjktNS4xOCwxLjY5LTEuNDgsMC0yLjU4LS4wMi0zLjgzLS45NC0uOTEtLjY3LTEuMzEtMS43LTEuMzEtMi45MywwLS44Mi4xOC0xLjUxLjU1LTIuMDdzMS4wNi0xLjA2LDEuNzktMS4zN2MxLjgtLjgsMy4zNS0uODMsNS4yLTEuMDcsMS4xMi0uMTQsMS45MS0uMjUsMi4zOC0uMzMuNDYtLjA4LDEuMS0uMjQsMS42Ni0uNDIuMjgtLjA5LjQ4LS4xOC42NS0uMjguMTktLjEyLjQzLjAyLjQzLjI0djEuNjVaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEwMS4zMyw4LjM4Yy00Ljk5LDAtOC4zOCwyLjA5LTguODUsNi4yNC0uMDMuMjYuMTkuNDkuNDUuNWgxLjY1Yy4yMywwLC40MS0uMTYuNDUtLjM5LjQ3LTIuNzgsMi42Ny00LjA5LDYuMjItNC4wOXM1LjQxLDEuNTcsNS41OCwzLjgzYy4wNi43NC0uMTEsMS4zOC0uNTksMS44OC0uMzIuMy0uNzkuNDgtLjk1LjUzLS4xNS4wNS0uNC4xMS0uNjYuMTYtLjI2LjA1LS40OC4xLS42Ni4xMi0uMTguMDMtLjQ1LjA2LS44Mi4xLS4zNy4wNC0uNTcuMDctLjkuMS0uMjMuMDItLjU5LjA2LTEuMDkuMS0uNDkuMDQtLjg3LjA4LTEuMTUuMS01LjIyLjU1LTguNDgsMi43My04LjQ4LDYuNTIsMCwxLjg2LjYxLDMuMzEsMS44Miw0LjM1LDEuMjIsMS4wNCwyLjksMS41Niw1LjA2LDEuNTYsMy4xOCwwLDYuMTgtMS4xNSw4LjA0LTMuNDUuMTctLjIxLjUtLjA5LjUuMTd2Mi4zNWMwLC4yNS4yLjQ2LjQ2LjQ2aDEuNTdjLjI1LDAsLjQ2LS4yLjQ2LS40NnYtMTMuNDRjMC00Ljk0LTIuOTctNy4yNS04LjExLTcuMjVaTTEwNi45LDIwLjJjMCwyLjYtLjk1LDQuNjUtMi4zNCw1Ljg0LTEuMzksMS4xOS0zLjE4LDEuNjktNS4xOCwxLjY5LTEuNDgsMC0yLjU4LS4wMi0zLjgzLS45NC0uOTEtLjY3LTEuMzEtMS43LTEuMzEtMi45MywwLS44Mi4xOC0xLjUxLjU1LTIuMDdzMS4wNi0xLjA2LDEuNzktMS4zN2MxLjgtLjgsMy4zNS0uODMsNS4yLTEuMDcsMS4xMi0uMTQsMS45MS0uMjUsMi4zOC0uMzMuNDYtLjA4LDEuMS0uMjQsMS42Ni0uNDIuMjgtLjA5LjQ4LS4xOC42NS0uMjguMTktLjEyLjQzLjAyLjQzLjI0djEuNjVaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEzOS4zOCwxMC44NnYtMS43MmMwLS4xNi0uMTMtLjI5LS4yOS0uMjloLTUuODhjLS4xNiwwLS4yOS0uMTMtLjI5LS4yOVYzLjI4YzAtLjE2LS4xMy0uMjktLjI5LS4yOWgtMi4wNWMtLjE2LDAtLjI5LjEzLS4yOS4yOXY1LjI5YzAsLjE2LS4xMy4yOS0uMjkuMjloLTkuNDVjLS4xNiwwLS4yOS0uMTMtLjI5LS4yOVYzLjI4YzAtLjE2LS4xMy0uMjktLjI5LS4yOWgtMi4wNWMtLjE2LDAtLjI5LjEzLS4yOS4yOXY1LjI5YzAsLjE2LS4xMy4yOS0uMjkuMjloLTQuNTFjLS4xNiwwLS4yOS4xMy0uMjkuMjl2MS43MmMwLC4xNi4xMy4yOS4yOS4yOWg0LjUxYy4xNiwwLC4yOS4xMy4yOS4yOXYxMy4yOGMwLDMuMjIsMS43Niw0Ljc5LDUsNC43OWgzLjUzYy4xNiwwLC4yOS0uMTMuMjktLjI5di0xLjgzYzAtLjE2LS4xMy0uMjktLjI5LS4yOWgtNS42MmMtLjE2LDAtLjI5LS4xMy0uMjktLjI5di0xNS4zOWMwLS4xNi4xMy0uMjkuMjktLjI5aDkuNDVjLjE2LDAsLjI5LjEzLjI5LjI5djEzLjI4YzAsMy4yMiwxLjc2LDQuNzksNSw0Ljc5aDMuNzdjLjE2LDAsLjI5LS4xMy4yOS0uMjl2LTEuODNjMC0uMTYtLjEzLS4yOS0uMjktLjI5aC01Ljg3Yy0uMTYsMC0uMjgtLjEzLS4yOC0uMjh2LTE1LjRjMC0uMTYuMTMtLjI5LjI5LS4yOWg1Ljg4Yy4xNiwwLC4yOS0uMTMuMjktLjI5WiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xNC43MS4yOGMwLS4xNi0uMTMtLjI4LS4yOC0uMjhoLTQuMTRjLTMuMjQsMC01LDEuNTgtNSw0Ljc5djMuNzhjMCwuMTYtLjEzLjI4LS4yOC4yOEguMjhjLS4xNiwwLS4yOC4xMy0uMjguMjh2MS43M2MwLC4xNi4xMy4yOC4yOC4yOGg0LjcyYy4xNiwwLC4yOC4xMy4yOC4yOHYxNy44YzAsLjE2LjEzLjI4LjI4LjI4aDIuMDZjLjE2LDAsLjI4LS4xMy4yOC0uMjhWMTEuNDNjMC0uMTYuMTMtLjI4LjI4LS4yOGg1LjY3Yy4xNiwwLC4yOC0uMTMuMjgtLjI4di0xLjczYzAtLjE2LS4xMy0uMjgtLjI4LS4yOGgtNS42N2MtLjE2LDAtLjI4LS4xMy0uMjgtLjI4VjIuNTRjMC0uMTYuMTMtLjI4LjI4LS4yOGg2LjI0Yy4xNiwwLC4yOC0uMTMuMjgtLjI4Vi4yOFoiLz4KICAgIDwvZz4KICA8L2c+Cjwvc3ZnPg==" alt="formattion ai" />
+
+  <!-- ═══ MENU ═══ -->
+  <div id="menuWrap">
+    <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" viewBox="64 68 36 36" fill="none">
+      <path id="menuIconPath" fill="currentColor" d="M101.48,86.71h-13.92c-1.71,0-3.1-1.39-3.1-3.1v-13.92c0-.75-.61-1.36-1.36-1.36h0c-.75,0-1.36.61-1.36,1.36v13.92c0,1.71-1.39,3.1-3.1,3.1h-13.92c-.75,0-1.36.61-1.36,1.36h0c0,.75.61,1.36,1.36,1.36h13.92c1.71,0,3.1,1.39,3.1,3.1v13.92c0,.75.61,1.36,1.36,1.36h0c.75,0,1.36-.61,1.36-1.36v-13.92c0-1.71,1.39-3.1,3.1-3.1h13.92c.75,0,1.36-.61,1.36-1.36h0c0-.75-.61-1.36-1.36-1.36Z"/>
+    </svg>
+
+    <div id="dropMenu">
+      <div class="drop-item" id="newChatBtn">new chat</div>
+      <div class="drop-item" data-page="services">services</div>
+      <div class="drop-item" data-page="pricing">pricing</div>
+      <div class="drop-item" data-page="news">news</div>
+      <div class="drop-item" data-page="about">about us</div>
+      <div class="drop-item" data-page="contact">contact us</div>
+
+      <!-- mode toggle -->
+      <div class="menu-mode" style="position:absolute;bottom:28px;left:32px;z-index:2;display:flex;align-items:center;gap:10px">
+        <svg id="msToggleSvg" viewBox="0 0 274.28 178.65" xmlns="http://www.w3.org/2000/svg" style="width:44px;height:28px;cursor:pointer;display:block;flex-shrink:0">
+          <rect id="togCircleEl" x="27.29" y="27.29" width="124.04" height="124.04" rx="62.02" ry="62.02" style="fill:#1c1814;transition:x .3s cubic-bezier(.4,0,.2,1)"/>
+          <path id="togPathEl" style="fill:#1c1814" d="M184.96,0h-95.64C39.99,0,0,39.99,0,89.32h0c0,49.33,39.99,89.32,89.32,89.32h95.64c49.33,0,89.32-39.99,89.32-89.32h0C274.28,39.99,234.29,0,184.96,0ZM262.71,89.33c0,42.94-34.81,77.75-77.75,77.75h-95.64c-42.94,0-77.75-34.81-77.75-77.75h0C11.57,46.39,46.38,11.58,89.32,11.58h95.64c42.94,0,77.75,34.81,77.75,77.75h0Z"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ LANDING ═══ -->
+  <div id="landing">
+    <svg id="brandLogoSvg" class="brand-logo" id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1382.4 175.68">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #1C1814;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <path class="cls-1" d="M154.33,48.96c36.24,0,60,22.92,60,63.36s-23.76,63.36-60,63.36-59.88-22.92-59.88-63.36,23.76-63.36,59.88-63.36ZM154.33,162.24c26.4,0,44.28-17.52,44.28-49.92s-17.88-49.92-44.28-49.92-44.28,17.52-44.28,49.92,18,49.92,44.28,49.92Z"/>
+      <path class="cls-1" d="M258.99,53.17l-.02,10.2c0,1.67,2.22,2.34,3.07.91,5.18-8.78,13.95-13.26,29.71-13.26h15.25c.92,0,1.67.75,1.67,1.67v10.57c0,.92-.75,1.67-1.67,1.67h-14.53c-24.24,0-33,13.8-33,39.72v66.13c0,.92-.75,1.67-1.67,1.67h-12.01c-.92,0-1.67-.75-1.67-1.67V53.17c0-.92.75-1.67,1.67-1.67h11.53c.93,0,1.67.75,1.67,1.68Z"/>
+      <path class="cls-1" d="M467.08,49.08c24.22,0,40.44,12.24,40.44,38.88v83.17c0,.92-.75,1.67-1.67,1.67h-11.9c-.92,0-1.67-.75-1.67-1.67v-81.85c0-17.76-9.6-26.76-28.08-26.76-21.12,0-35.76,12.48-35.76,38.4v70.21c0,.92-.75,1.67-1.67,1.67h-11.9c-.92,0-1.67-.75-1.67-1.67v-81.85c0-17.76-9.12-26.76-28.08-26.76-21.12,0-35.76,12.48-35.76,38.4v70.21c0,.92-.75,1.67-1.67,1.67h-11.9c-.92,0-1.67-.75-1.67-1.67V53.51c0-.92.75-1.67,1.67-1.67h11.42c.92,0,1.67.75,1.67,1.67v10c0,1.59,2.02,2.27,2.96.98,6.45-8.8,16.93-15.42,36.53-15.42,24.77,0,32.99,12.31,35.64,19.15.52,1.34,2.33,1.46,3.01.2,3.65-6.79,13.92-19.35,40.07-19.35Z"/>
+      <path class="cls-1" d="M948.36,48.96c36.24,0,60,22.92,60,63.36s-23.76,63.36-60,63.36-59.88-22.92-59.88-63.36,23.76-63.36,59.88-63.36ZM948.36,162.24c26.4,0,44.28-17.52,44.28-49.92s-17.88-49.92-44.28-49.92-44.28,17.52-44.28,49.92,18,49.92,44.28,49.92Z"/>
+      <path class="cls-1" d="M1051.32,51.84c.92,0,1.67.75,1.67,1.67v12.89c0,1.67,2.14,2.28,3.09.91,9.86-14.19,24.99-18.23,41.2-18.23,27.72,0,45.36,13.8,45.36,43.2v78.85c0,.92-.75,1.67-1.67,1.67h-12.02c-.92,0-1.67-.75-1.67-1.67v-77.17c0-22.08-11.88-31.32-32.76-31.32-22.92,0-41.04,13.8-41.04,42.6v65.89c0,.92-.75,1.67-1.67,1.67h-12.02c-.92,0-1.67-.75-1.67-1.67V53.51c0-.92.75-1.67,1.67-1.67h11.54Z"/>
+      <g>
+        <path class="cls-1" d="M858.83,53.5v117.64c0,.92-.74,1.66-1.66,1.66h-12.04c-.92,0-1.66-.74-1.66-1.66V53.5c0-.92.74-1.66,1.66-1.66h12.04c.92,0,1.66.74,1.66,1.66Z"/>
+        <circle class="cls-1" cx="851.14" cy="18.66" r="10.5"/>
+      </g>
+      <g>
+        <path class="cls-1" d="M1379.6,53.5v117.64c0,.92-.74,1.66-1.66,1.66h-12.04c-.92,0-1.66-.74-1.66-1.66V53.5c0-.92.74-1.66,1.66-1.66h12.04c.92,0,1.66.74,1.66,1.66Z"/>
+        <circle class="cls-1" cx="1371.9" cy="18.66" r="10.5"/>
+      </g>
+      <path class="cls-1" d="M1280.16,49.08c-29.22,0-49.1,12.27-51.84,36.55-.17,1.55,1.1,2.9,2.66,2.9l9.66.03c1.33,0,2.42-.99,2.64-2.3,2.77-16.3,15.64-23.98,36.4-23.98s31.7,9.18,32.69,22.43c.34,4.32-.66,8.08-3.45,11.01-1.86,1.76-4.64,2.83-5.58,3.11-.9.27-2.34.64-3.86.96-1.52.32-2.8.56-3.84.72-1.04.16-2.64.36-4.8.6-2.16.24-3.37.42-5.28.6-1.36.12-3.48.36-6.36.6-2.88.24-5.12.44-6.72.6-30.57,3.2-49.67,15.96-49.67,38.21,0,10.88,3.56,19.36,10.68,25.45,7.12,6.08,17,9.12,29.65,9.12,18.64,0,36.2-6.76,47.09-20.2.99-1.22,2.94-.55,2.94,1.02v13.74c0,1.47,1.19,2.67,2.67,2.67h9.19c1.47,0,2.67-1.19,2.67-2.67v-78.69c0-28.92-17.4-42.48-47.52-42.48ZM1312.8,118.27c0,15.22-5.55,27.22-13.71,34.18-8.16,6.96-18.64,9.91-30.32,9.91-8.64,0-15.11-.11-22.44-5.52-5.35-3.95-7.68-9.96-7.68-17.16,0-4.8,1.08-8.84,3.24-12.12,2.16-3.28,6.21-6.21,10.45-8.05,10.53-4.69,19.61-4.87,30.45-6.27,6.56-.8,11.2-1.44,13.92-1.92,2.72-.48,6.45-1.39,9.73-2.43,1.62-.51,2.83-1.06,3.82-1.67,1.11-.69,2.53.1,2.53,1.41v9.65Z"/>
+      <path class="cls-1" d="M593.41,49.08c-29.22,0-49.1,12.27-51.84,36.55-.17,1.55,1.1,2.9,2.66,2.9l9.66.03c1.33,0,2.42-.99,2.64-2.3,2.77-16.3,15.64-23.98,36.4-23.98s31.7,9.18,32.69,22.43c.34,4.32-.66,8.08-3.45,11.01-1.86,1.76-4.64,2.83-5.58,3.11-.9.27-2.34.64-3.86.96-1.52.32-2.8.56-3.84.72-1.04.16-2.64.36-4.8.6-2.16.24-3.37.42-5.28.6-1.36.12-3.48.36-6.36.6-2.88.24-5.12.44-6.72.6-30.57,3.2-49.67,15.96-49.67,38.21,0,10.88,3.56,19.36,10.68,25.45,7.12,6.08,17,9.12,29.65,9.12,18.64,0,36.2-6.76,47.09-20.2.99-1.22,2.94-.55,2.94,1.02v13.74c0,1.47,1.19,2.67,2.67,2.67h9.19c1.47,0,2.67-1.19,2.67-2.67v-78.69c0-28.92-17.4-42.48-47.52-42.48ZM626.05,118.27c0,15.22-5.55,27.22-13.71,34.18-8.16,6.96-18.64,9.91-30.32,9.91-8.64,0-15.11-.11-22.44-5.52-5.35-3.95-7.68-9.96-7.68-17.16,0-4.8,1.08-8.84,3.24-12.12,2.16-3.28,6.21-6.21,10.45-8.05,10.53-4.69,19.61-4.87,30.45-6.27,6.56-.8,11.2-1.44,13.92-1.92,2.72-.48,6.45-1.39,9.73-2.43,1.62-.51,2.83-1.06,3.82-1.67,1.11-.69,2.53.1,2.53,1.41v9.65Z"/>
+      <path class="cls-1" d="M816.21,63.61v-10.09c0-.92-.75-1.67-1.67-1.67h-34.46c-.92,0-1.67-.75-1.67-1.67v-30.98c0-.92-.75-1.67-1.67-1.67h-12.01c-.92,0-1.67.75-1.67,1.67v30.98c0,.92-.75,1.67-1.67,1.67h-55.33c-.92,0-1.67-.75-1.67-1.67v-30.98c0-.92-.75-1.67-1.67-1.67h-12.01c-.92,0-1.67.75-1.67,1.67v30.98c0,.92-.75,1.67-1.67,1.67h-26.41c-.92,0-1.67.75-1.67,1.67v10.09c0,.92.75,1.67,1.67,1.67h26.41c.92,0,1.67.75,1.67,1.67v77.77c0,18.84,10.32,28.08,29.28,28.08h20.65c.92,0,1.67-.75,1.67-1.67v-10.69c0-.92-.75-1.67-1.67-1.67h-32.9c-.92,0-1.67-.75-1.67-1.67v-90.14c0-.92.75-1.67,1.67-1.67h55.33c.92,0,1.67.75,1.67,1.67v77.77c0,18.84,10.32,28.08,29.28,28.08h22.09c.92,0,1.67-.75,1.67-1.67v-10.69c0-.92-.75-1.67-1.67-1.67h-34.36c-.91,0-1.65-.74-1.65-1.65v-90.16c0-.92.75-1.67,1.67-1.67h34.46c.92,0,1.67-.75,1.67-1.67Z"/>
+      <path class="cls-1" d="M86.16,1.65c0-.91-.74-1.65-1.65-1.65h-24.27c-18.96,0-29.28,9.24-29.28,28.08v22.11c0,.91-.74,1.65-1.65,1.65H1.65c-.91,0-1.65.74-1.65,1.65v10.14c0,.91.74,1.65,1.65,1.65h27.66c.91,0,1.65.74,1.65,1.65v104.22c0,.91.74,1.65,1.65,1.65h12.06c.91,0,1.65-.74,1.65-1.65v-104.22c0-.91.74-1.65,1.65-1.65h33.18c.91,0,1.65-.74,1.65-1.65v-10.14c0-.91-.74-1.65-1.65-1.65h-33.18c-.91,0-1.65-.74-1.65-1.65V14.85c0-.91.74-1.65,1.65-1.65h36.54c.91,0,1.65-.74,1.65-1.65V1.65Z"/>
+    </g>
+  </g>
+</svg>
+    <button class="chat-btn" id="openChat">chat with us</button>
+  </div>
+
+  <!-- ═══ CHAT ═══ -->
+  <div id="chat">
+    <div class="messages" id="messages"><div class="messages-spacer"></div></div>
+
+    <div class="input-area">
+      <div class="input-box" id="inputBox">
+        <textarea id="userInput" rows="1" placeholder="Reply…"></textarea>
+        <div class="input-actions">
+          <input type="file" id="fileUpload" style="display:none;" multiple />
+          <button id="uploadBtn" class="chat-icon" title="Add" type="button">
+            <svg viewBox="0 0 301.86 301.86" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;flex-shrink:0;">
+              <path fill="currentColor" d="M291.48,140.55h-104.7c-14.06,0-25.46-11.4-25.46-25.46V10.38c0-5.73-4.65-10.38-10.38-10.38h0c-5.73,0-10.38,4.65-10.38,10.38v104.71c0,14.06-11.4,25.46-25.46,25.46H10.38c-5.73,0-10.38,4.65-10.38,10.38h0c0,5.73,4.65,10.38,10.38,10.38h106.48c13.08,0,23.69,10.61,23.69,23.69v106.47c0,5.73,4.65,10.38,10.38,10.38h0c5.73,0,10.38-4.65,10.38-10.38v-106.47c0-13.08,10.61-23.69,23.69-23.69h106.47c5.73,0,10.38-4.65,10.38-10.38h0c0-5.73-4.65-10.38-10.38-10.38Z"/>
+            </svg>
+          </button>
+          <button id="micBtn" class="chat-icon" title="Voice input" type="button">
+            <svg viewBox="0 0 178.65 326.47" xmlns="http://www.w3.org/2000/svg" style="height:30px;width:auto;">
+              <rect fill="currentColor" x="27.31" y="0" width="124.04" height="219.68" rx="62.02" ry="62.02"/>
+              <path fill="currentColor" d="M167.07,126.99v29.3c0,40.66-30.1,76.42-70.6,80.05-46.07,4.14-84.9-32.19-84.9-77.42v-31.93c0-3.2-2.59-5.79-5.79-5.79h0c-3.2,0-5.79,2.59-5.79,5.79v31.93c0,40.32,26.88,74.41,63.65,85.45,11.6,3.48,19.89,13.67,19.89,25.78v50.52c0,3.2,2.59,5.79,5.79,5.79h0c3.2,0,5.79-2.59,5.79-5.79v-50.52c0-12.12,8.29-22.3,19.89-25.78,36.77-11.04,63.64-45.13,63.64-85.45v-31.93c0-3.2-2.59-5.79-5.79-5.79h0c-3.2,0-5.79,2.59-5.79,5.79Z"/>
+            </svg>
+          </button>
+          <button id="sendBtn" class="chat-icon" title="Send" type="button" style="display:none;">
+            <svg viewBox="0 0 219.53 301.9" xmlns="http://www.w3.org/2000/svg" style="height:20px;width:auto;">
+              <path fill="currentColor" d="M129.77,45.09c-3.56-3.56-9.64-1.04-9.64,3.99v242.44c.01,5.73-4.64,10.38-10.37,10.38s-10.38-4.65-10.38-10.38V49.08c0-5.03-6.06-7.57-9.62-4.02-21.59,21.6-72.03,72.05-72.03,72.05-4.05,4.05-10.63,4.05-14.68,0-4.05-4.05-4.05-10.63,0-14.68,0,0,75.34-75.34,99.41-99.41,4.05-4.05,10.59-4.02,14.64.03l99.4,99.38c4.05,4.05,4.05,10.63,0,14.68-4.05,4.05-10.63,4.05-14.68,0l-72.04-72.04Z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const sessionId   = 'formattion-' + Math.random().toString(36).slice(2, 10);
+    const landing     = document.getElementById('landing');
+    const chatEl      = document.getElementById('chat');
+    const messagesEl  = document.getElementById('messages');
+    const inputEl     = document.getElementById('userInput');
+    const menuWrap    = document.getElementById('menuWrap');
+    const menuIcon    = document.getElementById('menuIcon');
+    const inputBox    = document.getElementById('inputBox');
+    const topLogo     = document.getElementById('topLogo');
+    const openChatBtn = document.getElementById('openChat');
+
+    var chatStarted = false;
+
+    var backBtn = document.getElementById('backBtn');
+    var pageHistory = [];
+
+    function hideAll() {
+      landing.classList.add('hidden');
+      chatEl.classList.remove('visible');
+      document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('visible'); });
+    }
+
+    function showBack() { backBtn.classList.add('visible'); }
+    function hideBack() { backBtn.classList.remove('visible'); }
+
+    backBtn.addEventListener('click', function() {
+      pageHistory.pop(); // remove current
+      if (pageHistory.length > 0) {
+        var prev = pageHistory[pageHistory.length - 1];
+        hideAll();
+        menuWrap.classList.remove('open');
+        document.getElementById(prev).classList.add('visible');
+        topLogo.classList.add('visible');
+        showBack();
+      } else {
+        // no history — go to landing
+        hideAll();
+        landing.classList.remove('hidden');
+        topLogo.classList.remove('visible');
+        hideBack();
+        pageHistory = [];
+      }
+    });
+
+    function showPage(id) {
+      hideAll();
+      menuWrap.classList.remove('open');
+      var el = document.getElementById(id);
+      el.classList.add('visible');
+      el.scrollTop = 0;
+      topLogo.classList.add('visible');
+      showBack();
+      // push to history only if different from last entry
+      if (pageHistory[pageHistory.length - 1] !== id) {
+        pageHistory.push(id);
+      }
+    }
+
+    function showPageRoot(id) {
+      pageHistory = [];
+      showPage(id);
+    }
+
+    // ── Mode toggle ──
+    const msToggle = document.getElementById('msToggleSvg');
+    const togCircleEl = document.getElementById('togCircleEl');
+    const togPathEl = document.getElementById('togPathEl');
+    const menuIconPath = document.getElementById('menuIconPath');
+    let darkMode = false;
+
+    function setToggleFill(col) {
+      togCircleEl.style.fill = col;
+      togPathEl.style.fill = col;
+      if(menuIconPath) menuIconPath.setAttribute('fill', col);
+      // Update topLogo fill
+      const tlg = document.querySelector('#topLogo .cls-1') || document.querySelector('#topLogo path');
+      if(tlg) tlg.style.fill = col;
+      document.querySelectorAll('#topLogo path, #topLogo circle').forEach(el => el.style.fill = col);
+    }
+    setToggleFill('#1c1814');
+
+    if(msToggle) {
+      msToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        darkMode = !darkMode;
+        document.body.classList.toggle('dark', darkMode);
+        togCircleEl.setAttribute('x', darkMode ? '122.94' : '27.29');
+        setToggleFill(darkMode ? '#edecea' : '#1c1814');
+        // Update landing logo fill
+        document.querySelectorAll('.brand-logo .cls-1').forEach(el => el.style.fill = darkMode ? '#EDECEA' : '#1C1814');
+      });
+    }
+
+
+    // ── Menu toggle ──
+    menuIcon.addEventListener('click', function(e) {
+      e.stopPropagation();
+      menuWrap.classList.toggle('open');
+      if (landing.classList.contains('hidden')) {
+        topLogo.classList.add('visible');
+      }
+    });
+    document.addEventListener('click', function() {
+      menuWrap.classList.remove('open');
+    });
+
+    // ── Logo → home ──
+    topLogo.addEventListener('click', function() {
+      menuWrap.classList.remove('open');
+      hideAll();
+      landing.classList.remove('hidden');
+      topLogo.classList.remove('visible');
+      hideBack();
+    });
+
+    // ── Open / continue chat ──
+    openChatBtn.addEventListener('click', openChat);
+
+    function openChat() {
+      landing.classList.add('hidden');
+      chatEl.classList.add('visible');
+      topLogo.classList.add('visible');
+      showBack();
+      updateSendMic();
+      if (!chatStarted) {
+        chatStarted = true;
+        openChatBtn.textContent = 'continue chatting';
+        setTimeout(function() {
+          addAiMessage('Hello, I am For, how can I help you today?');
+          inputEl.focus();
+        }, 300);
+      } else {
+        inputEl.focus();
+        scrollBottom();
+      }
+    }
+
+    // ── New chat ──
+    document.getElementById('newChatBtn').addEventListener('click', function() {
+      menuWrap.classList.remove('open');
+      chatStarted = false;
+      openChatBtn.textContent = 'chat with us';
+      messagesEl.innerHTML = '<div class="messages-spacer"></div>';
+      hideAll();
+      openChat();
+    });
+
+    // ── Section pages ──
+    document.querySelectorAll('.drop-item[data-page]').forEach(function(item) {
+      item.addEventListener('click', function() {
+        showPageRoot('page-' + this.dataset.page);
+      });
+    });
+
+    // ── Hash routing for deep links (e.g. from email CTA) ──
+    (function() {
+      var hash = window.location.hash.slice(1);
+      if (hash && document.getElementById('page-' + hash)) {
+        showPage('page-' + hash);
+      }
+    })();
+
+    document.querySelectorAll('.drop-item').forEach(function(item) {
+      item.addEventListener('click', function() {
+        menuWrap.classList.remove('open');
+      });
+    });
+
+    // ── File upload ──
+    document.getElementById('uploadBtn').addEventListener('click', function() {
+      document.getElementById('fileUpload').click();
+    });
+    document.getElementById('fileUpload').addEventListener('change', function() {
+      var files = this.files;
+      if (!files.length) return;
+      var names = Array.from(files).map(function(f) { return f.name; }).join(', ');
+      inputEl.value = inputEl.value ? inputEl.value + ' [' + names + ']' : '[' + names + ']';
+      inputEl.focus();
+      this.value = '';
+    });
+
+    // ── Send on Enter ──
+    inputEl.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    // ── Auto-resize textarea + mic/send toggle ──
+    var micBtn  = document.getElementById('micBtn');
+    var sendBtn = document.getElementById('sendBtn');
+
+    function updateSendMic() {
+      var hasText = inputEl.value.trim().length > 0;
+      micBtn.style.display  = hasText ? 'none'  : 'flex';
+      sendBtn.style.display = hasText ? 'flex'  : 'none';
+    }
+
+    inputEl.addEventListener('input', function() {
+      inputEl.style.height = 'auto';
+      inputEl.style.height = Math.min(inputEl.scrollHeight, 168) + 'px';
+      var totalH = inputEl.scrollHeight + 80;
+      inputBox.style.minHeight = Math.min(Math.max(totalH, 100), 300) + 'px';
+      updateSendMic();
+    });
+
+    sendBtn.addEventListener('click', function() {
+      if (inputEl.value.trim().length > 0) {
+        sendMessage();
+        updateSendMic();
+      }
+    });
+
+    // ── Send message ──
+    async function sendMessage() {
+      var text = inputEl.value.trim();
+      if (!text) return;
+      inputEl.value = '';
+      inputEl.style.height = 'auto';
+      inputBox.style.minHeight = '100px';
+      updateSendMic();
+      addUserMessage(text);
+      var typingMsg = addAiTyping();
+      scrollBottom();
+      try {
+        var res = await fetch('https://ozarensky.app.n8n.cloud/webhook/c9f2e938-9876-4133-8b3e-e9abe1151931/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ chatInput: text, sessionId: sessionId })
+        });
+        var data = await res.json();
+        var reply = data.output || data.text || data.message || data.response
+          || (Array.isArray(data) && data[0] && (data[0].output || data[0].text))
+          || 'Sorry, I could not process that.';
+        typingMsg.remove();
+        addAiMessage(reply);
+      } catch (err) {
+        typingMsg.remove();
+        addAiMessage('Sorry, something went wrong. Please try again.');
+      }
+    }
+
+    function renderMarkdown(text) {
+      return text
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        .replace(/`(.+?)`/g, '<code style="font-family:var(--mono);font-size:15px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:2px;">$1</code>')
+        .replace(/\n/g, '<br>');
+    }
+
+    function addAiMessage(text) {
+      var wrap = document.createElement('div');
+      wrap.className = 'msg-ai';
+      wrap.innerHTML = '<div class="text">' + renderMarkdown(escHtml(text)) + '</div><div class="sender">For</div>';
+      messagesEl.appendChild(wrap);
+      scrollBottom();
+      return wrap;
+    }
+
+    function addAiTyping() {
+      var wrap = document.createElement('div');
+      wrap.className = 'msg-ai';
+      wrap.innerHTML = '<div class="typing"><span></span><span></span><span></span></div><div class="sender">For</div>';
+      messagesEl.appendChild(wrap);
+      scrollBottom();
+      return wrap;
+    }
+
+    function addUserMessage(text) {
+      var wrap = document.createElement('div');
+      wrap.className = 'msg-user';
+      wrap.innerHTML = '<div class="bubble">' + escHtml(text) + '</div>';
+      messagesEl.appendChild(wrap);
+      scrollBottom();
+      return wrap;
+    }
+
+    function scrollBottom() {
+      setTimeout(function() {
+        messagesEl.scrollTo({ top: messagesEl.scrollHeight, behavior: 'smooth' });
+      }, 50);
+    }
+
+    function escHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    // Set correct initial button state
+    updateSendMic();
+  </script>
+</body>
+</html>
