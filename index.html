@@ -702,22 +702,25 @@
     body.dark #topLogo { filter: invert(1); }
 
     /* ══ MENU ══ */
-    #menuWrap {
+    #menuIcon {
       position: fixed;
       top: 44px; left: 65px;
-      z-index: 400;
-      user-select: none;
-    }
-    #menuIcon {
       width: 32px; height: 32px;
       cursor: pointer;
       display: block;
       transition: transform .35s cubic-bezier(.4,0,.2,1);
       transform-origin: center center;
       overflow: visible;
+      z-index: 500;
+      color: var(--ink);
     }
-    #menuWrap:hover #menuIcon,
-    #menuWrap.open #menuIcon { transform: rotate(45deg); }
+    #menuWrap {
+      position: fixed;
+      top: 0; left: 0;
+      z-index: 400;
+      user-select: none;
+    }
+    #menuIcon.open { transform: rotate(45deg); }
 
     #dropMenu {
       position: fixed;
@@ -760,7 +763,7 @@
     .drop-item {
       display: block;
       padding: 6px 0;
-      margin: 0 0 12px 32px;
+      margin: 0 0 12px 28px;
       font-family: var(--sans);
       font-weight: 300;
       font-size: 22px;
@@ -1154,6 +1157,7 @@
     body.dark .pricing-card { background: var(--bg2); }
     body.dark .pricing-card--pilot { border-color: rgba(237,236,234,0.13); }
 
+
   /* ════════════════════════════════════════
      MOBILE — full audit, every element
      ════════════════════════════════════════ */
@@ -1169,29 +1173,36 @@
       right: 8px !important;
     }
 
-    /* ── TOP LOGO
-       Desktop: right 65px, top 51px — way off screen on mobile
-       Mobile: right 16px, vertically centred in the 60px bar ── */
+    /* ── TOP LOGO: bar top=8px h=60px, centre=38px, logo h=14px → top=31px ── */
     #topLogo {
-      top: 22px !important;
-      right: 16px !important;
+      top: 28px !important;
+      right: 28px !important;
       left: auto !important;
       height: 14px !important;
       width: auto !important;
     }
 
-    /* ── MENU ICON WRAP
-       Desktop: left 65px, top 44px — too far right
-       Mobile: left 16px, inside the bar ── */
+    /* ── MENU ICON: standalone fixed, always above everything ── */
+    #menuIcon {
+      top: 25px !important;
+      left: 28px !important;
+      width: 20px !important;
+      height: 20px !important;
+    }
     #menuWrap {
-      top: 24px !important;
-      left: 16px !important;
+      top: 76px !important;
+      left: 0 !important;
     }
 
     /* ── DROP MENU
        Desktop: fixed 260px wide, slides in from left
        Mobile: full width panel, slides down from top bar
        Also override the translateX animation to translateY ── */
+    /* drop-item and toggle left position: panel at 8px, icon at 28px → margin = 20px */
+    .drop-item { margin-left: 20px !important; }
+    #menuMode { left: 20px !important; }
+
+    /* dropMenu: full coords + padding to push items below X icon */
     #dropMenu {
       top: 76px !important;
       left: 8px !important;
@@ -1199,18 +1210,17 @@
       bottom: 8px !important;
       width: auto !important;
       transform: translateY(-16px) !important;
+      padding-top: 60px !important;
     }
     #menuWrap.open #dropMenu {
       transform: translateY(0) !important;
     }
 
     /* ── BACK BUTTON
-       Desktop: bottom 50px, left 65px — completely wrong on mobile
-       Mobile: top of screen, left aligned with menu ── */
+       Desktop: bottom 50px, left 65px
+       Mobile: bottom of screen, left side — avoids clash with menu icon top-left ── */
     #backBtn {
-      bottom: auto !important;
-      top: 24px !important;
-      left: 16px !important;
+      display: none !important;
     }
 
     /* ── LANDING PAGE
@@ -1222,23 +1232,25 @@
       flex-direction: column !important;
       align-items: center !important;
       justify-content: center !important;
-      gap: 40px !important;
+      gap: 0 !important;
+      min-height: 100dvh !important;
+      height: 100dvh !important;
     }
     .brand-logo {
-      position: relative !important;
-      top: auto !important;
-      left: auto !important;
-      transform: none !important;
+      position: absolute !important;
+      top: 38% !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) !important;
       width: 78vw !important;
       max-width: 300px !important;
-      height: auto !important;
     }
     .chat-btn {
-      position: relative !important;
-      bottom: auto !important;
-      left: auto !important;
-      transform: none !important;
+      position: absolute !important;
+      bottom: 80px !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
     }
+
 
     /* ── PAGES
        Desktop: padding 140px 65px 100px, max-width 900px
@@ -2163,12 +2175,13 @@
   <!-- ═══ TOP RIGHT LOGO ═══ -->
   <img id="topLogo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMiIgZGF0YS1uYW1lPSJMYXllciAyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMzYuMDYgMzAiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGZpbGw6ICMxQzE4MTQ7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxnIGlkPSJMYXllcl8xLTIiIGRhdGEtbmFtZT0iTGF5ZXIgMSI+CiAgICA8Zz4KICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjYuMzUsOC4zNmM2LjE5LDAsMTAuMjUsMy45MSwxMC4yNSwxMC44MnMtNC4wNiwxMC44Mi0xMC4yNSwxMC44Mi0xMC4yMy0zLjkxLTEwLjIzLTEwLjgyLDQuMDYtMTAuODIsMTAuMjMtMTAuODJaTTI2LjM1LDI3LjdjNC41MSwwLDcuNTYtMi45OSw3LjU2LTguNTJzLTMuMDUtOC41Mi03LjU2LTguNTItNy41NiwyLjk5LTcuNTYsOC41MiwzLjA3LDguNTIsNy41Niw4LjUyWiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00NC4yMyw5LjA4djEuNzRjMCwuMjguMzguNC41Mi4xNS44OC0xLjUsMi4zOC0yLjI2LDUuMDctMi4yNmgyLjZjLjE2LDAsLjI5LjEzLjI5LjI5djEuODFjMCwuMTYtLjEzLjI5LS4yOS4yOWgtMi40OGMtNC4xNCwwLTUuNjQsMi4zNi01LjY0LDYuNzh2MTEuMjljMCwuMTYtLjEzLjI5LS4yOS4yOWgtMi4wNWMtLjE2LDAtLjI5LS4xMy0uMjktLjI5VjkuMDhjMC0uMTYuMTMtLjI5LjI5LS4yOWgxLjk3Yy4xNiwwLC4yOS4xMy4yOS4yOVoiLz4KICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNzkuNzYsOC4zOGM0LjE0LDAsNi45MSwyLjA5LDYuOTEsNi42NHYxNC4yYzAsLjE2LS4xMy4yOC0uMjguMjhoLTIuMDNjLS4xNiwwLS4yOC0uMTMtLjI4LS4yOHYtMTMuOThjMC0zLjAzLTEuNjQtNC41Ny00Ljc5LTQuNTctMy42MSwwLTYuMTEsMi4xMy02LjExLDYuNTZ2MTEuOTljMCwuMTYtLjEzLjI4LS4yOC4yOGgtMi4wM2MtLjE2LDAtLjI4LS4xMy0uMjgtLjI4di0xMy45OGMwLTMuMDMtMS41Ni00LjU3LTQuOC00LjU3LTMuNjEsMC02LjExLDIuMTMtNi4xMSw2LjU2djExLjk5YzAsLjE2LS4xMy4yOC0uMjguMjhoLTIuMDNjLS4xNiwwLS4yOC0uMTMtLjI4LS4yOFY5LjE0YzAtLjE2LjEzLS4yOC4yOC0uMjhoMS45NWMuMTYsMCwuMjguMTMuMjguMjh2MS43MWMwLC4yNy4zNC4zOS41LjE3LDEuMS0xLjUsMi44OS0yLjYzLDYuMjQtMi42Myw0LjIzLDAsNS42MywyLjEsNi4wOSwzLjI3LjA5LjIzLjQuMjUuNTEuMDMuNjItMS4xNiwyLjM4LTMuMyw2Ljg0LTMuM1oiLz4KICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTYxLjk0LDguMzZjNi4xOSwwLDEwLjI1LDMuOTEsMTAuMjUsMTAuODJzLTQuMDYsMTAuODItMTAuMjUsMTAuODItMTAuMjMtMy45MS0xMC4yMy0xMC44Miw0LjA2LTEwLjgyLDEwLjIzLTEwLjgyWk0xNjEuOTQsMjcuN2M0LjUxLDAsNy41Ni0yLjk5LDcuNTYtOC41MnMtMy4wNS04LjUyLTcuNTYtOC41Mi03LjU2LDIuOTktNy41Niw4LjUyLDMuMDcsOC41Miw3LjU2LDguNTJaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTE3OS41Miw4Ljg1Yy4xNiwwLC4yOC4xMy4yOC4yOHYyLjJjMCwuMjguMzYuMzkuNTMuMTYsMS42OC0yLjQyLDQuMjctMy4xMSw3LjAzLTMuMTEsNC43MywwLDcuNzUsMi4zNiw3Ljc1LDcuMzh2MTMuNDZjMCwuMTYtLjEzLjI4LS4yOC4yOGgtMi4wNWMtLjE2LDAtLjI4LS4xMy0uMjgtLjI4di0xMy4xOGMwLTMuNzctMi4wMy01LjM1LTUuNTktNS4zNS0zLjkxLDAtNy4wMSwyLjM2LTcuMDEsNy4yN3YxMS4yNWMwLC4xNi0uMTMuMjgtLjI4LjI4aC0yLjA1Yy0uMTYsMC0uMjgtLjEzLS4yOC0uMjhWOS4xNGMwLS4xNi4xMy0uMjguMjgtLjI4aDEuOTdaIi8+CiAgICAgIDxnPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTE0Ni42Niw5LjE0djIwLjA5YzAsLjE2LS4xMy4yOC0uMjguMjhoLTIuMDZjLS4xNiwwLS4yOC0uMTMtLjI4LS4yOFY5LjE0YzAtLjE2LjEzLS4yOC4yOC0uMjhoMi4wNmMuMTYsMCwuMjguMTMuMjguMjhaIi8+CiAgICAgICAgPGNpcmNsZSBjbGFzcz0iY2xzLTEiIGN4PSIxNDUuMzQiIGN5PSIzLjE5IiByPSIxLjc5Ii8+CiAgICAgIDwvZz4KICAgICAgPGc+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjM1LjU4LDkuMTR2MjAuMDljMCwuMTYtLjEzLjI4LS4yOC4yOGgtMi4wNmMtLjE2LDAtLjI4LS4xMy0uMjgtLjI4VjkuMTRjMC0uMTYuMTMtLjI4LjI4LS4yOGgyLjA2Yy4xNiwwLC4yOC4xMy4yOC4yOFoiLz4KICAgICAgICA8Y2lyY2xlIGNsYXNzPSJjbHMtMSIgY3g9IjIzNC4yNyIgY3k9IjMuMTkiIHI9IjEuNzkiLz4KICAgICAgPC9nPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yMTguNiw4LjM4Yy00Ljk5LDAtOC4zOCwyLjA5LTguODUsNi4yNC0uMDMuMjYuMTkuNDkuNDUuNWgxLjY1Yy4yMywwLC40MS0uMTYuNDUtLjM5LjQ3LTIuNzgsMi42Ny00LjA5LDYuMjItNC4wOXM1LjQxLDEuNTcsNS41OCwzLjgzYy4wNi43NC0uMTEsMS4zOC0uNTksMS44OC0uMzIuMy0uNzkuNDgtLjk1LjUzLS4xNS4wNS0uNC4xMS0uNjYuMTYtLjI2LjA1LS40OC4xLS42Ni4xMi0uMTguMDMtLjQ1LjA2LS44Mi4xLS4zNy4wNC0uNTcuMDctLjkuMS0uMjMuMDItLjU5LjA2LTEuMDkuMS0uNDkuMDQtLjg3LjA4LTEuMTUuMS01LjIyLjU1LTguNDgsMi43My04LjQ4LDYuNTIsMCwxLjg2LjYxLDMuMzEsMS44Miw0LjM1czIuOSwxLjU2LDUuMDYsMS41NmMzLjE4LDAsNi4xOC0xLjE1LDguMDQtMy40NS4xNy0uMjEuNS0uMDkuNS4xN3YyLjM1YzAsLjI1LjIuNDYuNDYuNDZoMS41N2MuMjUsMCwuNDYtLjIuNDYtLjQ2di0xMy40NGMwLTQuOTQtMi45Ny03LjI1LTguMTEtNy4yNVpNMjI0LjE4LDIwLjJjMCwyLjYtLjk1LDQuNjUtMi4zNCw1Ljg0LTEuMzksMS4xOS0zLjE4LDEuNjktNS4xOCwxLjY5LTEuNDgsMC0yLjU4LS4wMi0zLjgzLS45NC0uOTEtLjY3LTEuMzEtMS43LTEuMzEtMi45MywwLS44Mi4xOC0xLjUxLjU1LTIuMDdzMS4wNi0xLjA2LDEuNzktMS4zN2MxLjgtLjgsMy4zNS0uODMsNS4yLTEuMDcsMS4xMi0uMTQsMS45MS0uMjUsMi4zOC0uMzMuNDYtLjA4LDEuMS0uMjQsMS42Ni0uNDIuMjgtLjA5LjQ4LS4xOC42NS0uMjguMTktLjEyLjQzLjAyLjQzLjI0djEuNjVaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEwMS4zMyw4LjM4Yy00Ljk5LDAtOC4zOCwyLjA5LTguODUsNi4yNC0uMDMuMjYuMTkuNDkuNDUuNWgxLjY1Yy4yMywwLC40MS0uMTYuNDUtLjM5LjQ3LTIuNzgsMi42Ny00LjA5LDYuMjItNC4wOXM1LjQxLDEuNTcsNS41OCwzLjgzYy4wNi43NC0uMTEsMS4zOC0uNTksMS44OC0uMzIuMy0uNzkuNDgtLjk1LjUzLS4xNS4wNS0uNC4xMS0uNjYuMTYtLjI2LjA1LS40OC4xLS42Ni4xMi0uMTguMDMtLjQ1LjA2LS44Mi4xLS4zNy4wNC0uNTcuMDctLjkuMS0uMjMuMDItLjU5LjA2LTEuMDkuMS0uNDkuMDQtLjg3LjA4LTEuMTUuMS01LjIyLjU1LTguNDgsMi43My04LjQ4LDYuNTIsMCwxLjg2LjYxLDMuMzEsMS44Miw0LjM1LDEuMjIsMS4wNCwyLjksMS41Niw1LjA2LDEuNTYsMy4xOCwwLDYuMTgtMS4xNSw4LjA0LTMuNDUuMTctLjIxLjUtLjA5LjUuMTd2Mi4zNWMwLC4yNS4yLjQ2LjQ2LjQ2aDEuNTdjLjI1LDAsLjQ2LS4yLjQ2LS40NnYtMTMuNDRjMC00Ljk0LTIuOTctNy4yNS04LjExLTcuMjVaTTEwNi45LDIwLjJjMCwyLjYtLjk1LDQuNjUtMi4zNCw1Ljg0LTEuMzksMS4xOS0zLjE4LDEuNjktNS4xOCwxLjY5LTEuNDgsMC0yLjU4LS4wMi0zLjgzLS45NC0uOTEtLjY3LTEuMzEtMS43LTEuMzEtMi45MywwLS44Mi4xOC0xLjUxLjU1LTIuMDdzMS4wNi0xLjA2LDEuNzktMS4zN2MxLjgtLjgsMy4zNS0uODMsNS4yLTEuMDcsMS4xMi0uMTQsMS45MS0uMjUsMi4zOC0uMzMuNDYtLjA4LDEuMS0uMjQsMS42Ni0uNDIuMjgtLjA5LjQ4LS4xOC42NS0uMjguMTktLjEyLjQzLjAyLjQzLjI0djEuNjVaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEzOS4zOCwxMC44NnYtMS43MmMwLS4xNi0uMTMtLjI5LS4yOS0uMjloLTUuODhjLS4xNiwwLS4yOS0uMTMtLjI5LS4yOVYzLjI4YzAtLjE2LS4xMy0uMjktLjI5LS4yOWgtMi4wNWMtLjE2LDAtLjI5LjEzLS4yOS4yOXY1LjI5YzAsLjE2LS4xMy4yOS0uMjkuMjloLTkuNDVjLS4xNiwwLS4yOS0uMTMtLjI5LS4yOVYzLjI4YzAtLjE2LS4xMy0uMjktLjI5LS4yOWgtMi4wNWMtLjE2LDAtLjI5LjEzLS4yOS4yOXY1LjI5YzAsLjE2LS4xMy4yOS0uMjkuMjloLTQuNTFjLS4xNiwwLS4yOS4xMy0uMjkuMjl2MS43MmMwLC4xNi4xMy4yOS4yOS4yOWg0LjUxYy4xNiwwLC4yOS4xMy4yOS4yOXYxMy4yOGMwLDMuMjIsMS43Niw0Ljc5LDUsNC43OWgzLjUzYy4xNiwwLC4yOS0uMTMuMjktLjI5di0xLjgzYzAtLjE2LS4xMy0uMjktLjI5LS4yOWgtNS42MmMtLjE2LDAtLjI5LS4xMy0uMjktLjI5di0xNS4zOWMwLS4xNi4xMy0uMjkuMjktLjI5aDkuNDVjLjE2LDAsLjI5LjEzLjI5LjI5djEzLjI4YzAsMy4yMiwxLjc2LDQuNzksNSw0Ljc5aDMuNzdjLjE2LDAsLjI5LS4xMy4yOS0uMjl2LTEuODNjMC0uMTYtLjEzLS4yOS0uMjktLjI5aC01Ljg3Yy0uMTYsMC0uMjgtLjEzLS4yOC0uMjh2LTE1LjRjMC0uMTYuMTMtLjI5LjI5LS4yOWg1Ljg4Yy4xNiwwLC4yOS0uMTMuMjktLjI5WiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xNC43MS4yOGMwLS4xNi0uMTMtLjI4LS4yOC0uMjhoLTQuMTRjLTMuMjQsMC01LDEuNTgtNSw0Ljc5djMuNzhjMCwuMTYtLjEzLjI4LS4yOC4yOEguMjhjLS4xNiwwLS4yOC4xMy0uMjguMjh2MS43M2MwLC4xNi4xMy4yOC4yOC4yOGg0LjcyYy4xNiwwLC4yOC4xMy4yOC4yOHYxNy44YzAsLjE2LjEzLjI4LjI4LjI4aDIuMDZjLjE2LDAsLjI4LS4xMy4yOC0uMjhWMTEuNDNjMC0uMTYuMTMtLjI4LjI4LS4yOGg1LjY3Yy4xNiwwLC4yOC0uMTMuMjgtLjI4di0xLjczYzAtLjE2LS4xMy0uMjgtLjI4LS4yOGgtNS42N2MtLjE2LDAtLjI4LS4xMy0uMjgtLjI4VjIuNTRjMC0uMTYuMTMtLjI4LjI4LS4yOGg2LjI0Yy4xNiwwLC4yOC0uMTMuMjgtLjI4Vi4yOFoiLz4KICAgIDwvZz4KICA8L2c+Cjwvc3ZnPg==" alt="formattion ai" />
 
-  <!-- ═══ MENU ═══ -->
-  <div id="menuWrap">
-    <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" viewBox="64 68 36 36" fill="none">
-      <path id="menuIconPath" fill="currentColor" d="M101.48,86.71h-13.92c-1.71,0-3.1-1.39-3.1-3.1v-13.92c0-.75-.61-1.36-1.36-1.36h0c-.75,0-1.36.61-1.36,1.36v13.92c0,1.71-1.39,3.1-3.1,3.1h-13.92c-.75,0-1.36.61-1.36,1.36h0c0,.75.61,1.36,1.36,1.36h13.92c1.71,0,3.1,1.39,3.1,3.1v13.92c0,.75.61,1.36,1.36,1.36h0c.75,0,1.36-.61,1.36-1.36v-13.92c0-1.71,1.39-3.1,3.1-3.1h13.92c.75,0,1.36-.61,1.36-1.36h0c0-.75-.61-1.36-1.36-1.36Z"/>
-    </svg>
+  <!-- ═══ MENU ICON (outside panel so it's never covered) ═══ -->
+  <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" viewBox="64 68 36 36" fill="none">
+    <path id="menuIconPath" fill="currentColor" d="M101.48,86.71h-13.92c-1.71,0-3.1-1.39-3.1-3.1v-13.92c0-.75-.61-1.36-1.36-1.36h0c-.75,0-1.36.61-1.36,1.36v13.92c0,1.71-1.39,3.1-3.1,3.1h-13.92c-.75,0-1.36.61-1.36,1.36h0c0,.75.61,1.36,1.36,1.36h13.92c1.71,0,3.1,1.39,3.1,3.1v13.92c0,.75.61,1.36,1.36,1.36h0c.75,0,1.36-.61,1.36-1.36v-13.92c0-1.71,1.39-3.1,3.1-3.1h13.92c.75,0,1.36-.61,1.36-1.36h0c0-.75-.61-1.36-1.36-1.36Z"/>
+  </svg>
 
+  <!-- ═══ MENU PANEL ═══ -->
+  <div id="menuWrap">
     <div id="dropMenu">
       <div class="drop-item" id="newChatBtn">new chat</div>
       <div class="drop-item" data-page="services">services</div>
@@ -2178,7 +2191,7 @@
       <div class="drop-item" data-page="contact">contact us</div>
 
       <!-- mode toggle -->
-      <div class="menu-mode" style="position:absolute;bottom:28px;left:32px;z-index:2;display:flex;align-items:center;gap:10px">
+      <div class="menu-mode" style="position:absolute;bottom:28px;left:32px;z-index:2;display:flex;align-items:center;gap:10px" id="menuMode">
         <svg id="msToggleSvg" viewBox="0 0 274.28 178.65" xmlns="http://www.w3.org/2000/svg" style="width:44px;height:28px;cursor:pointer;display:block;flex-shrink:0">
           <rect id="togCircleEl" x="27.29" y="27.29" width="124.04" height="124.04" rx="62.02" ry="62.02" style="fill:#1c1814;transition:x .3s cubic-bezier(.4,0,.2,1)"/>
           <path id="togPathEl" style="fill:#1c1814" d="M184.96,0h-95.64C39.99,0,0,39.99,0,89.32h0c0,49.33,39.99,89.32,89.32,89.32h95.64c49.33,0,89.32-39.99,89.32-89.32h0C274.28,39.99,234.29,0,184.96,0ZM262.71,89.33c0,42.94-34.81,77.75-77.75,77.75h-95.64c-42.94,0-77.75-34.81-77.75-77.75h0C11.57,46.39,46.38,11.58,89.32,11.58h95.64c42.94,0,77.75,34.81,77.75,77.75h0Z"/>
@@ -2284,6 +2297,7 @@
         var prev = pageHistory[pageHistory.length - 1];
         hideAll();
         menuWrap.classList.remove('open');
+        menuIcon.classList.remove('open');
         document.getElementById(prev).classList.add('visible');
         topLogo.classList.add('visible');
         showBack();
@@ -2297,9 +2311,28 @@
       }
     });
 
+    // ── Swipe right to go back (mobile only) ──
+    (function() {
+      var touchStartX = 0;
+      var touchStartY = 0;
+      document.addEventListener('touchstart', function(e) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+      document.addEventListener('touchend', function(e) {
+        var dx = e.changedTouches[0].clientX - touchStartX;
+        var dy = e.changedTouches[0].clientY - touchStartY;
+        // Only trigger if: swipe starts within 40px of left edge, mostly horizontal, at least 60px
+        if (touchStartX < 40 && dx > 60 && Math.abs(dy) < Math.abs(dx)) {
+          backBtn.click();
+        }
+      }, { passive: true });
+    })();
+
     function showPage(id) {
       hideAll();
       menuWrap.classList.remove('open');
+        menuIcon.classList.remove('open');
       var el = document.getElementById(id);
       el.classList.add('visible');
       el.scrollTop = 0;
@@ -2348,20 +2381,29 @@
 
 
     // ── Menu toggle ──
+    // menuIcon is now a standalone fixed element outside menuWrap/dropMenu
+    // so it can NEVER be covered by the panel — guaranteed tap target
     menuIcon.addEventListener('click', function(e) {
       e.stopPropagation();
-      menuWrap.classList.toggle('open');
+      var isOpen = menuWrap.classList.toggle('open');
+      menuIcon.classList.toggle('open', isOpen);
       if (landing.classList.contains('hidden')) {
         topLogo.classList.add('visible');
       }
     });
-    document.addEventListener('click', function() {
-      menuWrap.classList.remove('open');
+
+    document.addEventListener('click', function(e) {
+      if (!menuWrap.contains(e.target) && e.target !== menuIcon && !menuIcon.contains(e.target)) {
+        menuWrap.classList.remove('open');
+        menuIcon.classList.remove('open');
+      }
     });
+
 
     // ── Logo → home ──
     topLogo.addEventListener('click', function() {
       menuWrap.classList.remove('open');
+        menuIcon.classList.remove('open');
       hideAll();
       landing.classList.remove('hidden');
       topLogo.classList.remove('visible');
@@ -2393,6 +2435,7 @@
     // ── New chat ──
     document.getElementById('newChatBtn').addEventListener('click', function() {
       menuWrap.classList.remove('open');
+        menuIcon.classList.remove('open');
       chatStarted = false;
       openChatBtn.textContent = 'chat with us';
       messagesEl.innerHTML = '<div class="messages-spacer"></div>';
@@ -2418,6 +2461,7 @@
     document.querySelectorAll('.drop-item').forEach(function(item) {
       item.addEventListener('click', function() {
         menuWrap.classList.remove('open');
+        menuIcon.classList.remove('open');
       });
     });
 
