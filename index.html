@@ -57,6 +57,11 @@
       --sans:         'Helvetica Neue', Helvetica, Inter, sans-serif;
       --dm:           'DM Mono', monospace;
       --mono:         'DM Mono', monospace;
+      /* border-radius tokens */
+      --rx-tight:     6px;   /* inputs, tags, inline code */
+      --rx-std:       12px;  /* cards, panels, modals — default */
+      --rx-feature:   20px;  /* hero blocks, full-bleed containers */
+      --rx-pill:      999px; /* CTA buttons, status badges, toggles */
     }
 
     body.dark {
@@ -90,6 +95,8 @@
     body.dark #landing { background: var(--bg); }
     body.dark .chat-btn { border-color: rgba(110,130,153,0.3); color: var(--acc); }
     body.dark .service-cell, body.dark .pricing-cell, body.dark .news-item { background: var(--bg2); color: var(--ink); }
+    body.dark .news-card { box-shadow: 0 0 0 1px var(--dim); }
+    body.dark .news-card-gradient { background: linear-gradient(to top, rgba(20,22,24,0.98) 0%, rgba(20,22,24,0.6) 50%, rgba(20,22,24,0.15) 100%); }
     body.dark .about-stat, body.dark .article-stat, body.dark .article-flow-cell, body.dark .article-checklist-cell { background: var(--bg2); }
     body.dark .page-eyebrow { color: var(--muted); }
     body.dark .contact-input { color: var(--ink); border-color: var(--dim); }
@@ -445,6 +452,7 @@
       border-color: rgba(244,239,230,0.5);
     }
     .news-card:hover .news-card-title { opacity: 0.85; }
+    .news-card:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
     .news-card {
       transition: transform .25s cubic-bezier(.25,.46,.45,.94);
     }
@@ -764,7 +772,6 @@
     }
     #topLogo.visible { opacity: 1; pointer-events: all; }
     #topLogo:hover { opacity: 0.5; }
-    body.dark #topLogo { filter: invert(1); }
 
     /* ══ MENU ══ */
     #menuIcon {
@@ -1117,15 +1124,9 @@
       opacity: 1;
       pointer-events: auto;
     }
-    #backBtn img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-    #backBtn:hover {
-      opacity: 0.5;
-    }
-    body.dark #backBtn { filter: invert(1); }
+    #backBtn svg { width: 100%; height: 100%; display: block; }
+    #backBtn svg path { fill: var(--ink); transition: fill .4s ease; }
+    #backBtn:hover { opacity: 0.45; }
   
     /* ══ PRICING PAGE ══ */
     .pricing-grid {
@@ -1542,36 +1543,29 @@
   }
   #read-progress.visible { opacity: 1; }
 
-  /* ── Back-to-top button ── */
+  /* ── Back-to-top button (up.svg brand asset) ── */
   #back-to-top {
     position: fixed;
-    bottom: 28px;
-    right: 28px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 1px solid rgba(74,98,120,0.3);
-    background: var(--bg);
-    color: var(--acc);
-    font-family: var(--mono);
-    font-size: 16px;
+    bottom: 44px;
+    right: 44px;
+    height: 32px;
+    width: auto;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     opacity: 0;
     pointer-events: none;
-    transition: opacity .25s ease, background .2s ease, border-color .2s ease;
+    transition: opacity .25s ease;
     z-index: 800;
   }
+  #back-to-top svg { height: 32px; width: auto; display: block; }
+  #back-to-top svg path { fill: var(--ink); transition: fill .4s ease; }
   #back-to-top.visible { opacity: 1; pointer-events: auto; }
-  #back-to-top:hover { background: var(--acc); color: var(--bg); border-color: var(--acc); }
+  #back-to-top:hover { opacity: 0.45; }
 
   /* ── Sticky score CTA ── */
   #sticky-score {
     position: fixed;
-    bottom: 28px;
-    right: 80px;
+    bottom: 90px;
+    right: 44px;
     padding: 9px 18px;
     border-radius: 999px;
     border: 1px solid rgba(74,98,120,0.35);
@@ -1642,8 +1636,8 @@
   body.dark .outcome-card:hover { background: var(--bg3); }
   @media (max-width: 640px) {
     .outcomes-grid { grid-template-columns: 1fr; }
-    #sticky-score { right: 16px; }
-    #back-to-top { bottom: 76px; right: 16px; }
+    #sticky-score { right: 16px; bottom: 84px; }
+    #back-to-top { bottom: 28px; right: 16px; }
   }
 </style>
 </head>
@@ -1651,7 +1645,11 @@
 
   <!-- ── Global UI overlays ── -->
   <div id="read-progress"></div>
-  <button id="back-to-top" aria-label="Back to top">↑</button>
+  <div id="back-to-top" role="button" tabindex="0" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 219.53 301.9">
+      <path fill="var(--ink)" d="M129.77,45.09c-3.56-3.56-9.64-1.04-9.64,3.99v242.44c.01,5.73-4.64,10.38-10.37,10.38s-10.38-4.65-10.38-10.38V49.08c0-5.03-6.06-7.57-9.62-4.02-21.59,21.6-72.03,72.05-72.03,72.05-4.05,4.05-10.63,4.05-14.68,0-4.05-4.05-4.05-10.63,0-14.68,0,0,75.34-75.34,99.41-99.41,4.05-4.05,10.59-4.02,14.64.03l99.4,99.38c4.05,4.05,4.05,10.63,0,14.68-4.05,4.05-10.63,4.05-14.68,0l-72.04-72.04Z"/>
+    </svg>
+  </div>
   <button id="sticky-score" aria-label="Get your automation score">Get your score →</button>
 
   <!-- ═══ PAGES ═══ -->
@@ -1748,7 +1746,7 @@
       <div class="news-grid">
 
         <!-- Card 01 — latest first: AI Deployment -->
-        <div class="news-card" onclick="showPage('page-article-ai-deployment')">
+        <div class="news-card" role="button" tabindex="0" onclick="showPage('page-article-ai-deployment')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('page-article-ai-deployment');}" aria-label="Read: AI Agents in Construction: From Theory to First Deployment">
           <svg class="news-card-geo" viewBox="0 0 900 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
             <rect width="900" height="400" fill="#1c1814"/>
             <defs>
@@ -1783,7 +1781,7 @@
         </div>
 
         <!-- Card 02 — UK Construction -->
-        <div class="news-card" onclick="showPage('page-article-uk-construction')">
+        <div class="news-card" role="button" tabindex="0" onclick="showPage('page-article-uk-construction')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('page-article-uk-construction');}" aria-label="Read: Why UK Construction Subcontractors Must Act on AI Agents Now">
           <svg class="news-card-geo" viewBox="0 0 900 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
             <rect width="900" height="400" fill="#1c1814"/>
             <defs>
@@ -2325,7 +2323,11 @@
 
 
   <!-- ═══ BACK BUTTON ═══ -->
-  <div id="backBtn"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJMYXllcl8yIiBkYXRhLW5hbWU9IkxheWVyIDIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDM5LjQ4IDI4LjcxIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6IzFDMTgxNDt9PC9zdHlsZT48L2RlZnM+PGcgaWQ9IkxheWVyXzEtMiIgZGF0YS1uYW1lPSJMYXllciAxIj48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik01LjksMTEuNzRjLS40Ny40Ny0uMTQsMS4yNi41MiwxLjI2aDMxLjdjLjc1LDAsMS4zNi42MSwxLjM2LDEuMzZzLS42MSwxLjM2LTEuMzYsMS4zNkg2LjQyYy0uNjYsMC0uOTkuNzktLjUzLDEuMjYsMi44MiwyLjgyLDkuNDIsOS40Miw5LjQyLDkuNDIuNTMuNTMuNTMsMS4zOSwwLDEuOTJzLTEuMzkuNTMtMS45MiwwYzAsMC05Ljg1LTkuODUtMTMtMTMtLjUzLS41My0uNTMtMS4zOCwwLTEuOTFMMTMuNC40Yy41My0uNTMsMS4zOS0uNTMsMS45Miwwcy41MywxLjM5LDAsMS45Mkw1LjksMTEuNzRaIi8+PC9nPjwvc3ZnPg==" alt="back" /></div>
+  <div id="backBtn" role="button" aria-label="Go back">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 301.9 219.53" style="width:100%;height:100%;">
+      <path fill="var(--ink)" d="M45.09,89.76c-3.56,3.56-1.04,9.64,3.99,9.64h242.44c5.73-.01,10.38,4.64,10.38,10.37s-4.65,10.38-10.38,10.38H49.08c-5.03,0-7.57,6.06-4.02,9.62,21.6,21.59,72.05,72.03,72.05,72.03,4.05,4.05,4.05,10.63,0,14.68-4.05,4.05-10.63,4.05-14.68,0,0,0-75.34-75.34-99.41-99.41-4.05-4.05-4.02-10.59.03-14.64L102.44,3.04c4.05-4.05,10.63-4.05,14.68,0,4.05,4.05,4.05,10.63,0,14.68L45.09,89.76Z"/>
+    </svg>
+  </div>
 
     <div class="page" id="page-pricing">
     <div class="page-inner">
@@ -2424,7 +2426,21 @@
   <div id="topBar"></div>
 
   <!-- ═══ TOP RIGHT LOGO ═══ -->
-  <img id="topLogo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMiIgZGF0YS1uYW1lPSJMYXllciAyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMzYuMDYgMzAiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGZpbGw6ICMxQzE4MTQ7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxnIGlkPSJMYXllcl8xLTIiIGRhdGEtbmFtZT0iTGF5ZXIgMSI+CiAgICA8Zz4KICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjYuMzUsOC4zNmM2LjE5LDAsMTAuMjUsMy45MSwxMC4yNSwxMC44MnMtNC4wNiwxMC44Mi0xMC4yNSwxMC44Mi0xMC4yMy0zLjkxLTEwLjIzLTEwLjgyLDQuMDYtMTAuODIsMTAuMjMtMTAuODJaTTI2LjM1LDI3LjdjNC41MSwwLDcuNTYtMi45OSw3LjU2LTguNTJzLTMuMDUtOC41Mi03LjU2LTguNTItNy41NiwyLjk5LTcuNTYsOC41MiwzLjA3LDguNTIsNy41Niw4LjUyWiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00NC4yMyw5LjA4djEuNzRjMCwuMjguMzguNC41Mi4xNS44OC0xLjUsMi4zOC0yLjI2LDUuMDctMi4yNmgyLjZjLjE2LDAsLjI5LjEzLjI5LjI5djEuODFjMCwuMTYtLjEzLjI5LS4yOS4yOWgtMi40OGMtNC4xNCwwLTUuNjQsMi4zNi01LjY0LDYuNzh2MTEuMjljMCwuMTYtLjEzLjI5LS4yOS4yOWgtMi4wNWMtLjE2LDAtLjI5LS4xMy0uMjktLjI5VjkuMDhjMC0uMTYuMTMtLjI5LjI5LS4yOWgxLjk3Yy4xNiwwLC4yOS4xMy4yOS4yOVoiLz4KICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNzkuNzYsOC4zOGM0LjE0LDAsNi45MSwyLjA5LDYuOTEsNi42NHYxNC4yYzAsLjE2LS4xMy4yOC0uMjguMjhoLTIuMDNjLS4xNiwwLS4yOC0uMTMtLjI4LS4yOHYtMTMuOThjMC0zLjAzLTEuNjQtNC41Ny00Ljc5LTQuNTctMy42MSwwLTYuMTEsMi4xMy02LjExLDYuNTZ2MTEuOTljMCwuMTYtLjEzLjI4LS4yOC4yOGgtMi4wM2MtLjE2LDAtLjI4LS4xMy0uMjgtLjI4di0xMy45OGMwLTMuMDMtMS41Ni00LjU3LTQuOC00LjU3LTMuNjEsMC02LjExLDIuMTMtNi4xMSw2LjU2djExLjk5YzAsLjE2LS4xMy4yOC0uMjguMjhoLTIuMDNjLS4xNiwwLS4yOC0uMTMtLjI4LS4yOFY5LjE0YzAtLjE2LjEzLS4yOC4yOC0uMjhoMS45NWMuMTYsMCwuMjguMTMuMjguMjh2MS43MWMwLC4yNy4zNC4zOS41LjE3LDEuMS0xLjUsMi44OS0yLjYzLDYuMjQtMi42Myw0LjIzLDAsNS42MywyLjEsNi4wOSwzLjI3LjA5LjIzLjQuMjUuNTEuMDMuNjItMS4xNiwyLjM4LTMuMyw2Ljg0LTMuM1oiLz4KICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTYxLjk0LDguMzZjNi4xOSwwLDEwLjI1LDMuOTEsMTAuMjUsMTAuODJzLTQuMDYsMTAuODItMTAuMjUsMTAuODItMTAuMjMtMy45MS0xMC4yMy0xMC44Miw0LjA2LTEwLjgyLDEwLjIzLTEwLjgyWk0xNjEuOTQsMjcuN2M0LjUxLDAsNy41Ni0yLjk5LDcuNTYtOC41MnMtMy4wNS04LjUyLTcuNTYtOC41Mi03LjU2LDIuOTktNy41Niw4LjUyLDMuMDcsOC41Miw3LjU2LDguNTJaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTE3OS41Miw4Ljg1Yy4xNiwwLC4yOC4xMy4yOC4yOHYyLjJjMCwuMjguMzYuMzkuNTMuMTYsMS42OC0yLjQyLDQuMjctMy4xMSw3LjAzLTMuMTEsNC43MywwLDcuNzUsMi4zNiw3Ljc1LDcuMzh2MTMuNDZjMCwuMTYtLjEzLjI4LS4yOC4yOGgtMi4wNWMtLjE2LDAtLjI4LS4xMy0uMjgtLjI4di0xMy4xOGMwLTMuNzctMi4wMy01LjM1LTUuNTktNS4zNS0zLjkxLDAtNy4wMSwyLjM2LTcuMDEsNy4yN3YxMS4yNWMwLC4xNi0uMTMuMjgtLjI4LjI4aC0yLjA1Yy0uMTYsMC0uMjgtLjEzLS4yOC0uMjhWOS4xNGMwLS4xNi4xMy0uMjguMjgtLjI4aDEuOTdaIi8+CiAgICAgIDxnPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTE0Ni42Niw5LjE0djIwLjA5YzAsLjE2LS4xMy4yOC0uMjguMjhoLTIuMDZjLS4xNiwwLS4yOC0uMTMtLjI4LS4yOFY5LjE0YzAtLjE2LjEzLS4yOC4yOC0uMjhoMi4wNmMuMTYsMCwuMjguMTMuMjguMjhaIi8+CiAgICAgICAgPGNpcmNsZSBjbGFzcz0iY2xzLTEiIGN4PSIxNDUuMzQiIGN5PSIzLjE5IiByPSIxLjc5Ii8+CiAgICAgIDwvZz4KICAgICAgPGc+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjM1LjU4LDkuMTR2MjAuMDljMCwuMTYtLjEzLjI4LS4yOC4yOGgtMi4wNmMtLjE2LDAtLjI4LS4xMy0uMjgtLjI4VjkuMTRjMC0uMTYuMTMtLjI4LjI4LS4yOGgyLjA2Yy4xNiwwLC4yOC4xMy4yOC4yOFoiLz4KICAgICAgICA8Y2lyY2xlIGNsYXNzPSJjbHMtMSIgY3g9IjIzNC4yNyIgY3k9IjMuMTkiIHI9IjEuNzkiLz4KICAgICAgPC9nPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yMTguNiw4LjM4Yy00Ljk5LDAtOC4zOCwyLjA5LTguODUsNi4yNC0uMDMuMjYuMTkuNDkuNDUuNWgxLjY1Yy4yMywwLC40MS0uMTYuNDUtLjM5LjQ3LTIuNzgsMi42Ny00LjA5LDYuMjItNC4wOXM1LjQxLDEuNTcsNS41OCwzLjgzYy4wNi43NC0uMTEsMS4zOC0uNTksMS44OC0uMzIuMy0uNzkuNDgtLjk1LjUzLS4xNS4wNS0uNC4xMS0uNjYuMTYtLjI2LjA1LS40OC4xLS42Ni4xMi0uMTguMDMtLjQ1LjA2LS44Mi4xLS4zNy4wNC0uNTcuMDctLjkuMS0uMjMuMDItLjU5LjA2LTEuMDkuMS0uNDkuMDQtLjg3LjA4LTEuMTUuMS01LjIyLjU1LTguNDgsMi43My04LjQ4LDYuNTIsMCwxLjg2LjYxLDMuMzEsMS44Miw0LjM1czIuOSwxLjU2LDUuMDYsMS41NmMzLjE4LDAsNi4xOC0xLjE1LDguMDQtMy40NS4xNy0uMjEuNS0uMDkuNS4xN3YyLjM1YzAsLjI1LjIuNDYuNDYuNDZoMS41N2MuMjUsMCwuNDYtLjIuNDYtLjQ2di0xMy40NGMwLTQuOTQtMi45Ny03LjI1LTguMTEtNy4yNVpNMjI0LjE4LDIwLjJjMCwyLjYtLjk1LDQuNjUtMi4zNCw1Ljg0LTEuMzksMS4xOS0zLjE4LDEuNjktNS4xOCwxLjY5LTEuNDgsMC0yLjU4LS4wMi0zLjgzLS45NC0uOTEtLjY3LTEuMzEtMS43LTEuMzEtMi45MywwLS44Mi4xOC0xLjUxLjU1LTIuMDdzMS4wNi0xLjA2LDEuNzktMS4zN2MxLjgtLjgsMy4zNS0uODMsNS4yLTEuMDcsMS4xMi0uMTQsMS45MS0uMjUsMi4zOC0uMzMuNDYtLjA4LDEuMS0uMjQsMS42Ni0uNDIuMjgtLjA5LjQ4LS4xOC42NS0uMjguMTktLjEyLjQzLjAyLjQzLjI0djEuNjVaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEwMS4zMyw4LjM4Yy00Ljk5LDAtOC4zOCwyLjA5LTguODUsNi4yNC0uMDMuMjYuMTkuNDkuNDUuNWgxLjY1Yy4yMywwLC40MS0uMTYuNDUtLjM5LjQ3LTIuNzgsMi42Ny00LjA5LDYuMjItNC4wOXM1LjQxLDEuNTcsNS41OCwzLjgzYy4wNi43NC0uMTEsMS4zOC0uNTksMS44OC0uMzIuMy0uNzkuNDgtLjk1LjUzLS4xNS4wNS0uNC4xMS0uNjYuMTYtLjI2LjA1LS40OC4xLS42Ni4xMi0uMTguMDMtLjQ1LjA2LS44Mi4xLS4zNy4wNC0uNTcuMDctLjkuMS0uMjMuMDItLjU5LjA2LTEuMDkuMS0uNDkuMDQtLjg3LjA4LTEuMTUuMS01LjIyLjU1LTguNDgsMi43My04LjQ4LDYuNTIsMCwxLjg2LjYxLDMuMzEsMS44Miw0LjM1LDEuMjIsMS4wNCwyLjksMS41Niw1LjA2LDEuNTYsMy4xOCwwLDYuMTgtMS4xNSw4LjA0LTMuNDUuMTctLjIxLjUtLjA5LjUuMTd2Mi4zNWMwLC4yNS4yLjQ2LjQ2LjQ2aDEuNTdjLjI1LDAsLjQ2LS4yLjQ2LS40NnYtMTMuNDRjMC00Ljk0LTIuOTctNy4yNS04LjExLTcuMjVaTTEwNi45LDIwLjJjMCwyLjYtLjk1LDQuNjUtMi4zNCw1Ljg0LTEuMzksMS4xOS0zLjE4LDEuNjktNS4xOCwxLjY5LTEuNDgsMC0yLjU4LS4wMi0zLjgzLS45NC0uOTEtLjY3LTEuMzEtMS43LTEuMzEtMi45MywwLS44Mi4xOC0xLjUxLjU1LTIuMDdzMS4wNi0xLjA2LDEuNzktMS4zN2MxLjgtLjgsMy4zNS0uODMsNS4yLTEuMDcsMS4xMi0uMTQsMS45MS0uMjUsMi4zOC0uMzMuNDYtLjA4LDEuMS0uMjQsMS42Ni0uNDIuMjgtLjA5LjQ4LS4xOC42NS0uMjguMTktLjEyLjQzLjAyLjQzLjI0djEuNjVaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEzOS4zOCwxMC44NnYtMS43MmMwLS4xNi0uMTMtLjI5LS4yOS0uMjloLTUuODhjLS4xNiwwLS4yOS0uMTMtLjI5LS4yOVYzLjI4YzAtLjE2LS4xMy0uMjktLjI5LS4yOWgtMi4wNWMtLjE2LDAtLjI5LjEzLS4yOS4yOXY1LjI5YzAsLjE2LS4xMy4yOS0uMjkuMjloLTkuNDVjLS4xNiwwLS4yOS0uMTMtLjI5LS4yOVYzLjI4YzAtLjE2LS4xMy0uMjktLjI5LS4yOWgtMi4wNWMtLjE2LDAtLjI5LjEzLS4yOS4yOXY1LjI5YzAsLjE2LS4xMy4yOS0uMjkuMjloLTQuNTFjLS4xNiwwLS4yOS4xMy0uMjkuMjl2MS43MmMwLC4xNi4xMy4yOS4yOS4yOWg0LjUxYy4xNiwwLC4yOS4xMy4yOS4yOXYxMy4yOGMwLDMuMjIsMS43Niw0Ljc5LDUsNC43OWgzLjUzYy4xNiwwLC4yOS0uMTMuMjktLjI5di0xLjgzYzAtLjE2LS4xMy0uMjktLjI5LS4yOWgtNS42MmMtLjE2LDAtLjI5LS4xMy0uMjktLjI5di0xNS4zOWMwLS4xNi4xMy0uMjkuMjktLjI5aDkuNDVjLjE2LDAsLjI5LjEzLjI5LjI5djEzLjI4YzAsMy4yMiwxLjc2LDQuNzksNSw0Ljc5aDMuNzdjLjE2LDAsLjI5LS4xMy4yOS0uMjl2LTEuODNjMC0uMTYtLjEzLS4yOS0uMjktLjI5aC01Ljg3Yy0uMTYsMC0uMjgtLjEzLS4yOC0uMjh2LTE1LjRjMC0uMTYuMTMtLjI5LjI5LS4yOWg1Ljg4Yy4xNiwwLC4yOS0uMTMuMjktLjI5WiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xNC43MS4yOGMwLS4xNi0uMTMtLjI4LS4yOC0uMjhoLTQuMTRjLTMuMjQsMC01LDEuNTgtNSw0Ljc5djMuNzhjMCwuMTYtLjEzLjI4LS4yOC4yOEguMjhjLS4xNiwwLS4yOC4xMy0uMjguMjh2MS43M2MwLC4xNi4xMy4yOC4yOC4yOGg0LjcyYy4xNiwwLC4yOC4xMy4yOC4yOHYxNy44YzAsLjE2LjEzLjI4LjI4LjI4aDIuMDZjLjE2LDAsLjI4LS4xMy4yOC0uMjhWMTEuNDNjMC0uMTYuMTMtLjI4LjI4LS4yOGg1LjY3Yy4xNiwwLC4yOC0uMTMuMjgtLjI4di0xLjczYzAtLjE2LS4xMy0uMjgtLjI4LS4yOGgtNS42N2MtLjE2LDAtLjI4LS4xMy0uMjgtLjI4VjIuNTRjMC0uMTYuMTMtLjI4LjI4LS4yOGg2LjI0Yy4xNiwwLC4yOC0uMTMuMjgtLjI4Vi4yOFoiLz4KICAgIDwvZz4KICA8L2c+Cjwvc3ZnPg==" alt="formattion ai" />
+  <svg id="topLogo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 236.06 30" aria-label="formattion ai">
+    <path fill="var(--ink)" d="M26.35,8.36c6.19,0,10.25,3.91,10.25,10.82s-4.06,10.82-10.25,10.82-10.23-3.91-10.23-10.82,4.06-10.82,10.23-10.82ZM26.35,27.7c4.51,0,7.56-2.99,7.56-8.52s-3.05-8.52-7.56-8.52-7.56,2.99-7.56,8.52,3.07,8.52,7.56,8.52Z"/>
+    <path fill="var(--ink)" d="M44.23,9.08v1.74c0,.28.38.4.52.15.88-1.5,2.38-2.26,5.07-2.26h2.6c.16,0,.29.13.29.29v1.81c0,.16-.13.29-.29.29h-2.48c-4.14,0-5.64,2.36-5.64,6.78v11.29c0,.16-.13.29-.29.29h-2.05c-.16,0-.29-.13-.29-.29V9.08c0-.16.13-.29.29-.29h1.97c.16,0,.29.13.29.29Z"/>
+    <path fill="var(--ink)" d="M79.76,8.38c4.14,0,6.91,2.09,6.91,6.64v14.2c0,.16-.13.28-.28.28h-2.03c-.16,0-.28-.13-.28-.28v-13.98c0-3.03-1.64-4.57-4.79-4.57-3.61,0-6.11,2.13-6.11,6.56v11.99c0,.16-.13.28-.28.28h-2.03c-.16,0-.28-.13-.28-.28v-13.98c0-3.03-1.56-4.57-4.8-4.57-3.61,0-6.11,2.13-6.11,6.56v11.99c0,.16-.13.28-.28.28h-2.03c-.16,0-.28-.13-.28-.28V9.14c0-.16.13-.28.28-.28h1.95c.16,0,.28.13.28.28v1.71c0,.27.34.39.5.17,1.1-1.5,2.89-2.63,6.24-2.63,4.23,0,5.63,2.1,6.09,3.27.09.23.4.25.51.03.62-1.16,2.38-3.3,6.84-3.3Z"/>
+    <path fill="var(--ink)" d="M161.94,8.36c6.19,0,10.25,3.91,10.25,10.82s-4.06,10.82-10.25,10.82-10.23-3.91-10.23-10.82,4.06-10.82,10.23-10.82ZM161.94,27.7c4.51,0,7.56-2.99,7.56-8.52s-3.05-8.52-7.56-8.52-7.56,2.99-7.56,8.52,3.07,8.52,7.56,8.52Z"/>
+    <path fill="var(--ink)" d="M179.52,8.85c.16,0,.28.13.28.28v2.2c0,.28.36.39.53.16,1.68-2.42,4.27-3.11,7.03-3.11,4.73,0,7.75,2.36,7.75,7.38v13.46c0,.16-.13.28-.28.28h-2.05c-.16,0-.28-.13-.28-.28v-13.18c0-3.77-2.03-5.35-5.59-5.35-3.91,0-7.01,2.36-7.01,7.27v11.25c0,.16-.13.28-.28.28h-2.05c-.16,0-.28-.13-.28-.28V9.14c0-.16.13-.28.28-.28h1.97Z"/>
+    <path fill="var(--ink)" d="M146.66,9.14v20.09c0,.16-.13.28-.28.28h-2.06c-.16,0-.28-.13-.28-.28V9.14c0-.16.13-.28.28-.28h2.06c.16,0,.28.13.28.28Z"/>
+    <circle fill="var(--ink)" cx="145.34" cy="3.19" r="1.79"/>
+    <path fill="var(--ink)" d="M235.58,9.14v20.09c0,.16-.13.28-.28.28h-2.06c-.16,0-.28-.13-.28-.28V9.14c0-.16.13-.28.28-.28h2.06c.16,0,.28.13.28.28Z"/>
+    <circle fill="var(--ink)" cx="234.27" cy="3.19" r="1.79"/>
+    <path fill="var(--ink)" d="M218.6,8.38c-4.99,0-8.38,2.09-8.85,6.24-.03.26.19.49.45.5h1.65c.23,0,.41-.16.45-.39.47-2.78,2.67-4.09,6.22-4.09s5.41,1.57,5.58,3.83c.06.74-.11,1.38-.59,1.88-.32.3-.79.48-.95.53-.15.05-.4.11-.66.16-.26.05-.48.1-.66.12-.18.03-.45.06-.82.1-.37.04-.57.07-.9.1-.23.02-.59.06-1.09.1-.49.04-.87.08-1.15.1-5.22.55-8.48,2.73-8.48,6.52,0,1.86.61,3.31,1.82,4.35s2.9,1.56,5.06,1.56c3.18,0,6.18-1.15,8.04-3.45.17-.21.5-.09.5.17v2.35c0,.25.2.46.46.46h1.57c.25,0,.46-.2.46-.46v-13.44c0-4.94-2.97-7.25-8.11-7.25ZM224.18,20.2c0,2.6-.95,4.65-2.34,5.84-1.39,1.19-3.18,1.69-5.18,1.69-1.48,0-2.58-.02-3.83-.94-.91-.67-1.31-1.7-1.31-2.93,0-.82.18-1.51.55-2.07s1.06-1.06,1.79-1.37c1.8-.8,3.35-.83,5.2-1.07,1.12-.14,1.91-.25,2.38-.33.46-.08,1.1-.24,1.66-.42.28-.09.48-.18.65-.28.19-.12.43.02.43.24v1.65Z"/>
+    <path fill="var(--ink)" d="M101.33,8.38c-4.99,0-8.38,2.09-8.85,6.24-.03.26.19.49.45.5h1.65c.23,0,.41-.16.45-.39.47-2.78,2.67-4.09,6.22-4.09s5.41,1.57,5.58,3.83c.06.74-.11,1.38-.59,1.88-.32.3-.79.48-.95.53-.15.05-.4.11-.66.16-.26.05-.48.1-.66.12-.18.03-.45.06-.82.1-.37.04-.57.07-.9.1-.23.02-.59.06-1.09.1-.49.04-.87.08-1.15.1-5.22.55-8.48,2.73-8.48,6.52,0,1.86.61,3.31,1.82,4.35,1.22,1.04,2.9,1.56,5.06,1.56,3.18,0,6.18-1.15,8.04-3.45.17-.21.5-.09.5.17v2.35c0,.25.2.46.46.46h1.57c.25,0,.46-.2.46-.46v-13.44c0-4.94-2.97-7.25-8.11-7.25ZM106.9,20.2c0,2.6-.95,4.65-2.34,5.84-1.39,1.19-3.18,1.69-5.18,1.69-1.48,0-2.58-.02-3.83-.94-.91-.67-1.31-1.7-1.31-2.93,0-.82.18-1.51.55-2.07s1.06-1.06,1.79-1.37c1.8-.8,3.35-.83,5.2-1.07,1.12-.14,1.91-.25,2.38-.33.46-.08,1.1-.24,1.66-.42.28-.09.48-.18.65-.28.19-.12.43.02.43.24v1.65Z"/>
+    <path fill="var(--ink)" d="M139.38,10.86v-1.72c0-.16-.13-.29-.29-.29h-5.88c-.16,0-.29-.13-.29-.29V3.28c0-.16-.13-.29-.29-.29h-2.05c-.16,0-.29.13-.29.29v5.29c0,.16-.13.29-.29.29h-9.45c-.16,0-.29-.13-.29-.29V3.28c0-.16-.13-.29-.29-.29h-2.05c-.16,0-.29.13-.29.29v5.29c0,.16-.13.29-.29.29h-4.51c-.16,0-.29.13-.29.29v1.72c0,.16.13.29.29.29h4.51c.16,0,.29.13.29.29v13.28c0,3.22,1.76,4.79,5,4.79h3.53c.16,0,.29-.13.29-.29v-1.83c0-.16-.13-.29-.29-.29h-5.62c-.16,0-.29-.13-.29-.29v-15.39c0-.16.13-.29.29-.29h9.45c.16,0,.29.13.29.29v13.28c0,3.22,1.76,4.79,5,4.79h3.77c.16,0,.29-.13.29-.29v-1.83c0-.16-.13-.29-.29-.29h-5.87c-.16,0-.28-.13-.28-.28v-15.4c0-.16.13-.29.29-.29h5.88c.16,0,.29-.13.29-.29Z"/>
+    <path fill="var(--ink)" d="M14.71.28c0-.16-.13-.28-.28-.28h-4.14c-3.24,0-5,1.58-5,4.79v3.78c0,.16-.13.28-.28.28H.28c-.16,0-.28.13-.28.28v1.73c0,.16.13.28.28.28h4.72c.16,0,.28.13.28.28v17.8c0,.16.13.28.28.28h2.06c.16,0,.28-.13.28-.28V11.43c0-.16.13-.28.28-.28h5.67c.16,0,.28-.13.28-.28v-1.73c0-.16-.13-.28-.28-.28h-5.67c-.16,0-.28-.13-.28-.28V2.54c0-.16.13-.28.28-.28h6.24c.16,0,.28-.13.28-.28V.28Z"/>
+  </svg>
 
   <!-- ═══ MENU ICON (outside panel so it's never covered) ═══ -->
   <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" viewBox="64 68 36 36" fill="none">
@@ -2620,10 +2636,7 @@
       togCircleEl.style.fill = col;
       togPathEl.style.fill = col;
       if(menuIconPath) menuIconPath.setAttribute('fill', col);
-      // Update topLogo fill
-      const tlg = document.querySelector('#topLogo .cls-1') || document.querySelector('#topLogo path');
-      if(tlg) tlg.style.fill = col;
-      document.querySelectorAll('#topLogo path, #topLogo circle').forEach(el => el.style.fill = col);
+      // topLogo uses fill:var(--ink) — updates automatically via CSS variable
     }
     setToggleFill('#1c1814');
 
@@ -2903,7 +2916,7 @@
           var pct       = total > 0 ? Math.min(100, (scrolled / total) * 100) : 0;
           progressBar.style.width = pct + '%';
           progressBar.classList.toggle('visible', scrolled > 50);
-          backToTop.classList.toggle('visible', scrolled > 600);
+          backToTop.classList.toggle('visible', scrolled > (el.scrollHeight - el.clientHeight) * 0.8);
           stickyCta.classList.remove('visible');
         } else if (isScorePage) {
           progressBar.style.width = '0%';
@@ -2927,9 +2940,13 @@
         }, { passive: true });
       });
 
-      backToTop.addEventListener('click', function() {
+      function scrollToTop() {
         var visible = document.querySelector('.page.visible');
         if (visible) visible.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      backToTop.addEventListener('click', scrollToTop);
+      backToTop.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); scrollToTop(); }
       });
 
       stickyCta.addEventListener('click', function() {
