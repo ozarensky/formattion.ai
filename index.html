@@ -2597,6 +2597,11 @@
       if (pageHistory[pageHistory.length - 1] !== id) {
         pageHistory.push(id);
       }
+      // update URL hash
+      var slug = id.replace('page-', '');
+      if (location.hash !== '#' + slug) {
+        history.pushState({ page: id }, '', '#' + slug);
+      }
     }
 
     function showPageRoot(id) {
@@ -2663,6 +2668,8 @@
       landing.classList.remove('hidden');
       topLogo.classList.remove('visible');
       hideBack();
+      pageHistory = [];
+      history.pushState({ page: 'landing' }, '', window.location.pathname);
     });
 
     // ── Open / continue chat ──
@@ -2674,6 +2681,7 @@
       topLogo.classList.add('visible');
       showBack();
       updateSendMic();
+      if (location.hash !== '#chat') history.pushState({ page: 'chat' }, '', '#chat');
       if (!chatStarted) {
         chatStarted = true;
         openChatBtn.textContent = 'continue chatting';
@@ -2705,13 +2713,32 @@
       });
     });
 
-    // ── Hash routing for deep links (e.g. from email CTA) ──
+    // ── Hash routing — on load and on browser back/forward ──
+    function navigateToHash(hash, pushState) {
+      if (!hash) {
+        hideAll();
+        landing.classList.remove('hidden');
+        topLogo.classList.remove('visible');
+        hideBack();
+        pageHistory = [];
+      } else if (hash === 'chat') {
+        openChat();
+      } else {
+        var el = document.getElementById('page-' + hash);
+        if (el) showPage('page-' + hash);
+      }
+    }
+
+    // On load
     (function() {
       var hash = window.location.hash.slice(1);
-      if (hash && document.getElementById('page-' + hash)) {
-        showPage('page-' + hash);
-      }
+      if (hash) navigateToHash(hash);
     })();
+
+    // Browser back / forward
+    window.addEventListener('popstate', function() {
+      navigateToHash(location.hash.slice(1));
+    });
 
     document.querySelectorAll('.drop-item').forEach(function(item) {
       item.addEventListener('click', function() {
