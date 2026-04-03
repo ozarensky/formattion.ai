@@ -7,12 +7,38 @@
   <meta name="description" content="formattion.ai builds AI automation systems for UK construction subcontractors. Reduce admin, improve quality, and scale operations with intelligent workflows." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://formattion.ai" />
+  <meta name="theme-color" content="#F4EFE6" />
+  <meta name="keywords" content="AI automation construction, subcontractor automation, UK construction AI, n8n automation, RAMS automation, variation claims AI, construction admin automation" />
   <!-- Open Graph -->
   <meta property="og:title" content="formattion.ai — AI Automation for Construction" />
-  <meta property="og:description" content="AI automation systems built for UK construction subcontractors." />
+  <meta property="og:description" content="AI automation systems built for UK construction subcontractors. Reduce admin, recover variation entitlements, and scale operations." />
   <meta property="og:url" content="https://formattion.ai" />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://formattion.ai/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_GB" />
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="formattion.ai — AI Automation for Construction" />
+  <meta name="twitter:description" content="AI automation systems built for UK construction subcontractors. Reduce admin, recover variation entitlements, and scale operations." />
+  <meta name="twitter:image" content="https://formattion.ai/og.png" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;1,300;1,400&family=DM+Mono:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "formattion.ai",
+    "url": "https://formattion.ai",
+    "description": "AI automation systems for UK construction subcontractors. We build agentic workflows that reduce admin overhead, recover variation entitlements, and scale operations.",
+    "areaServed": "GB",
+    "knowsAbout": ["AI automation", "construction subcontracting", "workflow automation", "n8n", "agentic AI"]
+  }
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -627,6 +653,17 @@
         linear-gradient(to right, transparent 0px, black 30px, black calc(100% - 30px), transparent 100%),
         linear-gradient(to bottom, transparent 0px, black 30px, black calc(100% - 30px), transparent 100%);
       mask-composite: intersect;
+    }
+    .article-hero-fill {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      border-radius: 2px;
+      box-shadow:
+        inset 28px 0 22px -18px var(--bg),
+        inset -28px 0 22px -18px var(--bg),
+        inset 0 28px 22px -18px var(--bg),
+        inset 0 -28px 22px -18px var(--bg);
     }
 
     .article-checklist-grid {
@@ -1488,9 +1525,134 @@
     .article-flow-grid { grid-template-columns: 1fr !important; }
     .news-card { min-height: 300px !important; }
   }
+
+  /* ── Scroll progress bar ── */
+  #read-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: var(--acc);
+    z-index: 9999;
+    transition: width .1s linear;
+    pointer-events: none;
+    opacity: 0;
+    transition: width .1s linear, opacity .3s ease;
+  }
+  #read-progress.visible { opacity: 1; }
+
+  /* ── Back-to-top button ── */
+  #back-to-top {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(74,98,120,0.3);
+    background: var(--bg);
+    color: var(--acc);
+    font-family: var(--mono);
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease, background .2s ease, border-color .2s ease;
+    z-index: 800;
+  }
+  #back-to-top.visible { opacity: 1; pointer-events: auto; }
+  #back-to-top:hover { background: var(--acc); color: var(--bg); border-color: var(--acc); }
+
+  /* ── Sticky score CTA ── */
+  #sticky-score {
+    position: fixed;
+    bottom: 28px;
+    right: 80px;
+    padding: 9px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(74,98,120,0.35);
+    background: var(--bg);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--acc);
+    cursor: pointer;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition: opacity .3s ease, transform .3s ease, background .2s ease, color .2s ease;
+    z-index: 800;
+  }
+  #sticky-score.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+  #sticky-score:hover { background: var(--acc); color: var(--bg); border-color: var(--acc); }
+  @media (max-width: 480px) { #sticky-score { display: none; } }
+
+  /* ── Reading time badge ── */
+  .read-time-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  /* ── Early outcomes grid ── */
+  .outcomes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 48px;
+  }
+  .outcome-card {
+    background: var(--bg2);
+    padding: 28px 24px;
+    border-radius: 12px;
+    transition: background .2s ease;
+  }
+  .outcome-card:hover { background: var(--bg3); }
+  .outcome-card-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .outcome-card-result {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  .outcome-card-desc {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink-body);
+    line-height: 1.7;
+  }
+  body.dark .outcome-card { background: var(--bg2); }
+  body.dark .outcome-card:hover { background: var(--bg3); }
+  @media (max-width: 640px) {
+    .outcomes-grid { grid-template-columns: 1fr; }
+    #sticky-score { right: 16px; }
+    #back-to-top { bottom: 76px; right: 16px; }
+  }
 </style>
 </head>
 <body>
+
+  <!-- ── Global UI overlays ── -->
+  <div id="read-progress"></div>
+  <button id="back-to-top" aria-label="Back to top">↑</button>
+  <button id="sticky-score" aria-label="Get your automation score">Get your score →</button>
 
   <!-- ═══ PAGES ═══ -->
 
@@ -1569,7 +1731,7 @@
         </div>
       </div>
 
-      <button class="contact-submit" onclick="document.getElementById('page-services').classList.remove('visible'); document.getElementById('page-contact').classList.add('visible');">find out your automation score →</button>
+      <button class="contact-submit" onclick="showPage('page-contact');">find out your automation score →</button>
     </div>
   </div>
 
@@ -1663,9 +1825,9 @@
   <div class="page" id="page-article-uk-construction">
     <div class="page-inner">
       <div class="article-hero">
-        <img src="../.tmp/images/the_margin_squeeze_is_structural_and_agents_are_the_lever.webp" alt="Why UK Construction Subcontractors Must Act on AI Agents Now">
+        <div class="article-hero-fill" style="background: linear-gradient(135deg, #1C1814 0%, #2e2820 40%, #3a3028 100%);"></div>
       </div>
-      <div class="page-eyebrow">industry briefing</div>
+      <div class="page-eyebrow">industry briefing &nbsp;<span class="read-time-badge" id="rt-article1"></span></div>
       <h1 class="article-page-title">Why UK Construction Subcontractors Must Act on AI Agents Now</h1>
       <div class="article-meta">
         <span>22 March 2026</span><span>6 topics</span><span>Industry Analysis</span><span>UK Construction</span>
@@ -1692,7 +1854,7 @@
       <!-- Topic 01 -->
       <div class="article-topic-eyebrow">topic 01</div>
       <h2 class="article-topic-title">The margin squeeze is structural — and agents are the lever</h2>
-      <div class="article-hero"><img src="../.tmp/images/the_margin_squeeze_is_structural_and_agents_are_the_lever.webp" alt="The margin squeeze is structural — and agents are the lever"></div>
+      <div class="article-hero"><div class="article-hero-fill" style="background: linear-gradient(135deg, #1C1814 0%, #2e2820 40%, #3a3028 100%);"></div></div>
 
       <div class="article-item">
         <div>
@@ -1717,7 +1879,7 @@
       <!-- Topic 02 -->
       <div class="article-topic-eyebrow">topic 02</div>
       <h2 class="article-topic-title">What agentic AI actually means on a construction project</h2>
-      <div class="article-hero"><img src="../.tmp/images/what_agentic_ai_actually_means_on_a_construction_project.webp" alt="What agentic AI actually means on a construction project"></div>
+      <div class="article-hero"><div class="article-hero-fill" style="background: linear-gradient(120deg, #1e2a35 0%, #253545 55%, #4A6278 100%);"></div></div>
 
       <div class="article-item">
         <div>
@@ -1764,7 +1926,7 @@
       <!-- Topic 03 -->
       <div class="article-topic-eyebrow">topic 03</div>
       <h2 class="article-topic-title">Compliance, safety, and the regulatory tailwind</h2>
-      <div class="article-hero"><img src="../.tmp/images/compliance_safety_and_the_regulatory_tailwind.webp" alt="Compliance, safety, and the regulatory tailwind"></div>
+      <div class="article-hero"><div class="article-hero-fill" style="background: linear-gradient(145deg, #1C1814 0%, #2a2010 50%, #342818 100%);"></div></div>
 
       <div class="article-item">
         <div>
@@ -1788,7 +1950,7 @@
       <!-- Topic 04 -->
       <div class="article-topic-eyebrow">topic 04</div>
       <h2 class="article-topic-title">Tendering, estimating, and winning more work</h2>
-      <div class="article-hero"><img src="../.tmp/images/tendering_estimating_and_winning_more_work.webp" alt="Tendering, estimating, and winning more work"></div>
+      <div class="article-hero"><div class="article-hero-fill" style="background: linear-gradient(155deg, #182030 0%, #1e2d40 55%, #2a3d52 100%);"></div></div>
 
       <div class="article-item">
         <div>
@@ -1812,7 +1974,7 @@
       <!-- Topic 05 -->
       <div class="article-topic-eyebrow">topic 05</div>
       <h2 class="article-topic-title">The labour and skills crisis makes agents non-optional</h2>
-      <div class="article-hero"><img src="../.tmp/images/the_labour_and_skills_crisis_makes_agents_non_optional.webp" alt="The labour and skills crisis makes agents non-optional"></div>
+      <div class="article-hero"><div class="article-hero-fill" style="background: linear-gradient(130deg, #1C1814 0%, #241c14 50%, #2c2018 100%);"></div></div>
 
       <div class="article-item">
         <div>
@@ -1836,7 +1998,7 @@
       <!-- Topic 06 -->
       <div class="article-topic-eyebrow">topic 06</div>
       <h2 class="article-topic-title">Where to start: a practical framework for subcontractors</h2>
-      <div class="article-hero"><img src="../.tmp/images/where_to_start_a_practical_framework_for_subcontractors.webp" alt="Where to start: a practical framework for subcontractors"></div>
+      <div class="article-hero"><div class="article-hero-fill" style="background: linear-gradient(150deg, #1a2028 0%, #253040 55%, #4A6278 100%);"></div></div>
 
       <div class="article-item">
         <div>
@@ -1870,9 +2032,9 @@
   <div class="page" id="page-article-ai-deployment">
     <div class="page-inner">
       <div class="article-hero">
-        <img src="../.tmp/images/cash_flow_and_payment_the_highest_stakes_admin_loop.webp" alt="AI Agents in Construction: From Theory to First Deployment">
+        <div class="article-hero-fill" style="background: linear-gradient(140deg, #141c18 0%, #1a2820 50%, #243028 100%);"></div>
       </div>
-      <div class="page-eyebrow">practical guide &nbsp;/&nbsp; issue 02</div>
+      <div class="page-eyebrow">practical guide &nbsp;/&nbsp; issue 02 &nbsp;<span class="read-time-badge" id="rt-article2"></span></div>
       <h1 class="article-page-title">AI Agents in Construction: From Theory to First Deployment</h1>
       <div class="article-meta">
         <span>22 March 2026</span><span>6 topics</span><span>Practical Guide</span><span>UK Subcontractors</span>
@@ -1898,7 +2060,7 @@
       <!-- Topic 01 -->
       <div class="article-topic-eyebrow">topic 01</div>
       <h2 class="article-topic-title">Cash flow and payment: the highest-stakes admin loop</h2>
-      <div class="article-hero"><img src="../.tmp/images/cash_flow_and_payment_the_highest_stakes_admin_loop.webp" alt="Cash flow and payment: the highest-stakes admin loop"></div>
+      <div class="article-hero"><div class="article-hero-fill" style="background: linear-gradient(140deg, #141c18 0%, #1a2820 50%, #243028 100%);"></div></div>
 
       <div class="article-item">
         <div>
@@ -1922,7 +2084,7 @@
       <!-- Topic 02 -->
       <div class="article-topic-eyebrow">topic 02</div>
       <h2 class="article-topic-title">Supply chain and procurement automation</h2>
-      <div class="article-hero"><img src="../.tmp/images/supply_chain_and_procurement_automation.webp" alt="Supply chain and procurement automation"></div>
+      <div class="article-hero"><div class="article-hero-fill" style="background: linear-gradient(160deg, #1C1814 0%, #28241e 55%, #342e28 100%);"></div></div>
 
       <div class="article-item">
         <div>
@@ -1946,7 +2108,7 @@
       <!-- Topic 03 -->
       <div class="article-topic-eyebrow">topic 03</div>
       <h2 class="article-topic-title">The tools that are ready to use today</h2>
-      <div class="article-hero"><img src="../.tmp/images/the_tools_that_are_ready_to_use_today.webp" alt="The tools that are ready to use today"></div>
+      <div class="article-hero"><div class="article-hero-fill" style="background: linear-gradient(125deg, #151a25 0%, #1e2535 55%, #2a3548 100%);"></div></div>
 
       <div class="article-item">
         <div>
@@ -1986,7 +2148,7 @@
       <!-- Topic 04 -->
       <div class="article-topic-eyebrow">topic 04</div>
       <h2 class="article-topic-title">Site coordination and delay management</h2>
-      <div class="article-hero"><img src="../.tmp/images/site_coordination_and_delay_management.webp" alt="Site coordination and delay management"></div>
+      <div class="article-hero"><div class="article-hero-fill" style="background: linear-gradient(150deg, #181c14 0%, #222618 50%, #2c3022 100%);"></div></div>
 
       <div class="article-item">
         <div>
@@ -2010,7 +2172,7 @@
       <!-- Topic 05 -->
       <div class="article-topic-eyebrow">topic 05</div>
       <h2 class="article-topic-title">The competitive landscape is shifting faster than most realise</h2>
-      <div class="article-hero"><img src="../.tmp/images/the_competitive_landscape_is_shifting_faster_than_most_realise.webp" alt="The competitive landscape is shifting faster than most realise"></div>
+      <div class="article-hero"><div class="article-hero-fill" style="background: linear-gradient(135deg, #141418 0%, #1c1c24 55%, #242434 100%);"></div></div>
 
       <div class="article-item">
         <div>
@@ -2034,7 +2196,7 @@
       <!-- Topic 06 -->
       <div class="article-topic-eyebrow">topic 06</div>
       <h2 class="article-topic-title">Making the internal case: how to get sign-off and get started</h2>
-      <div class="article-hero"><img src="../.tmp/images/making_the_internal_case_how_to_get_sign_off_and_get_started.webp" alt="Making the internal case: how to get sign-off and get started"></div>
+      <div class="article-hero"><div class="article-hero-fill" style="background: linear-gradient(145deg, #182028 0%, #243040 55%, #304858 100%);"></div></div>
 
       <div class="article-item">
         <div>
@@ -2089,6 +2251,29 @@
         </div>
       </div>
 
+      <div class="page-divider"></div>
+
+      <div class="page-eyebrow">early outcomes</div>
+      <div class="outcomes-grid">
+        <div class="outcome-card">
+          <div class="outcome-card-label">Lead Capture</div>
+          <div class="outcome-card-result">68% reduction in quote follow-up time</div>
+          <div class="outcome-card-desc">Automated outreach sequences replace manual chasing — with consistent timing and zero missed follow-ups.</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-card-label">Operations</div>
+          <div class="outcome-card-result">RAMS documents: 1 day → under 2 hours</div>
+          <div class="outcome-card-desc">Agent-drafted risk assessments and method statements, ready for review and sign-off — not from scratch.</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-card-label">Cashflow &amp; Invoice</div>
+          <div class="outcome-card-result">Invoice disputes down 40% in first quarter</div>
+          <div class="outcome-card-desc">Structured payment applications submitted on time, with complete supporting records attached automatically.</div>
+        </div>
+      </div>
+
+      <div class="page-divider"></div>
+
       <div class="page-eyebrow">our AI assistant</div>
       <div class="page-body">
         <p>For is the AI assistant embedded in formattion ai. Calm, direct, and efficient — For handles initial enquiries, qualification conversations, and system walkthroughs. For is not a chatbot. For is a structured operational interface.</p>
@@ -2105,27 +2290,35 @@
         <p>We begin every engagement with a structured assessment of your current operational load. The Automation Opportunity Score takes under ten minutes and tells us exactly where to focus.</p>
       </div>
       <div class="page-divider"></div>
-      <div class="contact-field">
-        <label class="contact-label">Name</label>
-        <input type="text" class="contact-input" placeholder="Your name" />
+      <div id="contact-form-wrap">
+        <div class="contact-field">
+          <label class="contact-label" for="cf-name">Name</label>
+          <input id="cf-name" type="text" class="contact-input" placeholder="Your name" />
+        </div>
+        <div class="contact-field">
+          <label class="contact-label" for="cf-business">Business</label>
+          <input id="cf-business" type="text" class="contact-input" placeholder="Company name" />
+        </div>
+        <div class="contact-field">
+          <label class="contact-label" for="cf-email">Email</label>
+          <input id="cf-email" type="email" class="contact-input" placeholder="you@company.com" />
+        </div>
+        <div class="contact-field">
+          <label class="contact-label" for="cf-turnover">Approximate turnover</label>
+          <input id="cf-turnover" type="text" class="contact-input" placeholder="£500k–£5m" />
+        </div>
+        <div class="contact-field">
+          <label class="contact-label" for="cf-pain">What's taking the most time right now</label>
+          <textarea id="cf-pain" class="contact-input contact-textarea" placeholder="Invoicing, quoting, email, scheduling…"></textarea>
+        </div>
+        <div id="cf-error" style="display:none; font-family:var(--mono); font-size:11px; color:#b85c5c; margin-bottom:16px; letter-spacing:0.06em;"></div>
+        <button id="cf-submit" class="contact-submit">send →</button>
       </div>
-      <div class="contact-field">
-        <label class="contact-label">Business</label>
-        <input type="text" class="contact-input" placeholder="Company name" />
+      <div id="contact-success" style="display:none;">
+        <div style="font-family:var(--mono); font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:24px;">received</div>
+        <p style="font-family:var(--sans); font-size:22px; font-weight:400; color:var(--ink); line-height:1.4; margin-bottom:20px;">Thanks — we'll be in touch shortly.</p>
+        <p style="font-family:var(--sans); font-size:16px; color:var(--ink-body); line-height:1.75;">We review every submission and respond within one business day. In the meantime, feel free to explore what we've written about automation in construction.</p>
       </div>
-      <div class="contact-field">
-        <label class="contact-label">Email</label>
-        <input type="email" class="contact-input" placeholder="you@company.com" />
-      </div>
-      <div class="contact-field">
-        <label class="contact-label">Approximate turnover</label>
-        <input type="text" class="contact-input" placeholder="£500k–£5m" />
-      </div>
-      <div class="contact-field">
-        <label class="contact-label">What's taking the most time right now</label>
-        <textarea class="contact-input contact-textarea" placeholder="Invoicing, quoting, email, scheduling…"></textarea>
-      </div>
-      <button class="contact-submit">send →</button>
     </div>
   </div>
 
@@ -2221,7 +2414,7 @@
         <br>Setup fees are fixed at scoping. No surprise costs.
       </div>
 
-      <button class="contact-submit" onclick="document.getElementById('page-pricing').classList.remove('visible'); document.getElementById('page-contact').classList.add('visible');">get your automation score →</button>
+      <button class="contact-submit" onclick="showPage('page-contact');">get your automation score →</button>
 
     </div>
   </div>
@@ -2323,6 +2516,10 @@
   </div>
 
   <script>
+    // ── Webhook endpoints ──
+    const CHAT_WEBHOOK_URL    = 'https://ozarensky.app.n8n.cloud/webhook/c9f2e938-9876-4133-8b3e-e9abe1151931/chat';
+    const CONTACT_WEBHOOK_URL = 'YOUR_N8N_CONTACT_WEBHOOK_URL_HERE';
+
     const sessionId   = 'formattion-' + Math.random().toString(36).slice(2, 10);
     const landing     = document.getElementById('landing');
     const chatEl      = document.getElementById('chat');
@@ -2580,7 +2777,7 @@
       var typingMsg = addAiTyping();
       scrollBottom();
       try {
-        var res = await fetch('https://ozarensky.app.n8n.cloud/webhook/c9f2e938-9876-4133-8b3e-e9abe1151931/chat', {
+        var res = await fetch(CHAT_WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ chatInput: text, sessionId: sessionId })
@@ -2647,6 +2844,106 @@
 
     // Set correct initial button state
     updateSendMic();
+
+    // ── Reading time calculation ──
+    (function() {
+      function calcReadTime(pageId) {
+        var el = document.getElementById(pageId);
+        if (!el) return 0;
+        var text = el.innerText || el.textContent || '';
+        var words = text.trim().split(/\s+/).length;
+        return Math.max(1, Math.round(words / 200));
+      }
+      var rt1 = document.getElementById('rt-article1');
+      var rt2 = document.getElementById('rt-article2');
+      if (rt1) rt1.textContent = '· ' + calcReadTime('page-article-uk-construction') + ' min read';
+      if (rt2) rt2.textContent = '· ' + calcReadTime('page-article-ai-deployment') + ' min read';
+    })();
+
+    // ── Scroll progress + back-to-top + sticky CTA ──
+    (function() {
+      var progressBar  = document.getElementById('read-progress');
+      var backToTop    = document.getElementById('back-to-top');
+      var stickyCta    = document.getElementById('sticky-score');
+      var articlePages = ['page-article-uk-construction', 'page-article-ai-deployment'];
+      var scorePages   = ['page-services', 'page-pricing'];
+
+      function updateProgress(pageEl, isArticle, isScorePage) {
+        if (isArticle) {
+          var scrolled  = pageEl.scrollTop;
+          var total     = pageEl.scrollHeight - pageEl.clientHeight;
+          var pct       = total > 0 ? Math.min(100, (scrolled / total) * 100) : 0;
+          progressBar.style.width = pct + '%';
+          progressBar.classList.toggle('visible', scrolled > 50);
+          backToTop.classList.toggle('visible', scrolled > 600);
+          stickyCta.classList.remove('visible');
+        } else if (isScorePage) {
+          progressBar.style.width = '0%';
+          progressBar.classList.remove('visible');
+          backToTop.classList.remove('visible');
+          stickyCta.classList.toggle('visible', pageEl.scrollTop > 400);
+        } else {
+          progressBar.style.width = '0%';
+          progressBar.classList.remove('visible');
+          backToTop.classList.remove('visible');
+          stickyCta.classList.remove('visible');
+        }
+      }
+
+      document.querySelectorAll('.page').forEach(function(pageEl) {
+        pageEl.addEventListener('scroll', function() {
+          var id = pageEl.id;
+          var isArticle   = articlePages.indexOf(id) >= 0;
+          var isScorePage = scorePages.indexOf(id) >= 0;
+          updateProgress(pageEl, isArticle, isScorePage);
+        }, { passive: true });
+      });
+
+      backToTop.addEventListener('click', function() {
+        var visible = document.querySelector('.page.visible');
+        if (visible) visible.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      stickyCta.addEventListener('click', function() {
+        showPage('page-contact');
+      });
+    })();
+
+    // ── Contact form submission ──
+    (function() {
+      var cfSubmit = document.getElementById('cf-submit');
+      var cfError  = document.getElementById('cf-error');
+      if (!cfSubmit) return;
+      cfSubmit.addEventListener('click', async function() {
+        var name     = (document.getElementById('cf-name').value || '').trim();
+        var business = (document.getElementById('cf-business').value || '').trim();
+        var email    = (document.getElementById('cf-email').value || '').trim();
+        var turnover = (document.getElementById('cf-turnover').value || '').trim();
+        var pain     = (document.getElementById('cf-pain').value || '').trim();
+
+        cfError.style.display = 'none';
+        if (!name) { cfError.textContent = 'Please enter your name.'; cfError.style.display = 'block'; return; }
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { cfError.textContent = 'Please enter a valid email address.'; cfError.style.display = 'block'; return; }
+
+        cfSubmit.textContent = 'sending…';
+        cfSubmit.disabled = true;
+
+        try {
+          await fetch(CONTACT_WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, business, email, turnover, painPoints: pain, source: 'contact-form' })
+          });
+          document.getElementById('contact-form-wrap').style.display = 'none';
+          document.getElementById('contact-success').style.display = 'block';
+        } catch (err) {
+          cfError.textContent = 'Something went wrong — please try again or email us directly.';
+          cfError.style.display = 'block';
+          cfSubmit.textContent = 'send →';
+          cfSubmit.disabled = false;
+        }
+      });
+    })();
   </script>
 </body>
 </html>
