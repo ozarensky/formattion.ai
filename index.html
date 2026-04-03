@@ -96,7 +96,6 @@
     body.dark .chat-btn { border-color: rgba(110,130,153,0.3); color: var(--acc); }
     body.dark .service-cell, body.dark .pricing-cell, body.dark .news-item { background: var(--bg2); color: var(--ink); }
     body.dark .news-card { box-shadow: 0 0 0 1px var(--dim); }
-    body.dark .news-card-gradient { background: linear-gradient(to top, rgba(20,22,24,0.98) 0%, rgba(20,22,24,0.6) 50%, rgba(20,22,24,0.15) 100%); }
     body.dark .about-stat, body.dark .article-stat, body.dark .article-flow-cell, body.dark .article-checklist-cell { background: var(--bg2); }
     body.dark .page-eyebrow { color: var(--muted); }
     body.dark .contact-input { color: var(--ink); border-color: var(--dim); }
@@ -349,23 +348,28 @@
       letter-spacing: -0.02em;
       line-height: 1.0;
     }
-    /* ══ NEWS CARDS — Pattern 01: image as card background ══ */
+    /* ══ NEWS CARDS — image-zone + content-zone card ══ */
     .news-grid {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 16px;
     }
     .news-card {
-      position: relative;
-      border-radius: 12px;
+      border-radius: var(--rx-feature);
       overflow: hidden;
-      min-height: 400px;
-      background: #1c1814;
+      background: var(--bg2);
       cursor: pointer;
       display: flex;
+      flex-direction: column;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07), 0 0 0 1px var(--dim);
+      transition: transform .25s cubic-bezier(.25,.46,.45,.94), box-shadow .25s ease;
     }
-    .news-card {
-      min-height: 400px;
+    .news-card-image-zone {
+      position: relative;
+      height: 280px;
+      flex-shrink: 0;
+      overflow: hidden;
+      background: #1c1814;
     }
     .news-card-img {
       position: absolute;
@@ -383,47 +387,44 @@
     }
     .news-card-gradient {
       position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(28,24,20,0.97) 0%, rgba(28,24,20,0.55) 50%, rgba(28,24,20,0.1) 100%);
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: linear-gradient(to top, rgba(28,24,20,0.55) 0%, transparent 100%);
     }
     .news-card-content {
-      position: relative;
-      z-index: 2;
-      padding: 32px 36px;
+      padding: 28px 32px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
       width: 100%;
     }
-
     .news-card-eyebrow {
       font-family: var(--mono);
       font-size: 10px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(244,239,230,0.45);
+      color: var(--muted);
       margin-bottom: 12px;
     }
     .news-card-title {
       font-family: 'Cormorant Infant', Georgia, serif;
       font-weight: 400;
       font-size: 28px;
-      color: #f4efe6;
+      color: var(--ink);
       line-height: 1.2;
       letter-spacing: -0.01em;
       margin-bottom: 12px;
     }
-
     .news-card-desc {
       font-family: var(--sans);
       font-size: 13px;
       font-weight: 400;
-      color: rgba(244,239,230,0.65);
+      color: var(--muted);
       line-height: 1.65;
       margin-bottom: 20px;
       max-width: 560px;
     }
-
     .news-card-footer {
       display: flex;
       align-items: center;
@@ -433,7 +434,7 @@
       font-family: var(--mono);
       font-size: 10px;
       letter-spacing: 0.06em;
-      color: rgba(244,239,230,0.35);
+      color: var(--muted);
     }
     .news-card-cta {
       display: inline-block;
@@ -441,23 +442,17 @@
       font-size: 10px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #f4efe6;
-      border: 1px solid rgba(244,239,230,0.3);
+      color: var(--ink);
+      border: 1px solid var(--dim);
       border-radius: 999px;
       padding: 6px 16px;
       transition: background .2s, border-color .2s;
     }
-    .news-card:hover .news-card-cta {
-      background: rgba(244,239,230,0.1);
-      border-color: rgba(244,239,230,0.5);
-    }
-    .news-card:hover .news-card-title { opacity: 0.85; }
-    .news-card:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
-    .news-card {
-      transition: transform .25s cubic-bezier(.25,.46,.45,.94);
-    }
-    .news-card:hover { transform: translateY(-2px); }
+    .news-card:hover .news-card-cta { background: var(--dim); border-color: var(--muted); }
+    .news-card:hover .news-card-title { opacity: 0.75; }
+    .news-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.1), 0 0 0 1px var(--dim); }
     .news-card:active { transform: scale(0.985); }
+    .news-card:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
 
     /* ══ ARTICLE PAGE ══ */
     .article-page-title {
@@ -646,6 +641,7 @@
       width: 100%;
       aspect-ratio: 16/7;
       overflow: hidden;
+      border-radius: var(--rx-feature);
       margin-bottom: 56px;
     }
     .article-hero img {
@@ -653,25 +649,10 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      -webkit-mask-image:
-        linear-gradient(to right, transparent 0px, black 30px, black calc(100% - 30px), transparent 100%),
-        linear-gradient(to bottom, transparent 0px, black 30px, black calc(100% - 30px), transparent 100%);
-      -webkit-mask-composite: source-in;
-      mask-image:
-        linear-gradient(to right, transparent 0px, black 30px, black calc(100% - 30px), transparent 100%),
-        linear-gradient(to bottom, transparent 0px, black 30px, black calc(100% - 30px), transparent 100%);
-      mask-composite: intersect;
     }
     .article-hero-fill {
       width: 100%;
       height: 100%;
-      position: relative;
-      border-radius: 2px;
-      box-shadow:
-        inset 28px 0 22px -18px var(--bg),
-        inset -28px 0 22px -18px var(--bg),
-        inset 0 28px 22px -18px var(--bg),
-        inset 0 -28px 22px -18px var(--bg);
     }
 
     .article-checklist-grid {
@@ -1392,18 +1373,11 @@
       grid-template-columns: 1fr 1fr !important;
     }
 
-    /* ── NEWS CARDS
-       min-height: 400px — fine, but content padding was 32px 36px
-       Mobile: reduce padding ── */
-    .news-card-content {
-      padding: 20px 20px !important;
-    }
-    .news-card-title {
-      font-size: 22px !important;
-    }
-    .news-card-desc {
-      max-width: 100% !important;
-    }
+    /* ── NEWS CARDS ── */
+    .news-card-image-zone { height: 220px; }
+    .news-card-content { padding: 20px 20px; }
+    .news-card-title { font-size: 22px; }
+    .news-card-desc { max-width: 100%; }
 
     /* ── ARTICLE PAGE TITLE
        Desktop: clamp(40px, 6vw, 68px) — 6vw on 375px = 22px, clamp gives 40px
@@ -1524,7 +1498,7 @@
     .about-stat-row { grid-template-columns: 1fr !important; }
     .article-stats { grid-template-columns: 1fr !important; }
     .article-flow-grid { grid-template-columns: 1fr !important; }
-    .news-card { min-height: 300px !important; }
+    .news-card-image-zone { height: 180px; }
   }
 
   /* ── Scroll progress bar ── */
@@ -1747,26 +1721,28 @@
 
         <!-- Card 01 — latest first: AI Deployment -->
         <div class="news-card" role="button" tabindex="0" onclick="showPage('page-article-ai-deployment')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('page-article-ai-deployment');}" aria-label="Read: AI Agents in Construction: From Theory to First Deployment">
-          <svg class="news-card-geo" viewBox="0 0 900 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-            <rect width="900" height="400" fill="#1c1814"/>
-            <defs>
-              <linearGradient id="g2" x1="1" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#3a3028"/>
-                <stop offset="60%" stop-color="#2a2018"/>
-                <stop offset="100%" stop-color="#1a1612"/>
-              </linearGradient>
-            </defs>
-            <rect x="0" y="0" width="900" height="400" fill="url(#g2)"/>
-            <line x1="0" y1="0" x2="900" y2="400" stroke="#9a8f82" stroke-width="0.6" opacity="0.18"/>
-            <line x1="120" y1="0" x2="900" y2="320" stroke="#9a8f82" stroke-width="0.4" opacity="0.13"/>
-            <line x1="240" y1="0" x2="900" y2="240" stroke="#9a8f82" stroke-width="0.4" opacity="0.1"/>
-            <rect x="380" y="30" width="180" height="340" fill="none" stroke="#c8bfb4" stroke-width="0.5" opacity="0.18"/>
-            <rect x="580" y="50" width="140" height="300" fill="none" stroke="#c8bfb4" stroke-width="0.5" opacity="0.13"/>
-            <rect x="740" y="70" width="100" height="260" fill="none" stroke="#c8bfb4" stroke-width="0.4" opacity="0.1"/>
-            <line x1="360" y1="0" x2="360" y2="400" stroke="#9a8f82" stroke-width="0.4" opacity="0.12"/>
-            <line x1="0" y1="200" x2="360" y2="200" stroke="#9a8f82" stroke-width="0.3" opacity="0.08"/>
-          </svg>
-          <div class="news-card-gradient"></div>
+          <div class="news-card-image-zone">
+            <svg class="news-card-geo" viewBox="0 0 900 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <rect width="900" height="400" fill="#1c1814"/>
+              <defs>
+                <linearGradient id="g2" x1="1" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#3a3028"/>
+                  <stop offset="60%" stop-color="#2a2018"/>
+                  <stop offset="100%" stop-color="#1a1612"/>
+                </linearGradient>
+              </defs>
+              <rect x="0" y="0" width="900" height="400" fill="url(#g2)"/>
+              <line x1="0" y1="0" x2="900" y2="400" stroke="#9a8f82" stroke-width="0.6" opacity="0.18"/>
+              <line x1="120" y1="0" x2="900" y2="320" stroke="#9a8f82" stroke-width="0.4" opacity="0.13"/>
+              <line x1="240" y1="0" x2="900" y2="240" stroke="#9a8f82" stroke-width="0.4" opacity="0.1"/>
+              <rect x="380" y="30" width="180" height="340" fill="none" stroke="#c8bfb4" stroke-width="0.5" opacity="0.18"/>
+              <rect x="580" y="50" width="140" height="300" fill="none" stroke="#c8bfb4" stroke-width="0.5" opacity="0.13"/>
+              <rect x="740" y="70" width="100" height="260" fill="none" stroke="#c8bfb4" stroke-width="0.4" opacity="0.1"/>
+              <line x1="360" y1="0" x2="360" y2="400" stroke="#9a8f82" stroke-width="0.4" opacity="0.12"/>
+              <line x1="0" y1="200" x2="360" y2="200" stroke="#9a8f82" stroke-width="0.3" opacity="0.08"/>
+            </svg>
+            <div class="news-card-gradient"></div>
+          </div>
           <div class="news-card-content">
             <div>
               <div class="news-card-eyebrow">deployment guide</div>
@@ -1782,26 +1758,28 @@
 
         <!-- Card 02 — UK Construction -->
         <div class="news-card" role="button" tabindex="0" onclick="showPage('page-article-uk-construction')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('page-article-uk-construction');}" aria-label="Read: Why UK Construction Subcontractors Must Act on AI Agents Now">
-          <svg class="news-card-geo" viewBox="0 0 900 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-            <rect width="900" height="400" fill="#1c1814"/>
-            <defs>
-              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#2e2820"/>
-                <stop offset="50%" stop-color="#3a3028"/>
-                <stop offset="100%" stop-color="#1a1612"/>
-              </linearGradient>
-            </defs>
-            <rect x="0" y="0" width="900" height="400" fill="url(#g1)"/>
-            <line x1="450" y1="0" x2="900" y2="400" stroke="#9a8f82" stroke-width="0.5" opacity="0.2"/>
-            <line x1="560" y1="0" x2="900" y2="280" stroke="#9a8f82" stroke-width="0.4" opacity="0.15"/>
-            <line x1="670" y1="0" x2="900" y2="160" stroke="#9a8f82" stroke-width="0.4" opacity="0.12"/>
-            <rect x="480" y="40" width="160" height="320" fill="none" stroke="#c8bfb4" stroke-width="0.5" opacity="0.2"/>
-            <rect x="660" y="60" width="120" height="280" fill="none" stroke="#c8bfb4" stroke-width="0.5" opacity="0.15"/>
-            <rect x="800" y="80" width="80" height="240" fill="none" stroke="#c8bfb4" stroke-width="0.4" opacity="0.1"/>
-            <line x1="440" y1="0" x2="440" y2="400" stroke="#9a8f82" stroke-width="0.4" opacity="0.15"/>
-            <line x1="0" y1="200" x2="440" y2="200" stroke="#9a8f82" stroke-width="0.3" opacity="0.1"/>
-          </svg>
-          <div class="news-card-gradient"></div>
+          <div class="news-card-image-zone">
+            <svg class="news-card-geo" viewBox="0 0 900 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <rect width="900" height="400" fill="#1c1814"/>
+              <defs>
+                <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#2e2820"/>
+                  <stop offset="50%" stop-color="#3a3028"/>
+                  <stop offset="100%" stop-color="#1a1612"/>
+                </linearGradient>
+              </defs>
+              <rect x="0" y="0" width="900" height="400" fill="url(#g1)"/>
+              <line x1="450" y1="0" x2="900" y2="400" stroke="#9a8f82" stroke-width="0.5" opacity="0.2"/>
+              <line x1="560" y1="0" x2="900" y2="280" stroke="#9a8f82" stroke-width="0.4" opacity="0.15"/>
+              <line x1="670" y1="0" x2="900" y2="160" stroke="#9a8f82" stroke-width="0.4" opacity="0.12"/>
+              <rect x="480" y="40" width="160" height="320" fill="none" stroke="#c8bfb4" stroke-width="0.5" opacity="0.2"/>
+              <rect x="660" y="60" width="120" height="280" fill="none" stroke="#c8bfb4" stroke-width="0.5" opacity="0.15"/>
+              <rect x="800" y="80" width="80" height="240" fill="none" stroke="#c8bfb4" stroke-width="0.4" opacity="0.1"/>
+              <line x1="440" y1="0" x2="440" y2="400" stroke="#9a8f82" stroke-width="0.4" opacity="0.15"/>
+              <line x1="0" y1="200" x2="440" y2="200" stroke="#9a8f82" stroke-width="0.3" opacity="0.1"/>
+            </svg>
+            <div class="news-card-gradient"></div>
+          </div>
           <div class="news-card-content">
             <div>
               <div class="news-card-eyebrow">industry briefing</div>
