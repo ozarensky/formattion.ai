@@ -93,7 +93,7 @@
     body.dark .landing { background: var(--bg); }
     body.dark #landing { background: var(--bg); }
     body.dark .chat-btn { border-color: rgba(110,130,153,0.3); color: var(--acc); }
-    body.dark .service-cell, body.dark .pricing-cell, body.dark .news-item { background: var(--bg2); color: var(--ink); }
+    body.dark .pricing-cell, body.dark .news-item { background: var(--bg2); color: var(--ink); }
     body.dark .news-card { box-shadow: 0 0 0 1px var(--dim); }
     body.dark .about-stat, body.dark .article-stat, body.dark .article-flow-cell, body.dark .article-checklist-cell { background: var(--bg2); }
     body.dark .page-eyebrow { color: var(--muted); }
@@ -191,19 +191,15 @@
       margin-bottom: 8px;
     }
     .service-cell {
-      display: flex;
-      background: var(--bg2);
+      position: relative;
       border-radius: 12px;
       overflow: hidden;
-      transition: background .2s ease, transform .2s ease;
       cursor: default;
-      min-height: 240px;
+      min-height: 300px;
     }
-    .service-cell:hover { background: var(--bg3); transform: translateY(-1px); }
     .service-cell-image {
-      width: 38%;
-      flex-shrink: 0;
-      overflow: hidden;
+      position: absolute;
+      inset: 0;
       background: #1c1814;
     }
     .service-cell-image img {
@@ -211,42 +207,51 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      opacity: 0.88;
-      transition: opacity .3s ease, transform .4s ease;
+      opacity: 0.75;
+      transition: opacity .4s ease, transform .5s ease;
     }
     .service-cell:hover .service-cell-image img {
-      opacity: 1;
+      opacity: 0.85;
       transform: scale(1.03);
     }
+    .service-cell-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(20,18,14,0.85) 0%, rgba(20,18,14,0.3) 60%, rgba(20,18,14,0.1) 100%);
+    }
     .service-cell-content {
-      padding: 36px 40px;
-      flex: 1;
+      position: relative;
+      z-index: 1;
+      padding: 40px 44px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-end;
+      min-height: 300px;
     }
     .service-cell-label {
       font-family: var(--mono);
       font-size: 9px;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 16px;
+      color: rgba(237,236,234,0.5);
+      margin-bottom: 12px;
     }
     .service-cell-title {
       font-family: var(--sans);
       font-weight: 400;
-      font-size: 22px;
+      font-size: 24px;
       letter-spacing: -0.01em;
-      color: var(--ink);
-      margin-bottom: 14px;
+      color: #edecea;
+      margin-bottom: 12px;
     }
     .service-cell-body {
       font-family: var(--sans);
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 300;
       line-height: 1.75;
-      color: var(--ink-body);
+      color: rgba(237,236,234,0.75);
+      max-width: 560px;
     }
 
     /* methodology steps */
@@ -1381,22 +1386,9 @@
       margin: 40px 0 !important;
     }
 
-    /* ── SERVICES GRID
-       Desktop & Mobile: single column, stacked ── */
-    .services-grid {
-      flex-direction: column !important;
-    }
-    .service-cell {
-      flex-direction: column !important;
-      min-height: auto !important;
-    }
-    .service-cell-image {
-      width: 100% !important;
-      height: 200px;
-    }
-    .service-cell-content {
-      padding: 28px 24px !important;
-    }
+    /* ── SERVICES GRID — mobile ── */
+    .service-cell { min-height: 240px; }
+    .service-cell-content { padding: 28px 24px !important; min-height: 240px; }
 
     /* ── METHOD STEPS — already 48px + 1fr, fine on mobile ── */
 
