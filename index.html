@@ -2104,12 +2104,16 @@
       <div class="drop-item" data-page="about">about us</div>
       <div class="drop-item" data-page="contact">contact us</div>
 
-      <!-- mode toggle -->
-      <div class="menu-mode" style="position:absolute;bottom:28px;left:32px;z-index:2;display:flex;align-items:center;gap:10px" id="menuMode">
+      <!-- menu footer: toggle + privacy + copyright -->
+      <div id="menuMode" style="position:absolute;bottom:28px;left:32px;right:20px;z-index:2;display:flex;flex-direction:column;gap:16px;">
         <svg id="msToggleSvg" viewBox="0 0 274.28 178.65" xmlns="http://www.w3.org/2000/svg" style="width:44px;height:28px;cursor:pointer;display:block;flex-shrink:0">
           <rect id="togCircleEl" x="27.29" y="27.29" width="124.04" height="124.04" rx="62.02" ry="62.02" style="fill:#1c1814;transition:x .3s cubic-bezier(.4,0,.2,1)"/>
           <path id="togPathEl" style="fill:#1c1814" d="M184.96,0h-95.64C39.99,0,0,39.99,0,89.32h0c0,49.33,39.99,89.32,89.32,89.32h95.64c49.33,0,89.32-39.99,89.32-89.32h0C274.28,39.99,234.29,0,184.96,0ZM262.71,89.33c0,42.94-34.81,77.75-77.75,77.75h-95.64c-42.94,0-77.75-34.81-77.75-77.75h0C11.57,46.39,46.38,11.58,89.32,11.58h95.64c42.94,0,77.75,34.81,77.75,77.75h0Z"/>
         </svg>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <span id="privacyLink" style="font-family:var(--dm);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:color .15s ease;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">privacy</span>
+          <span style="font-family:var(--dm);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);user-select:none;">formattion ai © 2026</span>
+        </div>
       </div>
     </div>
   </div>
