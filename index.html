@@ -87,7 +87,6 @@
     body.dark .messages { background: var(--bg); }
     body.dark .message.bot { background: var(--bg2); color: var(--ink); }
     body.dark .message.user span { background: var(--bg3); color: var(--ink); }
-    body.dark .input-box { background: var(--bg2); border-color: var(--dim); }
     body.dark textarea { color: var(--ink); background: transparent; }
     body.dark .drop-item { color: var(--ink); }
     body.dark #dropMenu { background: rgba(20,22,24,0.30); }
@@ -859,9 +858,6 @@
       from { opacity: 0; transform: translate(-50%, calc(-50% - 30px)); }
       to   { opacity: 1; transform: translate(-50%, calc(-50% - 50px)); }
     }
-    .chat-btn {
-      animation-delay: .4s !important;
-    }
     body.dark .brand-logo .cls-1 { fill: #EDECEA; }
     body.dark .brand-logo { filter: none; }
 
@@ -885,6 +881,7 @@
       cursor: pointer;
       white-space: nowrap;
       transition: border-color .25s ease, background .25s ease;
+      animation-delay: .4s !important;
     }
     .chat-btn:hover {
       border-color: var(--ink);
@@ -2568,6 +2565,7 @@
         document.getElementById(prev).classList.add('visible');
         topLogo.classList.add('visible');
         showBack();
+        history.pushState({ page: prev }, '', '#' + prev.replace('page-', ''));
       } else {
         // no history — go to landing
         hideAll();
@@ -2575,6 +2573,7 @@
         topLogo.classList.remove('visible');
         hideBack();
         pageHistory = [];
+        history.pushState({ page: 'landing' }, '', window.location.pathname);
       }
     });
 
@@ -2723,7 +2722,7 @@
     });
 
     // ── Hash routing — on load and on browser back/forward ──
-    function navigateToHash(hash, pushState) {
+    function navigateToHash(hash) {
       if (!hash) {
         hideAll();
         landing.classList.remove('hidden');
@@ -2733,8 +2732,9 @@
       } else if (hash === 'chat') {
         openChat();
       } else {
-        var el = document.getElementById('page-' + hash);
-        if (el) showPage('page-' + hash);
+        var normalised = hash.replace(/^page-/, '');
+        var el = document.getElementById('page-' + normalised);
+        if (el) showPage('page-' + normalised);
       }
     }
 
@@ -3040,7 +3040,7 @@
       </div>
 
       <div class="article-callout">
-        <p class="article-callout-text">Explore how AI automation can transform your business with formattion.ai. <a href="https://formattion.ai/#page-article-ai-tools-essential-construction-subcontracting-2026" style="color:#4a6278;text-decoration:underline;">Find out how this applies to your business.</a></p>
+        <p class="article-callout-text">Ready to bring AI automation to your business? <span onclick="showPage('page-contact')" style="color:#4a6278;text-decoration:underline;cursor:pointer;">Book a free consultation →</span></p>
       </div>
 
       <span class="article-back" onclick="showPage('page-news')">&#8592; back to news</span>
