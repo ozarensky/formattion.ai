@@ -56,7 +56,7 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--l-bg);color:var(--l-ink);font-family:var(--sans);font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased;padding-top:0}
+body{background:var(--l-bg);color:var(--l-ink);font-family:var(--sans);font-size:14px;font-weight:300;line-height:1.65;-webkit-font-smoothing:antialiased;padding-top:0}
 /* TOP BAR */
 #topBar{position:fixed;top:10px;left:10px;right:10px;height:100px;background:rgba(244,239,230,0.30);backdrop-filter:blur(20px) saturate(100%);-webkit-backdrop-filter:blur(20px) saturate(100%);border-radius:12px;z-index:300;pointer-events:none}
 body.dark #topBar{background:rgba(20,22,24,0.30);backdrop-filter:blur(20px) saturate(100%);-webkit-backdrop-filter:blur(20px) saturate(100%)}
@@ -91,7 +91,7 @@ body.dark .drop-item{color:var(--d-ink)}
 section{border-bottom:1px solid var(--l-border);padding:88px 0}
 section:last-of-type{border-bottom:none}
 .ey{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:6px}
-.st{font-family:var(--sans);font-size:32px;font-weight:400;color:var(--l-ink);line-height:1.1;letter-spacing:-.02em;margin-bottom:48px}
+.st{font-family:var(--sans);font-size:32px;font-weight:300;color:var(--l-ink);line-height:1.1;letter-spacing:-.02em;margin-bottom:48px}
 .si{font-size:14px;color:var(--l-ink3);line-height:1.7;max-width:580px;margin-top:-32px;margin-bottom:48px}
 
 /* HERO */
@@ -104,31 +104,31 @@ section:last-of-type{border-bottom:none}
 .hm{display:flex;gap:0;border:1px solid var(--l-border);overflow:hidden;width:fit-content}
 .hmi{padding:12px 24px;font-family:var(--mono);font-size:10px;color:var(--l-ink4);border-right:1px solid var(--l-border)}
 .hmi:last-child{border-right:none}
-.hmi b{display:block;font-weight:400;color:var(--l-ink2);font-size:11px;margin-top:2px;font-family:var(--sans)}
+.hmi b{display:block;font-weight:300;color:var(--l-ink2);font-size:11px;margin-top:2px;font-family:var(--sans)}
 
 /* BRAND STORY */
 .brand-story{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:48px}
 .bs-cell{background:var(--l-bg2);padding:32px 36px;border-radius:12px}
-.bs-name{font-size:48px;font-weight:400;color:var(--l-ink);line-height:1.0;letter-spacing:-.03em;margin-bottom:4px}
+.bs-name{font-size:48px;font-weight:300;color:var(--l-ink);line-height:1.0;letter-spacing:-.03em;margin-bottom:4px}
 
 .bs-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:14px}
 .bs-body{font-size:13px;color:var(--l-ink2);line-height:1.7}
 .val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:32px}
 .val-cell{background:var(--l-bg2);padding:24px 26px;border-radius:12px}
 .val-num{font-family:var(--mono);font-size:10px;color:var(--acc);margin-bottom:8px;letter-spacing:.06em}
-.val-title{font-size:15px;font-weight:400;color:var(--l-ink);margin-bottom:6px;letter-spacing:-.01em}
+.val-title{font-size:15px;font-weight:300;color:var(--l-ink);margin-bottom:6px;letter-spacing:-.01em}
 .val-body{font-size:12px;color:var(--l-ink4);line-height:1.55}
 .client-split{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:32px}
 .client-panel{background:var(--l-bg2);padding:28px 32px;border-radius:12px}
 .cp-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:14px}
-.cp-stat{font-size:28px;font-weight:400;color:var(--l-ink);letter-spacing:-.02em;margin-bottom:4px}
+.cp-stat{font-size:28px;font-weight:300;color:var(--l-ink);letter-spacing:-.02em;margin-bottom:4px}
 .cp-desc{font-size:12px;color:var(--l-ink3);line-height:1.55;margin-bottom:16px}
 .cp-tags{display:flex;flex-wrap:wrap;gap:6px}
 .cp-tag{font-family:var(--mono);font-size:10px;color:var(--l-ink3);background:var(--l-bg3);border-radius:4px;padding:3px 8px}
 .method-row{display:flex;flex-direction:column;gap:2px;margin-bottom:32px}
 .method-step{background:var(--l-bg2);border-radius:12px;padding:20px 24px;display:flex;align-items:flex-start;gap:20px}
 .method-n{font-family:var(--mono);font-size:11px;color:var(--acc);flex-shrink:0;padding-top:1px;width:20px}
-.method-title{font-size:14px;font-weight:400;color:var(--l-ink);margin-bottom:3px}
+.method-title{font-size:14px;font-weight:300;color:var(--l-ink);margin-bottom:3px}
 .method-desc{font-size:12px;color:var(--l-ink4);line-height:1.55}
 
 /* LOGO */
@@ -170,7 +170,7 @@ section:last-of-type{border-bottom:none}
 .mpn.lm .mpl{color:var(--l-ink4)}.mpn.dm .mpl{color:var(--d-ink4)}
 .mpc{border-radius:8px;padding:18px 20px;margin-bottom:8px}
 .mpn.lm .mpc{border-radius:8px;background:var(--l-bg3)}.mpn.dm .mpc{border-radius:8px;background:var(--d-bg3)}
-.mpct{font-size:13px;font-weight:400;margin-bottom:3px}
+.mpct{font-size:13px;font-weight:300;margin-bottom:3px}
 .mpn.lm .mpct{color:var(--l-ink)}.mpn.dm .mpct{color:var(--d-ink)}
 .mpcb{font-size:12px}
 .mpn.lm .mpcb{color:var(--l-ink4)}.mpn.dm .mpcb{color:var(--d-ink4)}
@@ -185,10 +185,10 @@ section:last-of-type{border-bottom:none}
 .tt{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);border:1px solid rgba(74,98,120,0.25);border-radius:4px;padding:3px 8px}
 .tt.r{color:var(--l-ink4);border-color:var(--l-border2)}
 .td{font-family:var(--mono);font-size:11px;color:var(--l-ink4)}
-.th1{font-size:48px;font-weight:400;color:var(--l-ink);line-height:1.05;letter-spacing:-.025em;margin-bottom:10px}
-.th2{font-size:24px;font-weight:400;color:var(--l-ink);line-height:1.2;letter-spacing:-.015em;margin-bottom:8px}
+.th1{font-size:48px;font-weight:300;color:var(--l-ink);line-height:1.05;letter-spacing:-.025em;margin-bottom:10px}
+.th2{font-size:24px;font-weight:300;color:var(--l-ink);line-height:1.2;letter-spacing:-.015em;margin-bottom:8px}
 .tbd{font-size:14px;color:var(--l-ink2);line-height:1.7;max-width:560px;margin-bottom:8px}
-.tlb{font-size:11px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--l-ink4)}
+.tlb{font-size:11px;font-weight:300;letter-spacing:.08em;text-transform:uppercase;color:var(--l-ink4)}
 .tmo{font-family:var(--mono);font-size:13px;color:var(--acc);line-height:1.7;letter-spacing:.02em}
 .tmol{font-family:var(--mono);font-size:10px;color:var(--l-ink4);letter-spacing:.08em;text-transform:uppercase;margin-top:10px}
 .edb{background:var(--l-bg2);border-radius:8px;padding:24px 28px;opacity:.65}
@@ -206,7 +206,7 @@ section:last-of-type{border-bottom:none}
 /* VOICE */
 .vg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:28px}
 .vc{background:var(--l-bg2);padding:22px 24px;border-radius:12px}
-.vw{font-size:22px;font-weight:400;color:var(--l-ink);letter-spacing:-.01em;margin-bottom:4px}
+.vw{font-size:22px;font-weight:300;color:var(--l-ink);letter-spacing:-.01em;margin-bottom:4px}
 .vd{font-size:12px;color:var(--l-ink4);line-height:1.5}
 .tcl{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:28px}
 .tc2{background:var(--l-bg2);padding:24px;border-radius:12px}
@@ -217,7 +217,7 @@ section:last-of-type{border-bottom:none}
 .tc2.dn .tci{color:var(--l-ink4);text-decoration:line-through;text-decoration-color:rgba(138,64,64,0.35)}
 .veg{border-left:2px solid var(--acc);background:var(--l-bg2);border-radius:0 12px 12px 0;padding:24px 28px;margin-bottom:10px}
 .vegl{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:10px}
-.vegt{font-size:15px;color:var(--l-ink);line-height:1.6;font-weight:400}
+.vegt{font-size:15px;color:var(--l-ink);line-height:1.6;font-weight:300}
 
 /* SPEC */
 .spi{font-size:13px;color:var(--l-ink3);max-width:560px;line-height:1.7;margin-bottom:32px}
@@ -419,7 +419,7 @@ body.dark .fn{color:var(--d-ink4)}
       </div>
       <div class="bs-cell">
         <div class="bs-label">The mission</div>
-        <div style="font-size:22px;font-weight:400;color:var(--l-ink);line-height:1.35;letter-spacing:-.015em;margin-bottom:16px">Closing the automation gap between large construction firms and the subcontractors who build Britain.</div>
+        <div style="font-size:22px;font-weight:300;color:var(--l-ink);line-height:1.35;letter-spacing:-.015em;margin-bottom:16px">Closing the automation gap between large construction firms and the subcontractors who build Britain.</div>
         <p class="bs-body">UK subcontract businesses operate with fragmented systems and heavy manual workload. Large firms automate. SMEs are left behind. formattion.ai changes that.</p>
       </div>
     </div>
@@ -622,7 +622,7 @@ body.dark .fn{color:var(--d-ink4)}
         <div style="background:var(--l-bg2);padding:28px 32px;border-radius:12px">
           <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:16px">04 — Marketing hero (mixed)</div>
           <div style="line-height:1.05;margin-bottom:12px">
-            <span style="font-size:36px;font-weight:400;color:var(--l-ink);letter-spacing:-.025em">built for</span><br>
+            <span style="font-size:36px;font-weight:300;color:var(--l-ink);letter-spacing:-.025em">built for</span><br>
             <span style="font-family:'Cormorant Infant',Georgia,serif;font-size:40px;font-weight:300;font-style:italic;color:var(--acc-lt)">construction.</span>
           </div>
           <div style="font-family:var(--mono);font-size:10px;color:var(--l-ink4);letter-spacing:.06em">SANS STATEMENT + SERIF INFLECTION — one line maximum</div>
@@ -637,13 +637,13 @@ body.dark .fn{color:var(--d-ink4)}
     <table class="tsc">
       <thead><tr><th style="width:130px">name</th><th style="width:160px">typeface</th><th style="width:120px">size / weight</th><th>use</th></tr></thead>
       <tbody>
-        <tr><td class="scn">heading-xl</td><td class="scf">Helvetica Neue</td><td class="scs">36–40px / 400</td><td class="scu">Hero headlines, page titles, report covers</td></tr>
-        <tr><td class="scn">heading-lg</td><td class="scf">Helvetica Neue</td><td class="scs">24–28px / 400</td><td class="scu">Section titles, audit section headers</td></tr>
-        <tr><td class="scn">heading-sm</td><td class="scf">Helvetica Neue</td><td class="scs">16–18px / 400</td><td class="scu">Card titles, roadmap items</td></tr>
+        <tr><td class="scn">heading-xl</td><td class="scf">Helvetica Neue</td><td class="scs">36–40px / 300</td><td class="scu">Hero headlines, page titles, report covers</td></tr>
+        <tr><td class="scn">heading-lg</td><td class="scf">Helvetica Neue</td><td class="scs">24–28px / 300</td><td class="scu">Section titles, audit section headers</td></tr>
+        <tr><td class="scn">heading-sm</td><td class="scf">Helvetica Neue</td><td class="scs">16–18px / 300</td><td class="scu">Card titles, roadmap items</td></tr>
         <tr><td class="scn">body</td><td class="scf">Helvetica Neue</td><td class="scs">18px / 300</td><td class="scu">All body copy — line-height 1.7</td></tr>
-        <tr><td class="scn">label</td><td class="scf">Helvetica Neue</td><td class="scs">11px / 400</td><td class="scu">UI labels, nav, markers — uppercase, 0.06em</td></tr>
-        <tr><td class="scn">caption</td><td class="scf">Helvetica Neue</td><td class="scs">12px / 400</td><td class="scu">Timestamps, supporting info</td></tr>
-        <tr><td class="scn">mono-md</td><td class="scf">DM Mono</td><td class="scs">13px / 400</td><td class="scu">Audit IDs, scores, data values, For agent output</td></tr>
+        <tr><td class="scn">label</td><td class="scf">Helvetica Neue</td><td class="scs">11px / 300</td><td class="scu">UI labels, nav, markers — uppercase, 0.06em</td></tr>
+        <tr><td class="scn">caption</td><td class="scf">Helvetica Neue</td><td class="scs">12px / 300</td><td class="scu">Timestamps, supporting info</td></tr>
+        <tr><td class="scn">mono-md</td><td class="scf">DM Mono</td><td class="scs">13px / 300</td><td class="scu">Audit IDs, scores, data values, For agent output</td></tr>
         <tr><td class="scn">mono-sm</td><td class="scf">DM Mono</td><td class="scs">10–11px / 300</td><td class="scu">Version strings, system tags, meta labels</td></tr>
         <tr><td class="scn">display-cover</td><td class="scf">Cormorant Infant</td><td class="scs">32–44px / 300 italic</td><td class="scu">Report cover — client name only</td></tr>
         <tr><td class="scn">display-opener</td><td class="scf">Cormorant Infant</td><td class="scs">28–36px / 300 italic</td><td class="scu">Section opener / findings statement — one line</td></tr>
@@ -667,25 +667,25 @@ body.dark .fn{color:var(--d-ink4)}
       <!-- rx 6px -->
       <div style="background:var(--l-bg2);border-radius:6px;padding:28px 28px 24px">
         <div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:20px">rx 6px — tight</div>
-        <div style="font-size:18px;font-weight:400;color:var(--l-ink);letter-spacing:-.01em">Inputs, tags</div>
+        <div style="font-size:18px;font-weight:300;color:var(--l-ink);letter-spacing:-.01em">Inputs, tags</div>
       </div>
 
       <!-- rx 12px -->
       <div style="background:var(--l-bg2);border-radius:12px;padding:28px 28px 24px">
         <div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:20px">rx 12px — standard</div>
-        <div style="font-size:18px;font-weight:400;color:var(--l-ink);letter-spacing:-.01em">Cards, panels</div>
+        <div style="font-size:18px;font-weight:300;color:var(--l-ink);letter-spacing:-.01em">Cards, panels</div>
       </div>
 
       <!-- rx 20px -->
       <div style="background:var(--l-bg2);border-radius:20px;padding:28px 28px 24px">
         <div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:20px">rx 20px — feature card</div>
-        <div style="font-size:18px;font-weight:400;color:var(--l-ink);letter-spacing:-.01em">Hero blocks,<br>images</div>
+        <div style="font-size:18px;font-weight:300;color:var(--l-ink);letter-spacing:-.01em">Hero blocks,<br>images</div>
       </div>
 
       <!-- pill -->
       <div style="background:var(--l-bg2);border-radius:999px;padding:28px 28px 24px">
         <div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:20px">pill — buttons, badges</div>
-        <div style="font-size:18px;font-weight:400;color:var(--l-ink);letter-spacing:-.01em">Tags, CTAs</div>
+        <div style="font-size:18px;font-weight:300;color:var(--l-ink);letter-spacing:-.01em">Tags, CTAs</div>
       </div>
 
     </div>
@@ -695,9 +695,9 @@ body.dark .fn{color:var(--d-ink4)}
       <table style="width:100%;border-collapse:collapse;font-size:13px">
         <thead>
           <tr style="border-bottom:1px solid var(--l-border2)">
-            <th style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);font-weight:400;text-align:left;padding:0 0 10px 0;width:18%">Token</th>
-            <th style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);font-weight:400;text-align:left;padding:0 0 10px 16px;width:14%">Value</th>
-            <th style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);font-weight:400;text-align:left;padding:0 0 10px 16px;width:68%">Usage</th>
+            <th style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);font-weight:300;text-align:left;padding:0 0 10px 0;width:18%">Token</th>
+            <th style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);font-weight:300;text-align:left;padding:0 0 10px 16px;width:14%">Value</th>
+            <th style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);font-weight:300;text-align:left;padding:0 0 10px 16px;width:68%">Usage</th>
           </tr>
         </thead>
         <tbody>
@@ -796,19 +796,19 @@ body.dark .fn{color:var(--d-ink4)}
 
     <div style="background:var(--l-bg2);padding:28px 32px;border-radius:12px;margin-bottom:8px">
       <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:14px">Core aesthetic direction</div>
-      <div style="font-size:22px;font-weight:400;color:var(--l-ink);letter-spacing:-.015em;margin-bottom:10px">Documentary realism, desaturated warm</div>
+      <div style="font-size:22px;font-weight:300;color:var(--l-ink);letter-spacing:-.015em;margin-bottom:10px">Documentary realism, desaturated warm</div>
       <div style="font-size:13px;color:var(--l-ink2);line-height:1.7;max-width:600px">Images feel like they were taken on site — not staged, not stock. Real construction environments, real materials, real work. Treated with a warm desaturated grade that echoes the brand palette. The feel is quiet authority, not glossy aspiration.</div>
     </div>
 
     <div style="margin-top:8px;margin-bottom:32px">
       <div style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:12px">Style rules — always applied</div>
       <div style="display:flex;flex-direction:column;gap:2px">
-        <div class="ri"><span class="rb do">01</span><span class="rt"><strong style="font-weight:400;color:var(--l-ink)">Desaturated warm grade.</strong> Colours muted to 20–40% saturation. Aged document feel — not black-and-white, not vivid.</span></div>
-        <div class="ri"><span class="rb do">02</span><span class="rt"><strong style="font-weight:400;color:var(--l-ink)">Ambient natural light.</strong> Overcast daylight, golden hour, or diffused interior. No studio flash, no dramatic spotlights.</span></div>
-        <div class="ri"><span class="rb do">03</span><span class="rt"><strong style="font-weight:400;color:var(--l-ink)">No faces.</strong> Workers may appear from behind, side-on, or at distance. Hands on equipment are permitted. Faces are never shown.</span></div>
-        <div class="ri"><span class="rb do">04</span><span class="rt"><strong style="font-weight:400;color:var(--l-ink)">Geometry and structure over chaos.</strong> Clear lines, repetition, material texture. Steel framework, concrete surfaces, organised sites, aerial groundworks.</span></div>
-        <div class="ri"><span class="rb do">05</span><span class="rt"><strong style="font-weight:400;color:var(--l-ink)">Intentional negative space.</strong> Leave room in the composition — text will often sit here. Do not fill the frame edge-to-edge.</span></div>
-        <div class="ri"><span class="rb do">06</span><span class="rt"><strong style="font-weight:400;color:var(--l-ink)">Film grain texture.</strong> 15–25% opacity grain. Makes AI-generated images feel documentary rather than synthetic.</span></div>
+        <div class="ri"><span class="rb do">01</span><span class="rt"><strong style="font-weight:300;color:var(--l-ink)">Desaturated warm grade.</strong> Colours muted to 20–40% saturation. Aged document feel — not black-and-white, not vivid.</span></div>
+        <div class="ri"><span class="rb do">02</span><span class="rt"><strong style="font-weight:300;color:var(--l-ink)">Ambient natural light.</strong> Overcast daylight, golden hour, or diffused interior. No studio flash, no dramatic spotlights.</span></div>
+        <div class="ri"><span class="rb do">03</span><span class="rt"><strong style="font-weight:300;color:var(--l-ink)">No faces.</strong> Workers may appear from behind, side-on, or at distance. Hands on equipment are permitted. Faces are never shown.</span></div>
+        <div class="ri"><span class="rb do">04</span><span class="rt"><strong style="font-weight:300;color:var(--l-ink)">Geometry and structure over chaos.</strong> Clear lines, repetition, material texture. Steel framework, concrete surfaces, organised sites, aerial groundworks.</span></div>
+        <div class="ri"><span class="rb do">05</span><span class="rt"><strong style="font-weight:300;color:var(--l-ink)">Intentional negative space.</strong> Leave room in the composition — text will often sit here. Do not fill the frame edge-to-edge.</span></div>
+        <div class="ri"><span class="rb do">06</span><span class="rt"><strong style="font-weight:300;color:var(--l-ink)">Film grain texture.</strong> 15–25% opacity grain. Makes AI-generated images feel documentary rather than synthetic.</span></div>
       </div>
     </div>
 
@@ -816,19 +816,19 @@ body.dark .fn{color:var(--d-ink4)}
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:32px">
       <div style="background:var(--l-bg2);padding:24px;border-radius:12px">
         <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:12px">LinkedIn</div>
-        <div style="font-size:14px;font-weight:400;color:var(--l-ink);margin-bottom:8px">Social feed</div>
+        <div style="font-size:14px;font-weight:300;color:var(--l-ink);margin-bottom:8px">Social feed</div>
         <div style="font-size:12px;color:var(--l-ink4);line-height:1.6;margin-bottom:12px">Bold composition, clear subject, works at thumbnail scale. Must communicate construction + precision in under 1 second.</div>
         <div style="font-family:var(--mono);font-size:10px;color:var(--l-ink4);line-height:1.8">ratio: 1:1 or 4:5<br>subject: close detail or strong geometric overhead<br>text zone: upper or lower third<br>mood: direct, grounded, confident</div>
       </div>
       <div style="background:var(--l-bg2);padding:24px;border-radius:12px">
         <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:12px">Newsletter</div>
-        <div style="font-size:14px;font-weight:400;color:var(--l-ink);margin-bottom:8px">Editorial</div>
+        <div style="font-size:14px;font-weight:300;color:var(--l-ink);margin-bottom:8px">Editorial</div>
         <div style="font-size:12px;color:var(--l-ink4);line-height:1.6;margin-bottom:12px">Wider, slower, more atmospheric. Pairs with Cormorant headlines. Can be more abstract — material texture, aerial geometry, light studies.</div>
         <div style="font-family:var(--mono);font-size:10px;color:var(--l-ink4);line-height:1.8">ratio: 16:9 or 3:1 banner<br>subject: landscape, aerial, or abstract material<br>text zone: wide left or centre negative space<br>mood: contemplative, editorial, measured</div>
       </div>
       <div style="background:var(--l-bg2);padding:24px;border-radius:12px">
         <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:12px">Marketing site</div>
-        <div style="font-size:14px;font-weight:400;color:var(--l-ink);margin-bottom:8px">Web / hero</div>
+        <div style="font-size:14px;font-weight:300;color:var(--l-ink);margin-bottom:8px">Web / hero</div>
         <div style="font-size:12px;color:var(--l-ink4);line-height:1.6;margin-bottom:12px">Full-bleed behind text. Needs depth and atmosphere. Must not compete with the warm cream palette.</div>
         <div style="font-family:var(--mono);font-size:10px;color:var(--l-ink4);line-height:1.8">ratio: 16:9 or wider<br>subject: site, infrastructure, operational environment<br>text zone: dark lower third, overlay-ready<br>mood: authoritative, expansive, real</div>
       </div>
@@ -860,7 +860,7 @@ body.dark .fn{color:var(--d-ink4)}
         <div style="position:relative;z-index:1;padding:36px 40px;max-width:420px;display:flex;flex-direction:column;justify-content:space-between;min-height:220px">
           <div>
             <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,239,230,0.5);margin-bottom:12px">Marketing site — hero card</div>
-            <div style="font-size:24px;font-weight:400;color:#f4efe6;line-height:1.2;letter-spacing:-.015em;margin-bottom:10px">Automation infrastructure built for subcontract businesses.</div>
+            <div style="font-size:24px;font-weight:300;color:#f4efe6;line-height:1.2;letter-spacing:-.015em;margin-bottom:10px">Automation infrastructure built for subcontract businesses.</div>
             <div style="font-size:13px;color:rgba(244,239,230,0.65);line-height:1.65">Structured. Consistent. Reliable.</div>
           </div>
           <div style="margin-top:20px">
@@ -891,7 +891,7 @@ body.dark .fn{color:var(--d-ink4)}
         <!-- Text at bottom -->
         <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 32px">
           <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,239,230,0.45);margin-bottom:6px">LinkedIn / section break</div>
-          <div style="font-size:18px;font-weight:400;color:#f4efe6;letter-spacing:-.01em">12 hours of admin recovered. Every week.</div>
+          <div style="font-size:18px;font-weight:300;color:#f4efe6;letter-spacing:-.01em">12 hours of admin recovered. Every week.</div>
         </div>
       </div>
       <div style="background:var(--l-bg2);padding:14px 18px;border-radius:0 0 8px 8px;font-size:12px;color:var(--l-ink4);line-height:1.55">Image fills the entire frame. Dark gradient rises from the bottom to provide text legibility. Text anchors to the bottom-left. Works for LinkedIn posts, marketing site section dividers, and report cover pages. Keep the text brief — one statement maximum.</div>
@@ -917,7 +917,7 @@ body.dark .fn{color:var(--d-ink4)}
         <!-- Content side -->
         <div style="background:var(--l-bg2);padding:32px 28px;display:flex;flex-direction:column;justify-content:center">
           <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:12px">Report / case study</div>
-          <div style="font-size:16px;font-weight:400;color:var(--l-ink);line-height:1.3;letter-spacing:-.01em;margin-bottom:10px">Section opener or case study intro</div>
+          <div style="font-size:16px;font-weight:300;color:var(--l-ink);line-height:1.3;letter-spacing:-.01em;margin-bottom:10px">Section opener or case study intro</div>
           <div style="font-size:12px;color:var(--l-ink3);line-height:1.65">Clean separation — no overlay, no gradient. Image fills the left column entirely. Content fills the right. Used in audit reports, case studies, and proposal documents where clarity matters more than atmosphere.</div>
         </div>
       </div>
@@ -957,7 +957,7 @@ body.dark .fn{color:var(--d-ink4)}
         <div style="position:relative;z-index:1;padding:36px 40px;max-width:420px;display:flex;flex-direction:column;justify-content:space-between;min-height:220px">
           <div>
             <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,239,230,0.45);margin-bottom:12px">Marketing site — hero card</div>
-            <div style="font-size:24px;font-weight:400;color:#f4efe6;line-height:1.2;letter-spacing:-.015em;margin-bottom:10px">Automation infrastructure built for subcontract businesses.</div>
+            <div style="font-size:24px;font-weight:300;color:#f4efe6;line-height:1.2;letter-spacing:-.015em;margin-bottom:10px">Automation infrastructure built for subcontract businesses.</div>
             <div style="font-size:13px;color:rgba(244,239,230,0.6);line-height:1.65">Structured. Consistent. Reliable.</div>
           </div>
           <div style="margin-top:20px"><span style="display:inline-block;font-family:var(--mono);font-size:11px;color:#f4efe6;border:1px solid rgba(244,239,230,0.3);padding:8px 20px;letter-spacing:.04em;border-radius:999px">See how it works</span></div>
@@ -981,7 +981,7 @@ body.dark .fn{color:var(--d-ink4)}
         <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(28,24,20,0.96) 0%,rgba(28,24,20,0.4) 50%,rgba(28,24,20,0) 100%)"></div>
         <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 32px">
           <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,239,230,0.4);margin-bottom:6px">LinkedIn / section break</div>
-          <div style="font-size:18px;font-weight:400;color:#f4efe6;letter-spacing:-.01em">12 hours of admin recovered. Every week.</div>
+          <div style="font-size:18px;font-weight:300;color:#f4efe6;letter-spacing:-.01em">12 hours of admin recovered. Every week.</div>
         </div>
       </div>
       <div style="background:var(--l-bg2);padding:14px 18px;font-size:12px;color:var(--l-ink4);line-height:1.55;border-radius:12px;margin-top:4px">Image fills the entire frame. Dark gradient rises from the bottom. Text anchors bottom-left. Use for LinkedIn posts, site section dividers, and report cover pages. Keep text to one statement maximum.</div>
@@ -1003,7 +1003,7 @@ body.dark .fn{color:var(--d-ink4)}
         </div>
         <div style="background:var(--l-bg2);padding:32px 28px;display:flex;flex-direction:column;justify-content:center">
           <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:12px">Report / case study</div>
-          <div style="font-size:16px;font-weight:400;color:var(--l-ink);line-height:1.3;letter-spacing:-.01em;margin-bottom:10px">Section opener or case study intro</div>
+          <div style="font-size:16px;font-weight:300;color:var(--l-ink);line-height:1.3;letter-spacing:-.01em;margin-bottom:10px">Section opener or case study intro</div>
           <div style="font-size:12px;color:var(--l-ink3);line-height:1.65">Clean separation — no overlay, no gradient. Image fills the left column, content fills the right. Used in audit reports, case studies, and proposal documents.</div>
         </div>
       </div>
@@ -1012,12 +1012,12 @@ body.dark .fn{color:var(--d-ink4)}
 
     <div style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:12px">Prompt architecture — locked base + dynamic variables</div>
     <div style="background:var(--l-bg2);padding:28px 32px;border-radius:12px;margin-bottom:8px">
-      <div style="font-size:13px;color:var(--l-ink3);line-height:1.7;margin-bottom:20px">Every image prompt is assembled from four layers in order. The style base is <strong style="font-weight:400;color:var(--l-ink)">never modified</strong>. Only the subject, composition, and context spec are generated per use case by For.</div>
+      <div style="font-size:13px;color:var(--l-ink3);line-height:1.7;margin-bottom:20px">Every image prompt is assembled from four layers in order. The style base is <strong style="font-weight:300;color:var(--l-ink)">never modified</strong>. Only the subject, composition, and context spec are generated per use case by For.</div>
       <div style="background:var(--l-bg3);padding:20px 24px;border-radius:8px;font-family:var(--mono);font-size:11px;line-height:2;color:var(--l-ink3)">
-        <span style="color:var(--l-ink);font-weight:400">[STYLE BASE]</span> documentary construction photography, desaturated warm film grade, ambient overcast daylight, subtle grain texture, no faces, architectural precision, negative space composition —<br>
-        <span style="color:var(--l-ink);font-weight:400">[SUBJECT]</span> <span style="color:var(--acc)">{{generated by For from topic}}</span> —<br>
-        <span style="color:var(--l-ink);font-weight:400">[COMPOSITION]</span> <span style="color:var(--acc)">{{overhead aerial / close detail / wide environmental / etc.}}</span> —<br>
-        <span style="color:var(--l-ink);font-weight:400">[CONTEXT SPEC]</span> <span style="color:var(--acc)">{{aspect ratio + text zone from context template}}</span><br><br>
+        <span style="color:var(--l-ink);font-weight:300">[STYLE BASE]</span> documentary construction photography, desaturated warm film grade, ambient overcast daylight, subtle grain texture, no faces, architectural precision, negative space composition —<br>
+        <span style="color:var(--l-ink);font-weight:300">[SUBJECT]</span> <span style="color:var(--acc)">{{generated by For from topic}}</span> —<br>
+        <span style="color:var(--l-ink);font-weight:300">[COMPOSITION]</span> <span style="color:var(--acc)">{{overhead aerial / close detail / wide environmental / etc.}}</span> —<br>
+        <span style="color:var(--l-ink);font-weight:300">[CONTEXT SPEC]</span> <span style="color:var(--acc)">{{aspect ratio + text zone from context template}}</span><br><br>
         <span style="color:var(--l-ink4)">--no faces, bright colours, studio lighting, stock photo style, cgi render, illustration, logo, text</span>
       </div>
     </div>
