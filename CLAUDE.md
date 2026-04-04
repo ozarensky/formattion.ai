@@ -98,16 +98,16 @@ Never use SVG placeholders for new cards. The image file must exist at `images/n
 
 ### 2. Article Page (add before `</body>`)
 
-Use the existing articles as reference. The article callout CTA must use `openChatWithContext('[Article Title]')`:
+Use the existing articles as reference. The article callout CTA uses the `article-callout-btn` pill button — never an inline link or span:
 
 ```html
 <div class="article-callout">
-  <p class="article-callout-text">
-    [Callout text]. <span onclick="openChatWithContext('[Article Title]')"
-    style="color:#4a6278;text-decoration:underline;cursor:pointer;">Start a conversation with For →</span>
-  </p>
+  <p class="article-callout-text">[Callout text].</p>
+  <button class="article-callout-btn" onclick="openChatWithContext('[Article Title]')">chat with us</button>
 </div>
 ```
+
+**NEVER** add a `← back to news` link or any other back navigation inside an article. The `←` arrow in the top-left corner is the only navigation back.
 
 ### 3. Image files
 
