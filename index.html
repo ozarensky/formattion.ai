@@ -2750,7 +2750,7 @@
           var pct       = total > 0 ? Math.min(100, (scrolled / total) * 100) : 0;
           progressBar.style.width = pct + '%';
           progressBar.classList.toggle('visible', scrolled > 50);
-          backToTop.classList.toggle('visible', scrolled > (el.scrollHeight - el.clientHeight) * 0.8);
+          backToTop.classList.toggle('visible', scrolled > (pageEl.scrollHeight - pageEl.clientHeight) * 0.8);
           stickyCta.classList.remove('visible');
         } else if (isScorePage) {
           progressBar.style.width = '0%';
