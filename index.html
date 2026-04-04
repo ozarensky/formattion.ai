@@ -2105,13 +2105,13 @@
       <div class="drop-item" data-page="contact">contact us</div>
 
       <!-- menu footer: toggle + privacy + copyright -->
-      <div id="menuMode" style="position:absolute;bottom:28px;left:32px;right:20px;z-index:2;display:flex;flex-direction:column;gap:16px;">
-        <svg id="msToggleSvg" viewBox="0 0 274.28 178.65" xmlns="http://www.w3.org/2000/svg" style="width:44px;height:28px;cursor:pointer;display:block;flex-shrink:0">
+      <div id="menuMode" style="position:absolute;bottom:20px;left:32px;right:20px;z-index:2;display:flex;flex-direction:column;gap:0;">
+        <svg id="msToggleSvg" viewBox="0 0 274.28 178.65" xmlns="http://www.w3.org/2000/svg" style="width:44px;height:28px;cursor:pointer;display:block;flex-shrink:0;margin-bottom:18px;">
           <rect id="togCircleEl" x="27.29" y="27.29" width="124.04" height="124.04" rx="62.02" ry="62.02" style="fill:#1c1814;transition:x .3s cubic-bezier(.4,0,.2,1)"/>
           <path id="togPathEl" style="fill:#1c1814" d="M184.96,0h-95.64C39.99,0,0,39.99,0,89.32h0c0,49.33,39.99,89.32,89.32,89.32h95.64c49.33,0,89.32-39.99,89.32-89.32h0C274.28,39.99,234.29,0,184.96,0ZM262.71,89.33c0,42.94-34.81,77.75-77.75,77.75h-95.64c-42.94,0-77.75-34.81-77.75-77.75h0C11.57,46.39,46.38,11.58,89.32,11.58h95.64c42.94,0,77.75,34.81,77.75,77.75h0Z"/>
         </svg>
-        <div style="display:flex;flex-direction:column;gap:6px;">
-          <span id="privacyLink" style="font-family:var(--dm);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:color .15s ease;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">privacy</span>
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <span id="privacyLink" style="font-family:var(--dm);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:color .15s ease;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'" onclick="showPage('page-privacy')" onkeydown="if(event.key==='Enter'){showPage('page-privacy');}" tabindex="0" role="button">privacy</span>
           <span style="font-family:var(--dm);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);user-select:none;">formattion ai © 2026</span>
         </div>
       </div>
@@ -2717,7 +2717,7 @@
     (function() {
       var progressBar  = document.getElementById('read-progress');
       var backToTop    = document.getElementById('back-to-top');
-      var articlePages = ['page-article-payment-applications-ai-2026','page-article-rams-ai-automation-2026','page-article-agentic-ai-streamline-construction-operations-2026','page-article-ai-workflow-automation-subcontractors-2026','page-article-ai-workflow-revolution-subcontractors-2026','page-article-ai-tools-essential-construction-subcontracting-2026','page-service-lead-capture','page-service-quote-followup','page-service-email-management','page-service-cashflow-invoice'];
+      var articlePages = ['page-article-payment-applications-ai-2026','page-article-rams-ai-automation-2026','page-article-agentic-ai-streamline-construction-operations-2026','page-article-ai-workflow-automation-subcontractors-2026','page-article-ai-workflow-revolution-subcontractors-2026','page-article-ai-tools-essential-construction-subcontracting-2026','page-service-lead-capture','page-service-quote-followup','page-service-email-management','page-service-cashflow-invoice','page-privacy'];
 
       function updateProgress(pageEl, isArticle) {
         var scrolled = pageEl.scrollTop;
@@ -3329,6 +3329,64 @@
         <p class="article-callout-text">"The invoice that goes out on time, every time, gets paid faster than the one that depends on someone remembering to send it."</p>
         <button class="article-callout-btn" onclick="showPage('page-contact')">book a free audit</button>
       </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ PRIVACY POLICY ═══ -->
+  <div id="page-privacy" class="page">
+    <div class="page-inner">
+
+      <div class="page-eyebrow">legal</div>
+      <h1 class="article-page-title">Privacy Policy</h1>
+      <div class="article-meta">
+        <span>April 2026</span>
+        <span>formattion.ai</span>
+      </div>
+
+      <p class="article-intro">This policy explains how Formattion AI collects, uses, and protects information you provide through our website. We keep it short and plain.</p>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Information we collect</div>
+          <p class="article-item-desc">We collect only what you give us directly — your name, email address, phone number, and business details when you submit a contact form, request a quote, or chat with us. We do not track you or collect data passively beyond what is needed to run the site.</p>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">How we use it</div>
+          <p class="article-item-desc">Your information is used solely to respond to your enquiry and deliver the services you have requested. We do not sell, rent, or share your data with third parties for marketing purposes.</p>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Storage and processing</div>
+          <p class="article-item-desc">Submissions are processed through secure automation workflows and may be stored in cloud-based tools used to manage client communication. We take reasonable measures to protect your information from unauthorised access.</p>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Cookies and local storage</div>
+          <p class="article-item-desc">We use browser localStorage only to remember your display preference (light or dark mode). We do not use tracking cookies or third-party analytics.</p>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Your rights</div>
+          <p class="article-item-desc">You may request access to, correction of, or deletion of any personal data we hold about you at any time. To do so, reach us via our contact page.</p>
+        </div>
+      </div>
+
+      <div class="article-callout">
+        <p class="article-callout-text">Questions about your data? We're happy to help.</p>
+        <button class="article-callout-btn" onclick="showPage('page-contact')">contact us</button>
+      </div>
+
+      <p style="margin-top:32px;font-family:var(--mono);font-size:11px;color:var(--muted);">This policy will be updated as our services evolve. Material changes will be reflected in the date above.</p>
 
     </div>
   </div>
