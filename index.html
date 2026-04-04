@@ -2753,14 +2753,18 @@
           backToTop.classList.toggle('visible', scrolled > (pageEl.scrollHeight - pageEl.clientHeight) * 0.8);
           stickyCta.classList.remove('visible');
         } else if (isScorePage) {
+          var scrolled = pageEl.scrollTop;
+          var total    = pageEl.scrollHeight - pageEl.clientHeight;
           progressBar.style.width = '0%';
           progressBar.classList.remove('visible');
-          backToTop.classList.remove('visible');
-          stickyCta.classList.toggle('visible', pageEl.scrollTop > 400);
+          backToTop.classList.toggle('visible', scrolled > total * 0.8);
+          stickyCta.classList.toggle('visible', scrolled > 400);
         } else {
+          var scrolled = pageEl.scrollTop;
+          var total    = pageEl.scrollHeight - pageEl.clientHeight;
           progressBar.style.width = '0%';
           progressBar.classList.remove('visible');
-          backToTop.classList.remove('visible');
+          backToTop.classList.toggle('visible', scrolled > total * 0.8);
           stickyCta.classList.remove('visible');
         }
       }
