@@ -602,6 +602,28 @@
       font-style: italic;
       max-width: 640px;
     }
+    .article-callout-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 28px;
+      padding: 14px 40px;
+      border-radius: 999px;
+      border: 1px solid var(--idle-border);
+      background: transparent;
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 15px;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: border-color .25s ease, background .25s ease;
+    }
+    .article-callout-btn:hover {
+      border-color: var(--ink);
+      background: rgba(28,24,20,0.04);
+    }
 .article-hero {
       width: 100%;
       aspect-ratio: 16/7;
@@ -3081,7 +3103,8 @@
       </div>
 
       <div class="article-callout">
-        <p class="article-callout-text">Ready to bring AI automation to your business? <span onclick="openChatWithContext('AI Automation: Essential for Construction Subcontractors')" style="color:#4a6278;text-decoration:underline;cursor:pointer;">Start a conversation with For →</span></p>
+        <p class="article-callout-text">Ready to bring AI automation to your business?</p>
+        <button class="article-callout-btn" onclick="openChatWithContext('AI Automation: Essential for Construction Subcontractors')">chat with us</button>
       </div>
 
     </div>
@@ -3140,7 +3163,8 @@
       </div>
 
       <div class="article-callout">
-        <p class="article-callout-text">Explore how formattion.ai can help streamline your subcontracting business today. <span onclick="openChatWithContext('AI Workflow Tools Slash Admin Time, Boost Profitability')" style="color:#4a6278;text-decoration:underline;cursor:pointer;">Start a conversation with For →</span></p>
+        <p class="article-callout-text">Explore how formattion.ai can help streamline your subcontracting business today.</p>
+        <button class="article-callout-btn" onclick="openChatWithContext('AI Workflow Tools Slash Admin Time, Boost Profitability')">chat with us</button>
       </div>
 
     </div>
@@ -3199,7 +3223,8 @@
       </div>
 
       <div class="article-callout">
-        <p class="article-callout-text">Discover how AI can streamline your operations at formattion.ai. <span onclick="openChatWithContext('AI Workflow Tools Slash Quoting and Scheduling Time for 2026')" style="color:#4a6278;text-decoration:underline;cursor:pointer;">Start a conversation with For →</span></p>
+        <p class="article-callout-text">Discover how AI can streamline your operations at formattion.ai.</p>
+        <button class="article-callout-btn" onclick="openChatWithContext('AI Workflow Tools Slash Quoting and Scheduling Time for 2026')">chat with us</button>
       </div>
 
     </div>
