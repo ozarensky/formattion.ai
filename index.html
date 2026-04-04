@@ -1712,6 +1712,36 @@
       <div class="page-divider"></div>
 
       <div class="news-grid">
+        <!--
+          ╔══ NEW ARTICLE CARD TEMPLATE ══════════════════════════════════════╗
+          ║  Add new cards here (newest first).                               ║
+          ║  ALWAYS use the article's own hero image — never SVG placeholder. ║
+          ║                                                                    ║
+          ║  <div class="news-card" role="button" tabindex="0"                ║
+          ║       onclick="showPage('page-article-[slug]')"                   ║
+          ║       onkeydown="if(event.key==='Enter'||event.key===' '){        ║
+          ║         event.preventDefault();showPage('page-article-[slug]');}" ║
+          ║       aria-label="Read: [Article Title]">                         ║
+          ║    <div class="news-card-image-zone">                             ║
+          ║      <img class="news-card-img"                                   ║
+          ║           src="images/news/[slug]/image-1.jpg"                   ║
+          ║           alt="[Article Title]">                                  ║
+          ║      <div class="news-card-gradient"></div>                       ║
+          ║    </div>                                                          ║
+          ║    <div class="news-card-content">                                ║
+          ║      <div>                                                         ║
+          ║        <div class="news-card-eyebrow">[eyebrow]</div>             ║
+          ║        <div class="news-card-title">[Article Title]</div>         ║
+          ║        <div class="news-card-desc">[Description]</div>            ║
+          ║      </div>                                                        ║
+          ║      <div class="news-card-footer">                               ║
+          ║        <span class="news-card-date">[D Month YYYY]</span>         ║
+          ║        <span class="news-card-cta">Read article</span>            ║
+          ║      </div>                                                        ║
+          ║    </div>                                                          ║
+          ║  </div>                                                            ║
+          ╚════════════════════════════════════════════════════════════════════╝
+        -->
         <!-- Card: AI Workflow Tools Slash Quoting and Scheduling Time for 2026 — 4 April 2026 -->
         <div class="news-card" role="button" tabindex="0" onclick="showPage('page-article-ai-workflow-automation-subcontractors-2026')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('page-article-ai-workflow-automation-subcontractors-2026');}" aria-label="Read: AI Workflow Tools Slash Quoting and Scheduling Time for 2026">
           <div class="news-card-image-zone">
