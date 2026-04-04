@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>formattion.ai — Brand Guidelines v1.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* LIGHT MODE */
+  --l-bg:       #F4EFE6;
+  --l-bg2:      #ECE6DC;
+  --l-bg3:      #E2DBD0;
+  --l-ink:      #1C1814;
+  --l-ink2:     #4A4038;
+  --l-ink3:     #7A6E62;
+  --l-ink4:     #9A8F82;
+  --l-acc:      #4A6278;
+  --l-acc-lt:   #6E8299;
+  --l-border:   rgba(28,24,20,0.09);
+  --l-border2:  rgba(28,24,20,0.16);
+
+  /* DARK MODE — cool neutral dark, warm accent thread */
+  --d-bg:       #141618;
+  --d-bg2:      #1c1f22;
+  --d-bg3:      #242729;
+  --d-ink:      #edecea;
+  --d-ink2:     #b4b2ae;
+  --d-ink3:     #7a7875;
+  --d-ink4:     #52504e;
+  --d-acc:      #6e8299;
+  --d-acc-lt:   #8fa4bc;
+  --d-border:   rgba(237,236,234,0.07);
+  --d-border2:  rgba(237,236,234,0.13);
+
+  /* SHARED */
+  --acc:        #4A6278;
+  --acc-lt:     #6E8299;
+  --logo-ink:   #1C1814;
+
+  /* BORDER RADIUS */
+  --rx-tight:   6px;
+  --rx-std:     12px;
+  --rx-feature: 20px;
+  --rx-pill:    999px;
+
+  /* TYPE */
+  --nav-bg:     rgba(244,239,230,0.92);
+  --nav-border: rgba(28,24,20,0.09);
+  --nav-ink:    #1c1814;
+  --nav-ink4:   #9a8f82;
+  --sans:       'Helvetica Neue',Helvetica,Arial,sans-serif;
+  --mono:       'DM Mono',monospace;
+  --max:        960px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--l-bg);color:var(--l-ink);font-family:var(--sans);font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased;padding-top:0}
+/* TOP BAR */
+#topBar{position:fixed;top:10px;left:10px;right:10px;height:100px;background:rgba(244,239,230,0.30);backdrop-filter:blur(20px) saturate(100%);-webkit-backdrop-filter:blur(20px) saturate(100%);border-radius:12px;z-index:300;pointer-events:none}
+body.dark #topBar{background:rgba(20,22,24,0.30);backdrop-filter:blur(20px) saturate(100%);-webkit-backdrop-filter:blur(20px) saturate(100%)}
+/* SCROLL LOGO */
+#topLogo.visible{opacity:1!important;pointer-events:all!important}
+#topLogo:hover{opacity:.45!important}
+body.dark #topLogo #tlg{fill:#edecea}
+/* BACK TO TOP */
+#backTop{position:fixed;bottom:44px;right:44px;width:auto;height:32px;background:none;border:none;padding:0;cursor:pointer;z-index:500;opacity:0;pointer-events:none;transition:opacity .3s ease,transform .2s ease}
+#backTop.visible{opacity:1;pointer-events:all}
+#backTop:hover{transform:translateY(-3px)}
+#backTop svg{width:auto;height:32px;display:block}
+#backTop path{fill:var(--l-ink)}
+body.dark #backTop path{fill:var(--d-ink)}
+
+#topBar::after,#dropMenu::after{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");background-size:200px 200px;pointer-events:none;opacity:.1;border-radius:inherit}
+/* MENU */
+#menuWrap{position:fixed;top:44px;left:65px;z-index:400;user-select:none}
+#menuIcon{position:fixed;top:44px;left:65px;z-index:500;width:32px;height:32px;cursor:pointer;display:block;transition:transform .35s cubic-bezier(.4,0,.2,1);transform-origin:center center;overflow:visible}
+#menuWrap.open #menuIcon{transform:rotate(45deg)}
+#dropMenu{position:fixed;top:120px;left:10px;bottom:10px;width:260px;height:auto;background:rgba(244,239,230,0.30);backdrop-filter:blur(20px) saturate(100%);-webkit-backdrop-filter:blur(20px) saturate(100%);border-radius:12px;z-index:450;opacity:0;pointer-events:none;transform:translateX(-16px);transition:opacity .3s ease,transform .3s ease;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;padding-top:40px}
+#menuWrap.open #dropMenu{opacity:1;pointer-events:all;transform:translateX(0)}
+body.dark #dropMenu{background:rgba(20,22,24,0.30);backdrop-filter:blur(20px) saturate(100%);-webkit-backdrop-filter:blur(20px) saturate(100%);border-radius:12px}
+
+.drop-item{display:block;padding:6px 0;margin:0 0 12px 44px;font-family:var(--sans);font-weight:300;font-size:22px;color:var(--l-ink);cursor:pointer;line-height:1;text-decoration:none;transition:opacity .15s ease;letter-spacing:-.01em}
+body.dark .drop-item{color:var(--d-ink)}
+.drop-item:hover{opacity:.45}
+.menu-mode{display:flex;align-items:center;margin-top:auto;padding:0 0 44px 44px}
+.ms-track{position:relative;width:40px;height:22px;border-radius:999px;background:var(--l-bg3);border:1px solid var(--l-border2);cursor:pointer;transition:background .3s,border-color .3s;flex-shrink:0}
+.ms-thumb{position:absolute;top:3px;left:3px;width:14px;height:14px;background:var(--nav-ink4);transition:transform .25s,background .3s}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 40px}
+section{border-bottom:1px solid var(--l-border);padding:88px 0}
+section:last-of-type{border-bottom:none}
+.ey{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:6px}
+.st{font-family:var(--sans);font-size:32px;font-weight:400;color:var(--l-ink);line-height:1.1;letter-spacing:-.02em;margin-bottom:48px}
+.si{font-size:14px;color:var(--l-ink3);line-height:1.7;max-width:580px;margin-top:-32px;margin-bottom:48px}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:50px 0 80px;border-bottom:1px solid var(--l-border)}
+.hp{display:block;width:fit-content;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);border:1px solid rgba(74,98,120,0.3);border-radius:999px;padding:6px 18px;margin:20px auto 0}
+.hw{width:100%;max-width:680px;margin-bottom:40px;display:block}
+.hw path,.hw circle{fill:var(--logo-ink)}
+.hl{width:40px;height:1px;background:var(--l-border2);margin-bottom:24px}
+.hd{font-size:16px;color:var(--l-ink2);line-height:1.65;max-width:480px;text-align:center;margin:0 auto 0}
+.hm{display:flex;gap:0;border:1px solid var(--l-border);overflow:hidden;width:fit-content}
+.hmi{padding:12px 24px;font-family:var(--mono);font-size:10px;color:var(--l-ink4);border-right:1px solid var(--l-border)}
+.hmi:last-child{border-right:none}
+.hmi b{display:block;font-weight:400;color:var(--l-ink2);font-size:11px;margin-top:2px;font-family:var(--sans)}
+
+/* BRAND STORY */
+.brand-story{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:48px}
+.bs-cell{background:var(--l-bg2);padding:32px 36px;border-radius:12px}
+.bs-name{font-size:48px;font-weight:400;color:var(--l-ink);line-height:1.0;letter-spacing:-.03em;margin-bottom:4px}
+
+.bs-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:14px}
+.bs-body{font-size:13px;color:var(--l-ink2);line-height:1.7}
+.val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:32px}
+.val-cell{background:var(--l-bg2);padding:24px 26px;border-radius:12px}
+.val-num{font-family:var(--mono);font-size:10px;color:var(--acc);margin-bottom:8px;letter-spacing:.06em}
+.val-title{font-size:15px;font-weight:400;color:var(--l-ink);margin-bottom:6px;letter-spacing:-.01em}
+.val-body{font-size:12px;color:var(--l-ink4);line-height:1.55}
+.client-split{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:32px}
+.client-panel{background:var(--l-bg2);padding:28px 32px;border-radius:12px}
+.cp-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:14px}
+.cp-stat{font-size:28px;font-weight:400;color:var(--l-ink);letter-spacing:-.02em;margin-bottom:4px}
+.cp-desc{font-size:12px;color:var(--l-ink3);line-height:1.55;margin-bottom:16px}
+.cp-tags{display:flex;flex-wrap:wrap;gap:6px}
+.cp-tag{font-family:var(--mono);font-size:10px;color:var(--l-ink3);background:var(--l-bg3);border-radius:4px;padding:3px 8px}
+.method-row{display:flex;flex-direction:column;gap:2px;margin-bottom:32px}
+.method-step{background:var(--l-bg2);border-radius:12px;padding:20px 24px;display:flex;align-items:flex-start;gap:20px}
+.method-n{font-family:var(--mono);font-size:11px;color:var(--acc);flex-shrink:0;padding-top:1px;width:20px}
+.method-title{font-size:14px;font-weight:400;color:var(--l-ink);margin-bottom:3px}
+.method-desc{font-size:12px;color:var(--l-ink4);line-height:1.55}
+
+/* LOGO */
+.lg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px}
+.lc{padding:48px 40px;display:flex;align-items:center;justify-content:center;position:relative;border-radius:12px;overflow:hidden}
+.lc svg{width:100%;max-width:320px;position:relative;z-index:1}
+.lc-label{position:absolute;bottom:14px;left:16px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;z-index:2}
+.ll{background:var(--l-bg2)}.ll path,.ll circle{fill:var(--logo-ink)}.ll .lc-label{color:var(--l-ink4)}
+.ld{background:var(--d-bg2)}.ld path,.ld circle{fill:var(--d-ink)}.ld .lc-label{color:var(--d-ink4)}
+.la{background:var(--acc)}.la path,.la circle{fill:#F4EFE6}.la .lc-label{color:rgba(244,239,230,0.5)}
+.lb{background:#0a0a0a}.lb path,.lb circle{fill:#F4EFE6}.lb .lc-label{color:rgba(255,255,255,0.3)}
+.rl{display:flex;flex-direction:column;gap:2px}
+.ri{background:var(--l-bg2);border-radius:8px;padding:16px 20px;display:flex;gap:14px;align-items:flex-start}
+.rb{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;border-radius:4px;padding:3px 7px;white-space:nowrap;flex-shrink:0;margin-top:1px}
+.rb.do{background:rgba(74,98,120,0.1);color:var(--acc)}
+.rb.dn{background:rgba(160,80,80,0.08);color:#8a4040}
+.rt{font-size:13px;color:var(--l-ink2);line-height:1.6}
+
+/* COLOUR */
+.cgl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:12px;margin-top:32px}
+.cgl:first-of-type{margin-top:0}
+.swr{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.sw{width:148px;border-radius:8px;overflow:hidden;flex-shrink:0;border:1px solid var(--l-border)}
+.swb{height:60px}.swi{padding:10px 12px;background:var(--l-bg2)}
+.swn{font-family:var(--mono);font-size:10px;font-weight:500;color:var(--l-ink);margin-bottom:1px}
+.swh{font-family:var(--mono);font-size:10px;color:var(--l-ink4)}
+.swr2{font-size:10px;color:var(--l-ink4);margin-top:1px}
+.sw.dk .swi{background:var(--d-bg2)}.sw.dk .swn{color:var(--d-ink)}.sw.dk .swh,.sw.dk .swr2{color:var(--d-ink4)}
+.cr{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:32px}
+.crr{background:var(--l-bg2);padding:22px 24px;border-radius:12px}
+.cl{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:8px}
+.cb{font-size:13px;color:var(--l-ink2);line-height:1.65}
+
+/* MODE PREVIEW */
+.mp{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:32px}
+.mpn{padding:32px 36px;border-radius:12px}
+.mpn.lm{background:var(--l-bg2)}.mpn.dm{background:var(--d-bg2)}
+.mpl{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
+.mpn.lm .mpl{color:var(--l-ink4)}.mpn.dm .mpl{color:var(--d-ink4)}
+.mpc{border-radius:8px;padding:18px 20px;margin-bottom:8px}
+.mpn.lm .mpc{border-radius:8px;background:var(--l-bg3)}.mpn.dm .mpc{border-radius:8px;background:var(--d-bg3)}
+.mpct{font-size:13px;font-weight:400;margin-bottom:3px}
+.mpn.lm .mpct{color:var(--l-ink)}.mpn.dm .mpct{color:var(--d-ink)}
+.mpcb{font-size:12px}
+.mpn.lm .mpcb{color:var(--l-ink4)}.mpn.dm .mpcb{color:var(--d-ink4)}
+.mptg{display:inline-block;font-family:var(--mono);font-size:10px;border-radius:999px;padding:3px 10px;margin-top:8px}
+.mpn.lm .mptg{background:rgba(74,98,120,0.1);color:var(--acc)}
+.mpn.dm .mptg{background:rgba(110,130,153,0.15);color:var(--d-acc)}
+
+/* TYPOGRAPHY */
+.tb{padding-bottom:44px;margin-bottom:44px;border-bottom:1px solid var(--l-border)}
+.tb:last-of-type{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.tm{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.tt{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);border:1px solid rgba(74,98,120,0.25);border-radius:4px;padding:3px 8px}
+.tt.r{color:var(--l-ink4);border-color:var(--l-border2)}
+.td{font-family:var(--mono);font-size:11px;color:var(--l-ink4)}
+.th1{font-size:48px;font-weight:400;color:var(--l-ink);line-height:1.05;letter-spacing:-.025em;margin-bottom:10px}
+.th2{font-size:24px;font-weight:400;color:var(--l-ink);line-height:1.2;letter-spacing:-.015em;margin-bottom:8px}
+.tbd{font-size:14px;color:var(--l-ink2);line-height:1.7;max-width:560px;margin-bottom:8px}
+.tlb{font-size:11px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--l-ink4)}
+.tmo{font-family:var(--mono);font-size:13px;color:var(--acc);line-height:1.7;letter-spacing:.02em}
+.tmol{font-family:var(--mono);font-size:10px;color:var(--l-ink4);letter-spacing:.08em;text-transform:uppercase;margin-top:10px}
+.edb{background:var(--l-bg2);border-radius:8px;padding:24px 28px;opacity:.65}
+.edn{font-size:13px;color:var(--l-ink3);line-height:1.65;margin-top:10px}
+.tsc{width:100%;border-collapse:collapse;margin-top:40px}
+.tsc th{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);text-align:left;padding:0 0 10px;border-bottom:1px solid var(--l-border2)}
+.tsc td{padding:14px 0;border-bottom:1px solid var(--l-border);vertical-align:middle}
+.tsc tr:last-child td{border-bottom:none}
+.scn{font-family:var(--mono);font-size:11px;color:var(--acc)}
+.scf{font-size:12px;color:var(--l-ink2)}
+.scs{font-family:var(--mono);font-size:11px;color:var(--l-ink4)}
+.scu{font-size:12px;color:var(--l-ink4)}
+.scd{opacity:.38}
+
+/* VOICE */
+.vg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:28px}
+.vc{background:var(--l-bg2);padding:22px 24px;border-radius:12px}
+.vw{font-size:22px;font-weight:400;color:var(--l-ink);letter-spacing:-.01em;margin-bottom:4px}
+.vd{font-size:12px;color:var(--l-ink4);line-height:1.5}
+.tcl{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:28px}
+.tc2{background:var(--l-bg2);padding:24px;border-radius:12px}
+.tclbl{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.tc2.do .tclbl{color:var(--acc)}.tc2.dn .tclbl{color:#8a4040}
+.tci{font-size:13px;line-height:1.6;padding:8px 0;border-bottom:1px solid var(--l-border);color:var(--l-ink2)}
+.tci:last-child{border-bottom:none}
+.tc2.dn .tci{color:var(--l-ink4);text-decoration:line-through;text-decoration-color:rgba(138,64,64,0.35)}
+.veg{border-left:2px solid var(--acc);background:var(--l-bg2);border-radius:0 12px 12px 0;padding:24px 28px;margin-bottom:10px}
+.vegl{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:10px}
+.vegt{font-size:15px;color:var(--l-ink);line-height:1.6;font-weight:400}
+
+/* SPEC */
+.spi{font-size:13px;color:var(--l-ink3);max-width:560px;line-height:1.7;margin-bottom:32px}
+.tok{background:var(--d-bg);border-radius:12px;padding:32px 36px;font-family:var(--mono);font-size:12px;line-height:2;overflow-x:auto}
+.tk{color:#8fb4d4}.tv{color:#a8c49a}.ts2{color:#c4a89a}.tn{color:#9ab8c4}.tc3{color:#6B6058}
+
+/* FOOTER */
+footer{padding:56px 40px;text-align:center}
+.fwm{width:140px;margin:0 auto 16px;display:block}
+.fwm path,.fwm circle{fill:var(--l-ink4)}
+.fn{font-family:var(--mono);font-size:10px;color:var(--l-ink4);letter-spacing:.07em}
+.fa{color:var(--acc)}
+.fi{opacity:0;transform:translateY(12px);transition:opacity .55s ease,transform .55s ease}
+.fi.v{opacity:1;transform:none}
+
+/* MODE SWITCH */
+.mode-switch{display:flex;align-items:center;gap:10px;margin-left:32px}
+
+/* DARK MODE OVERRIDES */
+body.dark{background:var(--d-bg);color:var(--d-ink);--nav-bg:rgba(20,22,24,0.96);--nav-border:rgba(237,236,234,0.08);--nav-ink:#edecea;--nav-ink4:#52504e}
+
+body.dark .ey{color:var(--d-ink4)}
+body.dark .st{color:var(--d-ink)}
+body.dark .si{color:var(--d-ink3)}
+body.dark .hd{color:var(--d-ink2)}
+body.dark .hl{background:var(--d-border2)}
+body.dark .hp{color:var(--d-acc);border-color:rgba(110,130,153,0.3)}
+body.dark .hw path,body.dark .hw circle{fill:var(--d-ink)}
+body.dark .hm{border-color:var(--d-border)}
+body.dark .hmi{color:var(--d-ink4);border-right-color:var(--d-border)}
+body.dark .hmi b{color:var(--d-ink2)}
+body.dark section{border-bottom-color:var(--d-border)}
+body.dark .brand-story{background:transparent}
+body.dark .bs-cell{background:var(--d-bg2)}
+body.dark .bs-name{color:var(--d-ink)}
+body.dark .bs-body{color:var(--d-ink2)}
+body.dark .bs-label{color:var(--d-ink4)}
+body.dark .val-cell{background:var(--d-bg2)}
+body.dark .val-title{color:var(--d-ink)}
+body.dark .val-body{color:var(--d-ink4)}
+body.dark .client-panel{background:var(--d-bg2)}
+body.dark .cp-stat{color:var(--d-ink)}
+body.dark .cp-desc{color:var(--d-ink3)}
+body.dark .cp-label{color:var(--d-ink4)}
+body.dark .cp-tag{background:var(--d-bg3);color:var(--d-ink3)}
+body.dark .method-step{background:var(--d-bg2)}
+body.dark .method-title{color:var(--d-ink)}
+body.dark .method-desc{color:var(--d-ink4)}
+body.dark .ll{background:var(--d-bg2)}
+body.dark .ll path,body.dark .ll circle{fill:var(--d-ink)}
+body.dark .ll .lc-label{color:var(--d-ink4)}
+body.dark .ri{background:var(--d-bg2)}
+body.dark .rt{color:var(--d-ink2)}
+body.dark .cgl{color:var(--d-ink4)}
+body.dark .sw{border-color:var(--d-border)}
+body.dark .swi{background:var(--d-bg2)}
+body.dark .swn{color:var(--d-ink)}
+body.dark .swh,.body.dark .swr2{color:var(--d-ink4)}
+body.dark .swr2{color:var(--d-ink4)}
+body.dark .crr{background:var(--d-bg2)}
+body.dark .cl{color:var(--d-ink4)}
+body.dark .cb{color:var(--d-ink2)}
+body.dark .cr{background:transparent}
+body.dark .mpn.lm{background:var(--d-bg2)}
+body.dark .mpn.lm .mpl{color:var(--d-ink4)}
+body.dark .mpn.lm .mpc{border-radius:8px;background:var(--d-bg3)}
+body.dark .mpn.lm .mpct{color:var(--d-ink)}
+body.dark .mpn.lm .mpcb{color:var(--d-ink4)}
+body.dark .mpn.lm .mptg{background:rgba(110,130,153,0.15);color:var(--d-acc)}
+body.dark .tb{border-bottom-color:var(--d-border)}
+body.dark .tt{color:var(--d-acc);border-color:rgba(110,130,153,0.25)}
+body.dark .tt.r{color:var(--d-ink4);border-color:var(--d-border2)}
+body.dark .td{color:var(--d-ink4)}
+body.dark .th1,.body.dark .th2{color:var(--d-ink)}
+body.dark .th1{color:var(--d-ink)}
+body.dark .th2{color:var(--d-ink)}
+body.dark .tbd{color:var(--d-ink2)}
+body.dark .tlb{color:var(--d-ink4)}
+body.dark .tmo{color:var(--d-acc)}
+body.dark .tmol{color:var(--d-ink4)}
+body.dark .edb{background:var(--d-bg2)}
+body.dark .edb div{color:var(--d-ink2)}
+body.dark .edn{color:var(--d-ink3)}
+body.dark .tsc th{color:var(--d-ink4);border-bottom-color:var(--d-border2)}
+body.dark .tsc td{border-bottom-color:var(--d-border)}
+body.dark .scf{color:var(--d-ink2)}
+body.dark .scs{color:var(--d-ink4)}
+body.dark .scu{color:var(--d-ink4)}
+body.dark .vc{background:var(--d-bg2)}
+body.dark .vw{color:var(--d-ink)}
+body.dark .vd{color:var(--d-ink4)}
+body.dark .tc2{background:var(--d-bg2)}
+body.dark .tci{border-bottom-color:var(--d-border);color:var(--d-ink2)}
+body.dark .tc2.dn .tci{color:var(--d-ink4)}
+body.dark .tclbl{color:var(--d-ink4)}
+body.dark .tc2.do .tclbl{color:var(--d-acc)}
+body.dark .veg{background:var(--d-bg2)}
+body.dark .vegl{color:var(--d-ink4)}
+body.dark .vegt{color:var(--d-ink)}
+body.dark .spi{color:var(--d-ink3)}
+body.dark footer{background:var(--d-bg)}
+body.dark .fwm path,.body.dark .fwm circle{fill:var(--d-ink4)}
+body.dark .fwm path{fill:var(--d-ink4)}
+body.dark #radius .wrap [style*="background:var(--l-bg2)"]{background:var(--d-bg2)}
+body.dark #radius .wrap [style*="color:var(--l-ink2)"]{color:var(--d-ink2)}
+body.dark #radius .wrap [style*="color:var(--l-ink3)"]{color:var(--d-ink3)}
+body.dark #radius .wrap [style*="color:var(--l-ink4)"]{color:var(--d-ink4)}
+body.dark #radius .wrap [style*="color:var(--l-ink)"]{color:var(--d-ink)}
+body.dark #radius .wrap [style*="border-bottom:1px solid var(--l-border2)"]{border-bottom-color:var(--d-border2)}
+body.dark #radius .wrap [style*="border-bottom:1px solid var(--l-border)"]{border-bottom-color:var(--d-border)}
+body.dark #image .wrap [style*="background:var(--l-bg2)"]{background:var(--d-bg2)}
+body.dark #image .wrap [style*="background:var(--l-bg3)"]{background:var(--d-bg3)}
+body.dark .fn{color:var(--d-ink4)}
+</style>
+</head>
+<body>
+
+<div id="menuWrap">
+  <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" viewBox="64 68 36 36" fill="none">
+    <path id="menuIconPath" fill="#1C1814" d="M101.48,86.71h-13.92c-1.71,0-3.1-1.39-3.1-3.1v-13.92c0-.75-.61-1.36-1.36-1.36h0c-.75,0-1.36.61-1.36,1.36v13.92c0,1.71-1.39,3.1-3.1,3.1h-13.92c-.75,0-1.36.61-1.36,1.36h0c0,.75.61,1.36,1.36,1.36h13.92c1.71,0,3.1,1.39,3.1,3.1v13.92c0,.75.61,1.36,1.36,1.36h0c.75,0,1.36-.61,1.36-1.36v-13.92c0-1.71,1.39-3.1,3.1-3.1h13.92c.75,0,1.36-.61,1.36-1.36h0c0-.75-.61-1.36-1.36-1.36Z"/>
+  </svg>
+  <div id="dropMenu">
+    <a class="drop-item" href="#identity">identity</a>
+    <a class="drop-item" href="#logo">logo</a>
+    <a class="drop-item" href="#colour">colour</a>
+    <a class="drop-item" href="#type">typography</a>
+    <a class="drop-item" href="#radius">radius</a>
+    <a class="drop-item" href="#voice">voice</a>
+    <a class="drop-item" href="#image">image</a>
+    <a class="drop-item" href="#spec">spec</a>
+    <div class="menu-mode"><svg id="msToggleSvg" viewBox="0 0 274.28 178.65" xmlns="http://www.w3.org/2000/svg" style="width:44px;height:28px;cursor:pointer;display:block;flex-shrink:0">
+      <rect id="togCircleEl" x="27.29" y="27.29" width="124.04" height="124.04" rx="62.02" ry="62.02" style="fill:#1c1814;transition:x .3s cubic-bezier(.4,0,.2,1)"/>
+      <path id="togPathEl" style="fill:#1c1814" d="M184.96,0h-95.64C39.99,0,0,39.99,0,89.32h0c0,49.33,39.99,89.32,89.32,89.32h95.64c49.33,0,89.32-39.99,89.32-89.32h0C274.28,39.99,234.29,0,184.96,0ZM262.71,89.33c0,42.94-34.81,77.75-77.75,77.75h-95.64c-42.94,0-77.75-34.81-77.75-77.75h0C11.57,46.39,46.38,11.58,89.32,11.58h95.64c42.94,0,77.75,34.81,77.75,77.75h0Z"/>
+    </svg></div>
+  </div>
+</div>
+
+<div id="topBar"></div>
+<svg id="topLogo" viewBox="0 0 236.06 30" xmlns="http://www.w3.org/2000/svg" style="height:18px;width:auto;position:fixed;top:51px;right:65px;z-index:500;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s ease">
+  <g id="tlg" style="fill:#1c1814"><path id="tlp" d="M26.35,8.36c6.19,0,10.25,3.91,10.25,10.82s-4.06,10.82-10.25,10.82-10.23-3.91-10.23-10.82,4.06-10.82,10.23-10.82ZM26.35,27.7c4.51,0,7.56-2.99,7.56-8.52s-3.05-8.52-7.56-8.52-7.56,2.99-7.56,8.52,3.07,8.52,7.56,8.52Z"/>
+      <path id="tlp" d="M44.23,9.08v1.74c0,.28.38.4.52.15.88-1.5,2.38-2.26,5.07-2.26h2.6c.16,0,.29.13.29.29v1.81c0,.16-.13.29-.29.29h-2.48c-4.14,0-5.64,2.36-5.64,6.78v11.29c0,.16-.13.29-.29.29h-2.05c-.16,0-.29-.13-.29-.29V9.08c0-.16.13-.29.29-.29h1.97c.16,0,.29.13.29.29Z"/>
+      <path id="tlp" d="M79.76,8.38c4.14,0,6.91,2.09,6.91,6.64v14.2c0,.16-.13.28-.28.28h-2.03c-.16,0-.28-.13-.28-.28v-13.98c0-3.03-1.64-4.57-4.79-4.57-3.61,0-6.11,2.13-6.11,6.56v11.99c0,.16-.13.28-.28.28h-2.03c-.16,0-.28-.13-.28-.28v-13.98c0-3.03-1.56-4.57-4.8-4.57-3.61,0-6.11,2.13-6.11,6.56v11.99c0,.16-.13.28-.28.28h-2.03c-.16,0-.28-.13-.28-.28V9.14c0-.16.13-.28.28-.28h1.95c.16,0,.28.13.28.28v1.71c0,.27.34.39.5.17,1.1-1.5,2.89-2.63,6.24-2.63,4.23,0,5.63,2.1,6.09,3.27.09.23.4.25.51.03.62-1.16,2.38-3.3,6.84-3.3Z"/>
+      <path id="tlp" d="M161.94,8.36c6.19,0,10.25,3.91,10.25,10.82s-4.06,10.82-10.25,10.82-10.23-3.91-10.23-10.82,4.06-10.82,10.23-10.82ZM161.94,27.7c4.51,0,7.56-2.99,7.56-8.52s-3.05-8.52-7.56-8.52-7.56,2.99-7.56,8.52,3.07,8.52,7.56,8.52Z"/>
+      <path id="tlp" d="M179.52,8.85c.16,0,.28.13.28.28v2.2c0,.28.36.39.53.16,1.68-2.42,4.27-3.11,7.03-3.11,4.73,0,7.75,2.36,7.75,7.38v13.46c0,.16-.13.28-.28.28h-2.05c-.16,0-.28-.13-.28-.28v-13.18c0-3.77-2.03-5.35-5.59-5.35-3.91,0-7.01,2.36-7.01,7.27v11.25c0,.16-.13.28-.28.28h-2.05c-.16,0-.28-.13-.28-.28V9.14c0-.16.13-.28.28-.28h1.97Z"/>
+      <g>
+        <path id="tlp" d="M146.66,9.14v20.09c0,.16-.13.28-.28.28h-2.06c-.16,0-.28-.13-.28-.28V9.14c0-.16.13-.28.28-.28h2.06c.16,0,.28.13.28.28Z"/>
+        <circle id="tlp" cx="145.34" cy="3.19" r="1.79"/>
+      </g>
+      <g>
+        <path id="tlp" d="M235.58,9.14v20.09c0,.16-.13.28-.28.28h-2.06c-.16,0-.28-.13-.28-.28V9.14c0-.16.13-.28.28-.28h2.06c.16,0,.28.13.28.28Z"/>
+        <circle id="tlp" cx="234.27" cy="3.19" r="1.79"/>
+      </g>
+      <path id="tlp" d="M218.6,8.38c-4.99,0-8.38,2.09-8.85,6.24-.03.26.19.49.45.5h1.65c.23,0,.41-.16.45-.39.47-2.78,2.67-4.09,6.22-4.09s5.41,1.57,5.58,3.83c.06.74-.11,1.38-.59,1.88-.32.3-.79.48-.95.53-.15.05-.4.11-.66.16-.26.05-.48.1-.66.12-.18.03-.45.06-.82.1-.37.04-.57.07-.9.1-.23.02-.59.06-1.09.1-.49.04-.87.08-1.15.1-5.22.55-8.48,2.73-8.48,6.52,0,1.86.61,3.31,1.82,4.35s2.9,1.56,5.06,1.56c3.18,0,6.18-1.15,8.04-3.45.17-.21.5-.09.5.17v2.35c0,.25.2.46.46.46h1.57c.25,0,.46-.2.46-.46v-13.44c0-4.94-2.97-7.25-8.11-7.25ZM224.18,20.2c0,2.6-.95,4.65-2.34,5.84-1.39,1.19-3.18,1.69-5.18,1.69-1.48,0-2.58-.02-3.83-.94-.91-.67-1.31-1.7-1.31-2.93,0-.82.18-1.51.55-2.07s1.06-1.06,1.79-1.37c1.8-.8,3.35-.83,5.2-1.07,1.12-.14,1.91-.25,2.38-.33.46-.08,1.1-.24,1.66-.42.28-.09.48-.18.65-.28.19-.12.43.02.43.24v1.65Z"/>
+      <path id="tlp" d="M101.33,8.38c-4.99,0-8.38,2.09-8.85,6.24-.03.26.19.49.45.5h1.65c.23,0,.41-.16.45-.39.47-2.78,2.67-4.09,6.22-4.09s5.41,1.57,5.58,3.83c.06.74-.11,1.38-.59,1.88-.32.3-.79.48-.95.53-.15.05-.4.11-.66.16-.26.05-.48.1-.66.12-.18.03-.45.06-.82.1-.37.04-.57.07-.9.1-.23.02-.59.06-1.09.1-.49.04-.87.08-1.15.1-5.22.55-8.48,2.73-8.48,6.52,0,1.86.61,3.31,1.82,4.35,1.22,1.04,2.9,1.56,5.06,1.56,3.18,0,6.18-1.15,8.04-3.45.17-.21.5-.09.5.17v2.35c0,.25.2.46.46.46h1.57c.25,0,.46-.2.46-.46v-13.44c0-4.94-2.97-7.25-8.11-7.25ZM106.9,20.2c0,2.6-.95,4.65-2.34,5.84-1.39,1.19-3.18,1.69-5.18,1.69-1.48,0-2.58-.02-3.83-.94-.91-.67-1.31-1.7-1.31-2.93,0-.82.18-1.51.55-2.07s1.06-1.06,1.79-1.37c1.8-.8,3.35-.83,5.2-1.07,1.12-.14,1.91-.25,2.38-.33.46-.08,1.1-.24,1.66-.42.28-.09.48-.18.65-.28.19-.12.43.02.43.24v1.65Z"/>
+      <path id="tlp" d="M139.38,10.86v-1.72c0-.16-.13-.29-.29-.29h-5.88c-.16,0-.29-.13-.29-.29V3.28c0-.16-.13-.29-.29-.29h-2.05c-.16,0-.29.13-.29.29v5.29c0,.16-.13.29-.29.29h-9.45c-.16,0-.29-.13-.29-.29V3.28c0-.16-.13-.29-.29-.29h-2.05c-.16,0-.29.13-.29.29v5.29c0,.16-.13.29-.29.29h-4.51c-.16,0-.29.13-.29.29v1.72c0,.16.13.29.29.29h4.51c.16,0,.29.13.29.29v13.28c0,3.22,1.76,4.79,5,4.79h3.53c.16,0,.29-.13.29-.29v-1.83c0-.16-.13-.29-.29-.29h-5.62c-.16,0-.29-.13-.29-.29v-15.39c0-.16.13-.29.29-.29h9.45c.16,0,.29.13.29.29v13.28c0,3.22,1.76,4.79,5,4.79h3.77c.16,0,.29-.13.29-.29v-1.83c0-.16-.13-.29-.29-.29h-5.87c-.16,0-.28-.13-.28-.28v-15.4c0-.16.13-.29.29-.29h5.88c.16,0,.29-.13.29-.29Z"/>
+      <path id="tlp" d="M14.71.28c0-.16-.13-.28-.28-.28h-4.14c-3.24,0-5,1.58-5,4.79v3.78c0,.16-.13.28-.28.28H.28c-.16,0-.28.13-.28.28v1.73c0,.16.13.28.28.28h4.72c.16,0,.28.13.28.28v17.8c0,.16.13.28.28.28h2.06c.16,0,.28-.13.28-.28V11.43c0-.16.13-.28.28-.28h5.67c.16,0,.28-.13.28-.28v-1.73c0-.16-.13-.28-.28-.28h-5.67c-.16,0-.28-.13-.28-.28V2.54c0-.16.13-.28.28-.28h6.24c.16,0,.28-.13.28-.28V.28Z"/>
+    </g>
+  </g>
+</svg>
+
+<button id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <svg viewBox="0 0 219.53 301.9" xmlns="http://www.w3.org/2000/svg">
+    <path d="M129.77,45.09c-3.56-3.56-9.64-1.04-9.64,3.99v242.44c.01,5.73-4.64,10.38-10.37,10.38s-10.38-4.65-10.38-10.38V49.08c0-5.03-6.06-7.57-9.62-4.02-21.59,21.6-72.03,72.05-72.03,72.05-4.05,4.05-10.63,4.05-14.68,0-4.05-4.05-4.05-10.63,0-14.68,0,0,75.34-75.34,99.41-99.41,4.05-4.05,10.59-4.02,14.64.03l99.4,99.38c4.05,4.05,4.05,10.63,0,14.68-4.05,4.05-10.63,4.05-14.68,0l-72.04-72.04Z"/>
+  </svg>
+</button>
+
+<section id="hero">
+  <div class="wrap" style="position:relative;flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:72px">
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100%;max-width:680px">
+      <svg class="hw" style="margin-bottom:0" viewBox="0 0 1382.4 175.68" xmlns="http://www.w3.org/2000/svg"><path d="M154.33,48.96c36.24,0,60,22.92,60,63.36s-23.76,63.36-60,63.36-59.88-22.92-59.88-63.36,23.76-63.36,59.88-63.36ZM154.33,162.24c26.4,0,44.28-17.52,44.28-49.92s-17.88-49.92-44.28-49.92-44.28,17.52-44.28,49.92,18,49.92,44.28,49.92Z"/>
+      <path d="M258.99,53.17l-.02,10.2c0,1.67,2.22,2.34,3.07.91,5.18-8.78,13.95-13.26,29.71-13.26h15.25c.92,0,1.67.75,1.67,1.67v10.57c0,.92-.75,1.67-1.67,1.67h-14.53c-24.24,0-33,13.8-33,39.72v66.13c0,.92-.75,1.67-1.67,1.67h-12.01c-.92,0-1.67-.75-1.67-1.67V53.17c0-.92.75-1.67,1.67-1.67h11.53c.93,0,1.67.75,1.67,1.68Z"/>
+      <path d="M467.08,49.08c24.22,0,40.44,12.24,40.44,38.88v83.17c0,.92-.75,1.67-1.67,1.67h-11.9c-.92,0-1.67-.75-1.67-1.67v-81.85c0-17.76-9.6-26.76-28.08-26.76-21.12,0-35.76,12.48-35.76,38.4v70.21c0,.92-.75,1.67-1.67,1.67h-11.9c-.92,0-1.67-.75-1.67-1.67v-81.85c0-17.76-9.12-26.76-28.08-26.76-21.12,0-35.76,12.48-35.76,38.4v70.21c0,.92-.75,1.67-1.67,1.67h-11.9c-.92,0-1.67-.75-1.67-1.67V53.51c0-.92.75-1.67,1.67-1.67h11.42c.92,0,1.67.75,1.67,1.67v10c0,1.59,2.02,2.27,2.96.98,6.45-8.8,16.93-15.42,36.53-15.42,24.77,0,32.99,12.31,35.64,19.15.52,1.34,2.33,1.46,3.01.2,3.65-6.79,13.92-19.35,40.07-19.35Z"/>
+      <path d="M948.36,48.96c36.24,0,60,22.92,60,63.36s-23.76,63.36-60,63.36-59.88-22.92-59.88-63.36,23.76-63.36,59.88-63.36ZM948.36,162.24c26.4,0,44.28-17.52,44.28-49.92s-17.88-49.92-44.28-49.92-44.28,17.52-44.28,49.92,18,49.92,44.28,49.92Z"/>
+      <path d="M1051.32,51.84c.92,0,1.67.75,1.67,1.67v12.89c0,1.67,2.14,2.28,3.09.91,9.86-14.19,24.99-18.23,41.2-18.23,27.72,0,45.36,13.8,45.36,43.2v78.85c0,.92-.75,1.67-1.67,1.67h-12.02c-.92,0-1.67-.75-1.67-1.67v-77.17c0-22.08-11.88-31.32-32.76-31.32-22.92,0-41.04,13.8-41.04,42.6v65.89c0,.92-.75,1.67-1.67,1.67h-12.02c-.92,0-1.67-.75-1.67-1.67V53.51c0-.92.75-1.67,1.67-1.67h11.54Z"/>
+      <path d="M858.83,53.5v117.64c0,.92-.74,1.66-1.66,1.66h-12.04c-.92,0-1.66-.74-1.66-1.66V53.5c0-.92.74-1.66,1.66-1.66h12.04c.92,0,1.66.74,1.66,1.66Z"/>
+      <circle cx="851.14" cy="18.66" r="10.5"/>
+      <path d="M1379.6,53.5v117.64c0,.92-.74,1.66-1.66,1.66h-12.04c-.92,0-1.66-.74-1.66-1.66V53.5c0-.92.74-1.66,1.66-1.66h12.04c.92,0,1.66.74,1.66,1.66Z"/>
+      <circle cx="1371.9" cy="18.66" r="10.5"/>
+      <path d="M1280.16,49.08c-29.22,0-49.1,12.27-51.84,36.55-.17,1.55,1.1,2.9,2.66,2.9l9.66.03c1.33,0,2.42-.99,2.64-2.3,2.77-16.3,15.64-23.98,36.4-23.98s31.7,9.18,32.69,22.43c.34,4.32-.66,8.08-3.45,11.01-1.86,1.76-4.64,2.83-5.58,3.11-.9.27-2.34.64-3.86.96-1.52.32-2.8.56-3.84.72-1.04.16-2.64.36-4.8.6-2.16.24-3.37.42-5.28.6-1.36.12-3.48.36-6.36.6-2.88.24-5.12.44-6.72.6-30.57,3.2-49.67,15.96-49.67,38.21,0,10.88,3.56,19.36,10.68,25.45,7.12,6.08,17,9.12,29.65,9.12,18.64,0,36.2-6.76,47.09-20.2.99-1.22,2.94-.55,2.94,1.02v13.74c0,1.47,1.19,2.67,2.67,2.67h9.19c1.47,0,2.67-1.19,2.67-2.67v-78.69c0-28.92-17.4-42.48-47.52-42.48ZM1312.8,118.27c0,15.22-5.55,27.22-13.71,34.18-8.16,6.96-18.64,9.91-30.32,9.91-8.64,0-15.11-.11-22.44-5.52-5.35-3.95-7.68-9.96-7.68-17.16,0-4.8,1.08-8.84,3.24-12.12,2.16-3.28,6.21-6.21,10.45-8.05,10.53-4.69,19.61-4.87,30.45-6.27,6.56-.8,11.2-1.44,13.92-1.92,2.72-.48,6.45-1.39,9.73-2.43,1.62-.51,2.83-1.06,3.82-1.67,1.11-.69,2.53.1,2.53,1.41v9.65Z"/>
+      <path d="M593.41,49.08c-29.22,0-49.1,12.27-51.84,36.55-.17,1.55,1.1,2.9,2.66,2.9l9.66.03c1.33,0,2.42-.99,2.64-2.3,2.77-16.3,15.64-23.98,36.4-23.98s31.7,9.18,32.69,22.43c.34,4.32-.66,8.08-3.45,11.01-1.86,1.76-4.64,2.83-5.58,3.11-.9.27-2.34.64-3.86.96-1.52.32-2.8.56-3.84.72-1.04.16-2.64.36-4.8.6-2.16.24-3.37.42-5.28.6-1.36.12-3.48.36-6.36.6-2.88.24-5.12.44-6.72.6-30.57,3.2-49.67,15.96-49.67,38.21,0,10.88,3.56,19.36,10.68,25.45,7.12,6.08,17,9.12,29.65,9.12,18.64,0,36.2-6.76,47.09-20.2.99-1.22,2.94-.55,2.94,1.02v13.74c0,1.47,1.19,2.67,2.67,2.67h9.19c1.47,0,2.67-1.19,2.67-2.67v-78.69c0-28.92-17.4-42.48-47.52-42.48ZM626.05,118.27c0,15.22-5.55,27.22-13.71,34.18-8.16,6.96-18.64,9.91-30.32,9.91-8.64,0-15.11-.11-22.44-5.52-5.35-3.95-7.68-9.96-7.68-17.16,0-4.8,1.08-8.84,3.24-12.12,2.16-3.28,6.21-6.21,10.45-8.05,10.53-4.69,19.61-4.87,30.45-6.27,6.56-.8,11.2-1.44,13.92-1.92,2.72-.48,6.45-1.39,9.73-2.43,1.62-.51,2.83-1.06,3.82-1.67,1.11-.69,2.53.1,2.53,1.41v9.65Z"/>
+      <path d="M816.21,63.61v-10.09c0-.92-.75-1.67-1.67-1.67h-34.46c-.92,0-1.67-.75-1.67-1.67v-30.98c0-.92-.75-1.67-1.67-1.67h-12.01c-.92,0-1.67.75-1.67,1.67v30.98c0,.92-.75,1.67-1.67,1.67h-55.33c-.92,0-1.67-.75-1.67-1.67v-30.98c0-.92-.75-1.67-1.67-1.67h-12.01c-.92,0-1.67.75-1.67,1.67v30.98c0,.92-.75,1.67-1.67,1.67h-26.41c-.92,0-1.67.75-1.67,1.67v10.09c0,.92.75,1.67,1.67,1.67h26.41c.92,0,1.67.75,1.67,1.67v77.77c0,18.84,10.32,28.08,29.28,28.08h20.65c.92,0,1.67-.75,1.67-1.67v-10.69c0-.92-.75-1.67-1.67-1.67h-32.9c-.92,0-1.67-.75-1.67-1.67v-90.14c0-.92.75-1.67,1.67-1.67h55.33c.92,0,1.67.75,1.67,1.67v77.77c0,18.84,10.32,28.08,29.28,28.08h22.09c.92,0,1.67-.75,1.67-1.67v-10.69c0-.92-.75-1.67-1.67-1.67h-34.36c-.91,0-1.65-.74-1.65-1.65v-90.16c0-.92.75-1.67,1.67-1.67h34.46c.92,0,1.67-.75,1.67-1.67Z"/>
+      <path d="M86.16,1.65c0-.91-.74-1.65-1.65-1.65h-24.27c-18.96,0-29.28,9.24-29.28,28.08v22.11c0,.91-.74,1.65-1.65,1.65H1.65c-.91,0-1.65.74-1.65,1.65v10.14c0,.91.74,1.65,1.65,1.65h27.66c.91,0,1.65.74,1.65,1.65v104.22c0,.91.74,1.65,1.65,1.65h12.06c.91,0,1.65-.74,1.65-1.65v-104.22c0-.91.74-1.65,1.65-1.65h33.18c.91,0,1.65-.74,1.65-1.65v-10.14c0-.91-.74-1.65-1.65-1.65h-33.18c-.91,0-1.65-.74-1.65-1.65V14.85c0-.91.74-1.65,1.65-1.65h36.54c.91,0,1.65-.74,1.65-1.65V1.65Z"/></svg>
+    </div>
+    <p class="hd">The complete identity system for formattion.ai — rooted in who we are, what we do, and who we serve.</p>
+    <div class="hp">Brand Guidelines — v1.0</div>
+
+  </div>
+</section>
+
+<section id="identity">
+  <div class="wrap fi">
+    <div class="ey">00</div>
+    <h2 class="st">Who we are</h2>
+    <div class="brand-story">
+      <div class="bs-cell">
+        <div class="bs-label">The name</div>
+        <div class="bs-name"><span>for</span> · matt · <span>ion</span></div>
+        <p class="bs-body" style="margin-top:16px">The company is founded by Matt and Ion. The name &#8220;Formattion&#8221; reflects the three core components of the business: for (the internal AI entity), matt, and ion.</p>
+      </div>
+      <div class="bs-cell">
+        <div class="bs-label">The mission</div>
+        <div style="font-size:22px;font-weight:400;color:var(--l-ink);line-height:1.35;letter-spacing:-.015em;margin-bottom:16px">Closing the automation gap between large construction firms and the subcontractors who build Britain.</div>
+        <p class="bs-body">UK subcontract businesses operate with fragmented systems and heavy manual workload. Large firms automate. SMEs are left behind. formattion.ai changes that.</p>
+      </div>
+    </div>
+    <div class="val-grid">
+      <div class="val-cell"><div class="val-num">01</div><div class="val-title">Practical over theoretical</div><div class="val-body">Every system runs in production. No prototypes delivered as finished work. No recommendations without implementation.</div></div>
+      <div class="val-cell"><div class="val-num">02</div><div class="val-title">Repeatable by design</div><div class="val-body">Automation templates, workflow frameworks, audit methodology — built to deploy fast and scale without adding headcount.</div></div>
+      <div class="val-cell"><div class="val-num">03</div><div class="val-title">Proof before expansion</div><div class="val-body">Validate first. Refine. Then scale. The same discipline formattion installs in its clients.</div></div>
+      <div class="val-cell"><div class="val-num">04</div><div class="val-title">The operator's perspective</div><div class="val-body">Built by people who understand what it means to manage a job, not just automate one.</div></div>
+      <div class="val-cell"><div class="val-num">05</div><div class="val-title">AI as infrastructure</div><div class="val-body">For is the operational backbone — running lead capture, CRM, reporting, and outreach. formattion eats its own cooking.</div></div>
+      <div class="val-cell"><div class="val-num">06</div><div class="val-title">Trust through consistency</div><div class="val-body">The brand signals what the product delivers: structured, reliable, predictable. Every output held to that standard.</div></div>
+    </div>
+    <div style="margin-bottom:32px">
+      <div class="ey" style="margin-bottom:16px">Client profile</div>
+      <div class="client-split">
+        <div class="client-panel">
+          <div class="cp-label">The business</div>
+          <div class="cp-stat">£500k–£5m</div>
+          <div class="cp-desc">UK-based subcontract trade. Owner-operated. Small management team. Growth ambitions held back by operational bottlenecks — missed enquiries, slow quote follow-up, manual invoicing.</div>
+          <div class="cp-tags"><span class="cp-tag">groundworks</span><span class="cp-tag">electrical</span><span class="cp-tag">plumbing &amp; heating</span><span class="cp-tag">roofing</span><span class="cp-tag">fit-out</span></div>
+        </div>
+        <div class="client-panel">
+          <div class="cp-label">The person</div>
+          <div class="cp-stat">Time-poor.</div>
+          <div class="cp-desc">On site or in back-to-back calls. Knows something is broken. Doesn't have time to fix it themselves. Needs a trusted partner who understands construction, not just software.</div>
+          <div class="cp-tags"><span class="cp-tag">owner-operator</span><span class="cp-tag">growth-minded</span><span class="cp-tag">hands-on</span><span class="cp-tag">results-first</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ey" style="margin-bottom:16px">The five-stage methodology</div>
+    <div class="method-row">
+      <div class="method-step"><div class="method-n">01</div><div><div class="method-title">Automation Opportunity Assessment</div><div class="method-desc">A structured questionnaire calculating an Automation Opportunity Score. Lead qualification and first value in one step.</div></div></div>
+      <div class="method-step"><div class="method-n">02</div><div><div class="method-title">Operational Automation Audit</div><div class="method-desc">Detailed analysis of the client's workflows and inefficiencies. The audit is the product — not a pitch document.</div></div></div>
+      <div class="method-step"><div class="method-n">03</div><div><div class="method-title">Automation Roadmap Design</div><div class="method-desc">A phased implementation plan with clear priorities, dependencies, and expected outcomes. Structured, not aspirational.</div></div></div>
+      <div class="method-step"><div class="method-n">04</div><div><div class="method-title">System Implementation</div><div class="method-desc">Deployment within a six-week build window. n8n, OpenAI API, Airtable — configured and live.</div></div></div>
+      <div class="method-step"><div class="method-n">05</div><div><div class="method-title">Continuous Optimisation</div><div class="method-desc">Monthly retainer covering maintenance, improvements, and support. The relationship starts at delivery, it doesn't end there.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="logo">
+  <div class="wrap fi">
+    <div class="ey">01</div>
+    <h2 class="st">The wordmark</h2>
+    <div class="lg">
+      <div class="lc ll"><svg viewBox="0 0 1382.4 175.68" xmlns="http://www.w3.org/2000/svg"><path d="M154.33,48.96c36.24,0,60,22.92,60,63.36s-23.76,63.36-60,63.36-59.88-22.92-59.88-63.36,23.76-63.36,59.88-63.36ZM154.33,162.24c26.4,0,44.28-17.52,44.28-49.92s-17.88-49.92-44.28-49.92-44.28,17.52-44.28,49.92,18,49.92,44.28,49.92Z"/>
+      <path d="M258.99,53.17l-.02,10.2c0,1.67,2.22,2.34,3.07.91,5.18-8.78,13.95-13.26,29.71-13.26h15.25c.92,0,1.67.75,1.67,1.67v10.57c0,.92-.75,1.67-1.67,1.67h-14.53c-24.24,0-33,13.8-33,39.72v66.13c0,.92-.75,1.67-1.67,1.67h-12.01c-.92,0-1.67-.75-1.67-1.67V53.17c0-.92.75-1.67,1.67-1.67h11.53c.93,0,1.67.75,1.67,1.68Z"/>
+      <path d="M467.08,49.08c24.22,0,40.44,12.24,40.44,38.88v83.17c0,.92-.75,1.67-1.67,1.67h-11.9c-.92,0-1.67-.75-1.67-1.67v-81.85c0-17.76-9.6-26.76-28.08-26.76-21.12,0-35.76,12.48-35.76,38.4v70.21c0,.92-.75,1.67-1.67,1.67h-11.9c-.92,0-1.67-.75-1.67-1.67v-81.85c0-17.76-9.12-26.76-28.08-26.76-21.12,0-35.76,12.48-35.76,38.4v70.21c0,.92-.75,1.67-1.67,1.67h-11.9c-.92,0-1.67-.75-1.67-1.67V53.51c0-.92.75-1.67,1.67-1.67h11.42c.92,0,1.67.75,1.67,1.67v10c0,1.59,2.02,2.27,2.96.98,6.45-8.8,16.93-15.42,36.53-15.42,24.77,0,32.99,12.31,35.64,19.15.52,1.34,2.33,1.46,3.01.2,3.65-6.79,13.92-19.35,40.07-19.35Z"/>
+      <path d="M948.36,48.96c36.24,0,60,22.92,60,63.36s-23.76,63.36-60,63.36-59.88-22.92-59.88-63.36,23.76-63.36,59.88-63.36ZM948.36,162.24c26.4,0,44.28-17.52,44.28-49.92s-17.88-49.92-44.28-49.92-44.28,17.52-44.28,49.92,18,49.92,44.28,49.92Z"/>
+      <path d="M1051.32,51.84c.92,0,1.67.75,1.67,1.67v12.89c0,1.67,2.14,2.28,3.09.91,9.86-14.19,24.99-18.23,41.2-18.23,27.72,0,45.36,13.8,45.36,43.2v78.85c0,.92-.75,1.67-1.67,1.67h-12.02c-.92,0-1.67-.75-1.67-1.67v-77.17c0-22.08-11.88-31.32-32.76-31.32-22.92,0-41.04,13.8-41.04,42.6v65.89c0,.92-.75,1.67-1.67,1.67h-12.02c-.92,0-1.67-.75-1.67-1.67V53.51c0-.92.75-1.67,1.67-1.67h11.54Z"/>
+      <path d="M858.83,53.5v117.64c0,.92-.74,1.66-1.66,1.66h-12.04c-.92,0-1.66-.74-1.66-1.66V53.5c0-.92.74-1.66,1.66-1.66h12.04c.92,0,1.66.74,1.66,1.66Z"/>
+      <circle cx="851.14" cy="18.66" r="10.5"/>
+      <path d="M1379.6,53.5v117.64c0,.92-.74,1.66-1.66,1.66h-12.04c-.92,0-1.66-.74-1.66-1.66V53.5c0-.92.74-1.66,1.66-1.66h12.04c.92,0,1.66.74,1.66,1.66Z"/>
+      <circle cx="1371.9" cy="18.66" r="10.5"/>
+      <path d="M1280.16,49.08c-29.22,0-49.1,12.27-51.84,36.55-.17,1.55,1.1,2.9,2.66,2.9l9.66.03c1.33,0,2.42-.99,2.64-2.3,2.77-16.3,15.64-23.98,36.4-23.98s31.7,9.18,32.69,22.43c.34,4.32-.66,8.08-3.45,11.01-1.86,1.76-4.64,2.83-5.58,3.11-.9.27-2.34.64-3.86.96-1.52.32-2.8.56-3.84.72-1.04.16-2.64.36-4.8.6-2.16.24-3.37.42-5.28.6-1.36.12-3.48.36-6.36.6-2.88.24-5.12.44-6.72.6-30.57,3.2-49.67,15.96-49.67,38.21,0,10.88,3.56,19.36,10.68,25.45,7.12,6.08,17,9.12,29.65,9.12,18.64,0,36.2-6.76,47.09-20.2.99-1.22,2.94-.55,2.94,1.02v13.74c0,1.47,1.19,2.67,2.67,2.67h9.19c1.47,0,2.67-1.19,2.67-2.67v-78.69c0-28.92-17.4-42.48-47.52-42.48ZM1312.8,118.27c0,15.22-5.55,27.22-13.71,34.18-8.16,6.96-18.64,9.91-30.32,9.91-8.64,0-15.11-.11-22.44-5.52-5.35-3.95-7.68-9.96-7.68-17.16,0-4.8,1.08-8.84,3.24-12.12,2.16-3.28,6.21-6.21,10.45-8.05,10.53-4.69,19.61-4.87,30.45-6.27,6.56-.8,11.2-1.44,13.92-1.92,2.72-.48,6.45-1.39,9.73-2.43,1.62-.51,2.83-1.06,3.82-1.67,1.11-.69,2.53.1,2.53,1.41v9.65Z"/>
+      <path d="M593.41,49.08c-29.22,0-49.1,12.27-51.84,36.55-.17,1.55,1.1,2.9,2.66,2.9l9.66.03c1.33,0,2.42-.99,2.64-2.3,2.77-16.3,15.64-23.98,36.4-23.98s31.7,9.18,32.69,22.43c.34,4.32-.66,8.08-3.45,11.01-1.86,1.76-4.64,2.83-5.58,3.11-.9.27-2.34.64-3.86.96-1.52.32-2.8.56-3.84.72-1.04.16-2.64.36-4.8.6-2.16.24-3.37.42-5.28.6-1.36.12-3.48.36-6.36.6-2.88.24-5.12.44-6.72.6-30.57,3.2-49.67,15.96-49.67,38.21,0,10.88,3.56,19.36,10.68,25.45,7.12,6.08,17,9.12,29.65,9.12,18.64,0,36.2-6.76,47.09-20.2.99-1.22,2.94-.55,2.94,1.02v13.74c0,1.47,1.19,2.67,2.67,2.67h9.19c1.47,0,2.67-1.19,2.67-2.67v-78.69c0-28.92-17.4-42.48-47.52-42.48ZM626.05,118.27c0,15.22-5.55,27.22-13.71,34.18-8.16,6.96-18.64,9.91-30.32,9.91-8.64,0-15.11-.11-22.44-5.52-5.35-3.95-7.68-9.96-7.68-17.16,0-4.8,1.08-8.84,3.24-12.12,2.16-3.28,6.21-6.21,10.45-8.05,10.53-4.69,19.61-4.87,30.45-6.27,6.56-.8,11.2-1.44,13.92-1.92,2.72-.48,6.45-1.39,9.73-2.43,1.62-.51,2.83-1.06,3.82-1.67,1.11-.69,2.53.1,2.53,1.41v9.65Z"/>
+      <path d="M816.21,63.61v-10.09c0-.92-.75-1.67-1.67-1.67h-34.46c-.92,0-1.67-.75-1.67-1.67v-30.98c0-.92-.75-1.67-1.67-1.67h-12.01c-.92,0-1.67.75-1.67,1.67v30.98c0,.92-.75,1.67-1.67,1.67h-55.33c-.92,0-1.67-.75-1.67-1.67v-30.98c0-.92-.75-1.67-1.67-1.67h-12.01c-.92,0-1.67.75-1.67,1.67v30.98c0,.92-.75,1.67-1.67,1.67h-26.41c-.92,0-1.67.75-1.67,1.67v10.09c0,.92.75,1.67,1.67,1.67h26.41c.92,0,1.67.75,1.67,1.67v77.77c0,18.84,10.32,28.08,29.28,28.08h20.65c.92,0,1.67-.75,1.67-1.67v-10.69c0-.92-.75-1.67-1.67-1.67h-32.9c-.92,0-1.67-.75-1.67-1.67v-90.14c0-.92.75-1.67,1.67-1.67h55.33c.92,0,1.67.75,1.67,1.67v77.77c0,18.84,10.32,28.08,29.28,28.08h22.09c.92,0,1.67-.75,1.67-1.67v-10.69c0-.92-.75-1.67-1.67-1.67h-34.36c-.91,0-1.65-.74-1.65-1.65v-90.16c0-.92.75-1.67,1.67-1.67h34.46c.92,0,1.67-.75,1.67-1.67Z"/>
+      <path d="M86.16,1.65c0-.91-.74-1.65-1.65-1.65h-24.27c-18.96,0-29.28,9.24-29.28,28.08v22.11c0,.91-.74,1.65-1.65,1.65H1.65c-.91,0-1.65.74-1.65,1.65v10.14c0,.91.74,1.65,1.65,1.65h27.66c.91,0,1.65.74,1.65,1.65v104.22c0,.91.74,1.65,1.65,1.65h12.06c.91,0,1.65-.74,1.65-1.65v-104.22c0-.91.74-1.65,1.65-1.65h33.18c.91,0,1.65-.74,1.65-1.65v-10.14c0-.91-.74-1.65-1.65-1.65h-33.18c-.91,0-1.65-.74-1.65-1.65V14.85c0-.91.74-1.65,1.65-1.65h36.54c.91,0,1.65-.74,1.65-1.65V1.65Z"/></svg><span class="lc-label">light mode</span></div>
+      <div class="lc ld"><svg viewBox="0 0 1382.4 175.68" xmlns="http://www.w3.org/2000/svg"><path d="M154.33,48.96c36.24,0,60,22.92,60,63.36s-23.76,63.36-60,63.36-59.88-22.92-59.88-63.36,23.76-63.36,59.88-63.36ZM154.33,162.24c26.4,0,44.28-17.52,44.28-49.92s-17.88-49.92-44.28-49.92-44.28,17.52-44.28,49.92,18,49.92,44.28,49.92Z"/>
+      <path d="M258.99,53.17l-.02,10.2c0,1.67,2.22,2.34,3.07.91,5.18-8.78,13.95-13.26,29.71-13.26h15.25c.92,0,1.67.75,1.67,1.67v10.57c0,.92-.75,1.67-1.67,1.67h-14.53c-24.24,0-33,13.8-33,39.72v66.13c0,.92-.75,1.67-1.67,1.67h-12.01c-.92,0-1.67-.75-1.67-1.67V53.17c0-.92.75-1.67,1.67-1.67h11.53c.93,0,1.67.75,1.67,1.68Z"/>
+      <path d="M467.08,49.08c24.22,0,40.44,12.24,40.44,38.88v83.17c0,.92-.75,1.67-1.67,1.67h-11.9c-.92,0-1.67-.75-1.67-1.67v-81.85c0-17.76-9.6-26.76-28.08-26.76-21.12,0-35.76,12.48-35.76,38.4v70.21c0,.92-.75,1.67-1.67,1.67h-11.9c-.92,0-1.67-.75-1.67-1.67v-81.85c0-17.76-9.12-26.76-28.08-26.76-21.12,0-35.76,12.48-35.76,38.4v70.21c0,.92-.75,1.67-1.67,1.67h-11.9c-.92,0-1.67-.75-1.67-1.67V53.51c0-.92.75-1.67,1.67-1.67h11.42c.92,0,1.67.75,1.67,1.67v10c0,1.59,2.02,2.27,2.96.98,6.45-8.8,16.93-15.42,36.53-15.42,24.77,0,32.99,12.31,35.64,19.15.52,1.34,2.33,1.46,3.01.2,3.65-6.79,13.92-19.35,40.07-19.35Z"/>
+      <path d="M948.36,48.96c36.24,0,60,22.92,60,63.36s-23.76,63.36-60,63.36-59.88-22.92-59.88-63.36,23.76-63.36,59.88-63.36ZM948.36,162.24c26.4,0,44.28-17.52,44.28-49.92s-17.88-49.92-44.28-49.92-44.28,17.52-44.28,49.92,18,49.92,44.28,49.92Z"/>
+      <path d="M1051.32,51.84c.92,0,1.67.75,1.67,1.67v12.89c0,1.67,2.14,2.28,3.09.91,9.86-14.19,24.99-18.23,41.2-18.23,27.72,0,45.36,13.8,45.36,43.2v78.85c0,.92-.75,1.67-1.67,1.67h-12.02c-.92,0-1.67-.75-1.67-1.67v-77.17c0-22.08-11.88-31.32-32.76-31.32-22.92,0-41.04,13.8-41.04,42.6v65.89c0,.92-.75,1.67-1.67,1.67h-12.02c-.92,0-1.67-.75-1.67-1.67V53.51c0-.92.75-1.67,1.67-1.67h11.54Z"/>
+      <path d="M858.83,53.5v117.64c0,.92-.74,1.66-1.66,1.66h-12.04c-.92,0-1.66-.74-1.66-1.66V53.5c0-.92.74-1.66,1.66-1.66h12.04c.92,0,1.66.74,1.66,1.66Z"/>
+      <circle cx="851.14" cy="18.66" r="10.5"/>
+      <path d="M1379.6,53.5v117.64c0,.92-.74,1.66-1.66,1.66h-12.04c-.92,0-1.66-.74-1.66-1.66V53.5c0-.92.74-1.66,1.66-1.66h12.04c.92,0,1.66.74,1.66,1.66Z"/>
+      <circle cx="1371.9" cy="18.66" r="10.5"/>
+      <path d="M1280.16,49.08c-29.22,0-49.1,12.27-51.84,36.55-.17,1.55,1.1,2.9,2.66,2.9l9.66.03c1.33,0,2.42-.99,2.64-2.3,2.77-16.3,15.64-23.98,36.4-23.98s31.7,9.18,32.69,22.43c.34,4.32-.66,8.08-3.45,11.01-1.86,1.76-4.64,2.83-5.58,3.11-.9.27-2.34.64-3.86.96-1.52.32-2.8.56-3.84.72-1.04.16-2.64.36-4.8.6-2.16.24-3.37.42-5.28.6-1.36.12-3.48.36-6.36.6-2.88.24-5.12.44-6.72.6-30.57,3.2-49.67,15.96-49.67,38.21,0,10.88,3.56,19.36,10.68,25.45,7.12,6.08,17,9.12,29.65,9.12,18.64,0,36.2-6.76,47.09-20.2.99-1.22,2.94-.55,2.94,1.02v13.74c0,1.47,1.19,2.67,2.67,2.67h9.19c1.47,0,2.67-1.19,2.67-2.67v-78.69c0-28.92-17.4-42.48-47.52-42.48ZM1312.8,118.27c0,15.22-5.55,27.22-13.71,34.18-8.16,6.96-18.64,9.91-30.32,9.91-8.64,0-15.11-.11-22.44-5.52-5.35-3.95-7.68-9.96-7.68-17.16,0-4.8,1.08-8.84,3.24-12.12,2.16-3.28,6.21-6.21,10.45-8.05,10.53-4.69,19.61-4.87,30.45-6.27,6.56-.8,11.2-1.44,13.92-1.92,2.72-.48,6.45-1.39,9.73-2.43,1.62-.51,2.83-1.06,3.82-1.67,1.11-.69,2.53.1,2.53,1.41v9.65Z"/>
+      <path d="M593.41,49.08c-29.22,0-49.1,12.27-51.84,36.55-.17,1.55,1.1,2.9,2.66,2.9l9.66.03c1.33,0,2.42-.99,2.64-2.3,2.77-16.3,15.64-23.98,36.4-23.98s31.7,9.18,32.69,22.43c.34,4.32-.66,8.08-3.45,11.01-1.86,1.76-4.64,2.83-5.58,3.11-.9.27-2.34.64-3.86.96-1.52.32-2.8.56-3.84.72-1.04.16-2.64.36-4.8.6-2.16.24-3.37.42-5.28.6-1.36.12-3.48.36-6.36.6-2.88.24-5.12.44-6.72.6-30.57,3.2-49.67,15.96-49.67,38.21,0,10.88,3.56,19.36,10.68,25.45,7.12,6.08,17,9.12,29.65,9.12,18.64,0,36.2-6.76,47.09-20.2.99-1.22,2.94-.55,2.94,1.02v13.74c0,1.47,1.19,2.67,2.67,2.67h9.19c1.47,0,2.67-1.19,2.67-2.67v-78.69c0-28.92-17.4-42.48-47.52-42.48ZM626.05,118.27c0,15.22-5.55,27.22-13.71,34.18-8.16,6.96-18.64,9.91-30.32,9.91-8.64,0-15.11-.11-22.44-5.52-5.35-3.95-7.68-9.96-7.68-17.16,0-4.8,1.08-8.84,3.24-12.12,2.16-3.28,6.21-6.21,10.45-8.05,10.53-4.69,19.61-4.87,30.45-6.27,6.56-.8,11.2-1.44,13.92-1.92,2.72-.48,6.45-1.39,9.73-2.43,1.62-.51,2.83-1.06,3.82-1.67,1.11-.69,2.53.1,2.53,1.41v9.65Z"/>
+      <path d="M816.21,63.61v-10.09c0-.92-.75-1.67-1.67-1.67h-34.46c-.92,0-1.67-.75-1.67-1.67v-30.98c0-.92-.75-1.67-1.67-1.67h-12.01c-.92,0-1.67.75-1.67,1.67v30.98c0,.92-.75,1.67-1.67,1.67h-55.33c-.92,0-1.67-.75-1.67-1.67v-30.98c0-.92-.75-1.67-1.67-1.67h-12.01c-.92,0-1.67.75-1.67,1.67v30.98c0,.92-.75,1.67-1.67,1.67h-26.41c-.92,0-1.67.75-1.67,1.67v10.09c0,.92.75,1.67,1.67,1.67h26.41c.92,0,1.67.75,1.67,1.67v77.77c0,18.84,10.32,28.08,29.28,28.08h20.65c.92,0,1.67-.75,1.67-1.67v-10.69c0-.92-.75-1.67-1.67-1.67h-32.9c-.92,0-1.67-.75-1.67-1.67v-90.14c0-.92.75-1.67,1.67-1.67h55.33c.92,0,1.67.75,1.67,1.67v77.77c0,18.84,10.32,28.08,29.28,28.08h22.09c.92,0,1.67-.75,1.67-1.67v-10.69c0-.92-.75-1.67-1.67-1.67h-34.36c-.91,0-1.65-.74-1.65-1.65v-90.16c0-.92.75-1.67,1.67-1.67h34.46c.92,0,1.67-.75,1.67-1.67Z"/>
+      <path d="M86.16,1.65c0-.91-.74-1.65-1.65-1.65h-24.27c-18.96,0-29.28,9.24-29.28,28.08v22.11c0,.91-.74,1.65-1.65,1.65H1.65c-.91,0-1.65.74-1.65,1.65v10.14c0,.91.74,1.65,1.65,1.65h27.66c.91,0,1.65.74,1.65,1.65v104.22c0,.91.74,1.65,1.65,1.65h12.06c.91,0,1.65-.74,1.65-1.65v-104.22c0-.91.74-1.65,1.65-1.65h33.18c.91,0,1.65-.74,1.65-1.65v-10.14c0-.91-.74-1.65-1.65-1.65h-33.18c-.91,0-1.65-.74-1.65-1.65V14.85c0-.91.74-1.65,1.65-1.65h36.54c.91,0,1.65-.74,1.65-1.65V1.65Z"/></svg><span class="lc-label">dark mode</span></div>
+      <div class="lc la"><svg viewBox="0 0 1382.4 175.68" xmlns="http://www.w3.org/2000/svg"><path d="M154.33,48.96c36.24,0,60,22.92,60,63.36s-23.76,63.36-60,63.36-59.88-22.92-59.88-63.36,23.76-63.36,59.88-63.36ZM154.33,162.24c26.4,0,44.28-17.52,44.28-49.92s-17.88-49.92-44.28-49.92-44.28,17.52-44.28,49.92,18,49.92,44.28,49.92Z"/>
+      <path d="M258.99,53.17l-.02,10.2c0,1.67,2.22,2.34,3.07.91,5.18-8.78,13.95-13.26,29.71-13.26h15.25c.92,0,1.67.75,1.67,1.67v10.57c0,.92-.75,1.67-1.67,1.67h-14.53c-24.24,0-33,13.8-33,39.72v66.13c0,.92-.75,1.67-1.67,1.67h-12.01c-.92,0-1.67-.75-1.67-1.67V53.17c0-.92.75-1.67,1.67-1.67h11.53c.93,0,1.67.75,1.67,1.68Z"/>
+      <path d="M467.08,49.08c24.22,0,40.44,12.24,40.44,38.88v83.17c0,.92-.75,1.67-1.67,1.67h-11.9c-.92,0-1.67-.75-1.67-1.67v-81.85c0-17.76-9.6-26.76-28.08-26.76-21.12,0-35.76,12.48-35.76,38.4v70.21c0,.92-.75,1.67-1.67,1.67h-11.9c-.92,0-1.67-.75-1.67-1.67v-81.85c0-17.76-9.12-26.76-28.08-26.76-21.12,0-35.76,12.48-35.76,38.4v70.21c0,.92-.75,1.67-1.67,1.67h-11.9c-.92,0-1.67-.75-1.67-1.67V53.51c0-.92.75-1.67,1.67-1.67h11.42c.92,0,1.67.75,1.67,1.67v10c0,1.59,2.02,2.27,2.96.98,6.45-8.8,16.93-15.42,36.53-15.42,24.77,0,32.99,12.31,35.64,19.15.52,1.34,2.33,1.46,3.01.2,3.65-6.79,13.92-19.35,40.07-19.35Z"/>
+      <path d="M948.36,48.96c36.24,0,60,22.92,60,63.36s-23.76,63.36-60,63.36-59.88-22.92-59.88-63.36,23.76-63.36,59.88-63.36ZM948.36,162.24c26.4,0,44.28-17.52,44.28-49.92s-17.88-49.92-44.28-49.92-44.28,17.52-44.28,49.92,18,49.92,44.28,49.92Z"/>
+      <path d="M1051.32,51.84c.92,0,1.67.75,1.67,1.67v12.89c0,1.67,2.14,2.28,3.09.91,9.86-14.19,24.99-18.23,41.2-18.23,27.72,0,45.36,13.8,45.36,43.2v78.85c0,.92-.75,1.67-1.67,1.67h-12.02c-.92,0-1.67-.75-1.67-1.67v-77.17c0-22.08-11.88-31.32-32.76-31.32-22.92,0-41.04,13.8-41.04,42.6v65.89c0,.92-.75,1.67-1.67,1.67h-12.02c-.92,0-1.67-.75-1.67-1.67V53.51c0-.92.75-1.67,1.67-1.67h11.54Z"/>
+      <path d="M858.83,53.5v117.64c0,.92-.74,1.66-1.66,1.66h-12.04c-.92,0-1.66-.74-1.66-1.66V53.5c0-.92.74-1.66,1.66-1.66h12.04c.92,0,1.66.74,1.66,1.66Z"/>
+      <circle cx="851.14" cy="18.66" r="10.5"/>
+      <path d="M1379.6,53.5v117.64c0,.92-.74,1.66-1.66,1.66h-12.04c-.92,0-1.66-.74-1.66-1.66V53.5c0-.92.74-1.66,1.66-1.66h12.04c.92,0,1.66.74,1.66,1.66Z"/>
+      <circle cx="1371.9" cy="18.66" r="10.5"/>
+      <path d="M1280.16,49.08c-29.22,0-49.1,12.27-51.84,36.55-.17,1.55,1.1,2.9,2.66,2.9l9.66.03c1.33,0,2.42-.99,2.64-2.3,2.77-16.3,15.64-23.98,36.4-23.98s31.7,9.18,32.69,22.43c.34,4.32-.66,8.08-3.45,11.01-1.86,1.76-4.64,2.83-5.58,3.11-.9.27-2.34.64-3.86.96-1.52.32-2.8.56-3.84.72-1.04.16-2.64.36-4.8.6-2.16.24-3.37.42-5.28.6-1.36.12-3.48.36-6.36.6-2.88.24-5.12.44-6.72.6-30.57,3.2-49.67,15.96-49.67,38.21,0,10.88,3.56,19.36,10.68,25.45,7.12,6.08,17,9.12,29.65,9.12,18.64,0,36.2-6.76,47.09-20.2.99-1.22,2.94-.55,2.94,1.02v13.74c0,1.47,1.19,2.67,2.67,2.67h9.19c1.47,0,2.67-1.19,2.67-2.67v-78.69c0-28.92-17.4-42.48-47.52-42.48ZM1312.8,118.27c0,15.22-5.55,27.22-13.71,34.18-8.16,6.96-18.64,9.91-30.32,9.91-8.64,0-15.11-.11-22.44-5.52-5.35-3.95-7.68-9.96-7.68-17.16,0-4.8,1.08-8.84,3.24-12.12,2.16-3.28,6.21-6.21,10.45-8.05,10.53-4.69,19.61-4.87,30.45-6.27,6.56-.8,11.2-1.44,13.92-1.92,2.72-.48,6.45-1.39,9.73-2.43,1.62-.51,2.83-1.06,3.82-1.67,1.11-.69,2.53.1,2.53,1.41v9.65Z"/>
+      <path d="M593.41,49.08c-29.22,0-49.1,12.27-51.84,36.55-.17,1.55,1.1,2.9,2.66,2.9l9.66.03c1.33,0,2.42-.99,2.64-2.3,2.77-16.3,15.64-23.98,36.4-23.98s31.7,9.18,32.69,22.43c.34,4.32-.66,8.08-3.45,11.01-1.86,1.76-4.64,2.83-5.58,3.11-.9.27-2.34.64-3.86.96-1.52.32-2.8.56-3.84.72-1.04.16-2.64.36-4.8.6-2.16.24-3.37.42-5.28.6-1.36.12-3.48.36-6.36.6-2.88.24-5.12.44-6.72.6-30.57,3.2-49.67,15.96-49.67,38.21,0,10.88,3.56,19.36,10.68,25.45,7.12,6.08,17,9.12,29.65,9.12,18.64,0,36.2-6.76,47.09-20.2.99-1.22,2.94-.55,2.94,1.02v13.74c0,1.47,1.19,2.67,2.67,2.67h9.19c1.47,0,2.67-1.19,2.67-2.67v-78.69c0-28.92-17.4-42.48-47.52-42.48ZM626.05,118.27c0,15.22-5.55,27.22-13.71,34.18-8.16,6.96-18.64,9.91-30.32,9.91-8.64,0-15.11-.11-22.44-5.52-5.35-3.95-7.68-9.96-7.68-17.16,0-4.8,1.08-8.84,3.24-12.12,2.16-3.28,6.21-6.21,10.45-8.05,10.53-4.69,19.61-4.87,30.45-6.27,6.56-.8,11.2-1.44,13.92-1.92,2.72-.48,6.45-1.39,9.73-2.43,1.62-.51,2.83-1.06,3.82-1.67,1.11-.69,2.53.1,2.53,1.41v9.65Z"/>
+      <path d="M816.21,63.61v-10.09c0-.92-.75-1.67-1.67-1.67h-34.46c-.92,0-1.67-.75-1.67-1.67v-30.98c0-.92-.75-1.67-1.67-1.67h-12.01c-.92,0-1.67.75-1.67,1.67v30.98c0,.92-.75,1.67-1.67,1.67h-55.33c-.92,0-1.67-.75-1.67-1.67v-30.98c0-.92-.75-1.67-1.67-1.67h-12.01c-.92,0-1.67.75-1.67,1.67v30.98c0,.92-.75,1.67-1.67,1.67h-26.41c-.92,0-1.67.75-1.67,1.67v10.09c0,.92.75,1.67,1.67,1.67h26.41c.92,0,1.67.75,1.67,1.67v77.77c0,18.84,10.32,28.08,29.28,28.08h20.65c.92,0,1.67-.75,1.67-1.67v-10.69c0-.92-.75-1.67-1.67-1.67h-32.9c-.92,0-1.67-.75-1.67-1.67v-90.14c0-.92.75-1.67,1.67-1.67h55.33c.92,0,1.67.75,1.67,1.67v77.77c0,18.84,10.32,28.08,29.28,28.08h22.09c.92,0,1.67-.75,1.67-1.67v-10.69c0-.92-.75-1.67-1.67-1.67h-34.36c-.91,0-1.65-.74-1.65-1.65v-90.16c0-.92.75-1.67,1.67-1.67h34.46c.92,0,1.67-.75,1.67-1.67Z"/>
+      <path d="M86.16,1.65c0-.91-.74-1.65-1.65-1.65h-24.27c-18.96,0-29.28,9.24-29.28,28.08v22.11c0,.91-.74,1.65-1.65,1.65H1.65c-.91,0-1.65.74-1.65,1.65v10.14c0,.91.74,1.65,1.65,1.65h27.66c.91,0,1.65.74,1.65,1.65v104.22c0,.91.74,1.65,1.65,1.65h12.06c.91,0,1.65-.74,1.65-1.65v-104.22c0-.91.74-1.65,1.65-1.65h33.18c.91,0,1.65-.74,1.65-1.65v-10.14c0-.91-.74-1.65-1.65-1.65h-33.18c-.91,0-1.65-.74-1.65-1.65V14.85c0-.91.74-1.65,1.65-1.65h36.54c.91,0,1.65-.74,1.65-1.65V1.65Z"/></svg><span class="lc-label">accent</span></div>
+      <div class="lc lb"><svg viewBox="0 0 1382.4 175.68" xmlns="http://www.w3.org/2000/svg"><path d="M154.33,48.96c36.24,0,60,22.92,60,63.36s-23.76,63.36-60,63.36-59.88-22.92-59.88-63.36,23.76-63.36,59.88-63.36ZM154.33,162.24c26.4,0,44.28-17.52,44.28-49.92s-17.88-49.92-44.28-49.92-44.28,17.52-44.28,49.92,18,49.92,44.28,49.92Z"/>
+      <path d="M258.99,53.17l-.02,10.2c0,1.67,2.22,2.34,3.07.91,5.18-8.78,13.95-13.26,29.71-13.26h15.25c.92,0,1.67.75,1.67,1.67v10.57c0,.92-.75,1.67-1.67,1.67h-14.53c-24.24,0-33,13.8-33,39.72v66.13c0,.92-.75,1.67-1.67,1.67h-12.01c-.92,0-1.67-.75-1.67-1.67V53.17c0-.92.75-1.67,1.67-1.67h11.53c.93,0,1.67.75,1.67,1.68Z"/>
+      <path d="M467.08,49.08c24.22,0,40.44,12.24,40.44,38.88v83.17c0,.92-.75,1.67-1.67,1.67h-11.9c-.92,0-1.67-.75-1.67-1.67v-81.85c0-17.76-9.6-26.76-28.08-26.76-21.12,0-35.76,12.48-35.76,38.4v70.21c0,.92-.75,1.67-1.67,1.67h-11.9c-.92,0-1.67-.75-1.67-1.67v-81.85c0-17.76-9.12-26.76-28.08-26.76-21.12,0-35.76,12.48-35.76,38.4v70.21c0,.92-.75,1.67-1.67,1.67h-11.9c-.92,0-1.67-.75-1.67-1.67V53.51c0-.92.75-1.67,1.67-1.67h11.42c.92,0,1.67.75,1.67,1.67v10c0,1.59,2.02,2.27,2.96.98,6.45-8.8,16.93-15.42,36.53-15.42,24.77,0,32.99,12.31,35.64,19.15.52,1.34,2.33,1.46,3.01.2,3.65-6.79,13.92-19.35,40.07-19.35Z"/>
+      <path d="M948.36,48.96c36.24,0,60,22.92,60,63.36s-23.76,63.36-60,63.36-59.88-22.92-59.88-63.36,23.76-63.36,59.88-63.36ZM948.36,162.24c26.4,0,44.28-17.52,44.28-49.92s-17.88-49.92-44.28-49.92-44.28,17.52-44.28,49.92,18,49.92,44.28,49.92Z"/>
+      <path d="M1051.32,51.84c.92,0,1.67.75,1.67,1.67v12.89c0,1.67,2.14,2.28,3.09.91,9.86-14.19,24.99-18.23,41.2-18.23,27.72,0,45.36,13.8,45.36,43.2v78.85c0,.92-.75,1.67-1.67,1.67h-12.02c-.92,0-1.67-.75-1.67-1.67v-77.17c0-22.08-11.88-31.32-32.76-31.32-22.92,0-41.04,13.8-41.04,42.6v65.89c0,.92-.75,1.67-1.67,1.67h-12.02c-.92,0-1.67-.75-1.67-1.67V53.51c0-.92.75-1.67,1.67-1.67h11.54Z"/>
+      <path d="M858.83,53.5v117.64c0,.92-.74,1.66-1.66,1.66h-12.04c-.92,0-1.66-.74-1.66-1.66V53.5c0-.92.74-1.66,1.66-1.66h12.04c.92,0,1.66.74,1.66,1.66Z"/>
+      <circle cx="851.14" cy="18.66" r="10.5"/>
+      <path d="M1379.6,53.5v117.64c0,.92-.74,1.66-1.66,1.66h-12.04c-.92,0-1.66-.74-1.66-1.66V53.5c0-.92.74-1.66,1.66-1.66h12.04c.92,0,1.66.74,1.66,1.66Z"/>
+      <circle cx="1371.9" cy="18.66" r="10.5"/>
+      <path d="M1280.16,49.08c-29.22,0-49.1,12.27-51.84,36.55-.17,1.55,1.1,2.9,2.66,2.9l9.66.03c1.33,0,2.42-.99,2.64-2.3,2.77-16.3,15.64-23.98,36.4-23.98s31.7,9.18,32.69,22.43c.34,4.32-.66,8.08-3.45,11.01-1.86,1.76-4.64,2.83-5.58,3.11-.9.27-2.34.64-3.86.96-1.52.32-2.8.56-3.84.72-1.04.16-2.64.36-4.8.6-2.16.24-3.37.42-5.28.6-1.36.12-3.48.36-6.36.6-2.88.24-5.12.44-6.72.6-30.57,3.2-49.67,15.96-49.67,38.21,0,10.88,3.56,19.36,10.68,25.45,7.12,6.08,17,9.12,29.65,9.12,18.64,0,36.2-6.76,47.09-20.2.99-1.22,2.94-.55,2.94,1.02v13.74c0,1.47,1.19,2.67,2.67,2.67h9.19c1.47,0,2.67-1.19,2.67-2.67v-78.69c0-28.92-17.4-42.48-47.52-42.48ZM1312.8,118.27c0,15.22-5.55,27.22-13.71,34.18-8.16,6.96-18.64,9.91-30.32,9.91-8.64,0-15.11-.11-22.44-5.52-5.35-3.95-7.68-9.96-7.68-17.16,0-4.8,1.08-8.84,3.24-12.12,2.16-3.28,6.21-6.21,10.45-8.05,10.53-4.69,19.61-4.87,30.45-6.27,6.56-.8,11.2-1.44,13.92-1.92,2.72-.48,6.45-1.39,9.73-2.43,1.62-.51,2.83-1.06,3.82-1.67,1.11-.69,2.53.1,2.53,1.41v9.65Z"/>
+      <path d="M593.41,49.08c-29.22,0-49.1,12.27-51.84,36.55-.17,1.55,1.1,2.9,2.66,2.9l9.66.03c1.33,0,2.42-.99,2.64-2.3,2.77-16.3,15.64-23.98,36.4-23.98s31.7,9.18,32.69,22.43c.34,4.32-.66,8.08-3.45,11.01-1.86,1.76-4.64,2.83-5.58,3.11-.9.27-2.34.64-3.86.96-1.52.32-2.8.56-3.84.72-1.04.16-2.64.36-4.8.6-2.16.24-3.37.42-5.28.6-1.36.12-3.48.36-6.36.6-2.88.24-5.12.44-6.72.6-30.57,3.2-49.67,15.96-49.67,38.21,0,10.88,3.56,19.36,10.68,25.45,7.12,6.08,17,9.12,29.65,9.12,18.64,0,36.2-6.76,47.09-20.2.99-1.22,2.94-.55,2.94,1.02v13.74c0,1.47,1.19,2.67,2.67,2.67h9.19c1.47,0,2.67-1.19,2.67-2.67v-78.69c0-28.92-17.4-42.48-47.52-42.48ZM626.05,118.27c0,15.22-5.55,27.22-13.71,34.18-8.16,6.96-18.64,9.91-30.32,9.91-8.64,0-15.11-.11-22.44-5.52-5.35-3.95-7.68-9.96-7.68-17.16,0-4.8,1.08-8.84,3.24-12.12,2.16-3.28,6.21-6.21,10.45-8.05,10.53-4.69,19.61-4.87,30.45-6.27,6.56-.8,11.2-1.44,13.92-1.92,2.72-.48,6.45-1.39,9.73-2.43,1.62-.51,2.83-1.06,3.82-1.67,1.11-.69,2.53.1,2.53,1.41v9.65Z"/>
+      <path d="M816.21,63.61v-10.09c0-.92-.75-1.67-1.67-1.67h-34.46c-.92,0-1.67-.75-1.67-1.67v-30.98c0-.92-.75-1.67-1.67-1.67h-12.01c-.92,0-1.67.75-1.67,1.67v30.98c0,.92-.75,1.67-1.67,1.67h-55.33c-.92,0-1.67-.75-1.67-1.67v-30.98c0-.92-.75-1.67-1.67-1.67h-12.01c-.92,0-1.67.75-1.67,1.67v30.98c0,.92-.75,1.67-1.67,1.67h-26.41c-.92,0-1.67.75-1.67,1.67v10.09c0,.92.75,1.67,1.67,1.67h26.41c.92,0,1.67.75,1.67,1.67v77.77c0,18.84,10.32,28.08,29.28,28.08h20.65c.92,0,1.67-.75,1.67-1.67v-10.69c0-.92-.75-1.67-1.67-1.67h-32.9c-.92,0-1.67-.75-1.67-1.67v-90.14c0-.92.75-1.67,1.67-1.67h55.33c.92,0,1.67.75,1.67,1.67v77.77c0,18.84,10.32,28.08,29.28,28.08h22.09c.92,0,1.67-.75,1.67-1.67v-10.69c0-.92-.75-1.67-1.67-1.67h-34.36c-.91,0-1.65-.74-1.65-1.65v-90.16c0-.92.75-1.67,1.67-1.67h34.46c.92,0,1.67-.75,1.67-1.67Z"/>
+      <path d="M86.16,1.65c0-.91-.74-1.65-1.65-1.65h-24.27c-18.96,0-29.28,9.24-29.28,28.08v22.11c0,.91-.74,1.65-1.65,1.65H1.65c-.91,0-1.65.74-1.65,1.65v10.14c0,.91.74,1.65,1.65,1.65h27.66c.91,0,1.65.74,1.65,1.65v104.22c0,.91.74,1.65,1.65,1.65h12.06c.91,0,1.65-.74,1.65-1.65v-104.22c0-.91.74-1.65,1.65-1.65h33.18c.91,0,1.65-.74,1.65-1.65v-10.14c0-.91-.74-1.65-1.65-1.65h-33.18c-.91,0-1.65-.74-1.65-1.65V14.85c0-.91.74-1.65,1.65-1.65h36.54c.91,0,1.65-.74,1.65-1.65V1.65Z"/></svg><span class="lc-label">pure black</span></div>
+    </div>
+    <div class="rl">
+      <div class="ri"><span class="rb do">colour</span><span class="rt">Logo colour is <strong>#1C1814</strong> — the warm ink value. On dark backgrounds, the logo renders in the dark ink-primary (#EDECEA).</span></div>
+      <div class="ri"><span class="rb do">do</span><span class="rt">Use only on approved backgrounds: light mode bg, dark mode bg, accent blue-grey, or pure black.</span></div>
+      <div class="ri"><span class="rb do">do</span><span class="rt">Clearspace: cap-height of the 'f' on all sides. Minimum digital width: 120px.</span></div>
+      <div class="ri"><span class="rb do">note</span><span class="rt">The floating dots on both i's are the defining personality detail of the wordmark — the mark within the mark. Never remove or reposition them.</span></div>
+      <div class="ri"><span class="rb dn">don't</span><span class="rt">Do not rotate, stretch, outline, shadow, or apply any effects. Do not use any colour other than the approved values above.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="colour">
+  <div class="wrap fi">
+    <div class="ey">02</div>
+    <h2 class="st">Colour system</h2>
+    <p class="si">One warm palette. Two modes. The dark mode is the exact inverse of the light — the same family of tones, flipped. The accent blue-grey is the only colour that threads both unchanged.</p>
+
+    <div class="cgl">light mode</div>
+    <div class="swr">
+      <div class="sw"><div class="swb" style="background:#F4EFE6"></div><div class="swi"><div class="swn">bg-base</div><div class="swh">#F4EFE6</div><div class="swr2">Page background</div></div></div>
+      <div class="sw"><div class="swb" style="background:#ECE6DC"></div><div class="swi"><div class="swn">bg-surface</div><div class="swh">#ECE6DC</div><div class="swr2">Cards, panels</div></div></div>
+      <div class="sw"><div class="swb" style="background:#E2DBD0"></div><div class="swi"><div class="swn">bg-raised</div><div class="swh">#E2DBD0</div><div class="swr2">Inputs, hover</div></div></div>
+      <div class="sw"><div class="swb" style="background:#1C1814"></div><div class="swi"><div class="swn">ink-primary</div><div class="swh">#1C1814</div><div class="swr2">Headings, body · logo</div></div></div>
+      <div class="sw"><div class="swb" style="background:#4A4038"></div><div class="swi"><div class="swn">ink-secondary</div><div class="swh">#4A4038</div><div class="swr2">Supporting text</div></div></div>
+      <div class="sw"><div class="swb" style="background:#9A8F82"></div><div class="swi"><div class="swn">ink-muted</div><div class="swh">#9A8F82</div><div class="swr2">Labels, captions</div></div></div>
+      <div class="sw"><div class="swb" style="background:#4A6278"></div><div class="swi"><div class="swn">accent</div><div class="swh">#4A6278</div><div class="swr2">Links, CTA</div></div></div>
+      <div class="sw"><div class="swb" style="background:#6E8299"></div><div class="swi"><div class="swn">accent-light</div><div class="swh">#6E8299</div><div class="swr2">Hover, secondary</div></div></div>
+    </div>
+
+    <div class="cgl">dark mode — cool neutral</div>
+    <div class="swr">
+      <div class="sw dk"><div class="swb" style="background:#141618"></div><div class="swi"><div class="swn">bg-base</div><div class="swh">#141618</div><div class="swr2">Page background</div></div></div>
+      <div class="sw dk"><div class="swb" style="background:#1c1f22"></div><div class="swi"><div class="swn">bg-surface</div><div class="swh">#1C1F22</div><div class="swr2">Cards, panels</div></div></div>
+      <div class="sw dk"><div class="swb" style="background:#242729"></div><div class="swi"><div class="swn">bg-raised</div><div class="swh">#242729</div><div class="swr2">Inputs, hover</div></div></div>
+      <div class="sw dk"><div class="swb" style="background:#edecea"></div><div class="swi"><div class="swn">ink-primary</div><div class="swh">#EDECEA</div><div class="swr2">Headings, body</div></div></div>
+      <div class="sw dk"><div class="swb" style="background:#b4b2ae"></div><div class="swi"><div class="swn">ink-secondary</div><div class="swh">#B4B2AE</div><div class="swr2">Supporting text</div></div></div>
+      <div class="sw dk"><div class="swb" style="background:#7a7875"></div><div class="swi"><div class="swn">ink-muted</div><div class="swh">#7A7875</div><div class="swr2">Labels, captions</div></div></div>
+      <div class="sw dk"><div class="swb" style="background:#6E8299"></div><div class="swi"><div class="swn">accent</div><div class="swh">#6E8299</div><div class="swr2">Links, CTA</div></div></div>
+      <div class="sw dk"><div class="swb" style="background:#8fa4bc"></div><div class="swi"><div class="swn">accent-light</div><div class="swh">#8FA4BC</div><div class="swr2">Hover, secondary</div></div></div>
+    </div>
+
+    <div class="cr">
+      <div class="crr"><div class="cl">Two distinct modes</div><div class="cb">Light mode is warm cream — organic, approachable, human. Dark mode is cool neutral — precise, authoritative, focused. They are complementary, not mirror images. The warm accent threads both.</div></div>
+      <div class="crr"><div class="cl">The shared accent</div><div class="cb">The blue-grey accent (#4A6278 in light, #6E8299 in dark) is the visual constant across both modes. It shifts in value to maintain contrast, but its character never changes.</div></div>
+      <div class="crr"><div class="cl">Why warm light, cool dark</div><div class="cb">The light mode speaks to the client — warm, human, trustworthy. The dark mode speaks to the operator — precise, tool-like, focused. Both are correct for their context.</div></div>
+      <div class="crr"><div class="cl">Mode context</div><div class="cb">Light mode for client-facing outputs: reports, emails, proposals, the marketing site. Dark mode for the audit platform UI, the For agent interface, and any high-focus operational context.</div></div>
+    </div>
+
+    <div class="mp">
+      <div class="mpn lm">
+        <div class="mpl">light mode</div>
+        <div class="mpc"><div class="mpct">Site audit — Section 4</div><div class="mpcb">Material storage and handling</div><span class="mptg">In progress</span></div>
+        <div class="mpc"><div class="mpct">Analysis complete</div><div class="mpcb">3 inefficiencies identified</div><span class="mptg">Review</span></div>
+      </div>
+      <div class="mpn dm">
+        <div class="mpl">dark mode</div>
+        <div class="mpc"><div class="mpct">Site audit — Section 4</div><div class="mpcb">Material storage and handling</div><span class="mptg">In progress</span></div>
+        <div class="mpc"><div class="mpct">Analysis complete</div><div class="mpcb">3 inefficiencies identified</div><span class="mptg">Review</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="type">
+  <div class="wrap fi">
+    <div class="ey">03</div>
+    <h2 class="st">Typography</h2>
+    <p class="si">Two typefaces for all brand contexts. Helvetica Neue for everything functional. DM Mono for everything technical. Cormorant Infant is in the system but locked to the newsletter.</p>
+    <div class="tb">
+      <div class="tm"><span class="tt">primary sans</span><span class="td">Helvetica Neue — all brand contexts</span></div>
+      <div class="th1">Structured.<br>Reliable.</div>
+      <div class="th2" style="margin-top:12px">Section heading — weight 400, −0.015em</div>
+      <div class="tbd" style="margin-top:12px">Body copy at 14px, weight 400, line-height 1.7. Helvetica Neue is the primary voice of formattion across all contexts. It carries the authority of the methodology without needing to announce itself.</div>
+      <div class="tlb" style="margin-top:12px">LABEL — 11PX / WEIGHT 400 / 0.06EM TRACKING</div>
+    </div>
+    <div class="tb">
+      <div class="tm"><span class="tt">mono</span><span class="td">DM Mono — data, IDs, technical strings</span></div>
+      <div class="tmo">audit_id: FMT-2024-0047<br>client: Woodleaze Groundworks Ltd<br>score: 84 / 100 — status: complete<br>generated: 2024-11-12T09:41:00Z</div>
+      <div class="tmol">DM Mono — all technical, data, and system contexts</div>
+    </div>
+    <div class="tb">
+      <div class="tm"><span class="tt r">display serif</span><span class="td">Cormorant Infant — four approved contexts only</span></div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+        <div style="background:var(--l-bg2);padding:28px 32px;border-radius:12px">
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:16px">01 — Report cover</div>
+          <div style="font-family:'Cormorant Infant',Georgia,serif;font-size:28px;font-weight:300;font-style:italic;color:var(--l-ink);line-height:1.05;margin-bottom:8px">Woodleaze Groundworks Ltd</div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--l-ink4);letter-spacing:.06em">CLIENT NAME ONLY — everything else stays Helvetica Neue</div>
+        </div>
+        <div style="background:var(--l-bg2);padding:28px 32px;border-radius:12px">
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:16px">02 — Section opener / findings</div>
+          <div style="font-family:'Cormorant Infant',Georgia,serif;font-size:28px;font-weight:300;font-style:italic;color:var(--l-ink);line-height:1.1;margin-bottom:8px">Three inefficiencies identified.</div>
+          <div style="font-size:13px;color:var(--l-ink3);line-height:1.65;margin-bottom:8px">Section 4 shows material storage gaps outside current site standards.</div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--l-ink4);letter-spacing:.06em">ONE ITALIC STATEMENT — Helvetica body follows immediately</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div style="background:var(--l-bg2);padding:28px 32px;border-radius:12px">
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:16px">03 — Pull quote</div>
+          <div style="font-family:'Cormorant Infant',Georgia,serif;font-size:22px;font-weight:300;font-style:italic;color:var(--l-ink);line-height:1.4;padding-left:16px;border-left:2px solid var(--acc);margin-bottom:8px">"We recovered 12 hours a week in admin time within the first month."</div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--l-ink4);letter-spacing:.06em;padding-left:16px">— DIRECTOR, WOODLEAZE GROUNDWORKS</div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--l-ink4);letter-spacing:.06em;margin-top:10px">PROPOSALS &amp; MARKETING ONLY — never in reports or platform</div>
+        </div>
+        <div style="background:var(--l-bg2);padding:28px 32px;border-radius:12px">
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:16px">04 — Marketing hero (mixed)</div>
+          <div style="line-height:1.05;margin-bottom:12px">
+            <span style="font-size:36px;font-weight:400;color:var(--l-ink);letter-spacing:-.025em">built for</span><br>
+            <span style="font-family:'Cormorant Infant',Georgia,serif;font-size:40px;font-weight:300;font-style:italic;color:var(--acc-lt)">construction.</span>
+          </div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--l-ink4);letter-spacing:.06em">SANS STATEMENT + SERIF INFLECTION — one line maximum</div>
+        </div>
+      </div>
+
+      <div style="background:var(--l-bg2);padding:20px 24px;border-radius:8px;margin-top:8px;border-left:2px solid var(--l-border2)">
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:8px">rule — when Cormorant appears</div>
+        <div style="font-size:13px;color:var(--l-ink2);line-height:1.65">Cormorant marks the human moment — where a person receives something. The instant execution begins, Helvetica takes over. It must never appear in platform UI, the For agent interface, data tables, navigation, labels, or any operational context.</div>
+      </div>
+    </div>
+    <table class="tsc">
+      <thead><tr><th style="width:130px">name</th><th style="width:160px">typeface</th><th style="width:120px">size / weight</th><th>use</th></tr></thead>
+      <tbody>
+        <tr><td class="scn">heading-xl</td><td class="scf">Helvetica Neue</td><td class="scs">36–40px / 400</td><td class="scu">Hero headlines, page titles, report covers</td></tr>
+        <tr><td class="scn">heading-lg</td><td class="scf">Helvetica Neue</td><td class="scs">24–28px / 400</td><td class="scu">Section titles, audit section headers</td></tr>
+        <tr><td class="scn">heading-sm</td><td class="scf">Helvetica Neue</td><td class="scs">16–18px / 400</td><td class="scu">Card titles, roadmap items</td></tr>
+        <tr><td class="scn">body</td><td class="scf">Helvetica Neue</td><td class="scs">18px / 300</td><td class="scu">All body copy — line-height 1.7</td></tr>
+        <tr><td class="scn">label</td><td class="scf">Helvetica Neue</td><td class="scs">11px / 400</td><td class="scu">UI labels, nav, markers — uppercase, 0.06em</td></tr>
+        <tr><td class="scn">caption</td><td class="scf">Helvetica Neue</td><td class="scs">12px / 400</td><td class="scu">Timestamps, supporting info</td></tr>
+        <tr><td class="scn">mono-md</td><td class="scf">DM Mono</td><td class="scs">13px / 400</td><td class="scu">Audit IDs, scores, data values, For agent output</td></tr>
+        <tr><td class="scn">mono-sm</td><td class="scf">DM Mono</td><td class="scs">10–11px / 300</td><td class="scu">Version strings, system tags, meta labels</td></tr>
+        <tr><td class="scn">display-cover</td><td class="scf">Cormorant Infant</td><td class="scs">32–44px / 300 italic</td><td class="scu">Report cover — client name only</td></tr>
+        <tr><td class="scn">display-opener</td><td class="scf">Cormorant Infant</td><td class="scs">28–36px / 300 italic</td><td class="scu">Section opener / findings statement — one line</td></tr>
+        <tr><td class="scn">display-quote</td><td class="scf">Cormorant Infant</td><td class="scs">20–26px / 300 italic</td><td class="scu">Pull quotes — proposals and marketing only</td></tr>
+        <tr><td class="scn">display-hero</td><td class="scf">Cormorant Infant</td><td class="scs">38–48px / 300 italic</td><td class="scu">Marketing hero inflection word — mixed with Helvetica, one line max</td></tr>
+        <tr style="opacity:.4"><td class="scn">newsletter*</td><td class="scf">Cormorant Infant</td><td class="scs">any / 300</td><td class="scu">Newsletter — all weights and sizes permitted within newsletter context</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="radius">
+  <div class="wrap fi">
+    <div class="ey">04</div>
+    <h2 class="st">Border radius</h2>
+    <p class="si">Corner rounding is functional, not decorative. Each radius value maps to a specific role in the UI. Do not mix values arbitrarily — consistent radius use signals hierarchy and builds spatial familiarity across the platform.</p>
+
+    <!-- Four radius demo cards -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:48px">
+
+      <!-- rx 6px -->
+      <div style="background:var(--l-bg2);border-radius:6px;padding:28px 28px 24px">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:20px">rx 6px — tight</div>
+        <div style="font-size:18px;font-weight:400;color:var(--l-ink);letter-spacing:-.01em">Inputs, tags</div>
+      </div>
+
+      <!-- rx 12px -->
+      <div style="background:var(--l-bg2);border-radius:12px;padding:28px 28px 24px">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:20px">rx 12px — standard</div>
+        <div style="font-size:18px;font-weight:400;color:var(--l-ink);letter-spacing:-.01em">Cards, panels</div>
+      </div>
+
+      <!-- rx 20px -->
+      <div style="background:var(--l-bg2);border-radius:20px;padding:28px 28px 24px">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:20px">rx 20px — feature card</div>
+        <div style="font-size:18px;font-weight:400;color:var(--l-ink);letter-spacing:-.01em">Hero blocks,<br>images</div>
+      </div>
+
+      <!-- pill -->
+      <div style="background:var(--l-bg2);border-radius:999px;padding:28px 28px 24px">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:20px">pill — buttons, badges</div>
+        <div style="font-size:18px;font-weight:400;color:var(--l-ink);letter-spacing:-.01em">Tags, CTAs</div>
+      </div>
+
+    </div>
+
+    <!-- Token table -->
+    <div style="overflow-x:auto;margin-bottom:48px">
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead>
+          <tr style="border-bottom:1px solid var(--l-border2)">
+            <th style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);font-weight:400;text-align:left;padding:0 0 10px 0;width:18%">Token</th>
+            <th style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);font-weight:400;text-align:left;padding:0 0 10px 16px;width:14%">Value</th>
+            <th style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);font-weight:400;text-align:left;padding:0 0 10px 16px;width:68%">Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--l-border)">
+            <td style="padding:14px 0;font-family:var(--mono);font-size:11px;color:var(--l-ink2)">--rx-tight</td>
+            <td style="padding:14px 0 14px 16px;font-family:var(--mono);font-size:11px;color:var(--acc)">6px</td>
+            <td style="padding:14px 0 14px 16px;color:var(--l-ink3)">Text inputs, select fields, inline tags, code badges, table cells with interactive state</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--l-border)">
+            <td style="padding:14px 0;font-family:var(--mono);font-size:11px;color:var(--l-ink2)">--rx-std</td>
+            <td style="padding:14px 0 14px 16px;font-family:var(--mono);font-size:11px;color:var(--acc)">12px</td>
+            <td style="padding:14px 0 14px 16px;color:var(--l-ink3)">Standard cards, panels, modals, section containers, audit form blocks, nav drawer</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--l-border)">
+            <td style="padding:14px 0;font-family:var(--mono);font-size:11px;color:var(--l-ink2)">--rx-feature</td>
+            <td style="padding:14px 0 14px 16px;font-family:var(--mono);font-size:11px;color:var(--acc)">20px</td>
+            <td style="padding:14px 0 14px 16px;color:var(--l-ink3)">Hero blocks, feature callouts, full-bleed image containers, report cover panels</td>
+          </tr>
+          <tr>
+            <td style="padding:14px 0;font-family:var(--mono);font-size:11px;color:var(--l-ink2)">--rx-pill</td>
+            <td style="padding:14px 0 14px 16px;font-family:var(--mono);font-size:11px;color:var(--acc)">999px</td>
+            <td style="padding:14px 0 14px 16px;color:var(--l-ink3)">CTA buttons, status badges, filter chips, eyebrow pills, toggle tracks</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Rules -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div style="background:var(--l-bg2);border-radius:12px;padding:24px 28px">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:14px">do</div>
+        <div style="font-size:13px;color:var(--l-ink2);line-height:1.8">Use rx-std (12px) as the default for any contained element<br>Match child radius to parent — never exceed the container's value<br>Apply rx-pill exclusively to fully-rounded interactive elements<br>Use rx-tight consistently across all form inputs in a single context</div>
+      </div>
+      <div style="background:var(--l-bg2);border-radius:12px;padding:24px 28px">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:14px">don't</div>
+        <div style="font-size:13px;color:var(--l-ink2);line-height:1.8">Mix radius values within a single component<br>Apply rx-feature to interactive controls — it reads as decorative<br>Use arbitrary values outside the four tokens<br>Over-round small elements — a 4px tag in a 20px container looks broken</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="voice">
+  <div class="wrap fi">
+    <div class="ey">05</div>
+    <h2 class="st">Voice &amp; tone</h2>
+    <p class="si">The brand speaks the way the methodology works — structured, direct, precise. The audience is a construction operator. They read fast and they know when something is trying too hard.</p>
+    <div class="vg">
+      <div class="vc"><div class="vw">Structured</div><div class="vd">Every output has a clear architecture. Nothing placed arbitrarily. The report mirrors the methodology.</div></div>
+      <div class="vc"><div class="vw">Consistent</div><div class="vd">The same standard applied every time, to every client, on every site.</div></div>
+      <div class="vc"><div class="vw">Reliable</div><div class="vd">Professionals trust formattion because it delivers — without performance, without hedging.</div></div>
+      <div class="vc"><div class="vw">Predictable</div><div class="vd">In construction, predictability is the premium product. The brand owns it.</div></div>
+      <div class="vc"><div class="vw">Precise</div><div class="vd">Named specifics over vague summaries. Scores, dates, section numbers, £ values.</div></div>
+      <div class="vc"><div class="vw">Considered</div><div class="vd">Nothing is rushed. Recommendations come from the audit, not instinct. The roadmap is phased.</div></div>
+    </div>
+    <div class="tcl">
+      <div class="tc2 do">
+        <div class="tclbl">do</div>
+        <div class="tci">Write in complete, purposeful sentences</div>
+        <div class="tci">Active voice — "The audit identified three gaps"</div>
+        <div class="tci">Name specifics — section numbers, scores, dates, £ values</div>
+        <div class="tci">Be direct with findings, including uncomfortable ones</div>
+        <div class="tci">Lead with the outcome, follow with the detail</div>
+        <div class="tci">Write for someone reading standing up on a job site</div>
+      </div>
+      <div class="tc2 dn">
+        <div class="tclbl">don't</div>
+        <div class="tci">Use filler — "It's worth noting that..."</div>
+        <div class="tci">Soften findings with hedging or apology</div>
+        <div class="tci">Use exclamation marks or informal punctuation</div>
+        <div class="tci">Passive voice — "Issues were found..."</div>
+        <div class="tci">Use tech jargon without a plain-English follow-up</div>
+        <div class="tci">Over-explain — the client runs a business</div>
+      </div>
+    </div>
+    <div class="veg">
+      <div class="vegl">For — AI agent voice</div>
+      <div class="vegt">"Section 4 shows three material storage gaps outside current site standards. The highest-risk item has been flagged for immediate review. A structured remediation path is outlined in the roadmap below."</div>
+    </div>
+    <div class="veg" style="border-left-color:var(--l-ink3)">
+      <div class="vegl">Client report — opening</div>
+      <div class="vegt">"This audit identified clear opportunities to strengthen your site management processes. The findings below are structured by priority — each with a specific, actionable recommendation and an implementation timeline."</div>
+    </div>
+    <div class="veg" style="border-left-color:var(--l-acc-lt)">
+      <div class="vegl">Outreach — operator register</div>
+      <div class="vegt">"Most subcontract businesses lose £30–80k a year to slow quote follow-up and missed enquiries. We can show you exactly where yours are going — and fix it in six weeks."</div>
+    </div>
+  </div>
+</section>
+
+<section id="image">
+  <div class="wrap fi">
+    <div class="ey">06</div>
+    <h2 class="st">Image system</h2>
+    <p class="si">All images are generated via diffusion model API. The style is locked — only subject and composition variables change per use case. This ensures visual consistency across every context without a photographer or art director on every job.</p>
+
+    <div style="background:var(--l-bg2);padding:28px 32px;border-radius:12px;margin-bottom:8px">
+      <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:14px">Core aesthetic direction</div>
+      <div style="font-size:22px;font-weight:400;color:var(--l-ink);letter-spacing:-.015em;margin-bottom:10px">Documentary realism, desaturated warm</div>
+      <div style="font-size:13px;color:var(--l-ink2);line-height:1.7;max-width:600px">Images feel like they were taken on site — not staged, not stock. Real construction environments, real materials, real work. Treated with a warm desaturated grade that echoes the brand palette. The feel is quiet authority, not glossy aspiration.</div>
+    </div>
+
+    <div style="margin-top:8px;margin-bottom:32px">
+      <div style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:12px">Style rules — always applied</div>
+      <div style="display:flex;flex-direction:column;gap:2px">
+        <div class="ri"><span class="rb do">01</span><span class="rt"><strong style="font-weight:400;color:var(--l-ink)">Desaturated warm grade.</strong> Colours muted to 20–40% saturation. Aged document feel — not black-and-white, not vivid.</span></div>
+        <div class="ri"><span class="rb do">02</span><span class="rt"><strong style="font-weight:400;color:var(--l-ink)">Ambient natural light.</strong> Overcast daylight, golden hour, or diffused interior. No studio flash, no dramatic spotlights.</span></div>
+        <div class="ri"><span class="rb do">03</span><span class="rt"><strong style="font-weight:400;color:var(--l-ink)">No faces.</strong> Workers may appear from behind, side-on, or at distance. Hands on equipment are permitted. Faces are never shown.</span></div>
+        <div class="ri"><span class="rb do">04</span><span class="rt"><strong style="font-weight:400;color:var(--l-ink)">Geometry and structure over chaos.</strong> Clear lines, repetition, material texture. Steel framework, concrete surfaces, organised sites, aerial groundworks.</span></div>
+        <div class="ri"><span class="rb do">05</span><span class="rt"><strong style="font-weight:400;color:var(--l-ink)">Intentional negative space.</strong> Leave room in the composition — text will often sit here. Do not fill the frame edge-to-edge.</span></div>
+        <div class="ri"><span class="rb do">06</span><span class="rt"><strong style="font-weight:400;color:var(--l-ink)">Film grain texture.</strong> 15–25% opacity grain. Makes AI-generated images feel documentary rather than synthetic.</span></div>
+      </div>
+    </div>
+
+    <div style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:12px">Three contexts</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:32px">
+      <div style="background:var(--l-bg2);padding:24px;border-radius:12px">
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:12px">LinkedIn</div>
+        <div style="font-size:14px;font-weight:400;color:var(--l-ink);margin-bottom:8px">Social feed</div>
+        <div style="font-size:12px;color:var(--l-ink4);line-height:1.6;margin-bottom:12px">Bold composition, clear subject, works at thumbnail scale. Must communicate construction + precision in under 1 second.</div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--l-ink4);line-height:1.8">ratio: 1:1 or 4:5<br>subject: close detail or strong geometric overhead<br>text zone: upper or lower third<br>mood: direct, grounded, confident</div>
+      </div>
+      <div style="background:var(--l-bg2);padding:24px;border-radius:12px">
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:12px">Newsletter</div>
+        <div style="font-size:14px;font-weight:400;color:var(--l-ink);margin-bottom:8px">Editorial</div>
+        <div style="font-size:12px;color:var(--l-ink4);line-height:1.6;margin-bottom:12px">Wider, slower, more atmospheric. Pairs with Cormorant headlines. Can be more abstract — material texture, aerial geometry, light studies.</div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--l-ink4);line-height:1.8">ratio: 16:9 or 3:1 banner<br>subject: landscape, aerial, or abstract material<br>text zone: wide left or centre negative space<br>mood: contemplative, editorial, measured</div>
+      </div>
+      <div style="background:var(--l-bg2);padding:24px;border-radius:12px">
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:12px">Marketing site</div>
+        <div style="font-size:14px;font-weight:400;color:var(--l-ink);margin-bottom:8px">Web / hero</div>
+        <div style="font-size:12px;color:var(--l-ink4);line-height:1.6;margin-bottom:12px">Full-bleed behind text. Needs depth and atmosphere. Must not compete with the warm cream palette.</div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--l-ink4);line-height:1.8">ratio: 16:9 or wider<br>subject: site, infrastructure, operational environment<br>text zone: dark lower third, overlay-ready<br>mood: authoritative, expansive, real</div>
+      </div>
+    </div>
+
+    <div style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:12px;margin-top:32px">Image framing patterns</div>
+    <div style="font-size:13px;color:var(--l-ink3);line-height:1.7;max-width:600px;margin-bottom:24px">Three approved ways to frame images in brand contexts. The image is never decorative — it always carries context about the environment, the industry, or the scale of the problem formattion solves.</div>
+
+    <!-- PATTERN 01: Image as card background -->
+    <div style="margin-bottom:8px">
+      <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:10px">01 — Image as card background</div>
+      <div style="position:relative;border-radius:12px;overflow:hidden;min-height:220px;background:#2a2420;display:flex">
+        <!-- Simulated construction image bg -->
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1c1814 0%,#3a3028 30%,#4a4035 55%,#2e2820 80%,#1a1612 100%);opacity:.9"></div>
+        <!-- Structural lines simulating site geometry -->
+        <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.18" viewBox="0 0 800 220" preserveAspectRatio="xMidYMid slice">
+          <line x1="400" y1="0" x2="800" y2="220" stroke="#9a8f82" stroke-width="1"/>
+          <line x1="500" y1="0" x2="800" y2="140" stroke="#9a8f82" stroke-width=".5"/>
+          <line x1="600" y1="0" x2="800" y2="80" stroke="#9a8f82" stroke-width=".5"/>
+          <line x1="350" y1="0" x2="800" y2="280" stroke="#9a8f82" stroke-width=".5"/>
+          <rect x="420" y="20" width="120" height="180" fill="none" stroke="#c8bfb4" stroke-width=".5" opacity=".4"/>
+          <rect x="560" y="40" width="80" height="160" fill="none" stroke="#c8bfb4" stroke-width=".5" opacity=".3"/>
+          <rect x="660" y="60" width="60" height="140" fill="none" stroke="#c8bfb4" stroke-width=".5" opacity=".2"/>
+          <line x1="380" y1="0" x2="380" y2="220" stroke="#9a8f82" stroke-width=".5" opacity=".3"/>
+        </svg>
+        <!-- Dark gradient on left for text legibility -->
+        <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(28,24,20,0.95) 0%,rgba(28,24,20,0.7) 50%,rgba(28,24,20,0.1) 100%)"></div>
+        <!-- Content -->
+        <div style="position:relative;z-index:1;padding:36px 40px;max-width:420px;display:flex;flex-direction:column;justify-content:space-between;min-height:220px">
+          <div>
+            <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,239,230,0.5);margin-bottom:12px">Marketing site — hero card</div>
+            <div style="font-size:24px;font-weight:400;color:#f4efe6;line-height:1.2;letter-spacing:-.015em;margin-bottom:10px">Automation infrastructure built for subcontract businesses.</div>
+            <div style="font-size:13px;color:rgba(244,239,230,0.65);line-height:1.65">Structured. Consistent. Reliable.</div>
+          </div>
+          <div style="margin-top:20px">
+            <span style="display:inline-block;font-family:var(--mono);font-size:11px;color:#f4efe6;border:1px solid rgba(244,239,230,0.3);padding:8px 20px;letter-spacing:.04em;border-radius:999px">See how it works</span>
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--l-bg2);padding:14px 18px;border-radius:0 0 8px 8px;font-size:12px;color:var(--l-ink4);line-height:1.55">Text sits on a dark gradient overlay covering the left 50–60% of the card. Image bleeds to the right. Works for marketing site hero sections and newsletter headers. The gradient must be dark enough for text to pass contrast without appearing as a visible block.</div>
+    </div>
+
+    <!-- PATTERN 02: Full bleed with overlay -->
+    <div style="margin-bottom:8px">
+      <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:10px">02 — Full bleed with bottom gradient</div>
+      <div style="position:relative;border-radius:12px;overflow:hidden;height:180px;background:#2a2420">
+        <!-- Full image simulation -->
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,#3a3530 0%,#4a4038 25%,#5a5040 50%,#3e3428 75%,#1c1814 100%);opacity:.85"></div>
+        <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.2" viewBox="0 0 800 180" preserveAspectRatio="xMidYMid slice">
+          <line x1="0" y1="90" x2="800" y2="60" stroke="#c8bfb4" stroke-width=".5"/>
+          <line x1="0" y1="110" x2="800" y2="80" stroke="#c8bfb4" stroke-width=".5"/>
+          <line x1="0" y1="130" x2="800" y2="100" stroke="#c8bfb4" stroke-width=".5"/>
+          <rect x="100" y="20" width="200" height="140" fill="none" stroke="#9a8f82" stroke-width=".5"/>
+          <rect x="320" y="30" width="160" height="120" fill="none" stroke="#9a8f82" stroke-width=".5"/>
+          <rect x="500" y="10" width="140" height="160" fill="none" stroke="#9a8f82" stroke-width=".5"/>
+          <rect x="660" y="40" width="100" height="120" fill="none" stroke="#9a8f82" stroke-width=".5"/>
+        </svg>
+        <!-- Bottom gradient -->
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(28,24,20,0.96) 0%,rgba(28,24,20,0.4) 50%,rgba(28,24,20,0) 100%)"></div>
+        <!-- Text at bottom -->
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 32px">
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,239,230,0.45);margin-bottom:6px">LinkedIn / section break</div>
+          <div style="font-size:18px;font-weight:400;color:#f4efe6;letter-spacing:-.01em">12 hours of admin recovered. Every week.</div>
+        </div>
+      </div>
+      <div style="background:var(--l-bg2);padding:14px 18px;border-radius:0 0 8px 8px;font-size:12px;color:var(--l-ink4);line-height:1.55">Image fills the entire frame. Dark gradient rises from the bottom to provide text legibility. Text anchors to the bottom-left. Works for LinkedIn posts, marketing site section dividers, and report cover pages. Keep the text brief — one statement maximum.</div>
+    </div>
+
+    <!-- PATTERN 03: Image beside content -->
+    <div style="margin-bottom:8px">
+      <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:10px">03 — Image beside content</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:12px;overflow:hidden;min-height:200px">
+        <!-- Image side -->
+        <div style="position:relative;background:#2a2420;min-height:200px">
+          <div style="position:absolute;inset:0;background:linear-gradient(145deg,#4a4035 0%,#2e2820 40%,#1c1814 100%);opacity:.9"></div>
+          <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.25" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
+            <line x1="0" y1="0" x2="400" y2="200" stroke="#9a8f82" stroke-width=".8"/>
+            <line x1="80" y1="0" x2="400" y2="160" stroke="#9a8f82" stroke-width=".5"/>
+            <line x1="160" y1="0" x2="400" y2="120" stroke="#9a8f82" stroke-width=".5"/>
+            <rect x="40" y="30" width="140" height="140" fill="none" stroke="#c8bfb4" stroke-width=".5"/>
+            <rect x="200" y="50" width="100" height="100" fill="none" stroke="#c8bfb4" stroke-width=".5"/>
+            <line x1="0" y1="100" x2="400" y2="100" stroke="#9a8f82" stroke-width=".3" opacity=".5"/>
+          </svg>
+          <div style="position:absolute;bottom:14px;left:14px;font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:rgba(244,239,230,0.3)">construction site — aerial</div>
+        </div>
+        <!-- Content side -->
+        <div style="background:var(--l-bg2);padding:32px 28px;display:flex;flex-direction:column;justify-content:center">
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:12px">Report / case study</div>
+          <div style="font-size:16px;font-weight:400;color:var(--l-ink);line-height:1.3;letter-spacing:-.01em;margin-bottom:10px">Section opener or case study intro</div>
+          <div style="font-size:12px;color:var(--l-ink3);line-height:1.65">Clean separation — no overlay, no gradient. Image fills the left column entirely. Content fills the right. Used in audit reports, case studies, and proposal documents where clarity matters more than atmosphere.</div>
+        </div>
+      </div>
+      <div style="background:var(--l-bg2);padding:14px 18px;border-radius:0 0 8px 8px;font-size:12px;color:var(--l-ink4);line-height:1.55">No overlay. Hard edge between image and content. Image column is always left, content always right. Works in light mode only — do not use in dark platform UI. Best for printed or digital reports, proposals, and case studies.</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px">
+      <div style="background:var(--l-bg2);padding:18px 20px;border-radius:12px">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:8px">Pattern 01 use</div>
+        <div style="font-size:12px;color:var(--l-ink4);line-height:1.55">Marketing site hero, newsletter header, feature announcement</div>
+      </div>
+      <div style="background:var(--l-bg2);padding:18px 20px;border-radius:12px">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:8px">Pattern 02 use</div>
+        <div style="font-size:12px;color:var(--l-ink4);line-height:1.55">LinkedIn posts, site section dividers, report cover page</div>
+      </div>
+      <div style="background:var(--l-bg2);padding:18px 20px;border-radius:12px">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:8px">Pattern 03 use</div>
+        <div style="font-size:12px;color:var(--l-ink4);line-height:1.55">Audit reports, case studies, proposals — light mode only</div>
+      </div>
+    </div>
+
+    
+
+    <div style="margin-bottom:8px">
+      <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:10px">01 — Image as card background</div>
+      <div style="position:relative;border-radius:12px;overflow:hidden;min-height:220px;background:#2a2420;display:flex">
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1c1814 0%,#3a3028 30%,#4a4035 55%,#2e2820 80%,#1a1612 100%);opacity:.9"></div>
+        <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.18" viewBox="0 0 800 220" preserveAspectRatio="xMidYMid slice">
+          <line x1="400" y1="0" x2="800" y2="220" stroke="#9a8f82" stroke-width="1"/>
+          <line x1="500" y1="0" x2="800" y2="140" stroke="#9a8f82" stroke-width=".5"/>
+          <line x1="600" y1="0" x2="800" y2="80" stroke="#9a8f82" stroke-width=".5"/>
+          <rect x="420" y="20" width="120" height="180" fill="none" stroke="#c8bfb4" stroke-width=".5" opacity=".4"/>
+          <rect x="560" y="40" width="80" height="160" fill="none" stroke="#c8bfb4" stroke-width=".5" opacity=".3"/>
+          <rect x="660" y="60" width="60" height="140" fill="none" stroke="#c8bfb4" stroke-width=".5" opacity=".2"/>
+        </svg>
+        <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(28,24,20,0.95) 0%,rgba(28,24,20,0.7) 50%,rgba(28,24,20,0.1) 100%)"></div>
+        <div style="position:relative;z-index:1;padding:36px 40px;max-width:420px;display:flex;flex-direction:column;justify-content:space-between;min-height:220px">
+          <div>
+            <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,239,230,0.45);margin-bottom:12px">Marketing site — hero card</div>
+            <div style="font-size:24px;font-weight:400;color:#f4efe6;line-height:1.2;letter-spacing:-.015em;margin-bottom:10px">Automation infrastructure built for subcontract businesses.</div>
+            <div style="font-size:13px;color:rgba(244,239,230,0.6);line-height:1.65">Structured. Consistent. Reliable.</div>
+          </div>
+          <div style="margin-top:20px"><span style="display:inline-block;font-family:var(--mono);font-size:11px;color:#f4efe6;border:1px solid rgba(244,239,230,0.3);padding:8px 20px;letter-spacing:.04em;border-radius:999px">See how it works</span></div>
+        </div>
+      </div>
+      <div style="background:var(--l-bg2);padding:14px 18px;font-size:12px;color:var(--l-ink4);line-height:1.55;border-radius:12px;margin-top:4px">Text sits on a dark left-to-right gradient. Image bleeds right. Use for marketing site hero sections and newsletter headers. Gradient must be dark enough for text contrast without appearing as a visible block.</div>
+    </div>
+
+    <div style="margin-bottom:8px">
+      <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:10px">02 — Full bleed with bottom gradient</div>
+      <div style="position:relative;border-radius:12px;overflow:hidden;height:180px;background:#2a2420">
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,#3a3530 0%,#4a4038 25%,#5a5040 50%,#3e3428 75%,#1c1814 100%);opacity:.85"></div>
+        <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.2" viewBox="0 0 800 180" preserveAspectRatio="xMidYMid slice">
+          <line x1="0" y1="90" x2="800" y2="60" stroke="#c8bfb4" stroke-width=".5"/>
+          <line x1="0" y1="110" x2="800" y2="80" stroke="#c8bfb4" stroke-width=".5"/>
+          <rect x="100" y="20" width="200" height="140" fill="none" stroke="#9a8f82" stroke-width=".5"/>
+          <rect x="320" y="30" width="160" height="120" fill="none" stroke="#9a8f82" stroke-width=".5"/>
+          <rect x="500" y="10" width="140" height="160" fill="none" stroke="#9a8f82" stroke-width=".5"/>
+          <rect x="660" y="40" width="100" height="120" fill="none" stroke="#9a8f82" stroke-width=".5"/>
+        </svg>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(28,24,20,0.96) 0%,rgba(28,24,20,0.4) 50%,rgba(28,24,20,0) 100%)"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 32px">
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,239,230,0.4);margin-bottom:6px">LinkedIn / section break</div>
+          <div style="font-size:18px;font-weight:400;color:#f4efe6;letter-spacing:-.01em">12 hours of admin recovered. Every week.</div>
+        </div>
+      </div>
+      <div style="background:var(--l-bg2);padding:14px 18px;font-size:12px;color:var(--l-ink4);line-height:1.55;border-radius:12px;margin-top:4px">Image fills the entire frame. Dark gradient rises from the bottom. Text anchors bottom-left. Use for LinkedIn posts, site section dividers, and report cover pages. Keep text to one statement maximum.</div>
+    </div>
+
+    <div style="margin-bottom:32px">
+      <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:10px">03 — Image beside content</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:12px;overflow:hidden;min-height:200px">
+        <div style="position:relative;background:#2a2420;min-height:200px">
+          <div style="position:absolute;inset:0;background:linear-gradient(145deg,#4a4035 0%,#2e2820 40%,#1c1814 100%);opacity:.9"></div>
+          <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.25" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
+            <line x1="0" y1="0" x2="400" y2="200" stroke="#9a8f82" stroke-width=".8"/>
+            <line x1="80" y1="0" x2="400" y2="160" stroke="#9a8f82" stroke-width=".5"/>
+            <rect x="40" y="30" width="140" height="140" fill="none" stroke="#c8bfb4" stroke-width=".5"/>
+            <rect x="200" y="50" width="100" height="100" fill="none" stroke="#c8bfb4" stroke-width=".5"/>
+            <line x1="0" y1="100" x2="400" y2="100" stroke="#9a8f82" stroke-width=".3" opacity=".5"/>
+          </svg>
+          <div style="position:absolute;bottom:14px;left:14px;font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:rgba(244,239,230,0.3)">construction site — aerial</div>
+        </div>
+        <div style="background:var(--l-bg2);padding:32px 28px;display:flex;flex-direction:column;justify-content:center">
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:12px">Report / case study</div>
+          <div style="font-size:16px;font-weight:400;color:var(--l-ink);line-height:1.3;letter-spacing:-.01em;margin-bottom:10px">Section opener or case study intro</div>
+          <div style="font-size:12px;color:var(--l-ink3);line-height:1.65">Clean separation — no overlay, no gradient. Image fills the left column, content fills the right. Used in audit reports, case studies, and proposal documents.</div>
+        </div>
+      </div>
+      <div style="background:var(--l-bg2);padding:14px 18px;font-size:12px;color:var(--l-ink4);line-height:1.55;border-radius:12px;margin-top:4px">No overlay. Hard edge between image and content. Image always left, content always right. Light mode only — do not use in dark platform UI. Best for printed or digital reports, proposals, and case studies.</div>
+    </div>
+
+    <div style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:12px">Prompt architecture — locked base + dynamic variables</div>
+    <div style="background:var(--l-bg2);padding:28px 32px;border-radius:12px;margin-bottom:8px">
+      <div style="font-size:13px;color:var(--l-ink3);line-height:1.7;margin-bottom:20px">Every image prompt is assembled from four layers in order. The style base is <strong style="font-weight:400;color:var(--l-ink)">never modified</strong>. Only the subject, composition, and context spec are generated per use case by For.</div>
+      <div style="background:var(--l-bg3);padding:20px 24px;border-radius:8px;font-family:var(--mono);font-size:11px;line-height:2;color:var(--l-ink3)">
+        <span style="color:var(--l-ink);font-weight:400">[STYLE BASE]</span> documentary construction photography, desaturated warm film grade, ambient overcast daylight, subtle grain texture, no faces, architectural precision, negative space composition —<br>
+        <span style="color:var(--l-ink);font-weight:400">[SUBJECT]</span> <span style="color:var(--acc)">{{generated by For from topic}}</span> —<br>
+        <span style="color:var(--l-ink);font-weight:400">[COMPOSITION]</span> <span style="color:var(--acc)">{{overhead aerial / close detail / wide environmental / etc.}}</span> —<br>
+        <span style="color:var(--l-ink);font-weight:400">[CONTEXT SPEC]</span> <span style="color:var(--acc)">{{aspect ratio + text zone from context template}}</span><br><br>
+        <span style="color:var(--l-ink4)">--no faces, bright colours, studio lighting, stock photo style, cgi render, illustration, logo, text</span>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+      <div style="background:var(--l-bg2);padding:22px 24px;border-radius:12px">
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:8px">Generation</div>
+        <div style="font-size:13px;color:var(--l-ink2);line-height:1.65">Model: Flux 2 via fal.ai. Automated via n8n — POST to webhook with context, topic, and optional industry. For generates subject + composition via GPT-4o. Prompt assembled and sent to Flux 2 API. Image URL returned.</div>
+      </div>
+      <div style="background:var(--l-bg2);padding:22px 24px;border-radius:12px">
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--l-ink4);margin-bottom:8px">Never generate</div>
+        <div style="font-size:13px;color:var(--l-ink2);line-height:1.65">Faces or identifiable people. Bright or saturated colour palettes. Studio-lit product shots. Stock photo aesthetics. CGI renders or illustrations. Text within the image. Any scene that reads as aspirational rather than operational.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="spec">
+  <div class="wrap fi">
+    <div class="ey">07</div>
+    <h2 class="st">Design tokens</h2>
+    <p class="spi">Machine-readable spec for the For AI agent and n8n workflows. Single source of truth for any formattion-branded output. Client parameter packs extend this base.</p>
+    <div class="tok"><span class="tc3">// formattion.ai — brand tokens v1.0</span>
+<span class="tc3">// sector: UK construction subcontractors</span>
+<span class="tc3">// includes: colour, typography, voice, ui-components, image, layout, methodology</span>
+
+{
+  <span class="tk">"brand"</span>: {
+    <span class="tk">"name"</span>: <span class="ts2">"formattion.ai"</span>, <span class="tk">"version"</span>: <span class="ts2">"1.0.0"</span>,
+    <span class="tk">"sector"</span>: <span class="ts2">"UK construction automation"</span>,
+    <span class="tk">"target-client"</span>: <span class="ts2">"UK subcontract trade, £500k–£5m turnover"</span>,
+    <span class="tk">"modes"</span>: [<span class="ts2">"light"</span>, <span class="ts2">"dark"</span>],
+    <span class="tk">"agent"</span>: <span class="ts2">"For"</span>
+  },
+
+  <span class="tk">"colour"</span>: {
+    <span class="tk">"light"</span>: {
+      <span class="tk">"bg-base"</span>:      <span class="tv">"#F4EFE6"</span>,
+      <span class="tk">"bg-surface"</span>:   <span class="tv">"#ECE6DC"</span>,
+      <span class="tk">"bg-raised"</span>:    <span class="tv">"#E2DBD0"</span>,
+      <span class="tk">"ink-primary"</span>:  <span class="tv">"#1C1814"</span>,
+      <span class="tk">"ink-secondary"</span>:<span class="tv">"#4A4038"</span>,
+      <span class="tk">"ink-muted"</span>:    <span class="tv">"#9A8F82"</span>,
+      <span class="tk">"accent"</span>:       <span class="tv">"#4A6278"</span>,
+      <span class="tk">"accent-light"</span>: <span class="tv">"#6E8299"</span>
+    },
+    <span class="tk">"dark"</span>: {
+      <span class="tk">"bg-base"</span>:      <span class="tv">"#141618"</span>,
+      <span class="tk">"bg-surface"</span>:   <span class="tv">"#1C1F22"</span>,
+      <span class="tk">"bg-raised"</span>:    <span class="tv">"#242729"</span>,
+      <span class="tk">"ink-primary"</span>:  <span class="tv">"#EDECEA"</span>,
+      <span class="tk">"ink-secondary"</span>:<span class="tv">"#B4B2AE"</span>,
+      <span class="tk">"ink-muted"</span>:    <span class="tv">"#7A7875"</span>,
+      <span class="tk">"accent"</span>:       <span class="tv">"#6E8299"</span>,
+      <span class="tk">"accent-light"</span>: <span class="tv">"#8FA4BC"</span>
+    }
+  },
+
+  <span class="tk">"corners"</span>: {
+    <span class="tc3">// cards always carry their own border-radius — never nest inside overflow:hidden</span>
+    <span class="tk">"card"</span>:    <span class="tv">"12px"</span>,
+    <span class="tk">"element"</span>: <span class="tv">"8px"</span>,
+    <span class="tk">"tag"</span>:     <span class="tv">"4px"</span>,
+    <span class="tk">"pill"</span>:    <span class="tv">"999px"</span>
+  },
+
+  <span class="tk">"logo"</span>: {
+    <span class="tk">"colour-light"</span>: <span class="tv">"#1C1814"</span>,
+    <span class="tk">"colour-dark"</span>:  <span class="tv">"#EDECEA"</span>,
+    <span class="tk">"min-width-px"</span>: <span class="tn">120</span>,
+    <span class="tk">"clearspace"</span>:   <span class="ts2">"cap-height of 'f' on all sides"</span>,
+    <span class="tk">"detail"</span>:       <span class="ts2">"floating dots on both i's — never remove or reposition"</span>
+  },
+
+  <span class="tk">"typography"</span>: {
+    <span class="tk">"primary-sans"</span>:   <span class="ts2">"'Helvetica Neue', Helvetica, Arial, sans-serif"</span>,
+    <span class="tk">"primary-mono"</span>:   <span class="ts2">"'DM Mono', monospace"</span>,
+    <span class="tk">"display-serif"</span>:  <span class="ts2">"'Cormorant Infant', Georgia, serif"</span>,
+    <span class="tk">"weight-ceiling"</span>: <span class="tn">400</span>,
+    <span class="tc3">// max weight matches logo — hierarchy via size and tracking only</span>
+    <span class="tk">"display-contexts"</span>: [
+      <span class="ts2">"report-cover — client name"</span>,
+      <span class="ts2">"section-opener — one italic finding statement"</span>,
+      <span class="ts2">"pull-quote — proposals and marketing only"</span>,
+      <span class="ts2">"marketing-hero — mixed with Helvetica, one line max"</span>,
+      <span class="ts2">"newsletter — all uses permitted"</span>
+    ],
+    <span class="tk">"display-never"</span>: <span class="ts2">"platform UI, For agent, data tables, labels, navigation, any operational context"</span>,
+    <span class="tk">"scale"</span>: {
+      <span class="tk">"heading-xl"</span>: { <span class="tk">"size"</span>: <span class="ts2">"36–40px"</span>, <span class="tk">"weight"</span>: <span class="tn">400</span> },
+      <span class="tk">"heading-lg"</span>: { <span class="tk">"size"</span>: <span class="ts2">"24–28px"</span>, <span class="tk">"weight"</span>: <span class="tn">400</span> },
+      <span class="tk">"heading-sm"</span>: { <span class="tk">"size"</span>: <span class="ts2">"16–18px"</span>, <span class="tk">"weight"</span>: <span class="tn">400</span> },
+      <span class="tk">"body"</span>:       { <span class="tk">"size"</span>: <span class="ts2">"14px"</span>,    <span class="tk">"weight"</span>: <span class="tn">400</span>, <span class="tk">"lineHeight"</span>: <span class="ts2">"1.7"</span> },
+      <span class="tk">"label"</span>:      { <span class="tk">"size"</span>: <span class="ts2">"11px"</span>,    <span class="tk">"weight"</span>: <span class="tn">400</span>, <span class="tk">"transform"</span>: <span class="ts2">"uppercase"</span>, <span class="tk">"tracking"</span>: <span class="ts2">"0.08em"</span>, <span class="tk">"font"</span>: <span class="ts2">"primary-mono"</span> },
+      <span class="tk">"mono-md"</span>:    { <span class="tk">"size"</span>: <span class="ts2">"13px"</span>,    <span class="tk">"weight"</span>: <span class="tn">400</span>, <span class="tk">"font"</span>: <span class="ts2">"primary-mono"</span> },
+      <span class="tk">"mono-sm"</span>:    { <span class="tk">"size"</span>: <span class="ts2">"10px"</span>,    <span class="tk">"weight"</span>: <span class="tn">300</span>, <span class="tk">"font"</span>: <span class="ts2">"primary-mono"</span> }
+    }
+  },
+
+  <span class="tk">"ui-components"</span>: {
+    <span class="tc3">// all fixed UI elements — top bar, nav menu, scroll logo, back-to-top</span>
+
+    <span class="tk">"top-bar"</span>: {
+      <span class="tk">"position"</span>:   <span class="ts2">"fixed — top:10px left:10px right:10px"</span>,
+      <span class="tk">"height"</span>:     <span class="tv">"100px"</span>,
+      <span class="tk">"radius"</span>:     <span class="tv">"12px"</span>,
+      <span class="tk">"z-index"</span>:    <span class="tn">300</span>,
+      <span class="tk">"background-light"</span>: <span class="ts2">"rgba(244,239,230,0.30)"</span>,
+      <span class="tk">"background-dark"</span>:  <span class="ts2">"rgba(20,22,24,0.30)"</span>,
+      <span class="tk">"blur"</span>:        <span class="ts2">"backdrop-filter: blur(20px) saturate(100%)"</span>,
+      <span class="tk">"grain"</span>:       <span class="ts2">"SVG fractalNoise opacity:0.5, overlay opacity:0.1"</span>,
+      <span class="tk">"always-visible"</span>: <span class="ts2">"true — no scroll trigger"</span>
+    },
+
+    <span class="tk">"nav-menu"</span>: {
+      <span class="tk">"trigger"</span>:    <span class="ts2">"+ icon — rotates 45deg to × on open"</span>,
+      <span class="tk">"icon-pos"</span>:   <span class="ts2">"fixed — top:44px left:65px, 32×32px"</span>,
+      <span class="tk">"icon-colour-light"</span>: <span class="tv">"#1C1814"</span>,
+      <span class="tk">"icon-colour-dark"</span>:  <span class="tv">"#EDECEA"</span>,
+      <span class="tk">"panel"</span>: {
+        <span class="tk">"position"</span>:   <span class="ts2">"fixed — top:120px left:10px bottom:10px width:260px"</span>,
+        <span class="tk">"radius"</span>:     <span class="tv">"12px"</span>,
+        <span class="tk">"background-light"</span>: <span class="ts2">"rgba(244,239,230,0.30)"</span>,
+        <span class="tk">"background-dark"</span>:  <span class="ts2">"rgba(20,22,24,0.30)"</span>,
+        <span class="tk">"blur"</span>:        <span class="ts2">"backdrop-filter: blur(20px) saturate(100%)"</span>,
+        <span class="tk">"grain"</span>:       <span class="ts2">"SVG fractalNoise opacity:0.5, overlay opacity:0.1"</span>,
+        <span class="tk">"links"</span>:       { <span class="tk">"font"</span>: <span class="ts2">"primary-sans"</span>, <span class="tk">"size"</span>: <span class="ts2">"22px"</span>, <span class="tk">"weight"</span>: <span class="tn">300</span> }
+      },
+      <span class="tk">"mode-toggle"</span>: <span class="ts2">"SVG pill toggle — bottom-left of panel, ink colour per mode"</span>
+    },
+
+    <span class="tk">"scroll-logo"</span>: {
+      <span class="tc3">// appears when hero wordmark scrolls behind the top bar</span>
+      <span class="tk">"asset"</span>:      <span class="ts2">"little_logo.svg — 236.06×30 viewBox"</span>,
+      <span class="tk">"position"</span>:  <span class="ts2">"fixed — top:51px right:65px height:18px"</span>,
+      <span class="tk">"trigger"</span>:   <span class="ts2">"IntersectionObserver on .hw — rootMargin:-108px"</span>,
+      <span class="tk">"colour-light"</span>: <span class="tv">"#1C1814"</span>,
+      <span class="tk">"colour-dark"</span>:  <span class="tv">"#EDECEA"</span>
+    },
+
+    <span class="tk">"back-to-top"</span>: {
+      <span class="tk">"asset"</span>:      <span class="ts2">"up.svg — 219.53×301.9 viewBox"</span>,
+      <span class="tk">"position"</span>:  <span class="ts2">"fixed — bottom:44px right:44px height:32px"</span>,
+      <span class="tk">"trigger"</span>:   <span class="ts2">"scroll > 80% of viewport height"</span>,
+      <span class="tk">"colour-light"</span>: <span class="tv">"#1C1814"</span>,
+      <span class="tk">"colour-dark"</span>:  <span class="tv">"#EDECEA"</span>
+    }
+  },
+
+  <span class="tk">"image"</span>: {
+    <span class="tk">"style"</span>:      <span class="ts2">"documentary realism, desaturated warm film grade"</span>,
+    <span class="tk">"model"</span>:      <span class="ts2">"Flux 2 via fal.ai"</span>,
+    <span class="tk">"pipeline"</span>:   <span class="ts2">"n8n webhook → GPT-4o subject/composition → Flux 2 → image URL"</span>,
+    <span class="tk">"style-base"</span>: <span class="ts2">"documentary construction photography, desaturated warm film grade, ambient overcast daylight, subtle grain texture, no faces, architectural precision, negative space composition"</span>,
+    <span class="tk">"negative"</span>:   <span class="ts2">"faces, bright colours, studio lighting, stock photo, cgi, illustration, text"</span>,
+    <span class="tk">"contexts"</span>: {
+      <span class="tk">"linkedin"</span>:   { <span class="tk">"ratio"</span>: <span class="ts2">"1:1 or 4:5"</span>,  <span class="tk">"mood"</span>: <span class="ts2">"direct, grounded, confident"</span> },
+      <span class="tk">"newsletter"</span>: { <span class="tk">"ratio"</span>: <span class="ts2">"16:9 or 3:1"</span>, <span class="tk">"mood"</span>: <span class="ts2">"contemplative, editorial, measured"</span> },
+      <span class="tk">"site"</span>:       { <span class="tk">"ratio"</span>: <span class="ts2">"16:9 or wider"</span>, <span class="tk">"mood"</span>: <span class="ts2">"authoritative, expansive, real"</span> }
+    },
+    <span class="tk">"framing-patterns"</span>: [
+      <span class="ts2">"01 — card-background: text left, image bleeds right, dark left-gradient"</span>,
+      <span class="ts2">"02 — full-bleed: image fills frame, dark bottom gradient, text anchors bottom-left"</span>,
+      <span class="ts2">"03 — beside-content: image left column, content right, no overlay, light mode only"</span>
+    ]
+  },
+
+  <span class="tk">"voice"</span>: {
+    <span class="tk">"vocabulary"</span>: [<span class="ts2">"structured"</span>,<span class="ts2">"consistent"</span>,<span class="ts2">"reliable"</span>,<span class="ts2">"predictable"</span>,<span class="ts2">"precise"</span>,<span class="ts2">"considered"</span>],
+    <span class="tk">"avoid"</span>: [<span class="ts2">"it's worth noting"</span>,<span class="ts2">"leverage"</span>,<span class="ts2">"synergy"</span>,<span class="ts2">"game-changer"</span>],
+    <span class="tk">"register"</span>: <span class="ts2">"direct, operator-level — write for someone reading on a job site"</span>,
+    <span class="tk">"agent-name"</span>: <span class="ts2">"For"</span>,
+    <span class="tk">"agent-tone"</span>: <span class="ts2">"flat, precise, structured — never conversational, never performative"</span>
+  },
+
+  <span class="tk">"methodology"</span>: {
+    <span class="tk">"stages"</span>: [<span class="ts2">"Automation Opportunity Assessment"</span>,<span class="ts2">"Operational Automation Audit"</span>,<span class="ts2">"Automation Roadmap Design"</span>,<span class="ts2">"System Implementation"</span>,<span class="ts2">"Continuous Optimisation"</span>],
+    <span class="tk">"build-window"</span>: <span class="ts2">"6 weeks"</span>,
+    <span class="tk">"delivery-model"</span>: <span class="ts2">"implementation + monthly retainer"</span>
+  }
+}</div>
+  </div>
+</section>
+
+<footer>
+  <svg class="fwm" viewBox="0 0 1382.4 175.68" xmlns="http://www.w3.org/2000/svg"><path d="M154.33,48.96c36.24,0,60,22.92,60,63.36s-23.76,63.36-60,63.36-59.88-22.92-59.88-63.36,23.76-63.36,59.88-63.36ZM154.33,162.24c26.4,0,44.28-17.52,44.28-49.92s-17.88-49.92-44.28-49.92-44.28,17.52-44.28,49.92,18,49.92,44.28,49.92Z"/>
+      <path d="M258.99,53.17l-.02,10.2c0,1.67,2.22,2.34,3.07.91,5.18-8.78,13.95-13.26,29.71-13.26h15.25c.92,0,1.67.75,1.67,1.67v10.57c0,.92-.75,1.67-1.67,1.67h-14.53c-24.24,0-33,13.8-33,39.72v66.13c0,.92-.75,1.67-1.67,1.67h-12.01c-.92,0-1.67-.75-1.67-1.67V53.17c0-.92.75-1.67,1.67-1.67h11.53c.93,0,1.67.75,1.67,1.68Z"/>
+      <path d="M467.08,49.08c24.22,0,40.44,12.24,40.44,38.88v83.17c0,.92-.75,1.67-1.67,1.67h-11.9c-.92,0-1.67-.75-1.67-1.67v-81.85c0-17.76-9.6-26.76-28.08-26.76-21.12,0-35.76,12.48-35.76,38.4v70.21c0,.92-.75,1.67-1.67,1.67h-11.9c-.92,0-1.67-.75-1.67-1.67v-81.85c0-17.76-9.12-26.76-28.08-26.76-21.12,0-35.76,12.48-35.76,38.4v70.21c0,.92-.75,1.67-1.67,1.67h-11.9c-.92,0-1.67-.75-1.67-1.67V53.51c0-.92.75-1.67,1.67-1.67h11.42c.92,0,1.67.75,1.67,1.67v10c0,1.59,2.02,2.27,2.96.98,6.45-8.8,16.93-15.42,36.53-15.42,24.77,0,32.99,12.31,35.64,19.15.52,1.34,2.33,1.46,3.01.2,3.65-6.79,13.92-19.35,40.07-19.35Z"/>
+      <path d="M948.36,48.96c36.24,0,60,22.92,60,63.36s-23.76,63.36-60,63.36-59.88-22.92-59.88-63.36,23.76-63.36,59.88-63.36ZM948.36,162.24c26.4,0,44.28-17.52,44.28-49.92s-17.88-49.92-44.28-49.92-44.28,17.52-44.28,49.92,18,49.92,44.28,49.92Z"/>
+      <path d="M1051.32,51.84c.92,0,1.67.75,1.67,1.67v12.89c0,1.67,2.14,2.28,3.09.91,9.86-14.19,24.99-18.23,41.2-18.23,27.72,0,45.36,13.8,45.36,43.2v78.85c0,.92-.75,1.67-1.67,1.67h-12.02c-.92,0-1.67-.75-1.67-1.67v-77.17c0-22.08-11.88-31.32-32.76-31.32-22.92,0-41.04,13.8-41.04,42.6v65.89c0,.92-.75,1.67-1.67,1.67h-12.02c-.92,0-1.67-.75-1.67-1.67V53.51c0-.92.75-1.67,1.67-1.67h11.54Z"/>
+      <path d="M858.83,53.5v117.64c0,.92-.74,1.66-1.66,1.66h-12.04c-.92,0-1.66-.74-1.66-1.66V53.5c0-.92.74-1.66,1.66-1.66h12.04c.92,0,1.66.74,1.66,1.66Z"/>
+      <circle cx="851.14" cy="18.66" r="10.5"/>
+      <path d="M1379.6,53.5v117.64c0,.92-.74,1.66-1.66,1.66h-12.04c-.92,0-1.66-.74-1.66-1.66V53.5c0-.92.74-1.66,1.66-1.66h12.04c.92,0,1.66.74,1.66,1.66Z"/>
+      <circle cx="1371.9" cy="18.66" r="10.5"/>
+      <path d="M1280.16,49.08c-29.22,0-49.1,12.27-51.84,36.55-.17,1.55,1.1,2.9,2.66,2.9l9.66.03c1.33,0,2.42-.99,2.64-2.3,2.77-16.3,15.64-23.98,36.4-23.98s31.7,9.18,32.69,22.43c.34,4.32-.66,8.08-3.45,11.01-1.86,1.76-4.64,2.83-5.58,3.11-.9.27-2.34.64-3.86.96-1.52.32-2.8.56-3.84.72-1.04.16-2.64.36-4.8.6-2.16.24-3.37.42-5.28.6-1.36.12-3.48.36-6.36.6-2.88.24-5.12.44-6.72.6-30.57,3.2-49.67,15.96-49.67,38.21,0,10.88,3.56,19.36,10.68,25.45,7.12,6.08,17,9.12,29.65,9.12,18.64,0,36.2-6.76,47.09-20.2.99-1.22,2.94-.55,2.94,1.02v13.74c0,1.47,1.19,2.67,2.67,2.67h9.19c1.47,0,2.67-1.19,2.67-2.67v-78.69c0-28.92-17.4-42.48-47.52-42.48ZM1312.8,118.27c0,15.22-5.55,27.22-13.71,34.18-8.16,6.96-18.64,9.91-30.32,9.91-8.64,0-15.11-.11-22.44-5.52-5.35-3.95-7.68-9.96-7.68-17.16,0-4.8,1.08-8.84,3.24-12.12,2.16-3.28,6.21-6.21,10.45-8.05,10.53-4.69,19.61-4.87,30.45-6.27,6.56-.8,11.2-1.44,13.92-1.92,2.72-.48,6.45-1.39,9.73-2.43,1.62-.51,2.83-1.06,3.82-1.67,1.11-.69,2.53.1,2.53,1.41v9.65Z"/>
+      <path d="M593.41,49.08c-29.22,0-49.1,12.27-51.84,36.55-.17,1.55,1.1,2.9,2.66,2.9l9.66.03c1.33,0,2.42-.99,2.64-2.3,2.77-16.3,15.64-23.98,36.4-23.98s31.7,9.18,32.69,22.43c.34,4.32-.66,8.08-3.45,11.01-1.86,1.76-4.64,2.83-5.58,3.11-.9.27-2.34.64-3.86.96-1.52.32-2.8.56-3.84.72-1.04.16-2.64.36-4.8.6-2.16.24-3.37.42-5.28.6-1.36.12-3.48.36-6.36.6-2.88.24-5.12.44-6.72.6-30.57,3.2-49.67,15.96-49.67,38.21,0,10.88,3.56,19.36,10.68,25.45,7.12,6.08,17,9.12,29.65,9.12,18.64,0,36.2-6.76,47.09-20.2.99-1.22,2.94-.55,2.94,1.02v13.74c0,1.47,1.19,2.67,2.67,2.67h9.19c1.47,0,2.67-1.19,2.67-2.67v-78.69c0-28.92-17.4-42.48-47.52-42.48ZM626.05,118.27c0,15.22-5.55,27.22-13.71,34.18-8.16,6.96-18.64,9.91-30.32,9.91-8.64,0-15.11-.11-22.44-5.52-5.35-3.95-7.68-9.96-7.68-17.16,0-4.8,1.08-8.84,3.24-12.12,2.16-3.28,6.21-6.21,10.45-8.05,10.53-4.69,19.61-4.87,30.45-6.27,6.56-.8,11.2-1.44,13.92-1.92,2.72-.48,6.45-1.39,9.73-2.43,1.62-.51,2.83-1.06,3.82-1.67,1.11-.69,2.53.1,2.53,1.41v9.65Z"/>
+      <path d="M816.21,63.61v-10.09c0-.92-.75-1.67-1.67-1.67h-34.46c-.92,0-1.67-.75-1.67-1.67v-30.98c0-.92-.75-1.67-1.67-1.67h-12.01c-.92,0-1.67.75-1.67,1.67v30.98c0,.92-.75,1.67-1.67,1.67h-55.33c-.92,0-1.67-.75-1.67-1.67v-30.98c0-.92-.75-1.67-1.67-1.67h-12.01c-.92,0-1.67.75-1.67,1.67v30.98c0,.92-.75,1.67-1.67,1.67h-26.41c-.92,0-1.67.75-1.67,1.67v10.09c0,.92.75,1.67,1.67,1.67h26.41c.92,0,1.67.75,1.67,1.67v77.77c0,18.84,10.32,28.08,29.28,28.08h20.65c.92,0,1.67-.75,1.67-1.67v-10.69c0-.92-.75-1.67-1.67-1.67h-32.9c-.92,0-1.67-.75-1.67-1.67v-90.14c0-.92.75-1.67,1.67-1.67h55.33c.92,0,1.67.75,1.67,1.67v77.77c0,18.84,10.32,28.08,29.28,28.08h22.09c.92,0,1.67-.75,1.67-1.67v-10.69c0-.92-.75-1.67-1.67-1.67h-34.36c-.91,0-1.65-.74-1.65-1.65v-90.16c0-.92.75-1.67,1.67-1.67h34.46c.92,0,1.67-.75,1.67-1.67Z"/>
+      <path d="M86.16,1.65c0-.91-.74-1.65-1.65-1.65h-24.27c-18.96,0-29.28,9.24-29.28,28.08v22.11c0,.91-.74,1.65-1.65,1.65H1.65c-.91,0-1.65.74-1.65,1.65v10.14c0,.91.74,1.65,1.65,1.65h27.66c.91,0,1.65.74,1.65,1.65v104.22c0,.91.74,1.65,1.65,1.65h12.06c.91,0,1.65-.74,1.65-1.65v-104.22c0-.91.74-1.65,1.65-1.65h33.18c.91,0,1.65-.74,1.65-1.65v-10.14c0-.91-.74-1.65-1.65-1.65h-33.18c-.91,0-1.65-.74-1.65-1.65V14.85c0-.91.74-1.65,1.65-1.65h36.54c.91,0,1.65-.74,1.65-1.65V1.65Z"/></svg>
+  <p class="fn">formattion.ai — brand guidelines <span class="fa">v1.0</span></p>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v')})},{threshold:.08});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+
+const topLogo=document.getElementById('topLogo');
+const backTop=document.getElementById('backTop');
+window.addEventListener('scroll',()=>{
+  backTop.classList.toggle('visible', window.scrollY > window.innerHeight * 0.8);
+},{ passive:true });
+const heroLogo=document.querySelector('.hw');
+const logoObs=new IntersectionObserver(e=>{
+  const hidden=!e[0].isIntersecting;
+  topLogo.style.opacity=hidden?'1':'0';
+  topLogo.style.pointerEvents=hidden?'all':'none';
+},{threshold:0,rootMargin:'-108px 0px 0px 0px'});
+if(heroLogo) logoObs.observe(heroLogo);
+
+// Menu toggle
+const menuWrap=document.getElementById('menuWrap');
+const menuIcon=document.getElementById('menuIcon');
+const menuIconPath=document.getElementById('menuIconPath');
+menuIcon.addEventListener('click',e=>{
+  e.stopPropagation();
+  menuWrap.classList.toggle('open');
+});
+document.querySelectorAll('.drop-item').forEach(a=>{
+  a.addEventListener('click',e=>{
+    menuWrap.classList.remove('open');
+    // let the href anchor scroll naturally
+  });
+});
+document.addEventListener('click',e=>{
+  if(menuWrap.classList.contains('open') && !menuWrap.contains(e.target)){
+    menuWrap.classList.remove('open');
+  }
+});
+
+// Mode toggle
+const msToggle=document.getElementById('msToggleSvg');
+const togCircleEl=document.getElementById('togCircleEl');
+const togPathEl=document.getElementById('togPathEl');
+let dark=false;
+
+function setToggleFill(col){
+  togCircleEl.style.fill=col;
+  togPathEl.style.fill=col;
+  menuIconPath.setAttribute('fill',col);
+}
+
+// Initial: light mode, circle LEFT (x=27.29)
+setToggleFill('#1c1814');
+
+msToggle.addEventListener('click',()=>{
+  dark=!dark;
+  document.body.classList.toggle('dark',dark);
+  togCircleEl.setAttribute('x', dark ? '122.94' : '27.29');
+  setToggleFill(dark?'#edecea':'#1c1814');
+  const tlg=document.getElementById('tlg');
+  if(tlg) tlg.style.fill=dark?'#edecea':'#1c1814';
+  const bt=document.getElementById('backTop');
+  if(bt){bt.style.background='none';bt.querySelector('path').style.fill=dark?'#edecea':'#1c1814';}
+});
+</script>
+</body>
+</html>
