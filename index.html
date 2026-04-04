@@ -2738,11 +2738,11 @@
       }
     }
 
-    // On load
-    (function() {
+    // On load — defer until full DOM is parsed (article page div is after this script)
+    document.addEventListener('DOMContentLoaded', function() {
       var hash = window.location.hash.slice(1);
       if (hash) navigateToHash(hash);
-    })();
+    });
 
     // Browser back / forward
     window.addEventListener('popstate', function() {
