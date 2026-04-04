@@ -1068,6 +1068,16 @@
       overflow: visible;
     }
     .chat-icon:hover { opacity: 1; color: var(--ink); border-color: var(--idle-border); }
+    #micBtn.listening {
+      color: var(--acc) !important;
+      opacity: 1 !important;
+      animation: micPulse 1.4s ease-in-out infinite;
+      border-color: rgba(74,98,120,0.3);
+    }
+    @keyframes micPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(74,98,120,0.25); }
+      50%       { box-shadow: 0 0 0 8px rgba(74,98,120,0); }
+    }
 
     /* dark mode chat */
     body.dark #chat { background: var(--bg); }
@@ -2132,12 +2142,6 @@
       <div class="input-box" id="inputBox">
         <textarea id="userInput" rows="1" placeholder="Reply…"></textarea>
         <div class="input-actions">
-          <input type="file" id="fileUpload" style="display:none;" multiple />
-          <button id="uploadBtn" class="chat-icon" title="Add" type="button">
-            <svg viewBox="0 0 301.86 301.86" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;flex-shrink:0;">
-              <path fill="currentColor" d="M291.48,140.55h-104.7c-14.06,0-25.46-11.4-25.46-25.46V10.38c0-5.73-4.65-10.38-10.38-10.38h0c-5.73,0-10.38,4.65-10.38,10.38v104.71c0,14.06-11.4,25.46-25.46,25.46H10.38c-5.73,0-10.38,4.65-10.38,10.38h0c0,5.73,4.65,10.38,10.38,10.38h106.48c13.08,0,23.69,10.61,23.69,23.69v106.47c0,5.73,4.65,10.38,10.38,10.38h0c5.73,0,10.38-4.65,10.38-10.38v-106.47c0-13.08,10.61-23.69,23.69-23.69h106.47c5.73,0,10.38-4.65,10.38-10.38h0c0-5.73-4.65-10.38-10.38-10.38Z"/>
-            </svg>
-          </button>
           <button id="micBtn" class="chat-icon" title="Voice input" type="button">
             <svg viewBox="0 0 178.65 326.47" xmlns="http://www.w3.org/2000/svg" style="height:20px;width:11px;flex-shrink:0;">
               <rect fill="currentColor" x="27.31" y="0" width="124.04" height="219.68" rx="62.02" ry="62.02"/>
@@ -2159,7 +2163,11 @@
     const CHAT_WEBHOOK_URL    = 'https://ozarensky.app.n8n.cloud/webhook/c9f2e938-9876-4133-8b3e-e9abe1151931/chat';
     const CONTACT_WEBHOOK_URL = 'https://ozarensky.app.n8n.cloud/webhook/contact-form-leads';
 
-    const sessionId   = 'formattion-' + Math.random().toString(36).slice(2, 10);
+    var sessionId = localStorage.getItem('formattion-session-id');
+    if (!sessionId) {
+      sessionId = 'formattion-' + Math.random().toString(36).slice(2, 10);
+      localStorage.setItem('formattion-session-id', sessionId);
+    }
     const landing     = document.getElementById('landing');
     const chatEl      = document.getElementById('chat');
     const messagesEl  = document.getElementById('messages');
@@ -2171,6 +2179,36 @@
     const openChatBtn = document.getElementById('openChat');
 
     var chatStarted = false;
+
+    // ── Chat history persistence ──
+    var chatHistory = [];
+    (function restoreChatHistory() {
+      try {
+        var saved = localStorage.getItem('formattion-chat-history');
+        if (!saved) return;
+        chatHistory = JSON.parse(saved);
+        if (!chatHistory.length) return;
+        chatHistory.forEach(function(msg) {
+          if (msg.role === 'ai') {
+            var wrap = document.createElement('div');
+            wrap.className = 'msg-ai';
+            wrap.innerHTML = '<div class="text">' + renderMarkdown(escHtml(msg.text)) + '</div><div class="sender">For</div>';
+            messagesEl.appendChild(wrap);
+          } else {
+            var wrap = document.createElement('div');
+            wrap.className = 'msg-user';
+            wrap.innerHTML = '<div class="bubble">' + escHtml(msg.text) + '</div>';
+            messagesEl.appendChild(wrap);
+          }
+        });
+        chatStarted = true;
+        openChatBtn.textContent = 'continue chatting';
+      } catch(e) { /* ignore corrupt storage */ }
+    })();
+
+    function saveChatHistory() {
+      try { localStorage.setItem('formattion-chat-history', JSON.stringify(chatHistory)); } catch(e) {}
+    }
 
     var backBtn = document.getElementById('backBtn');
     var pageHistory = [];
@@ -2334,7 +2372,13 @@
 
     // ── Open chat with article context ──
     window.openChatWithContext = function(articleTitle) {
+      if (chatHistory.length > 0 && !confirm('Start a new conversation about this article? Your current chat will be cleared.')) {
+        openChat();
+        return;
+      }
       chatStarted = false;
+      chatHistory = [];
+      saveChatHistory();
       openChatBtn.textContent = 'continue chatting';
       messagesEl.innerHTML = '<div class="messages-spacer"></div>';
       hideAll();
@@ -2355,6 +2399,10 @@
       menuWrap.classList.remove('open');
         menuIcon.classList.remove('open');
       chatStarted = false;
+      chatHistory = [];
+      saveChatHistory();
+      sessionId = 'formattion-' + Math.random().toString(36).slice(2, 10);
+      localStorage.setItem('formattion-session-id', sessionId);
       openChatBtn.textContent = 'chat with us';
       messagesEl.innerHTML = '<div class="messages-spacer"></div>';
       hideAll();
@@ -2403,18 +2451,65 @@
       });
     });
 
-    // ── File upload ──
-    document.getElementById('uploadBtn').addEventListener('click', function() {
-      document.getElementById('fileUpload').click();
-    });
-    document.getElementById('fileUpload').addEventListener('change', function() {
-      var files = this.files;
-      if (!files.length) return;
-      var names = Array.from(files).map(function(f) { return f.name; }).join(', ');
-      inputEl.value = inputEl.value ? inputEl.value + ' [' + names + ']' : '[' + names + ']';
-      inputEl.focus();
-      this.value = '';
-    });
+    // ── Voice input (Web Speech API) ──
+    var micBtn  = document.getElementById('micBtn');
+    var sendBtn = document.getElementById('sendBtn');
+    var recognition = null;
+    var isListening = false;
+
+    (function() {
+      var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        micBtn.style.display = 'none';
+        return;
+      }
+      recognition = new SpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      recognition.lang = 'en-US';
+
+      var voiceBaseText = '';
+
+      recognition.onstart = function() {
+        isListening = true;
+        voiceBaseText = inputEl.value.trimEnd();
+        micBtn.classList.add('listening');
+        updateSendMic();
+      };
+
+      recognition.onresult = function(e) {
+        var transcript = '';
+        for (var i = 0; i < e.results.length; i++) {
+          transcript += e.results[i][0].transcript;
+        }
+        inputEl.value = voiceBaseText ? voiceBaseText + ' ' + transcript : transcript;
+        inputEl.dispatchEvent(new Event('input'));
+      };
+
+      recognition.onerror = function(e) {
+        isListening = false;
+        micBtn.classList.remove('listening');
+        updateSendMic();
+        if (e.error === 'not-allowed') {
+          addAiMessage('Microphone access was denied. Please allow it in your browser settings and try again.');
+        }
+      };
+
+      recognition.onend = function() {
+        isListening = false;
+        micBtn.classList.remove('listening');
+        updateSendMic();
+        inputEl.focus();
+      };
+
+      micBtn.addEventListener('click', function() {
+        if (isListening) {
+          recognition.stop();
+        } else {
+          recognition.start();
+        }
+      });
+    })();
 
     // ── Send on Enter ──
     inputEl.addEventListener('keydown', function(e) {
@@ -2424,11 +2519,12 @@
       }
     });
 
-    // ── Auto-resize textarea + mic/send toggle ──
-    var micBtn  = document.getElementById('micBtn');
-    var sendBtn = document.getElementById('sendBtn');
-
     function updateSendMic() {
+      if (isListening) {
+        micBtn.style.display = 'flex';
+        sendBtn.style.display = 'none';
+        return;
+      }
       var hasText = inputEl.value.trim().length > 0;
       micBtn.style.display  = hasText ? 'none'  : 'flex';
       sendBtn.style.display = hasText ? 'flex'  : 'none';
@@ -2450,9 +2546,15 @@
     });
 
     // ── Send message ──
+    var isLoading = false;
+
     async function sendMessage() {
+      if (isLoading) return;
       var text = inputEl.value.trim();
       if (!text) return;
+      isLoading = true;
+      sendBtn.style.opacity = '0.4';
+      sendBtn.style.pointerEvents = 'none';
       inputEl.value = '';
       inputEl.style.height = 'auto';
       inputBox.style.minHeight = '100px';
@@ -2468,22 +2570,81 @@
         });
         var data = await res.json();
         var reply = data.output || data.text || data.message || data.response
-          || (Array.isArray(data) && data[0] && (data[0].output || data[0].text))
-          || 'Sorry, I could not process that.';
+          || (Array.isArray(data) && data[0] && (data[0].output || data[0].text));
+        if (!reply) {
+          console.warn('[for] Unexpected webhook response shape:', data);
+          reply = 'Sorry, I could not process that.';
+        }
         typingMsg.remove();
         addAiMessage(reply);
       } catch (err) {
+        console.error('[for] Webhook error:', err);
         typingMsg.remove();
         addAiMessage('Sorry, something went wrong. Please try again.');
+      } finally {
+        isLoading = false;
+        sendBtn.style.opacity = '';
+        sendBtn.style.pointerEvents = '';
       }
     }
 
     function renderMarkdown(text) {
+      // Process block-level elements line by line, then inline
+      var lines = text.split('\n');
+      var out = [];
+      var i = 0;
+      while (i < lines.length) {
+        var line = lines[i];
+        // Headers
+        if (/^### (.+)/.test(line)) {
+          out.push('<strong style="display:block;margin:8px 0 4px;font-size:15px;">' + inlineMd(line.replace(/^### /, '')) + '</strong>');
+          i++; continue;
+        }
+        if (/^## (.+)/.test(line)) {
+          out.push('<strong style="display:block;margin:10px 0 4px;font-size:16px;">' + inlineMd(line.replace(/^## /, '')) + '</strong>');
+          i++; continue;
+        }
+        if (/^# (.+)/.test(line)) {
+          out.push('<strong style="display:block;margin:12px 0 4px;font-size:17px;">' + inlineMd(line.replace(/^# /, '')) + '</strong>');
+          i++; continue;
+        }
+        // Unordered list — collect consecutive list items
+        if (/^[-*] (.+)/.test(line)) {
+          var items = [];
+          while (i < lines.length && /^[-*] (.+)/.test(lines[i])) {
+            items.push('<li>' + inlineMd(lines[i].replace(/^[-*] /, '')) + '</li>');
+            i++;
+          }
+          out.push('<ul style="margin:6px 0;padding-left:20px;">' + items.join('') + '</ul>');
+          continue;
+        }
+        // Ordered list
+        if (/^\d+\. (.+)/.test(line)) {
+          var items = [];
+          while (i < lines.length && /^\d+\. (.+)/.test(lines[i])) {
+            items.push('<li>' + inlineMd(lines[i].replace(/^\d+\. /, '')) + '</li>');
+            i++;
+          }
+          out.push('<ol style="margin:6px 0;padding-left:20px;">' + items.join('') + '</ol>');
+          continue;
+        }
+        // Blank line → paragraph break
+        if (line.trim() === '') {
+          out.push('<br>');
+          i++; continue;
+        }
+        out.push(inlineMd(line));
+        i++;
+      }
+      return out.join('<br>').replace(/(<br>){3,}/g, '<br><br>');
+    }
+
+    function inlineMd(text) {
       return text
         .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
         .replace(/\*(.+?)\*/g, '<em>$1</em>')
         .replace(/`(.+?)`/g, '<code style="font-family:var(--mono);font-size:15px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:2px;">$1</code>')
-        .replace(/\n/g, '<br>');
+        .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener" style="color:var(--acc);text-decoration:underline;">$1</a>');
     }
 
     function addAiMessage(text) {
@@ -2491,6 +2652,8 @@
       wrap.className = 'msg-ai';
       wrap.innerHTML = '<div class="text">' + renderMarkdown(escHtml(text)) + '</div><div class="sender">For</div>';
       messagesEl.appendChild(wrap);
+      chatHistory.push({ role: 'ai', text: text });
+      saveChatHistory();
       scrollBottom();
       return wrap;
     }
@@ -2509,6 +2672,8 @@
       wrap.className = 'msg-user';
       wrap.innerHTML = '<div class="bubble">' + escHtml(text) + '</div>';
       messagesEl.appendChild(wrap);
+      chatHistory.push({ role: 'user', text: text });
+      saveChatHistory();
       scrollBottom();
       return wrap;
     }
