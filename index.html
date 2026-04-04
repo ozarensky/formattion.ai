@@ -99,8 +99,8 @@
     body.dark .page-eyebrow { color: var(--muted); }
     body.dark .contact-input { color: var(--ink); border-color: var(--dim); }
     body.dark .contact-input::placeholder { color: var(--muted); }
-    body.dark .contact-submit { border-color: var(--ink); color: var(--ink); }
-    body.dark .contact-submit:hover { background: var(--ink); color: var(--bg); }
+    body.dark .contact-submit { border-color: rgba(237,236,234,0.2); color: var(--ink); }
+    body.dark .contact-submit:hover { border-color: var(--ink); background: rgba(237,236,234,0.06); }
 
 
     html, body {
@@ -321,21 +321,24 @@
       line-height: 1.6;
     }
     .contact-submit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       margin-top: 32px;
-      padding: 8px 20px;
+      padding: 14px 40px;
       border-radius: 999px;
-      border: 1px solid rgba(74,98,120,0.3);
+      border: 1px solid var(--idle-border);
       background: transparent;
-      font-family: var(--mono);
-      font-weight: 400;
-      font-size: 11px;
-      color: var(--acc);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 15px;
+      color: var(--ink);
       cursor: pointer;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: background .2s ease, color .2s ease, border-color .2s ease;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      transition: border-color .25s ease, background .25s ease;
     }
-    .contact-submit:hover { background: var(--acc); color: var(--bg); border-color: var(--acc); }
+    .contact-submit:hover { border-color: var(--ink); background: rgba(28,24,20,0.04); }
     .contact-submit:active { transform: scale(0.97); }
 
     /* about section */
