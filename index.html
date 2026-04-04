@@ -194,7 +194,7 @@
       position: relative;
       border-radius: 20px;
       overflow: hidden;
-      cursor: default;
+      cursor: pointer;
       min-height: 300px;
     }
     .service-cell-image {
@@ -1665,7 +1665,7 @@
       <div class="page-divider"></div>
 
       <div class="services-grid">
-        <div class="service-cell">
+        <div class="service-cell" role="button" tabindex="0" onclick="showPage('page-service-lead-capture')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('page-service-lead-capture');}">
           <div class="service-cell-image">
             <img src="images/services/lead-capture.jpg" alt="Lead Capture">
           </div>
@@ -1675,7 +1675,7 @@
             <div class="service-cell-body">Automated intake, qualification, and routing. Every enquiry is logged, assigned, and followed up — without manual intervention.</div>
           </div>
         </div>
-        <div class="service-cell">
+        <div class="service-cell" role="button" tabindex="0" onclick="showPage('page-service-quote-followup')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('page-service-quote-followup');}">
           <div class="service-cell-image">
             <img src="images/services/quote-followup.jpg" alt="Quote Follow-Up">
           </div>
@@ -1685,7 +1685,7 @@
             <div class="service-cell-body">Systematic outreach sequences triggered by quote status. No chase-up falls through the gap.</div>
           </div>
         </div>
-        <div class="service-cell">
+        <div class="service-cell" role="button" tabindex="0" onclick="showPage('page-service-email-management')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('page-service-email-management');}">
           <div class="service-cell-image">
             <img src="images/services/email-management.jpg" alt="Email Management">
           </div>
@@ -1695,7 +1695,7 @@
             <div class="service-cell-body">AI-sorted inboxes, templated responses, and escalation logic. Reduces daily administrative load to near zero.</div>
           </div>
         </div>
-        <div class="service-cell">
+        <div class="service-cell" role="button" tabindex="0" onclick="showPage('page-service-cashflow-invoice')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('page-service-cashflow-invoice');}">
           <div class="service-cell-image">
             <img src="images/services/cashflow-invoice.jpg" alt="Cashflow &amp; Invoice">
           </div>
@@ -2749,7 +2749,7 @@
       var progressBar  = document.getElementById('read-progress');
       var backToTop    = document.getElementById('back-to-top');
       var stickyCta    = document.getElementById('sticky-score');
-      var articlePages = ['page-article-payment-applications-ai-2026','page-article-rams-ai-automation-2026','page-article-agentic-ai-streamline-construction-operations-2026','page-article-ai-workflow-automation-subcontractors-2026','page-article-ai-workflow-revolution-subcontractors-2026','page-article-ai-tools-essential-construction-subcontracting-2026'];
+      var articlePages = ['page-article-payment-applications-ai-2026','page-article-rams-ai-automation-2026','page-article-agentic-ai-streamline-construction-operations-2026','page-article-ai-workflow-automation-subcontractors-2026','page-article-ai-workflow-revolution-subcontractors-2026','page-article-ai-tools-essential-construction-subcontracting-2026','page-service-lead-capture','page-service-quote-followup','page-service-email-management','page-service-cashflow-invoice'];
       var scorePages   = ['page-services', 'page-pricing'];
 
       function updateProgress(pageEl, isArticle, isScorePage) {
@@ -3194,6 +3194,188 @@
       <div class="article-callout">
         <p class="article-callout-text">"RAMS that are late are not just a compliance problem. They are a cash flow problem, a relationship problem, and a programme problem. Automation removes the delay at source."</p>
         <button class="article-callout-btn" onclick="openChatWithContext('Why Your RAMS Documents Are Costing You More Than You Think')">chat with us</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ SERVICE DETAIL PAGES ═══ -->
+
+  <!-- LEAD CAPTURE -->
+  <div class="page" id="page-service-lead-capture">
+    <div class="page-inner">
+
+      <div class="article-hero">
+        <img src="images/services/lead-capture.jpg" alt="Lead Capture">
+      </div>
+
+      <div class="page-eyebrow">services — 01</div>
+      <h1 class="article-page-title">Lead Capture</h1>
+
+      <p class="article-intro">Every unanswered enquiry is a job that went to someone else. For most subcontract businesses, incoming leads arrive across multiple channels — email, phone, referral, tender portal — with no consistent process to capture, qualify, or route them. Automation closes that gap permanently.</p>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">The cost of a missed enquiry</div>
+          <p class="article-item-desc">When an enquiry arrives during a busy site week, it competes with programme updates, RFIs, and client calls. The response either gets delayed or never happens. Research consistently shows that a response within the first hour of an enquiry is seven times more likely to result in a qualified conversation than a response the following day. For a subcontractor turning over £1m, recovering even two additional qualified leads per month has a material impact on the pipeline. Manual processes make that consistency structurally impossible.</p>
+        </div>
+        <div class="article-item-date">Pipeline<br>Operations</div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">What automated lead capture actually does</div>
+          <p class="article-item-desc">An automated intake system monitors every inbound channel — email, web form, referral — and logs each enquiry the moment it arrives. It applies a qualification filter based on your criteria: trade type, project value, geography, programme timeline. Enquiries that meet your threshold are assigned to the right person with a briefing note already written. Those that don't are acknowledged professionally and filed. No lead sits unanswered. No decision about who handles it gets lost in a group chat.</p>
+        </div>
+        <div class="article-item-date">Intake<br>Routing</div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">What your team actually gains</div>
+          <p class="article-item-desc">The operational shift is significant. Your commercial or estimating team stops being the first filter for every inbound contact and starts receiving only the enquiries that are worth their time — pre-qualified, pre-briefed, and already acknowledged. Response times drop from days to minutes. Win rates improve because first impressions are consistent. And the data — every enquiry, every outcome, every source — accumulates in a log that lets you see where your best work comes from and double down on it.</p>
+        </div>
+        <div class="article-item-date">Efficiency<br>Win Rate</div>
+      </div>
+
+      <div class="article-callout">
+        <p class="article-callout-text">"The enquiry that gets a response in ten minutes wins the relationship before the quote is even written."</p>
+        <button class="article-callout-btn" onclick="openChatWithContext('Lead Capture automation')">chat with us</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- QUOTE FOLLOW-UP -->
+  <div class="page" id="page-service-quote-followup">
+    <div class="page-inner">
+
+      <div class="article-hero">
+        <img src="images/services/quote-followup.jpg" alt="Quote Follow-Up">
+      </div>
+
+      <div class="page-eyebrow">services — 02</div>
+      <h1 class="article-page-title">Quote Follow-Up</h1>
+
+      <p class="article-intro">Most subcontractors send a quote and wait. The client goes quiet. A week passes. The estimator is back on site, the quote is buried in sent items, and the job has been awarded to someone who followed up twice. Systematic follow-up is not a sales tactic — it is an operational discipline that most businesses cannot sustain manually.</p>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Why quotes go cold and what it costs</div>
+          <p class="article-item-desc">A typical subcontractor has between five and twenty live quotes at any point. Each one represents hours of estimating time and a real commercial opportunity. Without a follow-up system, the chase depends entirely on individual memory and availability — both of which are unreliable under site pressure. Studies of B2B sales conversion show that 80% of closed deals require five or more follow-up contacts. Most subcontractors make one or two, then move on. The revenue lost to unworked quotes is rarely measured but consistently significant.</p>
+        </div>
+        <div class="article-item-date">Pipeline<br>Revenue</div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">How automated sequences work in practice</div>
+          <p class="article-item-desc">When a quote is sent, the system registers it and starts a sequence. Three days later, a polite check-in goes out automatically. If there is no response, a second touch follows at day seven — this time noting the programme implications of a delayed decision. Each message is written in your voice, references the specific job, and stops the moment the client responds. No message ever goes out to a job that has already been awarded or declined. The system reads quote status in real time and adjusts accordingly.</p>
+        </div>
+        <div class="article-item-date">Sequences<br>Timing</div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">The compounding effect on conversion rate</div>
+          <p class="article-item-desc">The improvement is not dramatic in any single week — it is structural over time. When every quote gets followed up consistently, conversion rates rise because decisions that were stalling get nudged. Relationships that were going cold stay warm. And your team's time stays focused on active estimating rather than chasing admin. For a business converting 20% of quotes, moving that figure to 25% through better follow-up is often the difference between a flat year and a growth year.</p>
+        </div>
+        <div class="article-item-date">Conversion<br>Growth</div>
+      </div>
+
+      <div class="article-callout">
+        <p class="article-callout-text">"The quote that gets followed up three times wins more often than the quote that gets followed up once, regardless of price."</p>
+        <button class="article-callout-btn" onclick="openChatWithContext('Quote Follow-Up automation')">chat with us</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- EMAIL MANAGEMENT -->
+  <div class="page" id="page-service-email-management">
+    <div class="page-inner">
+
+      <div class="article-hero">
+        <img src="images/services/email-management.jpg" alt="Email Management">
+      </div>
+
+      <div class="page-eyebrow">services — 03</div>
+      <h1 class="article-page-title">Email Management</h1>
+
+      <p class="article-intro">The inbox of a subcontract business is not a communication tool — it is an unstructured record of every obligation, dispute, instruction, and relationship the business carries. Managing it manually means decisions get buried, instructions go unactioned, and the people who should be on site are instead sorting through correspondence.</p>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">The real cost of an unmanaged inbox</div>
+          <p class="article-item-desc">Research puts the average office worker's email time at two to three hours per day. For a contracts manager or director in a subcontract business, the figure is often higher — and the stakes are greater. A missed site instruction can generate a variation dispute. An unanswered client query can damage a relationship that took years to build. An unread payment notice can mean a missed deadline with contractual consequences. The inbox is not an administrative burden — it is a risk register that nobody is actively reading.</p>
+        </div>
+        <div class="article-item-date">Risk<br>Operations</div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">How AI sorting and templating changes the workflow</div>
+          <p class="article-item-desc">An AI agent that sits inside your inbox reads every incoming message and applies consistent classification: site instruction, payment notice, client query, subcontractor update, compliance document, or general correspondence. High-priority items are surfaced immediately. Routine queries receive a templated acknowledgement within minutes, drafted in your voice and referencing the specific context. Anything that requires a decision is flagged with a summary — not the full thread — so the person responsible can act in seconds rather than minutes. The inbox stops being a queue and becomes a triage system.</p>
+        </div>
+        <div class="article-item-date">Triage<br>Response</div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Escalation logic that protects the business</div>
+          <p class="article-item-desc">Not everything can be templated. The system knows that. Escalation logic identifies emails that carry contractual, financial, or relationship risk and routes them to the right person with a clear brief. A payment notice approaching its response deadline gets flagged 48 hours early. An instruction that conflicts with the agreed scope triggers an alert. A client whose email tone has shifted gets noticed before the relationship breaks down. These are not features — they are the things a good contracts manager does instinctively. Automation makes them systematic.</p>
+        </div>
+        <div class="article-item-date">Escalation<br>Protection</div>
+      </div>
+
+      <div class="article-callout">
+        <p class="article-callout-text">"The instruction that gets missed in a busy inbox is the one that becomes a dispute three months later. Automation closes that gap."</p>
+        <button class="article-callout-btn" onclick="openChatWithContext('Email Management automation')">chat with us</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CASHFLOW & INVOICE -->
+  <div class="page" id="page-service-cashflow-invoice">
+    <div class="page-inner">
+
+      <div class="article-hero">
+        <img src="images/services/cashflow-invoice.jpg" alt="Cashflow &amp; Invoice">
+      </div>
+
+      <div class="page-eyebrow">services — 04</div>
+      <h1 class="article-page-title">Cashflow &amp; Invoice</h1>
+
+      <p class="article-intro">Cash is the operational constraint that everything else runs into. For a subcontract business, the difference between a healthy cash position and a stressed one often comes down to how consistently invoices go out and how persistently they are chased. Both are tasks that automation handles without fatigue, without forgetting, and without the awkwardness that makes human chasers hesitate.</p>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Where cash flow breaks down in practice</div>
+          <p class="article-item-desc">The failure points are consistent across subcontract businesses of every size. Invoices go out late because the person who raises them is managing four other things. Payment applications miss their submission window because the contracts manager is on site. Chasing calls get delayed because nobody wants to damage the relationship. Each delay compounds: a late invoice becomes a late payment, which becomes a cash shortfall that forces the business to draw on its reserves or its credit line. The process itself is the problem — not the people running it.</p>
+        </div>
+        <div class="article-item-date">Cash Flow<br>Risk</div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">End-to-end automation of the invoicing cycle</div>
+          <p class="article-item-desc">An automated invoicing system connects to your project records, your agreed valuations, and your payment schedule. When an invoice date arrives, the system generates the document — pre-populated with the correct values, VAT treatment, and payment terms — and dispatches it to the right contact without manual intervention. Reminders go out at seven days, fourteen days, and final notice at twenty-eight days, each in a calibrated tone that preserves the relationship while making the expectation clear. The only time a human gets involved is when a dispute arises — and the system flags that early too.</p>
+        </div>
+        <div class="article-item-date">Invoicing<br>Dispatch</div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">What a consistent cash position makes possible</div>
+          <p class="article-item-desc">The operational effect of reliable cash collection is underestimated. When you know your debtor book is being worked consistently — not just when someone has capacity — you can plan with more certainty. You can take on more work without stretching your working capital. You can make supplier payments on time and negotiate better terms. You can remove the weekly cash position conversation from your management meetings entirely, because the position is being managed by a system that does not have a bad week. That is not an efficiency gain — it is a structural improvement to how the business operates.</p>
+        </div>
+        <div class="article-item-date">Stability<br>Growth</div>
+      </div>
+
+      <div class="article-callout">
+        <p class="article-callout-text">"The invoice that goes out on time, every time, gets paid faster than the one that depends on someone remembering to send it."</p>
+        <button class="article-callout-btn" onclick="openChatWithContext('Cashflow and Invoice automation')">chat with us</button>
       </div>
 
     </div>
