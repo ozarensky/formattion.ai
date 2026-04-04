@@ -347,26 +347,24 @@
       letter-spacing: -0.02em;
       line-height: 1.0;
     }
-    /* ══ NEWS CARDS — image-zone + content-zone card ══ */
+    /* ══ NEWS CARDS — full-image card with text overlay ══ */
     .news-grid {
       display: flex;
       flex-direction: column;
       gap: 16px;
     }
     .news-card {
+      position: relative;
+      height: 420px;
       border-radius: var(--rx-feature);
       overflow: hidden;
-      background: var(--bg2);
       cursor: pointer;
-      display: flex;
-      flex-direction: column;
       box-shadow: 0 1px 4px rgba(0,0,0,0.07), 0 0 0 1px var(--dim);
       transition: transform .25s cubic-bezier(.25,.46,.45,.94), box-shadow .25s ease;
     }
     .news-card-image-zone {
-      position: relative;
-      height: 280px;
-      flex-shrink: 0;
+      position: absolute;
+      inset: 0;
       overflow: hidden;
       background: #1c1814;
     }
@@ -377,79 +375,70 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform .4s ease;
     }
     .news-card-geo {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
+      transition: transform .4s ease;
     }
     .news-card-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.45) 50%, transparent 100%);
+    }
+    .news-card-content {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      height: 80px;
-      background: linear-gradient(to top, rgba(28,24,20,0.55) 0%, transparent 100%);
-    }
-    .news-card-content {
+      z-index: 1;
       padding: 28px 32px;
       display: flex;
       flex-direction: column;
-      width: 100%;
     }
     .news-card-eyebrow {
       font-family: var(--mono);
       font-size: 10px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 12px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 10px;
     }
     .news-card-title {
       font-family: 'Cormorant Infant', Georgia, serif;
       font-weight: 400;
       font-size: 28px;
-      color: var(--ink);
+      color: #fff;
       line-height: 1.2;
       letter-spacing: -0.01em;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .news-card-desc {
       font-family: var(--sans);
       font-size: 13px;
       font-weight: 400;
-      color: var(--muted);
+      color: rgba(255,255,255,0.75);
       line-height: 1.65;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       max-width: 560px;
     }
     .news-card-footer {
       display: flex;
       align-items: center;
-      gap: 16px;
     }
     .news-card-date {
       font-family: var(--mono);
       font-size: 10px;
       letter-spacing: 0.06em;
-      color: var(--muted);
+      color: rgba(255,255,255,0.5);
     }
-    .news-card-cta {
-      display: inline-block;
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--ink);
-      border: 1px solid var(--dim);
-      border-radius: 999px;
-      padding: 6px 16px;
-      transition: background .2s, border-color .2s;
-    }
-    .news-card:hover .news-card-cta { background: var(--dim); border-color: var(--muted); }
-    .news-card:hover .news-card-title { opacity: 0.75; }
-    .news-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.1), 0 0 0 1px var(--dim); }
+    .news-card:hover .news-card-img,
+    .news-card:hover .news-card-geo { transform: scale(1.04); }
+    .news-card:hover .news-card-title { opacity: 0.85; }
+    .news-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
     .news-card:active { transform: scale(0.985); }
     .news-card:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
 
@@ -1368,8 +1357,8 @@
     }
 
     /* ── NEWS CARDS ── */
-    .news-card-image-zone { height: 220px; }
-    .news-card-content { padding: 20px 20px; }
+    .news-card { height: 320px; }
+    .news-card-content { padding: 20px; }
     .news-card-title { font-size: 22px; }
     .news-card-desc { max-width: 100%; }
 
@@ -1492,7 +1481,7 @@
     .about-stat-row { grid-template-columns: 1fr !important; }
     .article-stats { grid-template-columns: 1fr !important; }
     .article-flow-grid { grid-template-columns: 1fr !important; }
-    .news-card-image-zone { height: 180px; }
+    .news-card { height: 260px; }
   }
 
   /* ── Scroll progress bar ── */
@@ -1736,7 +1725,6 @@
           ║      </div>                                                        ║
           ║      <div class="news-card-footer">                               ║
           ║        <span class="news-card-date">[D Month YYYY]</span>         ║
-          ║        <span class="news-card-cta">Read article</span>            ║
           ║      </div>                                                        ║
           ║    </div>                                                          ║
           ║  </div>                                                            ║
@@ -1756,7 +1744,6 @@
             </div>
             <div class="news-card-footer">
               <span class="news-card-date">4 April 2026</span>
-              <span class="news-card-cta">Read article</span>
             </div>
           </div>
         </div>
@@ -1774,7 +1761,6 @@
             </div>
             <div class="news-card-footer">
               <span class="news-card-date">4 April 2026</span>
-              <span class="news-card-cta">Read article</span>
             </div>
           </div>
         </div>
@@ -1792,7 +1778,6 @@
             </div>
             <div class="news-card-footer">
               <span class="news-card-date">4 April 2026</span>
-              <span class="news-card-cta">Read article</span>
             </div>
           </div>
         </div>
@@ -1829,7 +1814,6 @@
             </div>
             <div class="news-card-footer">
               <span class="news-card-date">22 March 2026</span>
-              <span class="news-card-cta">Read article</span>
             </div>
           </div>
         </div>
@@ -1866,7 +1850,6 @@
             </div>
             <div class="news-card-footer">
               <span class="news-card-date">22 March 2026</span>
-              <span class="news-card-cta">Read article</span>
             </div>
           </div>
         </div>
