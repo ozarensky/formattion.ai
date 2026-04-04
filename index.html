@@ -185,19 +185,46 @@
 
     /* services grid */
     .services-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
+      flex-direction: column;
       gap: 8px;
       margin-bottom: 8px;
     }
     .service-cell {
+      display: flex;
       background: var(--bg2);
-      padding: 32px 28px;
       border-radius: 12px;
+      overflow: hidden;
       transition: background .2s ease, transform .2s ease;
       cursor: default;
+      min-height: 240px;
     }
     .service-cell:hover { background: var(--bg3); transform: translateY(-1px); }
+    .service-cell-image {
+      width: 38%;
+      flex-shrink: 0;
+      overflow: hidden;
+      background: #1c1814;
+    }
+    .service-cell-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0.88;
+      transition: opacity .3s ease, transform .4s ease;
+    }
+    .service-cell:hover .service-cell-image img {
+      opacity: 1;
+      transform: scale(1.03);
+    }
+    .service-cell-content {
+      padding: 36px 40px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
     .service-cell-label {
       font-family: var(--mono);
       font-size: 9px;
@@ -1355,10 +1382,20 @@
     }
 
     /* ── SERVICES GRID
-       Desktop: 2 columns
-       Mobile: 1 column ── */
+       Desktop & Mobile: single column, stacked ── */
     .services-grid {
-      grid-template-columns: 1fr !important;
+      flex-direction: column !important;
+    }
+    .service-cell {
+      flex-direction: column !important;
+      min-height: auto !important;
+    }
+    .service-cell-image {
+      width: 100% !important;
+      height: 200px;
+    }
+    .service-cell-content {
+      padding: 28px 24px !important;
     }
 
     /* ── METHOD STEPS — already 48px + 1fr, fine on mobile ── */
@@ -1638,24 +1675,44 @@
 
       <div class="services-grid">
         <div class="service-cell">
-          <div class="service-cell-label">01</div>
-          <div class="service-cell-title">Lead Capture</div>
-          <div class="service-cell-body">Automated intake, qualification, and routing. Every enquiry is logged, assigned, and followed up — without manual intervention.</div>
+          <div class="service-cell-image">
+            <img src="images/services/lead-capture.jpg" alt="Lead Capture">
+          </div>
+          <div class="service-cell-content">
+            <div class="service-cell-label">01</div>
+            <div class="service-cell-title">Lead Capture</div>
+            <div class="service-cell-body">Automated intake, qualification, and routing. Every enquiry is logged, assigned, and followed up — without manual intervention.</div>
+          </div>
         </div>
         <div class="service-cell">
-          <div class="service-cell-label">02</div>
-          <div class="service-cell-title">Quote Follow-Up</div>
-          <div class="service-cell-body">Systematic outreach sequences triggered by quote status. No chase-up falls through the gap.</div>
+          <div class="service-cell-image">
+            <img src="images/services/quote-followup.jpg" alt="Quote Follow-Up">
+          </div>
+          <div class="service-cell-content">
+            <div class="service-cell-label">02</div>
+            <div class="service-cell-title">Quote Follow-Up</div>
+            <div class="service-cell-body">Systematic outreach sequences triggered by quote status. No chase-up falls through the gap.</div>
+          </div>
         </div>
         <div class="service-cell">
-          <div class="service-cell-label">03</div>
-          <div class="service-cell-title">Email Management</div>
-          <div class="service-cell-body">AI-sorted inboxes, templated responses, and escalation logic. Reduces daily administrative load to near zero.</div>
+          <div class="service-cell-image">
+            <img src="images/services/email-management.jpg" alt="Email Management">
+          </div>
+          <div class="service-cell-content">
+            <div class="service-cell-label">03</div>
+            <div class="service-cell-title">Email Management</div>
+            <div class="service-cell-body">AI-sorted inboxes, templated responses, and escalation logic. Reduces daily administrative load to near zero.</div>
+          </div>
         </div>
         <div class="service-cell">
-          <div class="service-cell-label">04</div>
-          <div class="service-cell-title">Cashflow & Invoice</div>
-          <div class="service-cell-body">Invoice creation, dispatch, and payment tracking automated end to end. Your team stops chasing.</div>
+          <div class="service-cell-image">
+            <img src="images/services/cashflow-invoice.jpg" alt="Cashflow &amp; Invoice">
+          </div>
+          <div class="service-cell-content">
+            <div class="service-cell-label">04</div>
+            <div class="service-cell-title">Cashflow & Invoice</div>
+            <div class="service-cell-body">Invoice creation, dispatch, and payment tracking automated end to end. Your team stops chasing.</div>
+          </div>
         </div>
       </div>
 
