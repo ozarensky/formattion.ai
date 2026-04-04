@@ -1554,31 +1554,6 @@
   #back-to-top.visible { opacity: 1; pointer-events: auto; }
   #back-to-top:hover { opacity: 0.45; }
 
-  /* ── Sticky score CTA ── */
-  #sticky-score {
-    position: fixed;
-    bottom: 90px;
-    right: 44px;
-    padding: 9px 18px;
-    border-radius: 999px;
-    border: 1px solid rgba(74,98,120,0.35);
-    background: var(--bg);
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--acc);
-    cursor: pointer;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(8px);
-    transition: opacity .3s ease, transform .3s ease, background .2s ease, color .2s ease;
-    z-index: 800;
-  }
-  #sticky-score.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
-  #sticky-score:hover { background: var(--acc); color: var(--bg); border-color: var(--acc); }
-  @media (max-width: 480px) { #sticky-score { display: none; } }
 
   /* ── Reading time badge ── */
   .read-time-badge {
@@ -1629,7 +1604,6 @@
   body.dark .outcome-card:hover { background: var(--bg3); }
   @media (max-width: 640px) {
     .outcomes-grid { grid-template-columns: 1fr; }
-    #sticky-score { right: 16px; bottom: 84px; }
     #back-to-top { display: none; }
   }
 </style>
@@ -1643,7 +1617,7 @@
       <path fill="var(--ink)" d="M129.77,45.09c-3.56-3.56-9.64-1.04-9.64,3.99v242.44c.01,5.73-4.64,10.38-10.37,10.38s-10.38-4.65-10.38-10.38V49.08c0-5.03-6.06-7.57-9.62-4.02-21.59,21.6-72.03,72.05-72.03,72.05-4.05,4.05-10.63,4.05-14.68,0-4.05-4.05-4.05-10.63,0-14.68,0,0,75.34-75.34,99.41-99.41,4.05-4.05,10.59-4.02,14.64.03l99.4,99.38c4.05,4.05,4.05,10.63,0,14.68-4.05,4.05-10.63,4.05-14.68,0l-72.04-72.04Z"/>
     </svg>
   </div>
-  <button id="sticky-score" aria-label="Get in touch">Get in touch</button>
+
 
   <!-- ═══ PAGES ═══ -->
 
@@ -2735,46 +2709,29 @@
 
     // ── Reading time calculation ──
 
-    // ── Scroll progress + back-to-top + sticky CTA ──
+    // ── Scroll progress + back-to-top ──
     (function() {
       var progressBar  = document.getElementById('read-progress');
       var backToTop    = document.getElementById('back-to-top');
-      var stickyCta    = document.getElementById('sticky-score');
       var articlePages = ['page-article-payment-applications-ai-2026','page-article-rams-ai-automation-2026','page-article-agentic-ai-streamline-construction-operations-2026','page-article-ai-workflow-automation-subcontractors-2026','page-article-ai-workflow-revolution-subcontractors-2026','page-article-ai-tools-essential-construction-subcontracting-2026','page-service-lead-capture','page-service-quote-followup','page-service-email-management','page-service-cashflow-invoice'];
-      var scorePages   = ['page-services', 'page-pricing'];
 
-      function updateProgress(pageEl, isArticle, isScorePage) {
+      function updateProgress(pageEl, isArticle) {
+        var scrolled = pageEl.scrollTop;
+        var total    = pageEl.scrollHeight - pageEl.clientHeight;
         if (isArticle) {
-          var scrolled  = pageEl.scrollTop;
-          var total     = pageEl.scrollHeight - pageEl.clientHeight;
-          var pct       = total > 0 ? Math.min(100, (scrolled / total) * 100) : 0;
+          var pct = total > 0 ? Math.min(100, (scrolled / total) * 100) : 0;
           progressBar.style.width = pct + '%';
           progressBar.classList.toggle('visible', scrolled > 50);
-          backToTop.classList.toggle('visible', scrolled > (pageEl.scrollHeight - pageEl.clientHeight) * 0.8);
-          stickyCta.classList.remove('visible');
-        } else if (isScorePage) {
-          var scrolled = pageEl.scrollTop;
-          var total    = pageEl.scrollHeight - pageEl.clientHeight;
-          progressBar.style.width = '0%';
-          progressBar.classList.remove('visible');
-          backToTop.classList.toggle('visible', scrolled > total * 0.8);
-          stickyCta.classList.toggle('visible', scrolled > 400);
         } else {
-          var scrolled = pageEl.scrollTop;
-          var total    = pageEl.scrollHeight - pageEl.clientHeight;
           progressBar.style.width = '0%';
           progressBar.classList.remove('visible');
-          backToTop.classList.toggle('visible', scrolled > total * 0.8);
-          stickyCta.classList.remove('visible');
         }
+        backToTop.classList.toggle('visible', scrolled > total * 0.8);
       }
 
       document.querySelectorAll('.page').forEach(function(pageEl) {
         pageEl.addEventListener('scroll', function() {
-          var id = pageEl.id;
-          var isArticle   = articlePages.indexOf(id) >= 0;
-          var isScorePage = scorePages.indexOf(id) >= 0;
-          updateProgress(pageEl, isArticle, isScorePage);
+          updateProgress(pageEl, articlePages.indexOf(pageEl.id) >= 0);
         }, { passive: true });
       });
 
@@ -2785,10 +2742,6 @@
       backToTop.addEventListener('click', scrollToTop);
       backToTop.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); scrollToTop(); }
-      });
-
-      stickyCta.addEventListener('click', function() {
-        showPage('page-contact');
       });
     })();
 
