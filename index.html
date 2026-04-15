@@ -889,8 +889,8 @@
     .chat-btn {
       position: absolute;
       bottom: 150px;
-      left: 50%;
-      transform: translateX(-50%);
+      left: calc(50% - min(450px, calc((100vw - 130px) / 2)));
+      transform: none;
       display: flex;
       align-items: center;
       justify-content: center;
