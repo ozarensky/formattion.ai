@@ -27,7 +27,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;1,300;1,400&family=DM+Mono:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;1,300;1,400&family=DM+Mono:wght@300;400&family=EB+Garamond:wght@400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
   <!-- Schema.org structured data -->
   <script type="application/ld+json">
   {
@@ -880,6 +880,25 @@
     }
     body.dark .brand-logo .cls-1 { fill: #EDECEA; }
     body.dark .brand-logo { filter: none; }
+
+    .brand-slogan {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, calc(-50% + 80px));
+      font-family: 'EB Garamond', Garamond, serif;
+      font-size: clamp(13px, 1.6vw, 20px);
+      color: var(--ink);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      text-align: center;
+      opacity: 0;
+      animation: sloganEnter .9s cubic-bezier(.25,.46,.45,.94) .15s forwards;
+    }
+    @keyframes sloganEnter {
+      from { opacity: 0; transform: translate(-50%, calc(-50% + 92px)); }
+      to   { opacity: 1; transform: translate(-50%, calc(-50% + 80px)); }
+    }
 
     .chat-btn {
       position: absolute;
@@ -2318,6 +2337,7 @@
     </g>
   </g>
 </svg>
+    <p class="brand-slogan">AI automation for construction subcontractors</p>
     <button class="chat-btn" id="openChat">chat with us</button>
   </div>
 
