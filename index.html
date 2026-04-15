@@ -867,23 +867,23 @@
     .brand-slogan {
       position: absolute;
       top: 50%;
-      left: 65px;
-      transform: translateY(-50%);
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(900px, calc(100vw - 130px));
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-weight: 300;
       font-style: normal;
-      font-size: clamp(56px, 7vw, 96px);
+      font-size: clamp(28px, 7vw, 96px);
       letter-spacing: -.02em;
-      line-height: 1;
+      line-height: 1.1;
       color: var(--ink);
       text-align: left;
-      max-width: calc(100vw - 130px);
       opacity: 0;
       animation: sloganEnter .9s cubic-bezier(.25,.46,.45,.94) .1s forwards;
     }
     @keyframes sloganEnter {
-      from { opacity: 0; transform: translateY(calc(-50% + 20px)); }
-      to   { opacity: 1; transform: translateY(-50%); }
+      from { opacity: 0; transform: translate(-50%, calc(-50% + 20px)); }
+      to   { opacity: 1; transform: translate(-50%, -50%); }
     }
 
     .chat-btn {
@@ -1279,6 +1279,11 @@
     /* Mobile entrance — simple fade, avoids transform conflicts */
     .brand-logo { animation: mobileFadeIn .9s ease both !important; }
     .chat-btn { animation: mobileFadeIn .9s ease .45s both !important; }
+
+    .brand-slogan {
+      width: calc(100vw - 56px);
+      font-size: clamp(28px, 7vw, 48px);
+    }
     @keyframes mobileFadeIn { from { opacity:0; } to { opacity:1; } }
 
     /* ── TOP LOGO: bar top=8px h=60px, centre=38px, logo h=14px → top=31px ── */
