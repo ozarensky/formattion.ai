@@ -867,8 +867,8 @@
     .brand-slogan {
       position: absolute;
       top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      left: 65px;
+      transform: translateY(-50%);
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-weight: 300;
       font-style: normal;
@@ -876,14 +876,14 @@
       letter-spacing: -.02em;
       line-height: 1;
       color: var(--ink);
-      text-align: center;
-      max-width: 80vw;
+      text-align: left;
+      max-width: calc(100vw - 130px);
       opacity: 0;
       animation: sloganEnter .9s cubic-bezier(.25,.46,.45,.94) .1s forwards;
     }
     @keyframes sloganEnter {
-      from { opacity: 0; transform: translate(-50%, calc(-50% + 20px)); }
-      to   { opacity: 1; transform: translate(-50%, -50%); }
+      from { opacity: 0; transform: translateY(calc(-50% + 20px)); }
+      to   { opacity: 1; transform: translateY(-50%); }
     }
 
     .chat-btn {
