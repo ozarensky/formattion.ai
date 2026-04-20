@@ -854,9 +854,22 @@
     #landing {
       position: fixed;
       inset: 0;
-      background: var(--bg);
+      background: var(--bg) url('images/landing-bg.jpg') center / cover no-repeat;
       z-index: 10;
       transition: opacity .55s ease, transform .55s ease;
+    }
+    #landing::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(244, 239, 230, 0.72);
+      pointer-events: none;
+    }
+    body.dark #landing {
+      background-color: #141618;
+    }
+    body.dark #landing::before {
+      background: rgba(20, 22, 24, 0.72);
     }
     #landing.hidden {
       opacity: 0;
@@ -1643,6 +1656,7 @@
       <div class="page-divider"></div>
 
       <div class="services-grid">
+        <!-- SERVICES-CARDS-START -->
         <div class="service-cell" role="button" tabindex="0" onclick="showPage('page-service-lead-capture')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('page-service-lead-capture');}">
           <div class="service-cell-image">
             <img src="images/services/lead-capture.jpg" alt="Lead Capture">
@@ -1683,6 +1697,7 @@
             <div class="service-cell-body">Invoice creation, dispatch, and payment tracking automated end to end. Your team stops chasing.</div>
           </div>
         </div>
+        <!-- SERVICES-CARDS-END -->
       </div>
 
       <div class="page-divider"></div>
@@ -3391,6 +3406,7 @@
   </div>
 
   <!-- ═══ SERVICE DETAIL PAGES ═══ -->
+  <!-- SERVICES-PAGES-START -->
 
   <!-- LEAD CAPTURE -->
   <div class="page" id="page-service-lead-capture">
@@ -3571,6 +3587,7 @@
 
     </div>
   </div>
+  <!-- SERVICES-PAGES-END -->
 
   <!-- ═══ PRIVACY POLICY ═══ -->
   <div id="page-privacy" class="page">

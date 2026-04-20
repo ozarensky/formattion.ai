@@ -1,0 +1,93 @@
+{
+  "name": "service-sync",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "service-sync",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [0, 0],
+      "id": "wh-services",
+      "name": "Webhook",
+      "webhookId": "service-sync"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://sheets.googleapis.com/v4/spreadsheets/REPLACE_WITH_SHEET_ID/values/Services!A1:Z100",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleSheetsOAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [220, 0],
+      "id": "http-services",
+      "name": "Read Services sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "qef9aerPDR2Xajto",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const resp = $input.first().json;\nconst rows = resp.values || [];\nif (rows.length < 2) return [{ json: { services: [] } }];\nconst headers = rows[0];\nconst services = rows.slice(1)\n  .filter(row => row.length > 0 && row[0])\n  .map(row => {\n    const obj = {};\n    headers.forEach((h, i) => { obj[h] = (row[i] || '').trim(); });\n    return {\n      slug:         obj.slug         || '',\n      number:       obj.number       || '',\n      card_eyebrow: obj.card_eyebrow || '',\n      card_title:   obj.card_title   || '',\n      card_desc:    obj.card_desc    || '',\n      page_intro:   obj.page_intro   || '',\n      item1_title:  obj.item1_title  || '',\n      item1_desc:   obj.item1_desc   || '',\n      item1_tag1:   obj.item1_tag1   || '',\n      item1_tag2:   obj.item1_tag2   || '',\n      item2_title:  obj.item2_title  || '',\n      item2_desc:   obj.item2_desc   || '',\n      item2_tag1:   obj.item2_tag1   || '',\n      item2_tag2:   obj.item2_tag2   || '',\n      item3_title:  obj.item3_title  || '',\n      item3_desc:   obj.item3_desc   || '',\n      item3_tag1:   obj.item3_tag1   || '',\n      item3_tag2:   obj.item3_tag2   || '',\n      callout_text: obj.callout_text || '',\n      image_prompt: obj.image_prompt || ''\n    };\n  });\nreturn [{ json: { services } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 0],
+      "id": "cd-services",
+      "name": "Build services"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [660, 0],
+      "id": "rsp-services",
+      "name": "Respond"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [[{"node": "Read Services sheet", "type": "main", "index": 0}]]
+    },
+    "Read Services sheet": {
+      "main": [[{"node": "Build services", "type": "main", "index": 0}]]
+    },
+    "Build services": {
+      "main": [[{"node": "Respond", "type": "main", "index": 0}]]
+    }
+  },
+  "active": true,
+  "settings": {"executionOrder": "v1"},
+  "versionId": "service-sync-v1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "360f2bc92c6156b75156c79a76cc952334e9f8c5f4440b0c32f789057e17aa73"
+  },
+  "id": "service-sync-wf",
+  "tags": []
+}
