@@ -854,22 +854,9 @@
     #landing {
       position: fixed;
       inset: 0;
-      background: var(--bg) url('images/landing-bg.jpg') center / cover no-repeat;
+      background: var(--bg);
       z-index: 10;
       transition: opacity .55s ease, transform .55s ease;
-    }
-    #landing::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(244, 239, 230, 0.18);
-      pointer-events: none;
-    }
-    body.dark #landing {
-      background-color: #141618;
-    }
-    body.dark #landing::before {
-      background: rgba(20, 22, 24, 0.18);
     }
     #landing.hidden {
       opacity: 0;
@@ -891,7 +878,6 @@
       line-height: 1.1;
       color: var(--ink);
       text-align: left;
-      text-shadow: 0 1px 24px rgba(244,239,230,0.7), 0 0 48px rgba(244,239,230,0.5);
       opacity: 0;
       animation: sloganEnter .9s cubic-bezier(.25,.46,.45,.94) .1s forwards;
     }
