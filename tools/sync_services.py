@@ -52,25 +52,20 @@ def fetch_services() -> list[dict]:
             continue
         services.append({
             "slug":         slug,
-            "number":       row.get("number", "").strip(),
-            "card_eyebrow": row.get("card_eyebrow", "").strip(),
-            "card_title":   row.get("card_title", "").strip(),
-            "card_desc":    row.get("card_desc", "").strip(),
-            "page_intro":   row.get("page_intro", "").strip(),
-            "item1_title":  row.get("item1_title", "").strip(),
-            "item1_desc":   row.get("item1_desc", "").strip(),
-            "item1_tag1":   row.get("item1_tag1", "").strip(),
-            "item1_tag2":   row.get("item1_tag2", "").strip(),
-            "item2_title":  row.get("item2_title", "").strip(),
-            "item2_desc":   row.get("item2_desc", "").strip(),
-            "item2_tag1":   row.get("item2_tag1", "").strip(),
-            "item2_tag2":   row.get("item2_tag2", "").strip(),
-            "item3_title":  row.get("item3_title", "").strip(),
-            "item3_desc":   row.get("item3_desc", "").strip(),
-            "item3_tag1":   row.get("item3_tag1", "").strip(),
-            "item3_tag2":   row.get("item3_tag2", "").strip(),
-            "callout_text": row.get("callout_text", "").strip(),
-            "image_prompt": row.get("image_prompt", "").strip(),
+            "number":                  row.get("number", "").strip(),
+            "card_eyebrow":            row.get("card_eyebrow", "").strip(),
+            "card_title":              row.get("card_title", "").strip(),
+            "card_desc":               row.get("card_desc", "").strip(),
+            "page_intro":              row.get("page_intro", "").strip(),
+            "promise":                 row.get("promise", "").strip(),
+            "what_it_does":            row.get("what_it_does", "").strip(),
+            "additional_capabilities": row.get("additional_capabilities", "").strip(),
+            "typical_deliverables":    row.get("typical_deliverables", "").strip(),
+            "where_applied":           row.get("where_applied", "").strip(),
+            "includes":                row.get("includes", "").strip(),
+            "result_callout":          row.get("result_callout", "").strip(),
+            "image_prompt":            row.get("image_prompt", "").strip(),
+            "image_alt":               row.get("image_alt", "").strip(),
         })
     print(f"  {len(services)} service(s) received")
     return services
@@ -126,41 +121,65 @@ def build_card(s: dict) -> str:
         </div>""")
 
 
-def build_detail_page(s: dict) -> str:
-    slug  = s["slug"]
-    num   = s["number"]
-    title = s["card_title"]
-    intro = s["page_intro"]
-    img   = f"images/services/{slug}.jpg"
+def build_bullet_items(pipe_str: str) -> str:
+    """Convert a pipe-separated string into article-item-desc paragraphs."""
+    items = [i.strip() for i in pipe_str.split("|") if i.strip()]
+    return "\n".join(f'        <p class="article-item-desc">— {item}</p>' for item in items)
 
-    items_html = ""
-    for i in (1, 2, 3):
-        item_title = s.get(f"item{i}_title", "")
-        item_desc  = s.get(f"item{i}_desc", "")
-        tag1       = s.get(f"item{i}_tag1", "")
-        tag2       = s.get(f"item{i}_tag2", "")
-        items_html += textwrap.dedent(f"""\
-            <div class="article-item">
-              <div>
-                <div class="article-item-title">{item_title}</div>
-                <p class="article-item-desc">{item_desc}</p>
-              </div>
-              <div class="article-item-date">{tag1}<br>{tag2}</div>
-            </div>
+
+def build_section(title: str, pipe_str: str) -> str:
+    """Render a named bullet-list section as an article-item block. Skip if empty."""
+    if not pipe_str.strip():
+        return ""
+    bullets = build_bullet_items(pipe_str)
+    return textwrap.dedent(f"""\
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">{title}</div>
+{bullets}
+        </div>
+      </div>
 """)
 
-    callout = s.get("callout_text", "")
+
+def build_detail_page(s: dict) -> str:
+    slug    = s["slug"]
+    num     = s["number"]
+    title   = s["card_title"]
+    alt     = s.get("image_alt") or title
+    intro   = s["page_intro"]
+    promise = s.get("promise", "")
+    callout = s.get("result_callout", "")
+    img     = f"images/services/{slug}.jpg"
+
+    promise_html = ""
+    if promise:
+        promise_html = textwrap.dedent(f"""\
+      <div class="article-item">
+        <div>
+          <p class="article-item-desc">{promise}</p>
+        </div>
+      </div>
+""")
+
+    sections = (
+        build_section("What this system does",    s.get("what_it_does", "")) +
+        build_section("Additional capabilities",  s.get("additional_capabilities", "")) +
+        build_section("Typical deliverables",     s.get("typical_deliverables", "")) +
+        build_section("Where it's applied",       s.get("where_applied", "")) +
+        build_section("What's included",          s.get("includes", ""))
+    )
 
     return textwrap.dedent(f"""\
   <div class="page" id="page-service-{slug}">
     <div class="page-inner">
       <div class="article-hero">
-        <img src="{img}" alt="{title}">
+        <img src="{img}" alt="{alt}">
       </div>
       <div class="page-eyebrow">services — {num}</div>
       <h1 class="article-page-title">{title}</h1>
       <p class="article-intro">{intro}</p>
-{items_html}\
+{promise_html}{sections}\
       <div class="article-callout">
         <p class="article-callout-text">{callout}</p>
         <button class="article-callout-btn" onclick="showPage('page-contact')">book a free audit</button>
