@@ -28,7 +28,7 @@ TOKEN_FILE = os.path.normpath(
     os.path.join(os.path.dirname(__file__), "../../workflows/news engine/token.json")
 )
 
-SHEET_ID  = "14q9e1REewluhPTY-p3p8mHKWA-ArfIXOpmWGfoR_Gdo"
+SHEET_ID  = "1Og0Aq8s2QIenNwM9oj5wyUI9oUKpkyBZj8oVpnje6oI"
 TAB_NAME  = "Services"
 
 # ── Data ──────────────────────────────────────────────────────────────────────

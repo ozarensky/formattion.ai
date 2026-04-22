@@ -28,14 +28,14 @@ import urllib.request
 
 # ── Config ────────────────────────────────────────────────────────────────────
 
-SHEET_ID  = "14q9e1REewluhPTY-p3p8mHKWA-ArfIXOpmWGfoR_Gdo"
-SHEET_GID = "842655231"
+SHEET_ID  = "1Og0Aq8s2QIenNwM9oj5wyUI9oUKpkyBZj8oVpnje6oI"
+TAB_NAME  = "Services"
 INDEX_HTML = os.path.join(os.path.dirname(__file__), "..", "index.html")
 IMAGES_DIR = os.path.join(os.path.dirname(__file__), "..", "images", "services")
 
 CSV_URL = (
     f"https://docs.google.com/spreadsheets/d/{SHEET_ID}"
-    f"/export?format=csv&gid={SHEET_GID}"
+    f"/export?format=csv&sheet={TAB_NAME}"
 )
 
 # ── Fetch ─────────────────────────────────────────────────────────────────────
