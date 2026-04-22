@@ -161,9 +161,16 @@ def build_detail_page(s: dict) -> str:
         build_section("What's included",          s.get("includes", ""))
     )
 
-    result_html = ""
-    if callout:
-        result_html = f'      <div class="service-result-card">{callout}</div>\n'
+    result_html = textwrap.dedent(f"""\
+      <div class="service-result-card">
+        <p class="service-result-text">{callout}</p>
+        <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
+      </div>
+""") if callout else textwrap.dedent("""\
+      <div style="margin-bottom:48px;">
+        <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
+      </div>
+""")
 
     return textwrap.dedent(f"""\
   <div class="page" id="page-service-{slug}">
@@ -175,7 +182,6 @@ def build_detail_page(s: dict) -> str:
       <h1 class="article-page-title">{title}</h1>
       <p class="article-intro" style="margin-bottom:8px;">{intro}</p>
 {promise_html}{sections}{result_html}\
-      <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
     </div>
   </div>""")
 
