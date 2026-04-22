@@ -629,25 +629,52 @@
       padding: 32px 0;
       margin: 64px 0;
     }
-    .service-section { margin-bottom: 36px; }
+    .service-section { margin-bottom: 52px; }
     .service-section-label {
       font-family: 'Cormorant Infant', Georgia, serif;
       font-weight: 300;
-      font-size: 22px;
+      font-size: 24px;
       letter-spacing: -0.01em;
-      color: var(--ink);
-      margin-bottom: 12px;
+      color: #1a1814;
+      margin-bottom: 16px;
+      margin-top: 8px;
     }
     .service-card-list { display: flex; flex-direction: column; gap: 8px; }
     .service-card {
       background: #e8e3da;
       border-radius: 6px;
-      padding: 14px 18px;
+      padding: 16px 20px;
       font-family: var(--sans);
       font-size: 15px;
       font-weight: 300;
-      color: var(--ink-body);
+      color: #3a3630;
+      line-height: 1.55;
+    }
+    .service-result-card {
+      background: #e8e3da;
+      border-radius: 6px;
+      padding: 24px 28px;
+      font-family: 'Cormorant Infant', Georgia, serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: 22px;
+      color: #1a1814;
       line-height: 1.5;
+      margin-top: 16px;
+      margin-bottom: 36px;
+    }
+    .service-audit-btn {
+      background: none;
+      border: 1px solid #1a1814;
+      color: #1a1814;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 400;
+      padding: 12px 28px;
+      border-radius: 100px;
+      cursor: pointer;
+      margin-bottom: 80px;
+      display: inline-block;
     }
     .article-callout-text {
       font-family: 'Cormorant Infant', Georgia, serif;
@@ -3478,8 +3505,8 @@
       </div>
       <div class="page-eyebrow">services — 01</div>
       <h1 class="article-page-title">Health & Safety Management</h1>
-      <p class="article-intro">We automate your health & safety processes to keep you compliant, reduce risk, and remove the constant burden of paperwork.</p>
-      <p class="article-intro">The right documents in the right place before work starts — every site, every project, every time.</p>
+      <p class="article-intro" style="margin-bottom:8px;">We automate your health & safety processes to keep you compliant, reduce risk, and remove the constant burden of paperwork.</p>
+      <p class="article-intro" style="margin-top:6px;margin-bottom:48px;">The right documents in the right place before work starts — every site, every project, every time.</p>
 <div class="service-section">
   <div class="service-section-label">What this system does</div>
   <div class="service-card-list">
@@ -3511,10 +3538,8 @@
   <div class="service-card">Main contractor-specific document formatting</div>
   </div>
 </div>
-      <div class="article-callout">
-        <p class="article-callout-text">We replace your Health & Safety Manager — with reduced risk, consistent compliance, and no more chasing paperwork across sites.</p>
-        <button class="article-callout-btn" onclick="showPage('page-contact')">book a free audit</button>
-      </div>
+      <div class="service-result-card">We replace your Health & Safety Manager — with reduced risk, consistent compliance, and no more chasing paperwork across sites.</div>
+      <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
     </div>
   </div>
 
@@ -3525,8 +3550,8 @@
       </div>
       <div class="page-eyebrow">services — 02</div>
       <h1 class="article-page-title">Social Media & Marketing</h1>
-      <p class="article-intro">We help you stay visible, look professional, and generate consistent enquiries — without needing to manage social media yourself.</p>
-      <p class="article-intro">Your day's work on site becomes next week's enquiries — captured, published, and routed automatically.</p>
+      <p class="article-intro" style="margin-bottom:8px;">We help you stay visible, look professional, and generate consistent enquiries — without needing to manage social media yourself.</p>
+      <p class="article-intro" style="margin-top:6px;margin-bottom:48px;">Your day's work on site becomes next week's enquiries — captured, published, and routed automatically.</p>
 <div class="service-section">
   <div class="service-section-label">What this system does</div>
   <div class="service-card-list">
@@ -3557,10 +3582,8 @@
   <div class="service-card">Basic performance and engagement tracking</div>
   </div>
 </div>
-      <div class="article-callout">
-        <p class="article-callout-text">We replace your social media manager — with a consistent, professional presence that builds trust and generates opportunities, without the time commitment.</p>
-        <button class="article-callout-btn" onclick="showPage('page-contact')">book a free audit</button>
-      </div>
+      <div class="service-result-card">We replace your social media manager — with a consistent, professional presence that builds trust and generates opportunities, without the time commitment.</div>
+      <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
     </div>
   </div>
 
@@ -3571,8 +3594,8 @@
       </div>
       <div class="page-eyebrow">services — 03</div>
       <h1 class="article-page-title">Lead Generation & CRM</h1>
-      <p class="article-intro">We help you win more work by ensuring every enquiry is captured, tracked, and followed up properly — without relying on memory or manual admin.</p>
-      <p class="article-intro">From first enquiry to signed job — nothing falls through the gap between your inbox and your diary.</p>
+      <p class="article-intro" style="margin-bottom:8px;">We help you win more work by ensuring every enquiry is captured, tracked, and followed up properly — without relying on memory or manual admin.</p>
+      <p class="article-intro" style="margin-top:6px;margin-bottom:48px;">From first enquiry to signed job — nothing falls through the gap between your inbox and your diary.</p>
 <div class="service-section">
   <div class="service-section-label">What this system does</div>
   <div class="service-card-list">
@@ -3603,10 +3626,8 @@
   <div class="service-card">Reporting on enquiries, conversions, and pipeline value</div>
   </div>
 </div>
-      <div class="article-callout">
-        <p class="article-callout-text">We replace your business development manager — with more enquiries converted into work, a clearer pipeline, and no missed opportunities.</p>
-        <button class="article-callout-btn" onclick="showPage('page-contact')">book a free audit</button>
-      </div>
+      <div class="service-result-card">We replace your business development manager — with more enquiries converted into work, a clearer pipeline, and no missed opportunities.</div>
+      <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
     </div>
   </div>
 
@@ -3617,8 +3638,8 @@
       </div>
       <div class="page-eyebrow">services — 04</div>
       <h1 class="article-page-title">Personal Assistant & Digital Receptionist</h1>
-      <p class="article-intro">We provide an intelligent, always-on assistant that manages your day-to-day admin, communication, and organisation — allowing you to focus on running the business.</p>
-      <p class="article-intro">An assistant that never sleeps, never forgets, and never forwards you an email that could have been handled.</p>
+      <p class="article-intro" style="margin-bottom:8px;">We provide an intelligent, always-on assistant that manages your day-to-day admin, communication, and organisation — allowing you to focus on running the business.</p>
+      <p class="article-intro" style="margin-top:6px;margin-bottom:48px;">An assistant that never sleeps, never forgets, and never forwards you an email that could have been handled.</p>
 <div class="service-section">
   <div class="service-section-label">What this system does</div>
   <div class="service-card-list">
@@ -3655,10 +3676,8 @@
   <div class="service-card">Document generation workflows</div>
   </div>
 </div>
-      <div class="article-callout">
-        <p class="article-callout-text">Acts as your personal assistant — with fewer interruptions, better organisation, and significantly more time to focus on high-value work.</p>
-        <button class="article-callout-btn" onclick="showPage('page-contact')">book a free audit</button>
-      </div>
+      <div class="service-result-card">Acts as your personal assistant — with fewer interruptions, better organisation, and significantly more time to focus on high-value work.</div>
+      <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
     </div>
   </div>
 
@@ -3669,8 +3688,8 @@
       </div>
       <div class="page-eyebrow">services — 05</div>
       <h1 class="article-page-title">HR & Internal Communications</h1>
-      <p class="article-intro">We streamline how your team is managed, trained, and communicated with — ensuring consistency across your workforce and reducing admin.</p>
-      <p class="article-intro">Every card in date, every induction done, every message acknowledged — without a spreadsheet anyone dreads opening.</p>
+      <p class="article-intro" style="margin-bottom:8px;">We streamline how your team is managed, trained, and communicated with — ensuring consistency across your workforce and reducing admin.</p>
+      <p class="article-intro" style="margin-top:6px;margin-bottom:48px;">Every card in date, every induction done, every message acknowledged — without a spreadsheet anyone dreads opening.</p>
 <div class="service-section">
   <div class="service-section-label">What this system does</div>
   <div class="service-card-list">
@@ -3705,10 +3724,8 @@
   <div class="service-card">Centralised staff database and records system</div>
   </div>
 </div>
-      <div class="article-callout">
-        <p class="article-callout-text">We replace your HR manager — with a more organised, compliant, and accountable workforce, and fewer communication gaps.</p>
-        <button class="article-callout-btn" onclick="showPage('page-contact')">book a free audit</button>
-      </div>
+      <div class="service-result-card">We replace your HR manager — with a more organised, compliant, and accountable workforce, and fewer communication gaps.</div>
+      <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
     </div>
   </div>
 
@@ -3719,8 +3736,8 @@
       </div>
       <div class="page-eyebrow">services — 06</div>
       <h1 class="article-page-title">Ongoing Support & Optimisation</h1>
-      <p class="article-intro">Your monthly retainer ensures your systems continue to run smoothly, improve over time, and adapt as your business grows.</p>
-      <p class="article-intro">Unlike static software, your systems are designed to learn and improve the more they're used.</p>
+      <p class="article-intro" style="margin-bottom:8px;">Your monthly retainer ensures your systems continue to run smoothly, improve over time, and adapt as your business grows.</p>
+      <p class="article-intro" style="margin-top:6px;margin-bottom:48px;">Unlike static software, your systems are designed to learn and improve the more they're used.</p>
 <div class="service-section">
   <div class="service-section-label">What this system does</div>
   <div class="service-card-list">
@@ -3750,10 +3767,8 @@
   <div class="service-card">Performance tracking and optimisation</div>
   </div>
 </div>
-      <div class="article-callout">
-        <p class="article-callout-text">Systems that don't just work — they get better, more efficient, and more valuable the longer they are in place.</p>
-        <button class="article-callout-btn" onclick="showPage('page-contact')">book a free audit</button>
-      </div>
+      <div class="service-result-card">Systems that don't just work — they get better, more efficient, and more valuable the longer they are in place.</div>
+      <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
     </div>
   </div>
 
@@ -3764,8 +3779,8 @@
       </div>
       <div class="page-eyebrow">services — 07</div>
       <h1 class="article-page-title">Branding & Identity Package</h1>
-      <p class="article-intro">Most subcontractors have a logo — but no consistent brand behind it. We create a complete branding system that ensures your business looks professional, consistent, and credible across every touchpoint.</p>
-      <p class="article-intro">One coherent brand — from the van door to the tender submission.</p>
+      <p class="article-intro" style="margin-bottom:8px;">Most subcontractors have a logo — but no consistent brand behind it. We create a complete branding system that ensures your business looks professional, consistent, and credible across every touchpoint.</p>
+      <p class="article-intro" style="margin-top:6px;margin-bottom:48px;">One coherent brand — from the van door to the tender submission.</p>
 <div class="service-section">
   <div class="service-section-label">What this system does</div>
   <div class="service-card-list">
@@ -3809,10 +3824,8 @@
   <div class="service-card">Tender submissions and presentations</div>
   </div>
 </div>
-      <div class="article-callout">
-        <p class="article-callout-text">A professional, consistent brand that builds trust with main contractors and clients — holding together across every touchpoint.</p>
-        <button class="article-callout-btn" onclick="showPage('page-contact')">book a free audit</button>
-      </div>
+      <div class="service-result-card">A professional, consistent brand that builds trust with main contractors and clients — holding together across every touchpoint.</div>
+      <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
     </div>
   </div>
 
@@ -3823,8 +3836,8 @@
       </div>
       <div class="page-eyebrow">services — 08</div>
       <h1 class="article-page-title">Website Design & Build</h1>
-      <p class="article-intro">Your website should reflect the quality of your work and support your business in winning new opportunities. We design and build modern, professional websites tailored to subcontractors in construction.</p>
-      <p class="article-intro">Not a brochure site — a working front door for your business, wired into the systems that convert enquiries into jobs.</p>
+      <p class="article-intro" style="margin-bottom:8px;">Your website should reflect the quality of your work and support your business in winning new opportunities. We design and build modern, professional websites tailored to subcontractors in construction.</p>
+      <p class="article-intro" style="margin-top:6px;margin-bottom:48px;">Not a brochure site — a working front door for your business, wired into the systems that convert enquiries into jobs.</p>
 <div class="service-section">
   <div class="service-section-label">What this system does</div>
   <div class="service-card-list">
@@ -3865,10 +3878,8 @@
   <div class="service-card">Performance monitoring and optimisation</div>
   </div>
 </div>
-      <div class="article-callout">
-        <p class="article-callout-text">A professional online presence that builds credibility and generates enquiries — wired directly into the systems that convert them.</p>
-        <button class="article-callout-btn" onclick="showPage('page-contact')">book a free audit</button>
-      </div>
+      <div class="service-result-card">A professional online presence that builds credibility and generates enquiries — wired directly into the systems that convert them.</div>
+      <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
     </div>
   </div>
   

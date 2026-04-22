@@ -149,7 +149,9 @@ def build_detail_page(s: dict) -> str:
 
     promise_html = ""
     if promise:
-        promise_html = f'      <p class="article-intro">{promise}</p>\n'
+        promise_html = f'      <p class="article-intro" style="margin-top:6px;margin-bottom:48px;">{promise}</p>\n'
+    else:
+        promise_html = '      <div style="margin-bottom:48px;"></div>\n'
 
     sections = (
         build_section("What this system does",    s.get("what_it_does", "")) +
@@ -159,6 +161,10 @@ def build_detail_page(s: dict) -> str:
         build_section("What's included",          s.get("includes", ""))
     )
 
+    result_html = ""
+    if callout:
+        result_html = f'      <div class="service-result-card">{callout}</div>\n'
+
     return textwrap.dedent(f"""\
   <div class="page" id="page-service-{slug}">
     <div class="page-inner">
@@ -167,12 +173,9 @@ def build_detail_page(s: dict) -> str:
       </div>
       <div class="page-eyebrow">services — {num}</div>
       <h1 class="article-page-title">{title}</h1>
-      <p class="article-intro">{intro}</p>
-{promise_html}{sections}\
-      <div class="article-callout">
-        <p class="article-callout-text">{callout}</p>
-        <button class="article-callout-btn" onclick="showPage('page-contact')">book a free audit</button>
-      </div>
+      <p class="article-intro" style="margin-bottom:8px;">{intro}</p>
+{promise_html}{sections}{result_html}\
+      <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
     </div>
   </div>""")
 
