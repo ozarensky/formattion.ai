@@ -121,22 +121,17 @@ def build_card(s: dict) -> str:
         </div>""")
 
 
-def build_bullet_items(pipe_str: str) -> str:
-    """Convert a pipe-separated string into article-item-desc paragraphs."""
-    items = [i.strip() for i in pipe_str.split("|") if i.strip()]
-    return "\n".join(f'        <p class="article-item-desc">— {item}</p>' for item in items)
-
-
 def build_section(title: str, pipe_str: str) -> str:
-    """Render a named bullet-list section as an article-item block. Skip if empty."""
+    """Render a named section as a card list. Skip if empty."""
     if not pipe_str.strip():
         return ""
-    bullets = build_bullet_items(pipe_str)
+    items = [i.strip() for i in pipe_str.split("|") if i.strip()]
+    cards = "\n".join(f'        <div class="service-card">{item}</div>' for item in items)
     return textwrap.dedent(f"""\
-      <div class="article-item">
-        <div>
-          <div class="article-item-title">{title}</div>
-{bullets}
+      <div class="service-section">
+        <div class="service-section-label">{title}</div>
+        <div class="service-card-list">
+{cards}
         </div>
       </div>
 """)
@@ -154,13 +149,7 @@ def build_detail_page(s: dict) -> str:
 
     promise_html = ""
     if promise:
-        promise_html = textwrap.dedent(f"""\
-      <div class="article-item">
-        <div>
-          <p class="article-item-desc">{promise}</p>
-        </div>
-      </div>
-""")
+        promise_html = f'      <p class="article-intro">{promise}</p>\n'
 
     sections = (
         build_section("What this system does",    s.get("what_it_does", "")) +
