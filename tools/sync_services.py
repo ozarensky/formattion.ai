@@ -17,44 +17,90 @@ After running, review index.html then:
     git push
 """
 
+import csv
+import io
 import os
+import re
+import shutil
 import sys
-import json
 import textwrap
 import urllib.request
 
 # ── Config ────────────────────────────────────────────────────────────────────
 
-N8N_WEBHOOK = "https://ozarensky.app.n8n.cloud/webhook/service-sync"
-INDEX_HTML   = os.path.join(os.path.dirname(__file__), "..", "index.html")
-IMAGES_DIR   = os.path.join(os.path.dirname(__file__), "..", "images", "services")
+SHEET_ID  = "14q9e1REewluhPTY-p3p8mHKWA-ArfIXOpmWGfoR_Gdo"
+SHEET_GID = "842655231"
+INDEX_HTML = os.path.join(os.path.dirname(__file__), "..", "index.html")
+IMAGES_DIR = os.path.join(os.path.dirname(__file__), "..", "images", "services")
+
+CSV_URL = (
+    f"https://docs.google.com/spreadsheets/d/{SHEET_ID}"
+    f"/export?format=csv&gid={SHEET_GID}"
+)
 
 # ── Fetch ─────────────────────────────────────────────────────────────────────
 
 def fetch_services() -> list[dict]:
-    print(f"Fetching from {N8N_WEBHOOK} ...")
-    with urllib.request.urlopen(N8N_WEBHOOK, timeout=15) as resp:
-        data = json.loads(resp.read())
-    services = data.get("services", [])
+    print(f"Fetching sheet as CSV (no auth required) ...")
+    with urllib.request.urlopen(CSV_URL, timeout=15) as resp:
+        raw = resp.read().decode("utf-8")
+    reader = csv.DictReader(io.StringIO(raw))
+    services = []
+    for row in reader:
+        slug = row.get("slug", "").strip()
+        if not slug:
+            continue
+        services.append({
+            "slug":         slug,
+            "number":       row.get("number", "").strip(),
+            "card_eyebrow": row.get("card_eyebrow", "").strip(),
+            "card_title":   row.get("card_title", "").strip(),
+            "card_desc":    row.get("card_desc", "").strip(),
+            "page_intro":   row.get("page_intro", "").strip(),
+            "item1_title":  row.get("item1_title", "").strip(),
+            "item1_desc":   row.get("item1_desc", "").strip(),
+            "item1_tag1":   row.get("item1_tag1", "").strip(),
+            "item1_tag2":   row.get("item1_tag2", "").strip(),
+            "item2_title":  row.get("item2_title", "").strip(),
+            "item2_desc":   row.get("item2_desc", "").strip(),
+            "item2_tag1":   row.get("item2_tag1", "").strip(),
+            "item2_tag2":   row.get("item2_tag2", "").strip(),
+            "item3_title":  row.get("item3_title", "").strip(),
+            "item3_desc":   row.get("item3_desc", "").strip(),
+            "item3_tag1":   row.get("item3_tag1", "").strip(),
+            "item3_tag2":   row.get("item3_tag2", "").strip(),
+            "callout_text": row.get("callout_text", "").strip(),
+            "image_prompt": row.get("image_prompt", "").strip(),
+        })
     print(f"  {len(services)} service(s) received")
     return services
 
 # ── Image generation ──────────────────────────────────────────────────────────
 
+PLACEHOLDER_IMAGE = os.path.join(IMAGES_DIR, "placeholder.jpg")
+
+
 def maybe_generate_image(slug: str, prompt: str) -> None:
-    """Call the image generation tool if the image doesn't already exist."""
+    """Ensure an image exists for this slug: generate, or fall back to placeholder."""
     image_path = os.path.join(IMAGES_DIR, f"{slug}.jpg")
     if os.path.exists(image_path):
         print(f"  [image] {slug}.jpg exists — skipping generation")
         return
 
     try:
-        # Import from the same tools/ directory
         sys.path.insert(0, os.path.dirname(__file__))
         from generate_image import generate_image
         generate_image(slug, prompt, output_dir=IMAGES_DIR)
     except ImportError:
-        print(f"  [image] generate_image.py not found — skipping {slug}")
+        pass
+
+    # If still missing, copy placeholder so the page doesn't break
+    if not os.path.exists(image_path):
+        if os.path.exists(PLACEHOLDER_IMAGE):
+            shutil.copy2(PLACEHOLDER_IMAGE, image_path)
+            print(f"  [image] {slug}.jpg — copied from placeholder")
+        else:
+            print(f"  [image] {slug}.jpg missing and no placeholder found")
 
 # ── HTML builders ─────────────────────────────────────────────────────────────
 
@@ -124,6 +170,28 @@ def build_detail_page(s: dict) -> str:
 
 # ── Patch index.html ──────────────────────────────────────────────────────────
 
+def patch_article_pages(html: str, services: list[dict]) -> str:
+    """Rewrite the articlePages JS array, keeping non-service entries and adding new service slugs."""
+    match = re.search(r"(var articlePages\s*=\s*\[)([^\]]*?)(\];)", html)
+    if not match:
+        print("  [warn] articlePages array not found — skipping")
+        return html
+
+    existing_raw = match.group(2)
+    existing = re.findall(r"'([^']+)'", existing_raw)
+
+    # Keep only non-service entries
+    non_service = [p for p in existing if not p.startswith("page-service-")]
+
+    # Append new service slugs
+    service_entries = [f"page-service-{s['slug']}" for s in services]
+
+    all_entries = non_service + service_entries
+    new_array = ", ".join(f"'{e}'" for e in all_entries)
+    replacement = f"{match.group(1)}{new_array}{match.group(3)}"
+    return html[:match.start()] + replacement + html[match.end():]
+
+
 def patch(html: str, start_marker: str, end_marker: str, new_content: str) -> str:
     start = html.find(start_marker)
     end   = html.find(end_marker)
@@ -155,6 +223,8 @@ def update_index(services: list[dict]) -> None:
                  "<!-- SERVICES-PAGES-START -->",
                  "<!-- SERVICES-PAGES-END -->",
                  "\n" + pages_html + "\n  ")
+
+    html = patch_article_pages(html, services)
 
     with open(INDEX_HTML, "w", encoding="utf-8") as f:
         f.write(html)
