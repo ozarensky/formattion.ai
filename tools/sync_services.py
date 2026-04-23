@@ -17,6 +17,7 @@ After running, review index.html then:
     git push
 """
 
+import argparse
 import csv
 import io
 import os
@@ -28,7 +29,7 @@ import urllib.request
 
 # ── Config ────────────────────────────────────────────────────────────────────
 
-SHEET_ID  = "1Og0Aq8s2QIenNwM9oj5wyUI9oUKpkyBZj8oVpnje6oI"
+SHEET_ID  = "1-MSWH1nN_pYKMEUzLgWxTA2w6-NdClz0l4pqswVlXB4"
 TAB_NAME  = "Services"
 INDEX_HTML = os.path.join(os.path.dirname(__file__), "..", "index.html")
 IMAGES_DIR = os.path.join(os.path.dirname(__file__), "..", "images", "services")
@@ -51,8 +52,9 @@ def fetch_services() -> list[dict]:
         if not slug:
             continue
         services.append({
-            "slug":         slug,
+            "slug":                    slug,
             "number":                  row.get("number", "").strip(),
+            "category":                row.get("category", "").strip(),
             "card_eyebrow":            row.get("card_eyebrow", "").strip(),
             "card_title":              row.get("card_title", "").strip(),
             "card_desc":               row.get("card_desc", "").strip(),
@@ -65,6 +67,7 @@ def fetch_services() -> list[dict]:
             "includes":                row.get("includes", "").strip(),
             "result_callout":          row.get("result_callout", "").strip(),
             "image_prompt":            row.get("image_prompt", "").strip(),
+            "image_prompt_2":          row.get("image_prompt_2", "").strip(),
             "image_alt":               row.get("image_alt", "").strip(),
         })
     print(f"  {len(services)} service(s) received")
@@ -75,27 +78,37 @@ def fetch_services() -> list[dict]:
 PLACEHOLDER_IMAGE = os.path.join(IMAGES_DIR, "placeholder.jpg")
 
 
-def maybe_generate_image(slug: str, prompt: str) -> None:
-    """Ensure an image exists for this slug: generate, or fall back to placeholder."""
-    image_path = os.path.join(IMAGES_DIR, f"{slug}.jpg")
-    if os.path.exists(image_path):
-        print(f"  [image] {slug}.jpg exists — skipping generation")
-        return
-
+def maybe_generate_image(slug: str, prompt: str, prompt_2: str = "", force: bool = False) -> None:
+    """Ensure images exist for this slug: generate primary and callout, or fall back to placeholder."""
+    sys.path.insert(0, os.path.dirname(__file__))
     try:
-        sys.path.insert(0, os.path.dirname(__file__))
-        from generate_image import generate_image
-        generate_image(slug, prompt, output_dir=IMAGES_DIR)
+        from generate_image import generate_image as _generate
     except ImportError:
-        pass
+        _generate = None
 
-    # If still missing, copy placeholder so the page doesn't break
-    if not os.path.exists(image_path):
+    def _ensure(img_slug: str, img_prompt: str) -> None:
+        image_path = os.path.join(IMAGES_DIR, f"{img_slug}.jpg")
+        if force and os.path.exists(image_path):
+            os.remove(image_path)
+            print(f"  [image] {img_slug}.jpg removed for regeneration")
+        if os.path.exists(image_path):
+            print(f"  [image] {img_slug}.jpg exists — skipping")
+            return
+        if _generate and img_prompt:
+            try:
+                _generate(img_slug, img_prompt, output_dir=IMAGES_DIR)
+                return
+            except Exception as e:
+                print(f"  [image] {img_slug}.jpg — generation failed: {e}")
         if os.path.exists(PLACEHOLDER_IMAGE):
             shutil.copy2(PLACEHOLDER_IMAGE, image_path)
-            print(f"  [image] {slug}.jpg — copied from placeholder")
+            print(f"  [image] {img_slug}.jpg — copied from placeholder")
         else:
-            print(f"  [image] {slug}.jpg missing and no placeholder found")
+            print(f"  [image] {img_slug}.jpg missing and no placeholder found")
+
+    _ensure(slug, prompt)
+    if prompt_2:
+        _ensure(f"{slug}-callout", prompt_2)
 
 # ── HTML builders ─────────────────────────────────────────────────────────────
 
@@ -161,12 +174,27 @@ def build_detail_page(s: dict) -> str:
         build_section("What's included",          s.get("includes", ""))
     )
 
-    result_html = textwrap.dedent(f"""\
+    callout_img = f"images/services/{slug}-callout.jpg"
+    has_callout_img = s.get("image_prompt_2", "")
+    if callout and has_callout_img:
+        result_html = textwrap.dedent(f"""\
+      <div class="service-callout-card">
+        <img class="service-callout-img" src="{callout_img}" alt="{alt}">
+        <div class="service-callout-overlay">
+          <p class="service-callout-text">{callout}</p>
+          <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
+        </div>
+      </div>
+""")
+    elif callout:
+        result_html = textwrap.dedent(f"""\
       <div class="service-result-card">
         <p class="service-result-text">{callout}</p>
         <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
       </div>
-""") if callout else textwrap.dedent("""\
+""")
+    else:
+        result_html = textwrap.dedent("""\
       <div style="margin-bottom:48px;">
         <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
       </div>
@@ -251,6 +279,10 @@ def update_index(services: list[dict]) -> None:
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
+    parser = argparse.ArgumentParser(description="Sync services from Google Sheets and patch index.html")
+    parser.add_argument("--force", action="store_true", help="Regenerate all images even if they already exist")
+    args = parser.parse_args()
+
     services = fetch_services()
     if not services:
         print("No services returned — aborting.")
@@ -259,10 +291,11 @@ def main():
     os.makedirs(IMAGES_DIR, exist_ok=True)
 
     for s in services:
-        slug   = s["slug"]
-        prompt = s.get("image_prompt", "")
+        slug     = s["slug"]
+        prompt   = s.get("image_prompt", "")
+        prompt_2 = s.get("image_prompt_2", "")
         print(f"Processing: {slug}")
-        maybe_generate_image(slug, prompt)
+        maybe_generate_image(slug, prompt, prompt_2=prompt_2, force=args.force)
 
     update_index(services)
     print("\nDone. Review changes in index.html, then:")
