@@ -1587,9 +1587,15 @@
       border-radius: 16px !important;
     }
 
-    /* ── SERVICES GRID — mobile ── */
-    .service-cell { min-height: 240px; }
-    .service-cell-content { padding: 28px 24px !important; min-height: 240px; }
+    /* ── SERVICES GRID — mobile; mirror news-card proportions so content doesn't
+       overflow the viewport (aspect-ratio 3/1 + min-height forces oversized width) ── */
+    .service-cell {
+      aspect-ratio: unset !important;
+      min-height: 200px !important;
+    }
+    .service-cell-content { padding: 14px 18px !important; }
+    .service-cell-title { font-size: 22px; }
+    .service-cell-body { font-size: 13px; line-height: 1.65; }
 
     /* ── METHOD STEPS — already 48px + 1fr, fine on mobile ── */
 
