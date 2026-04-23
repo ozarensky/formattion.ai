@@ -1616,12 +1616,27 @@
     .news-card-title { font-size: 22px; }
     .news-card-desc { max-width: 100%; }
 
-    /* ── SERVICE CALLOUT CARD — was in an orphan 600px block; folded here ── */
-    .service-callout-card { aspect-ratio: unset !important; min-height: 320px; }
+    /* ── SERVICE CALLOUT CARD — mobile: keep desktop look (image with cream
+       overlay) but stack the overlay full-width. Image must be absolutely
+       positioned so it reliably fills the card height (percentage height on
+       the img alone is unreliable when the parent only has min-height). ── */
+    .service-callout-card {
+      aspect-ratio: unset !important;
+      min-height: 320px;
+    }
+    .service-callout-img {
+      position: absolute;
+      inset: 0;
+    }
     .service-callout-overlay {
       max-width: 100% !important;
-      padding: 36px 24px !important;
+      padding: 32px 24px !important;
       background: rgba(240,236,228,0.82);
+    }
+    .service-callout-text {
+      font-size: 19px;
+      line-height: 1.4;
+      margin-bottom: 20px;
     }
 
     /* ── ARTICLE PAGE TITLE
