@@ -744,7 +744,7 @@
       justify-content: center;
       padding: 14px 40px;
       border-radius: 999px;
-      border: 1px solid var(--ink);
+      border: 1px solid var(--idle-border);
       background: transparent;
       color: var(--ink);
       font-family: var(--sans);
@@ -753,11 +753,10 @@
       letter-spacing: 0.04em;
       cursor: pointer;
       white-space: nowrap;
-      box-shadow: 0 0 0 0px var(--ink);
-      transition: box-shadow .25s ease, background .25s ease;
+      transition: border-color .25s ease, background .25s ease;
     }
     .service-audit-btn:hover {
-      box-shadow: 0 0 0 1px var(--ink);
+      border-color: var(--ink);
       background: rgba(28,24,20,0.04);
     }
     .service-audit-btn:active { transform: scale(0.97); }
