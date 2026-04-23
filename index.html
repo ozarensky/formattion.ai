@@ -731,21 +731,27 @@
       .service-callout-overlay { max-width: 100%; padding: 28px 20px; background: rgba(240,236,228,0.82); }
     }
     .service-audit-btn {
-      background: none;
-      border: 1px solid #1a1814;
-      color: #1a1814;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 40px;
+      border-radius: 999px;
+      border: 1px solid var(--idle-border);
+      background: transparent;
+      color: var(--ink);
       font-family: var(--sans);
-      font-size: 14px;
-      font-weight: 400;
-      padding: 12px 28px;
-      border-radius: 100px;
+      font-weight: 300;
+      font-size: 15px;
+      letter-spacing: 0.04em;
       cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease;
+      white-space: nowrap;
+      transition: border-color .25s ease, background .25s ease;
     }
     .service-audit-btn:hover {
-      background: #1a1814;
-      color: #f0ece4;
+      border-color: var(--ink);
+      background: rgba(28,24,20,0.04);
     }
+    .service-audit-btn:active { transform: scale(0.97); }
     .article-callout-text {
       font-family: 'Cormorant Infant', Georgia, serif;
       font-weight: 300;
