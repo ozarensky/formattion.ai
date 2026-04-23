@@ -107,6 +107,8 @@
     body.dark .service-result-card { border-color: var(--idle-border); color: var(--ink-body); }
     body.dark .service-section-label { color: var(--ink); }
     body.dark .service-result-text { color: var(--ink); }
+    body.dark .service-cell-title { color: var(--ink); text-shadow: 0 1px 3px rgba(0,0,0,0.55); }
+    body.dark .service-cell-body { color: var(--ink-body); text-shadow: 0 1px 3px rgba(0,0,0,0.55); }
     body.dark .service-audit-btn:hover { background: rgba(237,236,234,0.06); }
     body.dark .article-callout-btn:hover { background: rgba(237,236,234,0.06); }
     body.dark .service-callout-text { color: #1a1916; }
@@ -259,17 +261,6 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      opacity: 0.75;
-      transition: opacity .4s ease;
-    }
-    .service-cell:hover .service-cell-image img {
-      opacity: 0.85;
-    }
-    .service-cell-image::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(20,18,14,0.85) 0%, rgba(20,18,14,0.3) 60%, rgba(20,18,14,0.1) 100%);
     }
     .service-cell-content {
       position: relative;
@@ -280,28 +271,22 @@
       justify-content: flex-end;
       height: 100%;
     }
-    .service-cell-label {
-      font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(237,236,234,0.5);
-      margin-bottom: 12px;
-    }
     .service-cell-title {
-      font-family: var(--sans);
+      font-family: 'Cormorant Infant', Georgia, serif;
       font-weight: 400;
-      font-size: 24px;
+      font-size: 32px;
       letter-spacing: -0.01em;
-      color: #edecea;
+      color: var(--ink);
       margin-bottom: 12px;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.55);
     }
     .service-cell-body {
       font-family: var(--sans);
       font-size: 16px;
       font-weight: 300;
       line-height: 1.75;
-      color: rgba(237,236,234,0.75);
+      color: var(--ink-body);
+      text-shadow: 0 1px 2px rgba(255,255,255,0.5);
     }
 
     /* methodology steps */
@@ -1988,7 +1973,6 @@
             <img src="images/services/health-safety.jpg" alt="Health & Safety Management">
           </div>
           <div class="service-cell-content">
-            <div class="service-cell-label">01</div>
             <div class="service-cell-title">Health & Safety Management</div>
             <div class="service-cell-body">Automated compliance, RAMS, and site documentation — removing the constant burden of paperwork across every project.</div>
           </div>
@@ -2000,7 +1984,6 @@
             <img src="images/services/social-media-marketing.jpg" alt="Social Media & Marketing">
           </div>
           <div class="service-cell-content">
-            <div class="service-cell-label">02</div>
             <div class="service-cell-title">Social Media & Marketing</div>
             <div class="service-cell-body">Consistent, professional presence that builds credibility with main contractors and generates enquiries — without managing social media yourself.</div>
           </div>
@@ -2012,7 +1995,6 @@
             <img src="images/services/lead-generation-crm.jpg" alt="Lead Generation & CRM">
           </div>
           <div class="service-cell-content">
-            <div class="service-cell-label">03</div>
             <div class="service-cell-title">Lead Generation & CRM</div>
             <div class="service-cell-body">Every enquiry captured, tracked, and followed up properly — without relying on memory or manual admin.</div>
           </div>
@@ -2024,7 +2006,6 @@
             <img src="images/services/personal-assistant.jpg" alt="Personal Assistant & Digital Receptionist">
           </div>
           <div class="service-cell-content">
-            <div class="service-cell-label">04</div>
             <div class="service-cell-title">Personal Assistant & Digital Receptionist</div>
             <div class="service-cell-body">An intelligent, always-on assistant managing your day-to-day admin, communication, and organisation — so you can focus on running the business.</div>
           </div>
@@ -2036,7 +2017,6 @@
             <img src="images/services/hr-internal-comms.jpg" alt="HR & Internal Communications">
           </div>
           <div class="service-cell-content">
-            <div class="service-cell-label">05</div>
             <div class="service-cell-title">HR & Internal Communications</div>
             <div class="service-cell-body">A more organised, compliant, and accountable workforce — with fewer communication gaps and less admin.</div>
           </div>
@@ -2048,7 +2028,6 @@
             <img src="images/services/ongoing-support.jpg" alt="Ongoing Support & Optimisation">
           </div>
           <div class="service-cell-content">
-            <div class="service-cell-label">06</div>
             <div class="service-cell-title">Ongoing Support & Optimisation</div>
             <div class="service-cell-body">Your systems kept running, refined, and adapting — so they get more valuable the longer they're in place.</div>
           </div>
@@ -2060,7 +2039,6 @@
             <img src="images/services/branding-identity.jpg" alt="Branding & Identity Package">
           </div>
           <div class="service-cell-content">
-            <div class="service-cell-label">07</div>
             <div class="service-cell-title">Branding & Identity Package</div>
             <div class="service-cell-body">A complete branding system so your business looks professional, consistent, and credible across every touchpoint.</div>
           </div>
@@ -2072,7 +2050,6 @@
             <img src="images/services/website-design-build.jpg" alt="Website Design & Build">
           </div>
           <div class="service-cell-content">
-            <div class="service-cell-label">08</div>
             <div class="service-cell-title">Website Design & Build</div>
             <div class="service-cell-body">Modern, professional websites tailored to subcontractors — built to win work and feed your CRM.</div>
           </div>
