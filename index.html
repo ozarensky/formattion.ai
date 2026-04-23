@@ -177,27 +177,30 @@
     }
     .page-body p { margin-bottom: 28px; }
     .page-body p:last-child { margin-bottom: 0; }
-    .page-body ul {
-      list-style: disc;
-      padding-left: 20px;
-      margin-bottom: 28px;
-    }
-    .page-body ul li { margin-bottom: 6px; }
     .page-body strong { font-weight: 400; color: var(--ink); }
-    .page-section-title {
-      font-family: 'Cormorant Infant', Georgia, serif;
-      font-weight: 300;
-      font-size: clamp(22px, 2.8vw, 32px);
-      letter-spacing: 0;
-      line-height: 1.1;
-      color: var(--ink);
-      margin-bottom: 32px;
-    }
     #page-services .page-title {
       font-family: 'Cormorant Infant', Georgia, serif;
       font-weight: 300;
       letter-spacing: 0;
     }
+    #page-services .page-body p { margin-bottom: 20px; }
+    #page-services .method-steps { margin-bottom: 32px; }
+    .services-problem-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px;
+      max-width: 580px;
+    }
+    .services-problem-list li {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 10px 0;
+      border-bottom: 1px solid var(--dim);
+    }
+    .services-problem-list li:first-child { border-top: 1px solid var(--dim); }
 
     .page-divider {
       width: 100%;
@@ -693,6 +696,43 @@
       color: #1a1814;
       line-height: 1.5;
       margin-bottom: 24px;
+    }
+    .service-callout-card {
+      position: relative;
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 32px;
+      margin-bottom: 48px;
+      aspect-ratio: 16 / 7;
+    }
+    .service-callout-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .service-callout-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 48px;
+      max-width: 62%;
+    }
+    .service-callout-text {
+      font-family: 'Cormorant Infant', Georgia, serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: 22px;
+      line-height: 1.45;
+      color: #1a1916;
+      margin: 0 0 24px 0;
+    }
+    @media (max-width: 600px) {
+      .service-callout-card { aspect-ratio: unset; min-height: 320px; }
+      .service-callout-overlay { max-width: 100%; padding: 28px 20px; background: rgba(240,236,228,0.82); }
     }
     .service-audit-btn {
       background: none;
@@ -1717,35 +1757,52 @@
       <h1 class="page-title">We Build the Systems<br>That Run Your Business.</h1>
       <div class="page-body">
         <p>Most subcontractors don't have a systems problem — they have a <strong>time, admin, and consistency problem</strong>.</p>
-        <p>Too many things are:</p>
-        <ul>
-          <li>Done manually</li>
-          <li>Missed or forgotten</li>
-          <li>Stored in the wrong place</li>
-          <li>Dependent on one person</li>
-        </ul>
+      </div>
+      <ul class="services-problem-list">
+        <li>Done manually</li>
+        <li>Missed or forgotten</li>
+        <li>Stored in the wrong place</li>
+        <li>Dependent on one person</li>
+      </ul>
+      <div class="page-body">
         <p>We fix that by building <strong>automation systems</strong> that handle the repetitive, time-consuming parts of your business.</p>
       </div>
 
       <div class="page-divider"></div>
 
-      <h2 class="page-section-title">What Is a "System"?</h2>
+      <div class="page-eyebrow">what is a system?</div>
       <div class="page-body">
         <p>A system is a workflow we design and automate for a specific part of your business.</p>
-        <p>It:</p>
-        <ul>
-          <li>Collects the right information</li>
-          <li>Processes it automatically</li>
-          <li>Produces documents, actions, or updates</li>
-          <li>Stores everything in the right place</li>
-          <li>Notifies the right people</li>
-        </ul>
+      </div>
+      <div class="method-steps">
+        <div class="method-row">
+          <div class="method-n">01</div>
+          <div class="method-text"><div class="method-name">Collects the right information</div></div>
+        </div>
+        <div class="method-row">
+          <div class="method-n">02</div>
+          <div class="method-text"><div class="method-name">Processes it automatically</div></div>
+        </div>
+        <div class="method-row">
+          <div class="method-n">03</div>
+          <div class="method-text"><div class="method-name">Produces documents, actions, or updates</div></div>
+        </div>
+        <div class="method-row">
+          <div class="method-n">04</div>
+          <div class="method-text"><div class="method-name">Stores everything in the right place</div></div>
+        </div>
+        <div class="method-row">
+          <div class="method-n">05</div>
+          <div class="method-text"><div class="method-name">Notifies the right people</div></div>
+        </div>
+      </div>
+      <div class="page-body">
         <p>Each system replaces hours of admin every week — and ensures nothing gets missed.</p>
       </div>
 
       <div class="page-divider"></div>
 
-      <h2 class="page-section-title">Our Core Systems</h2>
+      <div class="page-eyebrow">our core systems</div>
 
       <div class="services-grid">
         <!-- SERVICES-CARDS-START -->
