@@ -753,11 +753,11 @@
       letter-spacing: 0.04em;
       cursor: pointer;
       white-space: nowrap;
-      transition: border-width .25s ease, border-color .25s ease, background .25s ease, padding .25s ease;
+      box-shadow: 0 0 0 0px var(--ink);
+      transition: box-shadow .25s ease, background .25s ease;
     }
     .service-audit-btn:hover {
-      border: 2px solid var(--ink);
-      padding: 13px 39px;
+      box-shadow: 0 0 0 1px var(--ink);
       background: rgba(28,24,20,0.04);
     }
     .service-audit-btn:active { transform: scale(0.97); }
