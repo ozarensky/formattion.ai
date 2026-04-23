@@ -737,7 +737,7 @@
       margin: 0 0 24px 0;
     }
     @media (max-width: 600px) {
-      .service-callout-card { aspect-ratio: unset; min-height: 320px; }
+      .service-callout-card { aspect-ratio: unset !important; min-height: 320px; }
       .service-callout-overlay { max-width: 100%; padding: 28px 20px; background: rgba(240,236,228,0.82); }
     }
     .service-audit-btn {
@@ -1521,6 +1521,14 @@
       margin-bottom: 36px !important;
     }
 
+    /* ── PAGE TITLE SPECIFICITY FIX
+       #page-services and #page-pricing override .page-title with higher specificity,
+       so the generic mobile rule above doesn't reach them — override here explicitly ── */
+    #page-services .page-title,
+    #page-pricing .page-title {
+      font-size: clamp(26px, 6.5vw, 42px) !important;
+    }
+
     /* ── PAGE BODY
        max-width: 580px is fine on mobile since page-inner is full width ── */
     .page-body {
@@ -1530,6 +1538,11 @@
     /* ── PAGE DIVIDER — margin 64px both sides, reduce on mobile ── */
     .page-divider {
       margin: 40px 0 !important;
+    }
+
+    /* ── ARTICLE HERO — reduce bottom margin on mobile ── */
+    .article-hero {
+      margin-bottom: 32px !important;
     }
 
     /* ── SERVICES GRID — mobile ── */
@@ -1546,6 +1559,10 @@
     }
 
     /* ── NEWS CARDS ── */
+    .news-card {
+      aspect-ratio: unset !important;
+      min-height: 240px !important;
+    }
     .news-card-content { padding: 16px 20px; }
     .news-card-title { font-size: 22px; }
     .news-card-desc { max-width: 100%; }
