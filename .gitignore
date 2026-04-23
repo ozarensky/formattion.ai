@@ -1,0 +1,13 @@
+# Scratch / temp
+.tmp/
+.superpowers/
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
