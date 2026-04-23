@@ -117,7 +117,15 @@ The slug must match between the card `src`, the card `onclick`, and the article 
 
 ## Deployment
 
-After any working change: commit and push autonomously (do not ask).
+After adding or updating articles: stage only the changed files, commit, and push.
+
+```bash
+git add index.html images/news/[slug]/
+git commit -m "news: [Article Title]"
+git push
+```
+
+Never use `git add -A` — only stage the files that were intentionally changed.
 
 
 
