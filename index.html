@@ -1617,34 +1617,32 @@
     .news-card-desc { max-width: 100%; }
 
     /* ── SERVICE CALLOUT CARD — mobile
-       Desktop: overlay covers left 62%, right side of image shows clean.
-       Mobile: card is too narrow to split left/right, so fade the overlay
-       from transparent at the top to cream at the bottom — the image reads
-       clearly at the top, text sits on enough cream for legibility.
-       Image also needs position:absolute so it reliably fills the card
-       (height:100% alone is unreliable when the parent only has min-height). ── */
+       Desktop splits left/right (overlay + image). Too narrow for that on
+       mobile, so stack instead: image as a clean banner, text + button
+       underneath on the page background (no overlay covering the image). ── */
     .service-callout-card {
       aspect-ratio: unset !important;
-      min-height: 360px;
+      min-height: 0 !important;
+      overflow: visible !important;
+      background: transparent;
     }
     .service-callout-img {
-      position: absolute;
-      inset: 0;
+      position: static !important;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 10;
+      border-radius: 8px;
     }
     .service-callout-overlay {
+      position: static !important;
+      inset: auto !important;
       max-width: 100% !important;
-      padding: 32px 24px !important;
-      justify-content: flex-end !important;
-      background: linear-gradient(
-        to bottom,
-        rgba(240,236,228,0) 0%,
-        rgba(240,236,228,0.55) 40%,
-        rgba(240,236,228,0.9) 70%,
-        rgba(240,236,228,0.95) 100%
-      );
+      padding: 20px 0 0 !important;
+      background: transparent !important;
+      align-items: flex-start !important;
     }
     .service-callout-text {
-      font-size: 19px;
+      font-size: 20px;
       line-height: 1.4;
       margin-bottom: 20px;
     }
