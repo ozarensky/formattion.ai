@@ -97,11 +97,16 @@
     body.dark .chat-btn { border-color: rgba(110,130,153,0.3); color: var(--acc); }
     body.dark .pricing-cell, body.dark .news-item { background: var(--bg2); color: var(--ink); }
     body.dark .news-card { box-shadow: 0 0 0 1px var(--dim); }
-    body.dark .about-stat, body.dark .article-stat, body.dark .article-flow-cell, body.dark .article-checklist-cell { background: var(--bg2); }
-    body.dark .page-eyebrow { color: var(--muted); }
-    body.dark .contact-input { color: var(--ink); border-color: var(--dim); }
+    body.dark .news-card-title { color: #1C1814; }
+    body.dark .news-card-desc { color: #4A4038; }
+    body.dark .news-card-eyebrow { color: #9A8F82; }
+    body.dark .news-card-date { color: #9A8F82; }
+    body.dark .article-stat, body.dark .article-flow-cell, body.dark .article-checklist-cell { background: var(--bg2); }
+    body.dark .contact-input { color: var(--ink); }
     body.dark .contact-input::placeholder { color: var(--muted); }
     body.dark .contact-submit { border-color: rgba(237,236,234,0.2); color: var(--ink); }
+    body.dark .service-callout-card .service-audit-btn { border-color: #1C1814; color: #1C1814; background: rgba(28,24,20,0.04); }
+    body.dark .service-callout-card .service-audit-btn:hover { background: rgba(28,24,20,0.18); }
     body.dark .contact-submit:hover { border-color: var(--ink); background: rgba(237,236,234,0.06); }
     body.dark .service-card { background: var(--bg2); color: var(--ink-body); }
     body.dark .service-result-card { border-color: var(--idle-border); color: var(--ink-body); }
@@ -113,8 +118,6 @@
     body.dark .article-callout-btn:hover { background: rgba(237,236,234,0.06); }
     body.dark .service-callout-text { color: #1a1916; }
     body.dark .service-callout-overlay p { color: #1a1916; }
-    body.dark .service-callout-card .service-audit-btn { background: #1c1814; border-color: #1c1814; color: #f4efe6; }
-    body.dark .service-callout-card .service-audit-btn:hover { background: rgba(28,24,20,0.50); border-color: #1c1814; color: #f4efe6; }
 
 
     html, body {
@@ -158,23 +161,6 @@
       padding: 140px 65px 100px;
     }
 
-    .page-eyebrow {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 40px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .page-eyebrow::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--dim);
-    }
 
     .page-title {
       font-family: var(--sans);
@@ -198,6 +184,15 @@
     .page-body p:last-child { margin-bottom: 0; }
     .page-body strong { font-weight: 400; color: var(--ink); }
     #page-services .page-body { max-width: none; }
+    #page-about .page-body { max-width: none; }
+    #page-about .page-title, #page-contact .page-title {
+      font-family: 'Cormorant Infant', Georgia, serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(48px, 6vw, 68px);
+      line-height: 1.0;
+      letter-spacing: 0;
+    }
     .page-section-title {
       font-family: 'Cormorant Infant', Georgia, serif;
       font-weight: 300;
@@ -247,6 +242,7 @@
       cursor: pointer;
       aspect-ratio: 3/1;
       min-height: 160px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
       transition: transform .25s cubic-bezier(.25,.46,.45,.94), box-shadow .25s ease;
     }
     .service-cell:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
@@ -330,35 +326,26 @@
 
     /* contact form */
     .contact-field {
-      margin-bottom: 24px;
-    }
-    .contact-label {
-      font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 10px;
-      display: block;
+      margin-bottom: 14px;
     }
     .contact-input {
       width: 100%;
       background: transparent;
-      border: none;
-      border-bottom: 1px solid var(--dim);
-      padding: 12px 0;
+      border: 1px solid var(--idle-border);
+      border-radius: 8px;
+      padding: 16px 20px;
       font-family: var(--sans);
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 300;
       color: var(--ink);
       outline: none;
       transition: border-color .2s ease;
     }
     .contact-input::placeholder { color: var(--muted); }
-    .contact-input:focus { border-bottom-color: var(--ink); }
+    .contact-input:focus { border-color: var(--ink); }
     .contact-textarea {
       resize: none;
-      min-height: 120px;
+      min-height: 140px;
       line-height: 1.6;
     }
     .contact-submit {
@@ -383,33 +370,52 @@
     .contact-submit:active { transform: scale(0.97); }
 
     /* about section */
-    .about-stat-row {
+    .founders-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+      margin: 32px 0 48px;
+    }
+    .founder-card {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 320px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .founder-text {
+      display: flex;
+      flex-direction: column;
       gap: 8px;
-      margin-bottom: 48px;
     }
-    .about-stat {
-      background: var(--bg2);
-      padding: 28px 24px;
-      border-radius: 12px;
-      transition: background .2s ease;
+    .founder-portrait {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: var(--rx-std);
+      object-fit: cover;
+      display: block;
     }
-    .about-stat:hover { background: var(--bg3); }
-    .about-stat-val {
-      font-family: var(--sans);
-      font-weight: 400;
-      font-size: 32px;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-      margin-bottom: 8px;
-    }
-    .about-stat-key {
+    .founder-role {
       font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: 0.12em;
+      font-size: 10px;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--muted);
+    }
+    .founder-name {
+      font-family: 'Cormorant Infant', Georgia, serif;
+      font-weight: 300;
+      font-size: 32px;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      line-height: 1.1;
+    }
+    .founder-bio {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--ink-body);
+      margin: 24px 0 0;
     }
 
     /* news listing */
@@ -435,7 +441,7 @@
       border-radius: var(--rx-feature);
       overflow: hidden;
       cursor: pointer;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.07), 0 0 0 1px var(--dim);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08), 0 0 0 1px var(--dim);
       transition: transform .25s cubic-bezier(.25,.46,.45,.94), box-shadow .25s ease;
     }
     .news-card-image-zone {
@@ -461,7 +467,7 @@
     .news-card-gradient {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.15) 75%, transparent 100%);
+      background: linear-gradient(to top right, rgba(245,240,230,0.88) 0%, rgba(245,240,230,0.55) 30%, rgba(245,240,230,0.2) 55%, rgba(245,240,230,0) 75%);
     }
     .news-card-content {
       position: absolute;
@@ -478,28 +484,26 @@
       font-size: 10px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
+      color: var(--muted);
       margin-bottom: 10px;
     }
     .news-card-title {
       font-family: 'Cormorant Infant', Georgia, serif;
       font-weight: 400;
       font-size: 28px;
-      color: #fff;
+      color: var(--ink);
       line-height: 1.2;
       letter-spacing: -0.01em;
       margin-bottom: 10px;
-      text-shadow: 0 1px 8px rgba(0,0,0,0.5);
     }
     .news-card-desc {
       font-family: var(--sans);
       font-size: 13px;
       font-weight: 300;
-      color: rgba(255,255,255,0.9);
+      color: var(--ink-body);
       line-height: 1.65;
       margin-bottom: 16px;
       max-width: 560px;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
     }
     .news-card-footer {
       display: flex;
@@ -509,9 +513,8 @@
       font-family: var(--mono);
       font-size: 10px;
       letter-spacing: 0.06em;
-      color: rgba(255,255,255,0.5);
+      color: var(--muted);
     }
-    .news-card:hover .news-card-title { opacity: 0.85; }
     .news-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
     .news-card:active { transform: scale(0.985); }
     .news-card:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
@@ -716,6 +719,14 @@
       margin-bottom: 48px;
       aspect-ratio: 3 / 1;
     }
+    .service-callout-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top right, rgba(245,240,230,0.88) 0%, rgba(245,240,230,0.55) 30%, rgba(245,240,230,0.2) 55%, rgba(245,240,230,0) 75%);
+      pointer-events: none;
+      z-index: 1;
+    }
     .service-callout-img {
       width: 100%;
       height: 100%;
@@ -725,6 +736,7 @@
     .service-callout-overlay {
       position: absolute;
       inset: 0;
+      z-index: 2;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -740,10 +752,6 @@
       line-height: 1.45;
       color: #1a1916;
       margin: 0 0 24px 0;
-      text-shadow:
-        0 0 10px rgba(255,255,255,0.75),
-        0 0 20px rgba(255,255,255,0.55),
-        0 1px 2px rgba(255,255,255,0.9);
     }
     .service-audit-btn {
       display: inline-flex;
@@ -768,14 +776,13 @@
     }
     .service-audit-btn:active { transform: scale(0.97); }
     .service-callout-card .service-audit-btn {
-      background: var(--ink);
-      border-color: var(--ink);
-      color: var(--bg);
+      border-color: #1C1814;
+      color: #1C1814;
+      background: rgba(28,24,20,0.04);
+      transition: background .25s ease;
     }
     .service-callout-card .service-audit-btn:hover {
-      background: rgba(28,24,20,0.50);
-      border-color: var(--ink);
-      color: var(--bg);
+      background: rgba(28,24,20,0.18);
     }
     .article-callout-text {
       font-family: 'Cormorant Infant', Georgia, serif;
@@ -809,6 +816,7 @@
       border-color: var(--ink);
       background: rgba(28,24,20,0.04);
     }
+    .article-callout-btn:active { transform: scale(0.97); }
 .article-hero {
       width: 100%;
       aspect-ratio: 16/7;
@@ -1060,6 +1068,7 @@
       border-color: var(--ink);
       background: rgba(28,24,20,0.04);
     }
+    .chat-btn:active { transform: scale(0.97); }
     @keyframes btnPulse {
       0%, 100% { box-shadow: 0 0 0 0 rgba(28,24,20,0.08); }
       50% { box-shadow: 0 0 0 8px rgba(28,24,20,0); }
@@ -1310,9 +1319,7 @@
       display: flex;
       flex-direction: column;
       gap: 0;
-      transition: transform .25s ease;
     }
-    .pricing-card:hover { transform: translateY(-2px); }
     .pricing-card--pilot {
       background: var(--bg2);
       border: 1px solid var(--idle-border);
@@ -1591,11 +1598,10 @@
 
     /* ── METHOD STEPS — already 48px + 1fr, fine on mobile ── */
 
-    /* ── ABOUT STATS
-       Desktop: 3 columns
-       Mobile: 2 columns (values are short enough) ── */
-    .about-stat-row {
-      grid-template-columns: 1fr 1fr !important;
+    /* ── FOUNDERS GRID — stack portrait above text on tablet/mobile ── */
+    .founder-card {
+      grid-template-columns: 1fr !important;
+      gap: 20px !important;
     }
 
     /* ── NEWS CARDS — tighten for 1-column stack on narrow screens;
@@ -1723,8 +1729,8 @@
       padding: 22px 20px !important;
     }
 
-    /* ── BACK-TO-TOP BUTTON (folded from orphan 640px block) ── */
-    #back-to-top { display: none !important; }
+    /* ── BACK-TO-TOP BUTTON — reposition for mobile thumb-reach ── */
+    #back-to-top { bottom: 24px !important; right: 20px !important; }
 
     /* ── CHAT CLOSE BUTTON (mobile-only) — thumb-reachable X at top-right.
        Fixed positioning so it stays put when the messages area scrolls. ── */
@@ -1797,7 +1803,6 @@
   @media (max-width: 400px) {
     .brand-logo { width: 85vw !important; }
     .page-title { font-size: 26px !important; }
-    .about-stat-row { grid-template-columns: 1fr !important; }
     .article-stats { grid-template-columns: 1fr !important; }
     .article-flow-grid { grid-template-columns: 1fr !important; }
     .chat-btn { padding: 14px 28px !important; font-size: 15px !important; }
@@ -1810,7 +1815,6 @@
   @media (hover: none) {
     .news-card:active,
     .service-cell:active,
-    .pricing-card:active,
     .outcome-card:active {
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(0,0,0,0.14);
@@ -1821,18 +1825,12 @@
       border-color: var(--ink);
       background: rgba(28,24,20,0.06);
     }
-    .service-callout-card .service-audit-btn:active {
-      background: rgba(28,24,20,0.75);
-    }
     .drop-item:active,
     #topLogo:active {
       opacity: 0.5;
     }
     /* Suppress the sticky hover state that can persist after tap on some
        Android browsers — neutralise :hover entirely and rely on :active. ── */
-    .news-card:hover,
-    .service-cell:hover,
-    .pricing-card:hover,
     .outcome-card:hover {
       transform: none;
       box-shadow: none;
@@ -1942,7 +1940,6 @@
       <div class="article-hero">
         <img src="images/services/services-hero.jpg" alt="Construction site at golden hour with a subcontractor director walking with calm authority.">
       </div>
-      <div class="page-eyebrow">services</div>
       <h1 class="page-title">We Build Systems<br>That Run Your Business.</h1>
       <div class="page-body">
         <p>Most subcontractors don't have a systems problem, they have a time, admin, and consistency problem. Too many things are, done manually, missed or forgotten, stored in the wrong place, dependent on one person. We fix that by building automation systems that handle the repetitive, time-consuming parts of your business.</p>
@@ -2101,7 +2098,6 @@
       <div class="article-hero">
         <img src="images/services/news-hero.jpg" alt="Trade newspaper and tablet on a site office desk with morning light.">
       </div>
-      <div class="page-eyebrow">news</div>
       <h1 class="page-title news-page-title">From the field.</h1>
       <div class="page-body">
         <p>Perspectives on automation, operational systems, and what's changing in the subcontract trades sector.</p>
@@ -2141,34 +2137,75 @@
       <div class="article-hero">
         <img src="images/services/about-hero.jpg" alt="Two subcontractors reviewing plans on a finished slab in early morning light.">
       </div>
-      <div class="page-eyebrow">about us</div>
-      <h1 class="page-title">We build systems<br>that hold.</h1>
+      <h1 class="page-title">About us</h1>
       <div class="page-body">
-        <p>formattion ai was founded by people who understand how subcontract businesses actually operate — the real administrative weight of running a site, managing a team, and chasing invoices at the same time.</p>
-        <p>Our focus is narrow by design. We work exclusively with UK subcontract trade businesses between £500k and £5m turnover. That specificity means our systems are built for real operational conditions, not general use cases.</p>
-        <p>We use n8n, OpenAI, and Airtable to build predictable, repeatable automation infrastructure. No proprietary lock-in. No black-box systems. Everything we build is documented and transferable.</p>
+        <p>We built formattion.ai to fix a problem most subcontractors don't realise is costing them thousands every month. We help construction subcontractors remove manual admin and deliver a more professional, efficient service without increasing overhead.</p>
+        <p>If you're running a subcontracting business, you're likely dealing with more admin than you ever expected. You didn't start your business to manage paperwork, chase documents, or keep up with constant demands from principal contractors. But as you grow, that's exactly what happens. You're expected to operate like a large company — with systems, reporting, and organisation — but without the staff or time to support it.</p>
+        <p>That gap is where most businesses struggle.</p>
       </div>
 
       <div class="page-divider"></div>
 
-      <div class="about-stat-row">
-        <div class="about-stat">
-          <div class="about-stat-val">£500k–£5m</div>
-          <div class="about-stat-key">Target turnover range</div>
+      <h2 class="page-section-title">Why we're different</h2>
+      <div class="page-body">
+        <p>Most automation solutions are built without understanding how construction businesses actually operate. We take a different approach. Everything we build is based on real-world experience of how subcontractors work on site, what principal contractors expect, and where things typically break down — the paperwork that arrives on a Friday afternoon, the document that gets signed and then lost, the enquiry that sits unread in a shared inbox for a week.</p>
+        <p>We build systems that reduce that friction rather than add to it. Your business should be easier to run with our systems in place, not more complicated.</p>
+      </div>
+
+      <div class="page-divider"></div>
+
+      <h2 class="page-section-title">Meet the founders</h2>
+      <div class="page-body">
+        <p>formattion.ai was founded by two people who see the same problem from different angles. Matt knows the pressure the industry puts on subcontractors. Ion knows how to build the systems that relieve it.</p>
+      </div>
+      <div class="founders-grid">
+        <div class="founder-card">
+          <img class="founder-portrait" src="images/about/matt-fox.png" alt="Matt Fox, co-founder of formattion.ai, portrait." style="object-position: calc(50% - 40px) center;">
+          <div class="founder-text">
+            <div class="founder-name">Matt Fox</div>
+            <div class="founder-role">co-founder · CEO</div>
+            <p class="founder-bio">With over 15 years in the construction industry, Matt has worked closely with subcontractors across a wide range of projects. He has seen first-hand the pressure placed on subcontractors to deliver high standards while managing increasing administrative demands. That experience shapes how we identify where formattion.ai can genuinely help — building systems that reduce the real operational weight on a business rather than adding more layers of complexity.</p>
+          </div>
         </div>
-        <div class="about-stat">
-          <div class="about-stat-val">6 weeks</div>
-          <div class="about-stat-key">Implementation window</div>
-        </div>
-        <div class="about-stat">
-          <div class="about-stat-val">UK only</div>
-          <div class="about-stat-key">Operating region</div>
+        <div class="founder-card">
+          <img class="founder-portrait" src="images/about/ion-ozarensky.png" alt="Ion Ozarensky, co-founder of formattion.ai, portrait.">
+          <div class="founder-text">
+            <div class="founder-name">Ion Ozarensky</div>
+            <div class="founder-role">co-founder · CTO</div>
+            <p class="founder-bio">Ion is a builder and designer who works across the full stack of formattion.ai — from the brand system and the website through to the agent architecture and automation infrastructure that runs behind every client's systems. Self-taught in engineering and trained in design, he treats the two as one discipline. His work sits on the principle that a system only matters if it holds up in real conditions — and that the way it looks, reads, and feels matters as much as whether it runs.</p>
+          </div>
         </div>
       </div>
 
       <div class="page-divider"></div>
 
-      <div class="page-eyebrow">early outcomes</div>
+      <h2 class="page-section-title">Why formattion.ai exists</h2>
+      <div class="page-body">
+        <p>We've seen too many good subcontractors struggle — not because of the quality of their work, but because of the demands around it. The administrative weight on a growing subcontract business has become disproportionate to the work itself, and most businesses haven't been given the tools to handle it properly.</p>
+        <p>At the same time, the technology to fix this has reached the point where it actually works. Language models and automation infrastructure are now reliable enough to handle the repetitive administrative work that has been eating into subcontractors' margins and evenings for years.</p>
+        <p>formattion.ai exists to close that gap. To let good subcontractors stay focused on the work they're good at, while the business runs itself behind the scenes.</p>
+      </div>
+
+      <div class="page-divider"></div>
+
+      <h2 class="page-section-title">Who we work with</h2>
+      <div class="page-body">
+        <p>We work with UK subcontractors turning over between £500,000 and £5 million — businesses too large to manage everything manually, but not large enough to justify full office teams. This is the band where the right systems make the biggest difference, and the band we know best.</p>
+        <p>Our clients include groundworkers, carpenters, electrical and mechanical contractors, bricklayers, roofers, and other specialist trades working directly with principal contractors. If you're feeling the strain of admin that's growing faster than your team can absorb, you're likely a good fit.</p>
+      </div>
+
+      <div class="page-divider"></div>
+
+      <h2 class="page-section-title">How we work</h2>
+      <div class="page-body">
+        <p>We start by understanding your business properly. Not a questionnaire — a conversation about how work actually moves through your operation, where time is being lost, where documents go missing, and where mistakes keep happening.</p>
+        <p>From there, we identify two or three areas where automation will have the biggest impact, and we build from there. Systems are installed, tested against real working conditions, and refined until they hold up. We stay involved after launch to make sure they keep working as your business evolves.</p>
+        <p>We're selective about who we work with, and we aim to build long-term relationships. Most clients begin with two or three systems and grow from there.</p>
+      </div>
+
+      <div class="page-divider"></div>
+
+      <h2 class="page-section-title">Early outcomes</h2>
       <div class="outcomes-grid">
         <div class="outcome-card">
           <div class="outcome-card-label">Lead Capture</div>
@@ -2189,9 +2226,12 @@
 
       <div class="page-divider"></div>
 
-      <div class="page-eyebrow">our AI assistant</div>
-      <div class="page-body">
-        <p>For is the AI assistant embedded in formattion ai. Calm, direct, and efficient — For handles initial enquiries, qualification conversations, and system walkthroughs. For is not a chatbot. For is a structured operational interface.</p>
+      <div class="service-callout-card">
+        <img class="service-callout-img" src="images/services/free-audit-callout.jpg" alt="A subcontractor in hi-vis on a construction site at golden hour, calm and confident.">
+        <div class="service-callout-overlay">
+          <p class="service-callout-text">If admin is starting to hold you back, the next step is a free audit. No obligation, no hard sell.</p>
+          <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
+        </div>
       </div>
     </div>
   </div>
@@ -2199,32 +2239,26 @@
   <!-- CONTACT -->
   <div class="page" id="page-contact">
     <div class="page-inner">
-      <div class="page-eyebrow">contact us</div>
-      <h1 class="page-title">Let's talk.</h1>
+      <h1 class="page-title">Contact us</h1>
       <div class="page-body">
         <p>Fill in the form. We'll review your details and reach out within one business day to arrange your free operations audit.</p>
       </div>
       <div class="page-divider"></div>
       <div id="contact-form-wrap">
         <div class="contact-field">
-          <label class="contact-label" for="cf-name">Name</label>
-          <input id="cf-name" type="text" class="contact-input" placeholder="Your name" />
+          <input id="cf-name" type="text" class="contact-input" placeholder="Name" aria-label="Name" />
         </div>
         <div class="contact-field">
-          <label class="contact-label" for="cf-business">Business</label>
-          <input id="cf-business" type="text" class="contact-input" placeholder="Company name" />
+          <input id="cf-business" type="text" class="contact-input" placeholder="Business" aria-label="Business" />
         </div>
         <div class="contact-field">
-          <label class="contact-label" for="cf-email">Email</label>
-          <input id="cf-email" type="email" class="contact-input" placeholder="you@company.com" />
+          <input id="cf-email" type="email" class="contact-input" placeholder="Email" aria-label="Email" />
         </div>
         <div class="contact-field">
-          <label class="contact-label" for="cf-turnover">Approximate turnover</label>
-          <input id="cf-turnover" type="text" class="contact-input" placeholder="£500k–£5m" />
+          <input id="cf-turnover" type="text" class="contact-input" placeholder="Approximate turnover" aria-label="Approximate turnover" />
         </div>
         <div class="contact-field">
-          <label class="contact-label" for="cf-pain">What's taking the most time right now</label>
-          <textarea id="cf-pain" class="contact-input contact-textarea" placeholder="Invoicing, quoting, email, scheduling…"></textarea>
+          <textarea id="cf-pain" class="contact-input contact-textarea" placeholder="What's taking the most time right now" aria-label="What's taking the most time right now"></textarea>
         </div>
         <div id="cf-error" style="display:none; font-family:var(--mono); font-size:11px; color:#b85c5c; margin-bottom:16px; letter-spacing:0.06em;"></div>
         <button id="cf-submit" class="contact-submit">send</button>
@@ -2251,7 +2285,6 @@
       <div class="article-hero">
         <img src="images/services/pricing-hero.jpg" alt="Clean site office desk with project folder and morning light.">
       </div>
-      <div class="page-eyebrow">pricing</div>
       <h1 class="page-title">Pricing &amp; How It Works</h1>
       <div class="page-body">
         <p>We design and implement automation systems that remove repetitive work, reduce costly mistakes, and allow your business to scale — without increasing staffing overheads.</p>
@@ -2576,6 +2609,8 @@
       var el = document.getElementById(id);
       el.classList.add('visible');
       el.scrollTop = 0;
+      var btt = document.getElementById('back-to-top');
+      if (btt) btt.classList.remove('visible');
       topLogo.classList.add('visible');
       showBack();
       // push to history only if different from last entry
@@ -3049,14 +3084,21 @@
           progressBar.style.width = '0%';
           progressBar.classList.remove('visible');
         }
-        backToTop.classList.toggle('visible', scrolled > total * 0.8);
+        backToTop.classList.toggle('visible', scrolled > pageEl.clientHeight * 0.8);
       }
 
-      document.querySelectorAll('.page').forEach(function(pageEl) {
-        pageEl.addEventListener('scroll', function() {
-          updateProgress(pageEl, articlePages.indexOf(pageEl.id) >= 0);
-        }, { passive: true });
-      });
+      function attachScrollListeners() {
+        document.querySelectorAll('.page').forEach(function(pageEl) {
+          pageEl.addEventListener('scroll', function() {
+            updateProgress(pageEl, articlePages.indexOf(pageEl.id) >= 0);
+          }, { passive: true });
+        });
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', attachScrollListeners);
+      } else {
+        attachScrollListeners();
+      }
 
       function scrollToTop() {
         var visible = document.querySelector('.page.visible');
@@ -3115,7 +3157,6 @@
       </div>
       
 
-      <div class="page-eyebrow">cost analysis</div>
       <h1 class="article-page-title">AI Tools for Retention Chasing Can Boost Cash Flow</h1>
       <div class="article-meta">
         <span>23 April 2026</span>
@@ -3189,7 +3230,6 @@
       <div class="article-hero">
         <img src="images/services/health-safety.jpg" alt="A worker in hi-vis reviewing a clipboard on a completed slab at mid-morning, scaffolding rising behind against warm sky.">
       </div>
-      <div class="page-eyebrow">services — 01</div>
       <h1 class="article-page-title">Health & Safety Management</h1>
       <p class="article-intro" style="margin-bottom:8px;">We automate your health & safety processes to keep you compliant, reduce risk, and remove the constant burden of paperwork.</p>
       <p class="article-intro" style="margin-top:6px;margin-bottom:48px;">The right documents in the right place before work starts — every site, every project, every time.</p>
@@ -3239,7 +3279,6 @@
       <div class="article-hero">
         <img src="images/services/social-media-marketing.jpg" alt="A finished residential build at golden hour with a homeowner, contractor, and photographer on the pavement outside.">
       </div>
-      <div class="page-eyebrow">services — 02</div>
       <h1 class="article-page-title">Social Media & Marketing</h1>
       <p class="article-intro" style="margin-bottom:8px;">We help you stay visible, look professional, and generate consistent enquiries — without needing to manage social media yourself.</p>
       <p class="article-intro" style="margin-top:6px;margin-bottom:48px;">Your day's work on site becomes next week's enquiries — captured, published, and routed automatically.</p>
@@ -3288,7 +3327,6 @@
       <div class="article-hero">
         <img src="images/services/lead-generation-crm.jpg" alt="A contractor's office desk in morning window-light with a laptop, diary, mug, and a view out to a tidy yard.">
       </div>
-      <div class="page-eyebrow">services — 03</div>
       <h1 class="article-page-title">Lead Generation & CRM</h1>
       <p class="article-intro" style="margin-bottom:8px;">We help you win more work by ensuring every enquiry is captured, tracked, and followed up properly — without relying on memory or manual admin.</p>
       <p class="article-intro" style="margin-top:6px;margin-bottom:48px;">From first enquiry to signed job — nothing falls through the gap between your inbox and your diary.</p>
@@ -3337,7 +3375,6 @@
       <div class="article-hero">
         <img src="images/services/personal-assistant.jpg" alt="A figure at a window at first light holding a coffee, looking out over quiet rooftops in spring mist.">
       </div>
-      <div class="page-eyebrow">services — 04</div>
       <h1 class="article-page-title">Personal Assistant & Digital Receptionist</h1>
       <p class="article-intro" style="margin-bottom:8px;">We provide an intelligent, always-on assistant that manages your day-to-day admin, communication, and organisation — allowing you to focus on running the business.</p>
       <p class="article-intro" style="margin-top:6px;margin-bottom:48px;">An assistant that never sleeps, never forgets, and never forwards you an email that could have been handled.</p>
@@ -3392,7 +3429,6 @@
       <div class="article-hero">
         <img src="images/services/hr-internal-comms.jpg" alt="A small crew of workers in hi-vis crossing a site at morning in warm light, walking together in an easy rhythm.">
       </div>
-      <div class="page-eyebrow">services — 05</div>
       <h1 class="article-page-title">HR & Internal Communications</h1>
       <p class="article-intro" style="margin-bottom:8px;">We streamline how your team is managed, trained, and communicated with — ensuring consistency across your workforce and reducing admin.</p>
       <p class="article-intro" style="margin-top:6px;margin-bottom:48px;">Every card in date, every induction done, every message acknowledged — without a spreadsheet anyone dreads opening.</p>
@@ -3445,7 +3481,6 @@
       <div class="article-hero">
         <img src="images/services/ongoing-support.jpg" alt="An old dry-stone wall running through spring grass and wildflowers, including a single coral-red poppy.">
       </div>
-      <div class="page-eyebrow">services — 06</div>
       <h1 class="article-page-title">Ongoing Support & Optimisation</h1>
       <p class="article-intro" style="margin-bottom:8px;">Your monthly retainer ensures your systems continue to run smoothly, improve over time, and adapt as your business grows.</p>
       <p class="article-intro" style="margin-top:6px;margin-bottom:48px;">Unlike static software, your systems are designed to learn and improve the more they're used.</p>
@@ -3493,7 +3528,6 @@
       <div class="article-hero">
         <img src="images/services/branding-identity.jpg" alt="A tradesman's van parked outside a client's home in spring morning light, livery clean, blossoming tree behind.">
       </div>
-      <div class="page-eyebrow">services — 07</div>
       <h1 class="article-page-title">Branding & Identity Package</h1>
       <p class="article-intro" style="margin-bottom:8px;">Most subcontractors have a logo — but no consistent brand behind it. We create a complete branding system that ensures your business looks professional, consistent, and credible across every touchpoint.</p>
       <p class="article-intro" style="margin-top:6px;margin-bottom:48px;">One coherent brand — from the van door to the tender submission.</p>
@@ -3555,7 +3589,6 @@
       <div class="article-hero">
         <img src="images/services/website-design-build.jpg" alt="A workshop interior at mid-morning, long workbench receding toward a warm window, laptop open among hand tools.">
       </div>
-      <div class="page-eyebrow">services — 08</div>
       <h1 class="article-page-title">Website Design & Build</h1>
       <p class="article-intro" style="margin-bottom:8px;">Your website should reflect the quality of your work and support your business in winning new opportunities. We design and build modern, professional websites tailored to subcontractors in construction.</p>
       <p class="article-intro" style="margin-top:6px;margin-bottom:48px;">Not a brochure site — a working front door for your business, wired into the systems that convert enquiries into jobs.</p>
@@ -3610,5 +3643,63 @@
   </div>
   
         <!-- SERVICES-PAGES-END -->
+
+  <!-- PRIVACY POLICY -->
+  <div id="page-privacy" class="page">
+    <div class="page-inner">
+
+      <h1 class="article-page-title">Privacy Policy</h1>
+      <div class="article-meta">
+        <span>April 2026</span>
+        <span>formattion.ai</span>
+      </div>
+
+      <p class="article-intro">This policy explains how Formattion AI collects, uses, and protects information you provide through our website. We keep it short and plain.</p>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Information we collect</div>
+          <p class="article-item-desc">We collect only what you give us directly — your name, email address, phone number, and business details when you submit a contact form, request a quote, or chat with us. We do not track you or collect data passively beyond what is needed to run the site.</p>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">How we use it</div>
+          <p class="article-item-desc">Your information is used solely to respond to your enquiry and deliver the services you have requested. We do not sell, rent, or share your data with third parties for marketing purposes.</p>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Storage and processing</div>
+          <p class="article-item-desc">Submissions are processed through secure automation workflows and may be stored in cloud-based tools used to manage client communication. We take reasonable measures to protect your information from unauthorised access.</p>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Cookies and local storage</div>
+          <p class="article-item-desc">We use browser localStorage only to remember your display preference (light or dark mode). We do not use tracking cookies or third-party analytics.</p>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <div class="article-item-title">Your rights</div>
+          <p class="article-item-desc">You may request access to, correction of, or deletion of any personal data we hold about you at any time. To do so, reach us via our contact page.</p>
+        </div>
+      </div>
+
+      <div class="article-callout">
+        <p class="article-callout-text">Questions about your data? We're happy to help.</p>
+        <button class="article-callout-btn" onclick="showPage('page-contact')">contact us</button>
+      </div>
+
+      <p style="margin-top:32px;font-family:var(--mono);font-size:11px;color:var(--muted);">This policy will be updated as our services evolve. Material changes will be reflected in the date above.</p>
+
+    </div>
+  </div>
+
 </body>
 </html>
