@@ -107,8 +107,9 @@
     body.dark .service-result-card { border-color: var(--idle-border); color: var(--ink-body); }
     body.dark .service-section-label { color: var(--ink); }
     body.dark .service-result-text { color: var(--ink); }
-    body.dark .service-cell-title { color: var(--ink); text-shadow: 0 1px 3px rgba(0,0,0,0.55); }
-    body.dark .service-cell-body { color: var(--ink-body); text-shadow: 0 1px 3px rgba(0,0,0,0.55); }
+    body.dark .service-cell-title { color: var(--ink); }
+    body.dark .service-cell-body { color: var(--ink-body); }
+    body.dark .service-cell-image::after { background: linear-gradient(to top right, rgba(20,18,14,0.88) 0%, rgba(20,18,14,0.55) 30%, rgba(20,18,14,0.2) 55%, rgba(20,18,14,0) 75%); }
     body.dark .service-audit-btn:hover { background: rgba(237,236,234,0.06); }
     body.dark .article-callout-btn:hover { background: rgba(237,236,234,0.06); }
     body.dark .service-callout-text { color: #1a1916; }
@@ -237,8 +238,8 @@
     .services-grid {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      margin-bottom: 8px;
+      gap: 24px;
+      margin-bottom: 24px;
     }
     .service-cell {
       position: relative;
@@ -262,6 +263,13 @@
       object-fit: cover;
       display: block;
     }
+    .service-cell-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top right, rgba(245,240,230,0.88) 0%, rgba(245,240,230,0.55) 30%, rgba(245,240,230,0.2) 55%, rgba(245,240,230,0) 75%);
+      pointer-events: none;
+    }
     .service-cell-content {
       position: relative;
       z-index: 1;
@@ -278,7 +286,6 @@
       letter-spacing: -0.01em;
       color: var(--ink);
       margin-bottom: 12px;
-      text-shadow: 0 1px 2px rgba(255,255,255,0.55);
     }
     .service-cell-body {
       font-family: var(--sans);
@@ -286,7 +293,6 @@
       font-weight: 300;
       line-height: 1.75;
       color: var(--ink-body);
-      text-shadow: 0 1px 2px rgba(255,255,255,0.5);
     }
 
     /* methodology steps */
