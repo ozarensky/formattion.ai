@@ -124,6 +124,13 @@
       overflow: hidden;
       transition: background .4s ease, color .4s ease;
     }
+    /* Body scroll lock — applied by JS when the menu is open so users can't
+       scroll the page behind the drawer. Each .page scrolls independently, so
+       we lock the active page rather than the body. ── */
+    body.menu-open .page.visible,
+    body.menu-open #chat.visible .messages {
+      overflow: hidden !important;
+    }
 
     /* ══ PAGES ══ */
     .page {
@@ -744,10 +751,6 @@
       color: #1a1916;
       margin: 0 0 24px 0;
     }
-    @media (max-width: 600px) {
-      .service-callout-card { aspect-ratio: unset !important; min-height: 320px; }
-      .service-callout-overlay { max-width: 100%; padding: 28px 20px; background: rgba(240,236,228,0.82); }
-    }
     .service-audit-btn {
       display: inline-flex;
       align-items: center;
@@ -1291,7 +1294,14 @@
     #backBtn svg { width: 100%; height: 100%; display: block; }
     #backBtn svg path { fill: var(--ink); }
     #backBtn:hover { transform: translateX(-5px); }
-  
+
+    /* ── CHAT CLOSE BUTTON (mobile-only)
+       Desktop already has #backBtn bottom-left; on mobile that was hidden,
+       leaving no obvious dismiss. This is the thumb-reachable X at top-right. ── */
+    .chat-close-btn {
+      display: none;
+    }
+
     /* ══ PRICING PAGE ══ */
     .pricing-grid {
       display: grid;
@@ -1432,8 +1442,8 @@
     .chat-btn { animation: mobileFadeIn .9s ease .45s both !important; }
 
     .brand-slogan {
-      width: calc(100vw - 56px);
-      font-size: clamp(28px, 7vw, 48px);
+      width: calc(100vw - 40px);
+      font-size: clamp(34px, 9vw, 52px);
     }
     @keyframes mobileFadeIn { from { opacity:0; } to { opacity:1; } }
 
@@ -1446,8 +1456,16 @@
       width: auto !important;
     }
 
-    /* ── MENU ICON: standalone fixed, always above everything ── */
-    #menuIcon { top: 25px !important; left: 28px !important; width: 20px !important; height: 20px !important; }
+    /* ── MENU ICON: standalone fixed, always above everything ──
+       44×44 hit area with 24×24 visible SVG (padding is the invisible touch buffer) ── */
+    #menuIcon {
+      top: 16px !important;
+      left: 18px !important;
+      width: 24px !important;
+      height: 24px !important;
+      padding: 10px !important;
+      box-sizing: content-box !important;
+    }
     #menuWrap {
       top: 76px !important;
       left: 0 !important;
@@ -1494,6 +1512,8 @@
       gap: 0 !important;
       min-height: 100dvh !important;
       height: 100dvh !important;
+      padding-top: env(safe-area-inset-top) !important;
+      padding-bottom: env(safe-area-inset-bottom) !important;
     }
     .brand-logo {
       position: absolute !important;
@@ -1505,7 +1525,9 @@
     }
     .chat-btn {
       position: absolute !important;
-      bottom: 80px !important;
+      /* Lifts on taller phones (iPhone 14 Pro etc.) while staying clear of the
+         home indicator on shorter devices (iPhone SE). ── */
+      bottom: max(80px, 14dvh) !important;
       left: 50% !important;
       transform: translateX(-50%) !important;
     }
@@ -1525,8 +1547,8 @@
        But padding was 65px desktop, now 20px — title fits.
        Reduce max slightly for comfort ── */
     .page-title {
-      font-size: clamp(26px, 6.5vw, 42px) !important;
-      margin-bottom: 36px !important;
+      font-size: clamp(30px, 7.5vw, 44px) !important;
+      margin-bottom: 32px !important;
     }
 
     /* ── PAGE TITLE SPECIFICITY FIX
@@ -1534,7 +1556,15 @@
        so the generic mobile rule above doesn't reach them — override here explicitly ── */
     #page-services .page-title,
     #page-pricing .page-title {
-      font-size: clamp(26px, 6.5vw, 42px) !important;
+      font-size: clamp(30px, 7.5vw, 44px) !important;
+    }
+
+    /* ── SECTION TITLES — no mobile override existed; desktop clamp floored at 28px
+       which is too close to body text. Step it down for tighter hierarchy on 375px. ── */
+    .page-section-title,
+    .outcomes-title {
+      font-size: clamp(22px, 5.5vw, 30px) !important;
+      margin-bottom: 20px !important;
     }
 
     /* ── PAGE BODY
@@ -1548,9 +1578,13 @@
       margin: 40px 0 !important;
     }
 
-    /* ── ARTICLE HERO — reduce bottom margin on mobile ── */
+    /* ── ARTICLE HERO — reduce bottom margin + rebalance aspect ratio
+       Desktop 16/7 compresses to ~160px tall on a 375px phone (too weak).
+       4/3 gives the hero genuine presence on mobile without dominating. ── */
     .article-hero {
+      aspect-ratio: 4 / 3 !important;
       margin-bottom: 32px !important;
+      border-radius: 16px !important;
     }
 
     /* ── SERVICES GRID — mobile ── */
@@ -1566,14 +1600,23 @@
       grid-template-columns: 1fr 1fr !important;
     }
 
-    /* ── NEWS CARDS ── */
+    /* ── NEWS CARDS — tighten for 1-column stack on narrow screens;
+       240px min-height × 20+ cards was scrolling forever. ── */
     .news-card {
       aspect-ratio: unset !important;
-      min-height: 240px !important;
+      min-height: 200px !important;
     }
-    .news-card-content { padding: 16px 20px; }
+    .news-card-content { padding: 14px 18px; }
     .news-card-title { font-size: 22px; }
     .news-card-desc { max-width: 100%; }
+
+    /* ── SERVICE CALLOUT CARD — was in an orphan 600px block; folded here ── */
+    .service-callout-card { aspect-ratio: unset !important; min-height: 320px; }
+    .service-callout-overlay {
+      max-width: 100% !important;
+      padding: 36px 24px !important;
+      background: rgba(240,236,228,0.82);
+    }
 
     /* ── ARTICLE PAGE TITLE
        Desktop: clamp(40px, 6vw, 68px) — 6vw on 375px = 22px, clamp gives 40px
@@ -1634,16 +1677,63 @@
     }
 
     /* ── ARTICLE CALLOUT
-       padding may be wide — check ── */
+       Tighter inner padding + full-width pill button for reliable tap target ── */
     .article-callout {
       padding: 24px 20px !important;
     }
+    .article-callout-btn {
+      width: 100% !important;
+      padding: 16px 24px !important;
+      margin-top: 20px !important;
+      white-space: normal !important;
+    }
 
-    /* ── PRICING GRID
-       Desktop: 2 columns
-       Mobile: 1 column ── */
+    /* ── PRICING GRID + CARD ── */
     .pricing-grid {
       grid-template-columns: 1fr !important;
+    }
+    .pricing-card {
+      padding: 24px 22px 28px !important;
+    }
+    .pricing-price {
+      font-size: 30px !important;
+    }
+
+    /* ── OUTCOMES GRID (folded from orphan 640px block) ── */
+    .outcomes-grid {
+      grid-template-columns: 1fr !important;
+    }
+    .outcome-card {
+      padding: 22px 20px !important;
+    }
+
+    /* ── BACK-TO-TOP BUTTON (folded from orphan 640px block) ── */
+    #back-to-top { display: none !important; }
+
+    /* ── CHAT CLOSE BUTTON (mobile-only) — thumb-reachable X at top-right.
+       Fixed positioning so it stays put when the messages area scrolls. ── */
+    .chat-close-btn {
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      width: 44px;
+      height: 44px;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      color: var(--ink);
+      cursor: pointer;
+      z-index: 550;
+    }
+    /* Hide the small top-right logo while chat is open on mobile so it
+       doesn't collide with the close X. Uses :has() — safe in 2026 browsers. ── */
+    body:has(#chat.visible) #topLogo {
+      opacity: 0 !important;
+      pointer-events: none !important;
     }
 
     /* ── CHAT MESSAGES
@@ -1690,10 +1780,47 @@
   /* ── SMALL PHONES (under 400px) ── */
   @media (max-width: 400px) {
     .brand-logo { width: 85vw !important; }
-    .page-title { font-size: 24px !important; }
+    .page-title { font-size: 26px !important; }
     .about-stat-row { grid-template-columns: 1fr !important; }
     .article-stats { grid-template-columns: 1fr !important; }
     .article-flow-grid { grid-template-columns: 1fr !important; }
+    .chat-btn { padding: 14px 28px !important; font-size: 15px !important; }
+  }
+
+  /* ── TOUCH DEVICES: translate :hover affordances to :active
+     Mobile browsers fire :hover only after tap (or not at all), leaving users
+     without tactile feedback. Re-route the same transforms / borders to :active
+     so a press is immediately acknowledged. ── */
+  @media (hover: none) {
+    .news-card:active,
+    .service-cell:active,
+    .pricing-card:active,
+    .outcome-card:active {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+    }
+    .article-callout-btn:active,
+    .service-audit-btn:active,
+    .contact-submit:active {
+      border-color: var(--ink);
+      background: rgba(28,24,20,0.06);
+    }
+    .service-callout-card .service-audit-btn:active {
+      background: rgba(28,24,20,0.75);
+    }
+    .drop-item:active,
+    #topLogo:active {
+      opacity: 0.5;
+    }
+    /* Suppress the sticky hover state that can persist after tap on some
+       Android browsers — neutralise :hover entirely and rely on :active. ── */
+    .news-card:hover,
+    .service-cell:hover,
+    .pricing-card:hover,
+    .outcome-card:hover {
+      transform: none;
+      box-shadow: none;
+    }
   }
 
   /* ── Scroll progress bar ── */
@@ -1778,10 +1905,6 @@
   }
   body.dark .outcome-card { background: var(--bg2); }
   body.dark .outcome-card:hover { background: var(--bg3); }
-  @media (max-width: 640px) {
-    .outcomes-grid { grid-template-columns: 1fr; }
-    #back-to-top { display: none; }
-  }
 </style>
 </head>
 <body>
@@ -2306,6 +2429,11 @@
 
   <!-- ═══ CHAT ═══ -->
   <div id="chat">
+    <button id="chatClose" class="chat-close-btn" aria-label="Close chat" type="button">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+        <path d="M6 6l12 12M6 18L18 6"/>
+      </svg>
+    </button>
     <div class="messages" id="messages"><div class="messages-spacer"></div></div>
 
     <div class="input-area">
@@ -2347,6 +2475,7 @@
     const inputBox    = document.getElementById('inputBox');
     const topLogo     = document.getElementById('topLogo');
     const openChatBtn = document.getElementById('openChat');
+    const chatClose   = document.getElementById('chatClose');
 
     var chatStarted = false;
 
@@ -2507,6 +2636,19 @@
         menuIcon.classList.remove('open');
       }
     });
+
+    // ── Sync body.menu-open with menuWrap.open so the scroll lock in CSS
+    // follows every menu open/close path without patching each call site ──
+    new MutationObserver(function() {
+      document.body.classList.toggle('menu-open', menuWrap.classList.contains('open'));
+    }).observe(menuWrap, { attributes: true, attributeFilter: ['class'] });
+
+    // ── Chat close (mobile) — reuse backBtn's history-aware logic ──
+    if (chatClose) {
+      chatClose.addEventListener('click', function() {
+        backBtn.click();
+      });
+    }
 
 
     // ── Logo → home ──
@@ -2708,8 +2850,20 @@
       inputEl.style.height = 'auto';
       inputEl.style.height = Math.min(inputEl.scrollHeight, 168) + 'px';
       var totalH = inputEl.scrollHeight + 80;
-      inputBox.style.minHeight = Math.min(Math.max(totalH, 100), 300) + 'px';
+      // On mobile the soft keyboard already steals ~40% of the viewport — cap
+      // the input box to 40% of the visible viewport height so the message
+      // history stays readable while the user composes a reply.
+      var mobileCap = window.innerHeight * 0.4;
+      var desktopCap = 300;
+      var cap = window.matchMedia('(max-width: 768px)').matches ? Math.min(mobileCap, desktopCap) : desktopCap;
+      inputBox.style.minHeight = Math.min(Math.max(totalH, 100), cap) + 'px';
       updateSendMic();
+    });
+
+    // Keep the latest message in view when the soft keyboard appears. 300ms
+    // gives iOS time to animate the keyboard in before we scroll.
+    inputEl.addEventListener('focus', function() {
+      setTimeout(scrollBottom, 300);
     });
 
     sendBtn.addEventListener('click', function() {
