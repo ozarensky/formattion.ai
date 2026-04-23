@@ -1578,11 +1578,9 @@
       margin: 40px 0 !important;
     }
 
-    /* ── ARTICLE HERO — reduce bottom margin + rebalance aspect ratio
-       Desktop 16/7 compresses to ~160px tall on a 375px phone (too weak).
-       4/3 gives the hero genuine presence on mobile without dominating. ── */
+    /* ── ARTICLE HERO — 16:9 on mobile ── */
     .article-hero {
-      aspect-ratio: 4 / 3 !important;
+      aspect-ratio: 16 / 9 !important;
       margin-bottom: 32px !important;
       border-radius: 16px !important;
     }
@@ -1616,14 +1614,12 @@
     .news-card-title { font-size: 22px; }
     .news-card-desc { max-width: 100%; }
 
-    /* ── SERVICE CALLOUT CARD — mobile
-       Same structure as desktop: image is the card, text + button sit on top.
-       Just undo the 3/1 aspect-ratio (too squat on mobile) and anchor the
-       image so it reliably fills the card. No overlay background — the image
-       stays visible as designed. ── */
+    /* ── SERVICE CALLOUT CARD — mobile: 16:9, image is the card,
+       text + button sit on top of it (no overlay background). Tighter
+       typography so content fits in the shorter box. ── */
     .service-callout-card {
-      aspect-ratio: unset !important;
-      min-height: 320px;
+      aspect-ratio: 16 / 9 !important;
+      min-height: 0 !important;
     }
     .service-callout-img {
       position: absolute;
@@ -1631,14 +1627,18 @@
     }
     .service-callout-overlay {
       max-width: 100% !important;
-      padding: 32px 24px !important;
+      padding: 20px 20px !important;
       background: transparent !important;
     }
     .service-callout-text {
-      font-size: 20px;
-      line-height: 1.4;
-      margin-bottom: 20px;
+      font-size: 15px;
+      line-height: 1.35;
+      margin-bottom: 12px;
       text-shadow: 0 1px 6px rgba(255,255,255,0.55);
+    }
+    .service-callout-card .service-audit-btn {
+      padding: 10px 24px;
+      font-size: 13px;
     }
 
     /* ── ARTICLE PAGE TITLE
@@ -2317,7 +2317,7 @@
         <div class="service-card">Website Build, Domain Hosting &amp; Support — £2,500 one-off + from £75/mo</div>
         <div class="service-card">Business Branding &amp; Identity Package — £1,500 one-off</div>
       </div>
-      <div class="service-callout-card" style="aspect-ratio:3/1;margin-top:32px;">
+      <div class="service-callout-card" style="margin-top:32px;">
         <img class="service-callout-img" src="images/services/services-page-callout.jpg" alt="A subcontractor director reviewing organised project dashboards at a site office desk." style="object-position: center 20%; transform: scaleX(-1);">
         <div class="service-callout-overlay">
           <p class="service-callout-text">See our services page for details on each automation system.</p>
