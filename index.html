@@ -1616,13 +1616,16 @@
     .news-card-title { font-size: 22px; }
     .news-card-desc { max-width: 100%; }
 
-    /* ── SERVICE CALLOUT CARD — mobile: keep desktop look (image with cream
-       overlay) but stack the overlay full-width. Image must be absolutely
-       positioned so it reliably fills the card height (percentage height on
-       the img alone is unreliable when the parent only has min-height). ── */
+    /* ── SERVICE CALLOUT CARD — mobile
+       Desktop: overlay covers left 62%, right side of image shows clean.
+       Mobile: card is too narrow to split left/right, so fade the overlay
+       from transparent at the top to cream at the bottom — the image reads
+       clearly at the top, text sits on enough cream for legibility.
+       Image also needs position:absolute so it reliably fills the card
+       (height:100% alone is unreliable when the parent only has min-height). ── */
     .service-callout-card {
       aspect-ratio: unset !important;
-      min-height: 320px;
+      min-height: 360px;
     }
     .service-callout-img {
       position: absolute;
@@ -1631,7 +1634,14 @@
     .service-callout-overlay {
       max-width: 100% !important;
       padding: 32px 24px !important;
-      background: rgba(240,236,228,0.82);
+      justify-content: flex-end !important;
+      background: linear-gradient(
+        to bottom,
+        rgba(240,236,228,0) 0%,
+        rgba(240,236,228,0.55) 40%,
+        rgba(240,236,228,0.9) 70%,
+        rgba(240,236,228,0.95) 100%
+      );
     }
     .service-callout-text {
       font-size: 19px;
