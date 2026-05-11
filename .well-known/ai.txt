@@ -1,0 +1,14 @@
+# ai.txt — AI policy for formattion.ai
+# Reference: https://site.spawning.ai/spawning-ai-txt
+# Last updated: 2026-05-11
+
+# We do not consent to use of this site's content for AI/ML training,
+# dataset compilation, fine-tuning, or grounding without a written agreement.
+# Per-page directives also live in <meta name="robots" content="...noai, noimageai">
+# and in HTTP X-Robots-Tag headers.
+
+User-Agent: *
+Disallow: /
+
+# Contact for licensing / training data agreements:
+# ionozarensky@gmail.com

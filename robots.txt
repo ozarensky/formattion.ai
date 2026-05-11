@@ -1,0 +1,133 @@
+# formattion.ai — crawl policy
+# Last updated: 2026-05-11
+#
+# Search engines: indexing welcome.
+# AI training crawlers: not welcome. Our content is not training data.
+
+# ─── Real search engines: allow everything ─────────────────────────────
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# ─── AI training / dataset crawlers: deny everything ───────────────────
+# OpenAI
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+# Google AI training (separate from Googlebot search indexing)
+User-agent: Google-Extended
+Disallow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Perplexity-User
+Disallow: /
+
+# Common Crawl (feeds many LLMs)
+User-agent: CCBot
+Disallow: /
+
+# ByteDance / TikTok
+User-agent: Bytespider
+Disallow: /
+
+# Amazon
+User-agent: Amazonbot
+Disallow: /
+
+# Cohere
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: cohere-training-data-crawler
+Disallow: /
+
+# Apple AI training (separate from Applebot search indexing)
+User-agent: Applebot-Extended
+Disallow: /
+
+# Meta / Facebook AI
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: Meta-ExternalFetcher
+Disallow: /
+
+# DiffBot
+User-agent: DiffBot
+Disallow: /
+
+# Image-training crawlers
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: img2dataset
+Disallow: /
+
+# Mistral
+User-agent: MistralAI-User
+Disallow: /
+
+# AI21
+User-agent: AI2Bot
+Disallow: /
+
+User-agent: Ai2Bot-Dolma
+Disallow: /
+
+# Timpi
+User-agent: Timpibot
+Disallow: /
+
+# Omgili / Webz
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: Omgili
+Disallow: /
+
+# YouBot
+User-agent: YouBot
+Disallow: /
+
+# PetalBot (Huawei)
+User-agent: PetalBot
+Disallow: /
+
+# Sitemap
+Sitemap: https://formattion.ai/sitemap.xml

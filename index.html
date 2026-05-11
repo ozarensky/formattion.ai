@@ -1,15 +1,20 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>formattion.ai — AI Automation for Construction</title>
-  <meta name="description" content="formattion.ai builds AI automation systems for UK construction subcontractors. Reduce admin, improve quality, and scale operations with intelligent workflows." />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://formattion.ai" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <title>formattion.ai — AI Automation for UK Construction Subcontractors</title>
+  <meta name="description" content="formattion.ai builds AI automation systems for UK construction subcontractors. Cut admin, automate RAMS and variation claims, and run operations on intelligent workflows." />
+  <!-- Search engines: index everything; AI training crawlers: deny -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1, noai, noimageai" />
+  <meta name="googlebot" content="index, follow, noai, noimageai" />
+  <link rel="canonical" href="https://formattion.ai/" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
   <meta name="theme-color" content="#F4EFE6" />
   <meta name="keywords" content="AI automation construction, subcontractor automation, UK construction AI, n8n automation, RAMS automation, variation claims AI, construction admin automation" />
+  <!-- Google Search Console verification — replace placeholder after verifying the property at search.google.com/search-console -->
+  <meta name="google-site-verification" content="rvlbXRPExwyRmll69yTpvjZw9Cyse_bDCl4CZtOLgTo" />
   <!-- Open Graph -->
   <meta property="og:title" content="formattion.ai — AI Automation for Construction" />
   <meta property="og:description" content="AI automation systems built for UK construction subcontractors. Reduce admin, recover variation entitlements, and scale operations." />
@@ -29,16 +34,133 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;1,300;1,400&family=DM+Mono:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
-  <!-- Schema.org structured data -->
+  <!-- Schema.org structured data: Organization -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "formattion.ai",
-    "url": "https://formattion.ai",
+    "alternateName": "formattion",
+    "url": "https://formattion.ai/",
+    "logo": "https://formattion.ai/favicon.svg",
     "description": "AI automation systems for UK construction subcontractors. We build agentic workflows that reduce admin overhead, recover variation entitlements, and scale operations.",
-    "areaServed": "GB",
-    "knowsAbout": ["AI automation", "construction subcontracting", "workflow automation", "n8n", "agentic AI"]
+    "areaServed": { "@type": "Country", "name": "United Kingdom" },
+    "knowsAbout": [
+      "AI automation",
+      "construction subcontracting",
+      "workflow automation",
+      "n8n",
+      "agentic AI",
+      "RAMS automation",
+      "variation claims",
+      "construction CRM"
+    ],
+    "founder": [
+      { "@type": "Person", "name": "Matt Fox", "jobTitle": "Co-founder & CEO" },
+      { "@type": "Person", "name": "Ion Ozarensky", "jobTitle": "Co-founder & CTO" }
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "sales",
+      "url": "https://formattion.ai/#contact",
+      "areaServed": "GB",
+      "availableLanguage": ["en-GB"]
+    }
+  }
+  </script>
+  <!-- Schema.org structured data: WebSite (enables SearchAction in Google) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "formattion.ai",
+    "url": "https://formattion.ai/",
+    "inLanguage": "en-GB",
+    "publisher": { "@type": "Organization", "name": "formattion.ai", "url": "https://formattion.ai/" }
+  }
+  </script>
+  <!-- Schema.org structured data: ProfessionalService -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "formattion.ai — AI automation for construction subcontractors",
+    "url": "https://formattion.ai/",
+    "image": "https://formattion.ai/og.png",
+    "priceRange": "££",
+    "areaServed": { "@type": "Country", "name": "United Kingdom" },
+    "serviceType": "AI automation systems for construction",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Core systems",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Health & Safety Management automation (RAMS, site documentation)" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Social Media & Marketing automation for subcontractors" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Lead Generation & CRM automation" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Personal Assistant & Digital Receptionist" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "HR & Internal Communications automation" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Branding & Identity systems" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website Design & Build" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ongoing Support & System Improvement" } }
+      ]
+    }
+  }
+  </script>
+  <!-- Schema.org structured data: FAQPage — DRAFT for Ion to review/edit -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does formattion.ai actually do for a construction subcontractor?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We build automation systems that handle the repetitive admin in your business — RAMS, follow-ups, payment applications, lead capture, internal comms. Each system collects the right information, processes it, produces the document or action, and stores it in the right place automatically. The goal is to remove hours of weekly admin and stop things from being missed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What size of construction subcontractor is formattion.ai built for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We work with UK subcontractors turning over between £500,000 and £5 million — large enough to feel the weight of admin, but not large enough to justify a full office team. Typical clients are groundworkers, carpenters, electrical and mechanical contractors, bricklayers, and roofers working directly with principal contractors."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does a system cost and how long does it take to install?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Each system is £1,000 to set up plus £500 per month, ongoing improvements included. Most systems are installed and running within two to four weeks. Clients typically begin with two or three systems and add more once the first ones are stable."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which system should I automate first?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The biggest wins usually come from Health & Safety / RAMS automation, Lead Generation & CRM, and Personal Assistant / Digital Receptionist — these are where most subcontractors lose the most hours per week. We start every engagement with a free operations audit to identify the two or three areas where automation will have the biggest impact for your specific business."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will your systems work alongside my existing accounting and project software?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Our systems integrate with the tools you already use — Xero, QuickBooks, Sage, project management platforms, shared inboxes, and document stores. We don't ask you to switch software; we connect what you've got so information moves automatically between them."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I know if my subcontracting business is ready for automation?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If admin is growing faster than your team can absorb, paperwork is sitting on someone's desk on a Friday afternoon, enquiries are sitting unread in a shared inbox, or one person is the single point of failure for documents — you're ready. Book a free operations audit and we'll show you which parts of your business are easiest to automate first."
+        }
+      }
+    ]
   }
   </script>
   <style>
@@ -436,11 +558,14 @@
     }
     .news-card {
       position: relative;
+      display: block;
       aspect-ratio: 3/1;
       min-height: 160px;
       border-radius: var(--rx-feature);
       overflow: hidden;
       cursor: pointer;
+      color: inherit;
+      text-decoration: none;
       box-shadow: 0 2px 10px rgba(0,0,0,0.08), 0 0 0 1px var(--dim);
       transition: transform .25s cubic-bezier(.25,.46,.45,.94), box-shadow .25s ease;
     }
@@ -1919,6 +2044,48 @@
   }
   body.dark .outcome-card { background: var(--bg2); }
   body.dark .outcome-card:hover { background: var(--bg3); }
+
+  /* ══ COPY-PROTECTION LAYER ══
+     Prevents casual text/image selection and copying across the site.
+     Form inputs and the chat interface remain selectable so they stay usable. */
+  body, .page, .article-body, .article-page-title, .article-intro,
+  .article-item, .news-card, .service-card, .page-body, .page-title,
+  .page-section-title, .founder-bio, .outcome-card {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+  input, textarea, .contact-input, [contenteditable="true"],
+  .messages, .msg-ai .text, .msg-user .bubble {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+  img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+    pointer-events: auto;
+  }
+  /* Disable printing — replace the page with a copyright notice */
+  @media print {
+    body * { visibility: hidden !important; }
+    body::after {
+      content: "© formattion.ai — printing is disabled. Visit https://formattion.ai for the live site.";
+      visibility: visible;
+      display: block;
+      position: fixed;
+      top: 2cm; left: 2cm; right: 2cm;
+      font-family: 'Helvetica Neue', Helvetica, sans-serif;
+      font-size: 14pt;
+      color: #1C1814;
+    }
+  }
 </style>
 </head>
 <body>
@@ -1938,7 +2105,7 @@
   <div class="page" id="page-services">
     <div class="page-inner">
       <div class="article-hero">
-        <img src="images/services/services-hero.jpg" alt="Construction site at golden hour with a subcontractor director walking with calm authority.">
+        <img loading="lazy" decoding="async" src="images/services/services-hero.jpg" alt="Construction site at golden hour with a subcontractor director walking with calm authority.">
       </div>
       <h1 class="page-title">We Build Systems<br>That Run Your Business.</h1>
       <div class="page-body">
@@ -1972,7 +2139,7 @@
              onclick="showPage('page-service-health-safety')"
              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('page-service-health-safety');}">
           <div class="service-cell-image">
-            <img src="images/services/health-safety.jpg" alt="Health & Safety Management">
+            <img loading="lazy" decoding="async" src="images/services/health-safety.jpg" alt="Health & Safety Management">
           </div>
           <div class="service-cell-content">
             <div class="service-cell-title">Health & Safety Management</div>
@@ -1983,7 +2150,7 @@
              onclick="showPage('page-service-social-media-marketing')"
              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('page-service-social-media-marketing');}">
           <div class="service-cell-image">
-            <img src="images/services/social-media-marketing.jpg" alt="Social Media & Marketing">
+            <img loading="lazy" decoding="async" src="images/services/social-media-marketing.jpg" alt="Social Media & Marketing">
           </div>
           <div class="service-cell-content">
             <div class="service-cell-title">Social Media & Marketing</div>
@@ -1994,7 +2161,7 @@
              onclick="showPage('page-service-lead-generation-crm')"
              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('page-service-lead-generation-crm');}">
           <div class="service-cell-image">
-            <img src="images/services/lead-generation-crm.jpg" alt="Lead Generation & CRM">
+            <img loading="lazy" decoding="async" src="images/services/lead-generation-crm.jpg" alt="Lead Generation & CRM">
           </div>
           <div class="service-cell-content">
             <div class="service-cell-title">Lead Generation & CRM</div>
@@ -2005,7 +2172,7 @@
              onclick="showPage('page-service-personal-assistant')"
              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('page-service-personal-assistant');}">
           <div class="service-cell-image">
-            <img src="images/services/personal-assistant.jpg" alt="Personal Assistant & Digital Receptionist">
+            <img loading="lazy" decoding="async" src="images/services/personal-assistant.jpg" alt="Personal Assistant & Digital Receptionist">
           </div>
           <div class="service-cell-content">
             <div class="service-cell-title">Personal Assistant & Digital Receptionist</div>
@@ -2016,7 +2183,7 @@
              onclick="showPage('page-service-hr-internal-comms')"
              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('page-service-hr-internal-comms');}">
           <div class="service-cell-image">
-            <img src="images/services/hr-internal-comms.jpg" alt="HR & Internal Communications">
+            <img loading="lazy" decoding="async" src="images/services/hr-internal-comms.jpg" alt="HR & Internal Communications">
           </div>
           <div class="service-cell-content">
             <div class="service-cell-title">HR & Internal Communications</div>
@@ -2027,7 +2194,7 @@
              onclick="showPage('page-service-ongoing-support')"
              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('page-service-ongoing-support');}">
           <div class="service-cell-image">
-            <img src="images/services/ongoing-support.jpg" alt="Ongoing Support & Optimisation">
+            <img loading="lazy" decoding="async" src="images/services/ongoing-support.jpg" alt="Ongoing Support & Optimisation">
           </div>
           <div class="service-cell-content">
             <div class="service-cell-title">Ongoing Support & Optimisation</div>
@@ -2038,7 +2205,7 @@
              onclick="showPage('page-service-branding-identity')"
              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('page-service-branding-identity');}">
           <div class="service-cell-image">
-            <img src="images/services/branding-identity.jpg" alt="Branding & Identity Package">
+            <img loading="lazy" decoding="async" src="images/services/branding-identity.jpg" alt="Branding & Identity Package">
           </div>
           <div class="service-cell-content">
             <div class="service-cell-title">Branding & Identity Package</div>
@@ -2049,7 +2216,7 @@
              onclick="showPage('page-service-website-design-build')"
              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('page-service-website-design-build');}">
           <div class="service-cell-image">
-            <img src="images/services/website-design-build.jpg" alt="Website Design & Build">
+            <img loading="lazy" decoding="async" src="images/services/website-design-build.jpg" alt="Website Design & Build">
           </div>
           <div class="service-cell-content">
             <div class="service-cell-title">Website Design & Build</div>
@@ -2083,7 +2250,7 @@
       </div>
 
       <div class="service-callout-card">
-        <img class="service-callout-img" src="images/services/services-page-callout.jpg" alt="A subcontractor director reviewing organised project dashboards at a site office desk.">
+        <img loading="lazy" decoding="async" class="service-callout-img" src="images/services/services-page-callout.jpg" alt="A subcontractor director reviewing organised project dashboards at a site office desk.">
         <div class="service-callout-overlay">
           <p class="service-callout-text">Ready to simplify how your business runs? Start with a free audit.</p>
           <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
@@ -2096,7 +2263,7 @@
   <div class="page" id="page-news">
     <div class="page-inner">
       <div class="article-hero">
-        <img src="images/services/news-hero.jpg" alt="Trade newspaper and tablet on a site office desk with morning light.">
+        <img loading="lazy" decoding="async" src="images/services/news-hero.jpg" alt="Trade newspaper and tablet on a site office desk with morning light.">
       </div>
       <h1 class="page-title news-page-title">From the field.</h1>
       <div class="page-body">
@@ -2106,13 +2273,12 @@
 
       <div class="news-grid">
         <!-- Card: AI Tools for Retention Chasing Can Boost Cash Flow — 23 April 2026 -->
-        <div class="news-card" role="button" tabindex="0"
-             onclick="showPage('page-article-ai-tools-improve-retention-chasing-2026')"
-             onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('page-article-ai-tools-improve-retention-chasing-2026');}"
-             aria-label="Read: AI Tools for Retention Chasing Can Boost Cash Flow">
+        <a class="news-card" href="/news/ai-tools-improve-retention-chasing-2026/"
+           onclick="if(!event.metaKey&&!event.ctrlKey&&!event.shiftKey){event.preventDefault();showPage('page-article-ai-tools-improve-retention-chasing-2026');}"
+           aria-label="Read: AI Tools for Retention Chasing Can Boost Cash Flow">
           
           <div class="news-card-image-zone">
-            <img class="news-card-img" src="images/news/ai-tools-improve-retention-chasing-2026/image-1.jpg" alt="AI Tools for Retention Chasing Can Boost Cash Flow">
+            <img loading="lazy" decoding="async" class="news-card-img" src="images/news/ai-tools-improve-retention-chasing-2026/image-1.jpg" alt="AI Tools for Retention Chasing Can Boost Cash Flow">
             <div class="news-card-gradient"></div>
           </div>
           
@@ -2126,7 +2292,7 @@
               <span class="news-card-date">23 April 2026</span>
             </div>
           </div>
-        </div>
+        </a>
       </div><!-- /news-grid -->
     </div>
   </div>
@@ -2135,7 +2301,7 @@
   <div class="page" id="page-about">
     <div class="page-inner">
       <div class="article-hero">
-        <img src="images/services/about-hero.jpg" alt="Two subcontractors reviewing plans on a finished slab in early morning light.">
+        <img loading="lazy" decoding="async" src="images/services/about-hero.jpg" alt="Two subcontractors reviewing plans on a finished slab in early morning light.">
       </div>
       <h1 class="page-title">About us</h1>
       <div class="page-body">
@@ -2160,7 +2326,7 @@
       </div>
       <div class="founders-grid">
         <div class="founder-card">
-          <img class="founder-portrait" src="images/about/matt-fox.png" alt="Matt Fox, co-founder of formattion.ai, portrait.">
+          <img loading="lazy" decoding="async" class="founder-portrait" src="images/about/matt-fox.png" alt="Matt Fox, co-founder of formattion.ai, portrait.">
           <div class="founder-text">
             <div class="founder-name">Matt Fox</div>
             <div class="founder-role">co-founder · CEO</div>
@@ -2168,7 +2334,7 @@
           </div>
         </div>
         <div class="founder-card">
-          <img class="founder-portrait" src="images/about/ion-ozarensky.png" alt="Ion Ozarensky, co-founder of formattion.ai, portrait.">
+          <img loading="lazy" decoding="async" class="founder-portrait" src="images/about/ion-ozarensky.png" alt="Ion Ozarensky, co-founder of formattion.ai, portrait.">
           <div class="founder-text">
             <div class="founder-name">Ion Ozarensky</div>
             <div class="founder-role">co-founder · CTO</div>
@@ -2227,7 +2393,7 @@
       <div class="page-divider"></div>
 
       <div class="service-callout-card">
-        <img class="service-callout-img" src="images/services/free-audit-callout.jpg" alt="A subcontractor in hi-vis on a construction site at golden hour, calm and confident.">
+        <img loading="lazy" decoding="async" class="service-callout-img" src="images/services/free-audit-callout.jpg" alt="A subcontractor in hi-vis on a construction site at golden hour, calm and confident.">
         <div class="service-callout-overlay">
           <p class="service-callout-text">If admin is starting to hold you back, the next step is a free audit. No obligation, no hard sell.</p>
           <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
@@ -2283,7 +2449,7 @@
     <div class="page" id="page-pricing">
     <div class="page-inner">
       <div class="article-hero">
-        <img src="images/services/pricing-hero.jpg" alt="Clean site office desk with project folder and morning light.">
+        <img loading="lazy" decoding="async" src="images/services/pricing-hero.jpg" alt="Clean site office desk with project folder and morning light.">
       </div>
       <h1 class="page-title">Pricing &amp; How It Works</h1>
       <div class="page-body">
@@ -2336,7 +2502,7 @@
         <div class="service-card">Business Branding &amp; Identity Package — £1,500 one-off</div>
       </div>
       <div class="service-callout-card" style="margin-top:32px;">
-        <img class="service-callout-img" src="images/services/services-page-callout.jpg" alt="A subcontractor director reviewing organised project dashboards at a site office desk." style="object-position: center 20%; transform: scaleX(-1);">
+        <img loading="lazy" decoding="async" class="service-callout-img" src="images/services/services-page-callout.jpg" alt="A subcontractor director reviewing organised project dashboards at a site office desk." style="object-position: center 20%; transform: scaleX(-1);">
         <div class="service-callout-overlay">
           <p class="service-callout-text">See our services page for details on each automation system.</p>
           <button class="service-audit-btn" onclick="showPage('page-services')">view our services</button>
@@ -2374,7 +2540,7 @@
       </div>
 
       <div class="service-callout-card" style="margin-top:48px;">
-        <img class="service-callout-img" src="images/services/free-audit-callout.jpg" alt="A subcontractor in hi-vis on a construction site at golden hour, calm and confident.">
+        <img loading="lazy" decoding="async" class="service-callout-img" src="images/services/free-audit-callout.jpg" alt="A subcontractor in hi-vis on a construction site at golden hour, calm and confident.">
         <div class="service-callout-overlay">
           <p class="service-callout-text">Start with a Free Audit. We'll show you exactly how your business can benefit from automation — and which systems will have the biggest impact.</p>
           <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
@@ -2498,6 +2664,57 @@
   </div>
 
   <script>
+    // ══ COPY-PROTECTION LAYER ══
+    // Blocks right-click, watermarks any copied text, kills view-source/devtools/print shortcuts,
+    // and disables image drag-save. Inputs and the chat input remain fully usable.
+    (function installCopyProtection() {
+      var ALLOW_SELECTORS = 'input, textarea, .contact-input, [contenteditable="true"], .messages, .msg-ai .text, .msg-user .bubble';
+      function isInAllowedField(target) {
+        try { return target && target.closest && target.closest(ALLOW_SELECTORS); }
+        catch (e) { return false; }
+      }
+      document.addEventListener('contextmenu', function(e) {
+        if (isInAllowedField(e.target)) return;
+        e.preventDefault();
+      });
+      ['copy', 'cut'].forEach(function(evt) {
+        document.addEventListener(evt, function(e) {
+          if (isInAllowedField(e.target)) return;
+          var sel = (window.getSelection && window.getSelection().toString()) || '';
+          if (!sel) return;
+          var watermark = '\n\n— formattion.ai — © formattion.ai. Source: ' + location.href;
+          try {
+            if (e.clipboardData) {
+              e.clipboardData.setData('text/plain', sel + watermark);
+              e.preventDefault();
+            }
+          } catch (err) { /* clipboard API missing — fall through */ }
+        });
+      });
+      document.addEventListener('keydown', function(e) {
+        if (isInAllowedField(e.target)) return;
+        var k = (e.key || '').toLowerCase();
+        var blocked =
+          e.key === 'F12' ||
+          (e.ctrlKey && e.shiftKey && ['i', 'j', 'c'].indexOf(k) !== -1) ||
+          (e.metaKey && e.altKey && ['i', 'j', 'c'].indexOf(k) !== -1) ||
+          (e.ctrlKey && k === 'u') ||
+          (e.ctrlKey && k === 's') ||
+          (e.ctrlKey && k === 'p') ||
+          (e.metaKey && k === 'u') ||
+          (e.metaKey && k === 's') ||
+          (e.metaKey && k === 'p');
+        if (blocked) e.preventDefault();
+      });
+      document.addEventListener('dragstart', function(e) {
+        if (e.target && e.target.tagName === 'IMG') e.preventDefault();
+      });
+      document.addEventListener('selectstart', function(e) {
+        if (isInAllowedField(e.target)) return;
+        // selection is also blocked at CSS layer; this is a belt-and-braces for older browsers
+      });
+    })();
+
     // ── Webhook endpoints ──
     const CHAT_WEBHOOK_URL    = 'https://ozarensky.app.n8n.cloud/webhook/c9f2e938-9876-4133-8b3e-e9abe1151931/chat';
     const CONTACT_WEBHOOK_URL = 'https://ozarensky.app.n8n.cloud/webhook/contact-form-leads';
@@ -3153,7 +3370,7 @@
 
       
       <div class="article-hero">
-        <img src="images/news/ai-tools-improve-retention-chasing-2026/image-1.jpg" alt="AI Tools for Retention Chasing Can Boost Cash Flow">
+        <img loading="lazy" decoding="async" src="images/news/ai-tools-improve-retention-chasing-2026/image-1.jpg" alt="AI Tools for Retention Chasing Can Boost Cash Flow">
       </div>
       
 
@@ -3206,7 +3423,7 @@
 
       
       <div class="article-hero">
-        <img src="images/news/ai-tools-improve-retention-chasing-2026/image-2.jpg" alt="AI Tools for Retention Chasing Can Boost Cash Flow">
+        <img loading="lazy" decoding="async" src="images/news/ai-tools-improve-retention-chasing-2026/image-2.jpg" alt="AI Tools for Retention Chasing Can Boost Cash Flow">
       </div>
       
 
@@ -3228,7 +3445,7 @@
   <div class="page" id="page-service-health-safety">
     <div class="page-inner">
       <div class="article-hero">
-        <img src="images/services/health-safety.jpg" alt="A worker in hi-vis reviewing a clipboard on a completed slab at mid-morning, scaffolding rising behind against warm sky.">
+        <img loading="lazy" decoding="async" src="images/services/health-safety.jpg" alt="A worker in hi-vis reviewing a clipboard on a completed slab at mid-morning, scaffolding rising behind against warm sky.">
       </div>
       <h1 class="article-page-title">Health & Safety Management</h1>
       <p class="article-intro" style="margin-bottom:8px;">We automate your health & safety processes to keep you compliant, reduce risk, and remove the constant burden of paperwork.</p>
@@ -3265,7 +3482,7 @@
   </div>
 </div>
 <div class="service-callout-card">
-  <img class="service-callout-img" src="images/services/health-safety-callout.jpg" alt="A worker in hi-vis reviewing a clipboard on a completed slab at mid-morning, scaffolding rising behind against warm sky.">
+  <img loading="lazy" decoding="async" class="service-callout-img" src="images/services/health-safety-callout.jpg" alt="A worker in hi-vis reviewing a clipboard on a completed slab at mid-morning, scaffolding rising behind against warm sky.">
   <div class="service-callout-overlay">
     <p class="service-callout-text">We replace your Health & Safety Manager — with reduced risk, consistent compliance, and no more chasing paperwork across sites.</p>
     <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
@@ -3277,7 +3494,7 @@
   <div class="page" id="page-service-social-media-marketing">
     <div class="page-inner">
       <div class="article-hero">
-        <img src="images/services/social-media-marketing.jpg" alt="A finished residential build at golden hour with a homeowner, contractor, and photographer on the pavement outside.">
+        <img loading="lazy" decoding="async" src="images/services/social-media-marketing.jpg" alt="A finished residential build at golden hour with a homeowner, contractor, and photographer on the pavement outside.">
       </div>
       <h1 class="article-page-title">Social Media & Marketing</h1>
       <p class="article-intro" style="margin-bottom:8px;">We help you stay visible, look professional, and generate consistent enquiries — without needing to manage social media yourself.</p>
@@ -3313,7 +3530,7 @@
   </div>
 </div>
 <div class="service-callout-card">
-  <img class="service-callout-img" src="images/services/social-media-marketing-callout.jpg" alt="A finished residential build at golden hour with a homeowner, contractor, and photographer on the pavement outside.">
+  <img loading="lazy" decoding="async" class="service-callout-img" src="images/services/social-media-marketing-callout.jpg" alt="A finished residential build at golden hour with a homeowner, contractor, and photographer on the pavement outside.">
   <div class="service-callout-overlay">
     <p class="service-callout-text">We replace your social media manager — with a consistent, professional presence that builds trust and generates opportunities, without the time commitment.</p>
     <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
@@ -3325,7 +3542,7 @@
   <div class="page" id="page-service-lead-generation-crm">
     <div class="page-inner">
       <div class="article-hero">
-        <img src="images/services/lead-generation-crm.jpg" alt="A contractor's office desk in morning window-light with a laptop, diary, mug, and a view out to a tidy yard.">
+        <img loading="lazy" decoding="async" src="images/services/lead-generation-crm.jpg" alt="A contractor's office desk in morning window-light with a laptop, diary, mug, and a view out to a tidy yard.">
       </div>
       <h1 class="article-page-title">Lead Generation & CRM</h1>
       <p class="article-intro" style="margin-bottom:8px;">We help you win more work by ensuring every enquiry is captured, tracked, and followed up properly — without relying on memory or manual admin.</p>
@@ -3361,7 +3578,7 @@
   </div>
 </div>
 <div class="service-callout-card">
-  <img class="service-callout-img" src="images/services/lead-generation-crm-callout.jpg" alt="A contractor's office desk in morning window-light with a laptop, diary, mug, and a view out to a tidy yard.">
+  <img loading="lazy" decoding="async" class="service-callout-img" src="images/services/lead-generation-crm-callout.jpg" alt="A contractor's office desk in morning window-light with a laptop, diary, mug, and a view out to a tidy yard.">
   <div class="service-callout-overlay">
     <p class="service-callout-text">We replace your business development manager — with more enquiries converted into work, a clearer pipeline, and no missed opportunities.</p>
     <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
@@ -3373,7 +3590,7 @@
   <div class="page" id="page-service-personal-assistant">
     <div class="page-inner">
       <div class="article-hero">
-        <img src="images/services/personal-assistant.jpg" alt="A figure at a window at first light holding a coffee, looking out over quiet rooftops in spring mist.">
+        <img loading="lazy" decoding="async" src="images/services/personal-assistant.jpg" alt="A figure at a window at first light holding a coffee, looking out over quiet rooftops in spring mist.">
       </div>
       <h1 class="article-page-title">Personal Assistant & Digital Receptionist</h1>
       <p class="article-intro" style="margin-bottom:8px;">We provide an intelligent, always-on assistant that manages your day-to-day admin, communication, and organisation — allowing you to focus on running the business.</p>
@@ -3415,7 +3632,7 @@
   </div>
 </div>
 <div class="service-callout-card">
-  <img class="service-callout-img" src="images/services/personal-assistant-callout.jpg" alt="A figure at a window at first light holding a coffee, looking out over quiet rooftops in spring mist.">
+  <img loading="lazy" decoding="async" class="service-callout-img" src="images/services/personal-assistant-callout.jpg" alt="A figure at a window at first light holding a coffee, looking out over quiet rooftops in spring mist.">
   <div class="service-callout-overlay">
     <p class="service-callout-text">Acts as your personal assistant — with fewer interruptions, better organisation, and significantly more time to focus on high-value work.</p>
     <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
@@ -3427,7 +3644,7 @@
   <div class="page" id="page-service-hr-internal-comms">
     <div class="page-inner">
       <div class="article-hero">
-        <img src="images/services/hr-internal-comms.jpg" alt="A small crew of workers in hi-vis crossing a site at morning in warm light, walking together in an easy rhythm.">
+        <img loading="lazy" decoding="async" src="images/services/hr-internal-comms.jpg" alt="A small crew of workers in hi-vis crossing a site at morning in warm light, walking together in an easy rhythm.">
       </div>
       <h1 class="article-page-title">HR & Internal Communications</h1>
       <p class="article-intro" style="margin-bottom:8px;">We streamline how your team is managed, trained, and communicated with — ensuring consistency across your workforce and reducing admin.</p>
@@ -3467,7 +3684,7 @@
   </div>
 </div>
 <div class="service-callout-card">
-  <img class="service-callout-img" src="images/services/hr-internal-comms-callout.jpg" alt="A small crew of workers in hi-vis crossing a site at morning in warm light, walking together in an easy rhythm.">
+  <img loading="lazy" decoding="async" class="service-callout-img" src="images/services/hr-internal-comms-callout.jpg" alt="A small crew of workers in hi-vis crossing a site at morning in warm light, walking together in an easy rhythm.">
   <div class="service-callout-overlay">
     <p class="service-callout-text">We replace your HR manager — with a more organised, compliant, and accountable workforce, and fewer communication gaps.</p>
     <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
@@ -3479,7 +3696,7 @@
   <div class="page" id="page-service-ongoing-support">
     <div class="page-inner">
       <div class="article-hero">
-        <img src="images/services/ongoing-support.jpg" alt="An old dry-stone wall running through spring grass and wildflowers, including a single coral-red poppy.">
+        <img loading="lazy" decoding="async" src="images/services/ongoing-support.jpg" alt="An old dry-stone wall running through spring grass and wildflowers, including a single coral-red poppy.">
       </div>
       <h1 class="article-page-title">Ongoing Support & Optimisation</h1>
       <p class="article-intro" style="margin-bottom:8px;">Your monthly retainer ensures your systems continue to run smoothly, improve over time, and adapt as your business grows.</p>
@@ -3514,7 +3731,7 @@
   </div>
 </div>
 <div class="service-callout-card">
-  <img class="service-callout-img" src="images/services/ongoing-support-callout.jpg" alt="An old dry-stone wall running through spring grass and wildflowers, including a single coral-red poppy.">
+  <img loading="lazy" decoding="async" class="service-callout-img" src="images/services/ongoing-support-callout.jpg" alt="An old dry-stone wall running through spring grass and wildflowers, including a single coral-red poppy.">
   <div class="service-callout-overlay">
     <p class="service-callout-text">Systems that don't just work — they get better, more efficient, and more valuable the longer they are in place.</p>
     <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
@@ -3526,7 +3743,7 @@
   <div class="page" id="page-service-branding-identity">
     <div class="page-inner">
       <div class="article-hero">
-        <img src="images/services/branding-identity.jpg" alt="A tradesman's van parked outside a client's home in spring morning light, livery clean, blossoming tree behind.">
+        <img loading="lazy" decoding="async" src="images/services/branding-identity.jpg" alt="A tradesman's van parked outside a client's home in spring morning light, livery clean, blossoming tree behind.">
       </div>
       <h1 class="article-page-title">Branding & Identity Package</h1>
       <p class="article-intro" style="margin-bottom:8px;">Most subcontractors have a logo — but no consistent brand behind it. We create a complete branding system that ensures your business looks professional, consistent, and credible across every touchpoint.</p>
@@ -3575,7 +3792,7 @@
   </div>
 </div>
 <div class="service-callout-card">
-  <img class="service-callout-img" src="images/services/branding-identity-callout.jpg" alt="A tradesman's van parked outside a client's home in spring morning light, livery clean, blossoming tree behind.">
+  <img loading="lazy" decoding="async" class="service-callout-img" src="images/services/branding-identity-callout.jpg" alt="A tradesman's van parked outside a client's home in spring morning light, livery clean, blossoming tree behind.">
   <div class="service-callout-overlay">
     <p class="service-callout-text">A professional, consistent brand that builds trust with main contractors and clients — holding together across every touchpoint.</p>
     <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>
@@ -3587,7 +3804,7 @@
   <div class="page" id="page-service-website-design-build">
     <div class="page-inner">
       <div class="article-hero">
-        <img src="images/services/website-design-build.jpg" alt="A workshop interior at mid-morning, long workbench receding toward a warm window, laptop open among hand tools.">
+        <img loading="lazy" decoding="async" src="images/services/website-design-build.jpg" alt="A workshop interior at mid-morning, long workbench receding toward a warm window, laptop open among hand tools.">
       </div>
       <h1 class="article-page-title">Website Design & Build</h1>
       <p class="article-intro" style="margin-bottom:8px;">Your website should reflect the quality of your work and support your business in winning new opportunities. We design and build modern, professional websites tailored to subcontractors in construction.</p>
@@ -3633,7 +3850,7 @@
   </div>
 </div>
 <div class="service-callout-card">
-  <img class="service-callout-img" src="images/services/website-design-build-callout.jpg" alt="A workshop interior at mid-morning, long workbench receding toward a warm window, laptop open among hand tools.">
+  <img loading="lazy" decoding="async" class="service-callout-img" src="images/services/website-design-build-callout.jpg" alt="A workshop interior at mid-morning, long workbench receding toward a warm window, laptop open among hand tools.">
   <div class="service-callout-overlay">
     <p class="service-callout-text">A professional online presence that builds credibility and generates enquiries — wired directly into the systems that convert them.</p>
     <button class="service-audit-btn" onclick="showPage('page-contact')">book a free audit</button>

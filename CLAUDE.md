@@ -66,18 +66,21 @@ credentials.json, token.json  # Google OAuth (gitignored)
 
 ## Adding a New Article
 
-Every new article requires **two** additions to `index.html`:
+Articles live in `index.html` as the source of truth, and are also rendered to standalone, SEO-indexable URLs at `/news/<slug>/` by `tools/build_static.py`. Both versions ship; SPA visitors get the smooth in-page article, search engines and direct-link visitors get the standalone page.
+
+Every new article requires **three** edits plus a build step:
 
 ### 1. News Card (in the `news-grid` section, add at the TOP)
 
+The card is an `<a>` element so search engines crawl the article URL. The `onclick` keeps SPA navigation working for JS-enabled visitors. Cmd/Ctrl/Shift-clicks pass through so the article can be opened in a new tab.
+
 ```html
 <!-- Card: [Article Title] — [Date] -->
-<div class="news-card" role="button" tabindex="0"
-     onclick="showPage('page-article-[slug]')"
-     onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('page-article-[slug]');}"
-     aria-label="Read: [Article Title]">
+<a class="news-card" href="/news/[slug]/"
+   onclick="if(!event.metaKey&&!event.ctrlKey&&!event.shiftKey){event.preventDefault();showPage('page-article-[slug]');}"
+   aria-label="Read: [Article Title]">
   <div class="news-card-image-zone">
-    <img class="news-card-img" src="images/news/[slug]/image-1.jpg" alt="[Article Title]">
+    <img loading="lazy" decoding="async" class="news-card-img" src="images/news/[slug]/image-1.jpg" alt="[Article Title]">
     <div class="news-card-gradient"></div>
   </div>
   <div class="news-card-content">
@@ -90,11 +93,10 @@ Every new article requires **two** additions to `index.html`:
       <span class="news-card-date">[D Month YYYY]</span>
     </div>
   </div>
-</div>
+</a>
 ```
 
-**IMPORTANT:** The card image MUST use `<img class="news-card-img">` pointing to the article's hero image.
-Never use SVG placeholders for new cards. The image file must exist at `images/news/[slug]/image-1.jpg`.
+**IMPORTANT:** The card image MUST use `<img class="news-card-img">` pointing to the article's hero image. Never use SVG placeholders for new cards. The image file must exist at `images/news/[slug]/image-1.jpg`.
 
 ### 2. Article Page (add before `</body>`)
 
@@ -107,25 +109,42 @@ Use the existing articles as reference. The article callout CTA uses the `articl
 </div>
 ```
 
-**NEVER** add a `← back to news` link or any other back navigation inside an article. The `←` arrow in the top-left corner is the only navigation back.
+**NEVER** add a `← back to news` link or any other back navigation inside the SPA article. The `←` arrow in the top-left corner is the only navigation back. The standalone `/news/<slug>/` page gets its own header with `← all news` injected automatically by the build script — don't add another one.
 
 ### 3. Image files
 
 Place images in: `images/news/[slug]/image-1.jpg` (and optionally `image-2.jpg`)
 
-The slug must match between the card `src`, the card `onclick`, and the article page `id`.
+The slug must match between the card `href`, the card `onclick`, and the article page `id`.
 
-## Deployment
+### 4. Build + deploy
 
-After adding or updating articles: stage only the changed files, commit, and push.
+After editing `index.html` and adding images, **always run the build before committing**:
 
 ```bash
-git add index.html images/news/[slug]/
+python tools/build_static.py
+```
+
+This regenerates `news/<slug>/index.html` for every article and rewrites `sitemap.xml`. Skipping this step means the new article only exists inside the SPA and won't be indexable by Google.
+
+Then stage, commit, and push:
+
+```bash
+git add index.html images/news/[slug]/ news/ sitemap.xml
 git commit -m "news: [Article Title]"
 git push
 ```
 
 Never use `git add -A` — only stage the files that were intentionally changed.
+
+## SEO / scraping policy
+
+- `robots.txt` blocks AI training crawlers (GPTBot, ClaudeBot, Google-Extended, PerplexityBot, CCBot, Bytespider, etc.) while allowing real search engines (Googlebot, Bingbot).
+- `vercel.json` injects `X-Robots-Tag: noai, noimageai` and security headers on every response.
+- Every page declares `noai, noimageai` in its `<meta name="robots">`.
+- `.well-known/ai.txt` declares the AI training opt-out at the standard path.
+
+When editing `index.html`, templates, or `vercel.json`, never weaken these signals without checking with Ion first.
 
 
 
