@@ -1068,14 +1068,9 @@
       left: 50%;
       transform: translate(-50%, -50%);
       width: min(900px, calc(100vw - 130px));
-      font-family: 'Cormorant Infant', Georgia, serif;
-      font-weight: 300;
-      font-style: italic;
-      font-size: clamp(28px, 7vw, 96px);
-      letter-spacing: -.02em;
-      line-height: 1.1;
+      height: auto;
+      display: block;
       color: var(--ink);
-      text-align: left;
       opacity: 0;
       animation: sloganEnter .9s cubic-bezier(.25,.46,.45,.94) .1s forwards;
     }
@@ -1486,7 +1481,6 @@
 
     .brand-slogan {
       width: calc(100vw - 40px);
-      font-size: clamp(34px, 9vw, 52px);
     }
     @keyframes mobileFadeIn { from { opacity:0; } to { opacity:1; } }
 
