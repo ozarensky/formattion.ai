@@ -6,7 +6,8 @@ Checks:
   1. Every news card slug has a matching article page div
   2. Every article page has a matching news card
   3. Card image paths reference existing files
-  4. articlePages JS array contains all card slugs
+  4. articlePages JS array contains all card slugs (only its page-article-* entries are compared;
+     the array is the progress-bar whitelist and also lists privacy + service pages by design)
   5. Slug consistency: card src, card onclick, and article page id all match
 
 Usage:
@@ -28,8 +29,13 @@ IMAGES_DIR = Path(__file__).parent.parent / "images" / "news"
 
 
 def extract_card_slugs(html: str) -> list[str]:
-    """Extract slugs from all news card onclick attributes."""
-    pattern = r'class="news-card"[^>]*onclick="showPage\(\'page-article-([^\']+)\'\)"'
+    """Extract slugs from all news card onclick attributes.
+
+    Cards are ``<a class="news-card" href="/news/<slug>/" onclick="...showPage('page-article-<slug>')...">``.
+    The onclick is wrapped in a modifier-key guard since May 2026, so match ``showPage(`` anywhere
+    inside the tag rather than requiring it to open the attribute.
+    """
+    pattern = r'class="news-card"[^>]*showPage\(\'page-article-([^\']+)\'\)'
     return re.findall(pattern, html)
 
 
@@ -40,12 +46,18 @@ def extract_page_ids(html: str) -> list[str]:
 
 
 def extract_article_pages_js(html: str) -> list[str]:
-    """Extract slugs from the articlePages JS array (strips 'page-article-' prefix)."""
+    """Extract article slugs from the articlePages JS array.
+
+    ``articlePages`` is the reading-progress-bar whitelist, NOT an article registry: it also
+    lists ``page-privacy`` and every ``page-service-*``. Only ``page-article-*`` entries are
+    returned here so the card/array comparison is meaningful.
+    """
     match = re.search(r'var articlePages\s*=\s*\[([^\]]*)\]', html)
     if not match:
         return []
     raw = match.group(1)
-    return [s.strip().strip("'\"").replace("page-article-", "") for s in raw.split(",") if s.strip()]
+    ids = [s.strip().strip("'\"") for s in raw.split(",") if s.strip()]
+    return [i[len("page-article-"):] for i in ids if i.startswith("page-article-")]
 
 
 def extract_card_image_src(html: str, slug: str) -> str | None:
