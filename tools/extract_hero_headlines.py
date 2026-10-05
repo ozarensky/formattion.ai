@@ -4,8 +4,9 @@ extract_hero_headlines.py — landing-hero headline extractor.
 
 Reads the Claude Design "typing hero" exports (bundled HTML, ~1 MB each: React +
 Babel + a motion editor around ~10 KB of real content) and writes
-`hero-headlines.json` — only the glyph paths, layout and timings that the inline
-hero player in `index.html` needs. The exports themselves are never deployed.
+`hero-headlines.json` — only the glyph outlines and where they sit. The exports'
+own animation timing is ignored: the inline hero player in `index.html` types every
+headline with one natural rhythm. The exports themselves are never deployed.
 
 Outputs:
   - hero-headlines.json   (BUILD OUTPUT — never hand-edit; re-run this script)
@@ -22,7 +23,6 @@ from __future__ import annotations
 import argparse
 import base64
 import gzip
-import hashlib
 import json
 import math
 import pathlib
@@ -52,10 +52,6 @@ LABELS: dict[str, str] = {
 ORIGIN_X = 2.0
 ORIGIN_Y = 10.0
 MIN_VIEWBOX = (1106.91, 163.58)
-
-# hero-anim.jsx builds this player was ported from. An unknown build means the
-# typing logic changed in Claude Design — re-check the player before shipping.
-KNOWN_HERO_BUILDS = {"e445dda3", "707da607", "ff36bf6b", "3e2ca5e8"}
 
 _ISLAND = r'<script type="__bundler/%s">\s*(.*?)\s*</script>'
 _TOKEN = re.compile(r"[MmLlHhVvCcSsQqTtZz]|-?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?")
@@ -190,18 +186,15 @@ def path_bbox(d: str) -> tuple[float, float, float, float]:
 
 def extract(path: pathlib.Path) -> dict:
     html = path.read_text(encoding="utf-8")
-    template = island(html, "template")
     sources = bundle_sources(html)
 
     data_src = next((s for s in sources if re.search(r"window\.HERO_GLYPHS\s*=", s)), None)
-    hero_src = next((s for s in sources if "function HeroPiece" in s), None)
-    if data_src is None or hero_src is None:
-        raise ValueError("not a typing-hero export (no HERO_GLYPHS / HeroPiece)")
+    if data_src is None:
+        raise ValueError("not a typing-hero export (no HERO_GLYPHS)")
 
     glyphs = js_literal(data_src, "HERO_GLYPHS")
     layout = js_literal(data_src, "HERO_LAYOUT")
     suffix = js_literal(data_src, "HERO_SUFFIX")
-    scenes = json.loads(re.search(r"window\.OM_SCENES = '(.*?)';", template).group(1))
 
     lines = [g["line"] for g in glyphs]
     if lines != sorted(lines) or set(lines) != {0, 1}:
@@ -225,7 +218,6 @@ def extract(path: pathlib.Path) -> dict:
     if suffix:
         right = max(right, boxes[-1][2] + suffix["gap"] + suffix["width"])
 
-    build = hashlib.md5(hero_src.encode("utf-8")).hexdigest()[:8]
     stem = path.stem
     name = re.sub(r"\s+Animation\b", "", stem).strip()
     dx = round(ORIGIN_X - left, 2)
@@ -237,16 +229,9 @@ def extract(path: pathlib.Path) -> dict:
         "shift": [dx, dy],
         "startX": round(left, 2),
         "lineTops": [round(t, 2) for t in tops],
-        "scenes": {s["name"]: s["dur"] for s in scenes},
         "split": split,
         "glyphs": [g["d"] for g in glyphs],
         "suffix": suffix,
-        # which typing behaviour this export shipped with (see the player)
-        "chain": "acc += BLINK * 1.5" in hero_src,
-        "steady": "posInWord" in hero_src,
-        "pop": "MOTION.pop(times[i]" in hero_src,
-        "simpleBlink": "Math.floor(T * 2.2)" in hero_src,
-        "_build": build,
         "_extent": [round(right + dx, 2), round(bottom + dy, 2)],
     }
 
@@ -274,13 +259,8 @@ def main() -> int:
         except Exception as e:
             sys.stderr.write(f"  FAILED {f.name}: {e}\n")
             return 1
-        flags = " ".join(k for k in ("chain", "steady", "pop", "simpleBlink") if h[k]) or "-"
-        total = sum(h["scenes"].values())
         print(f"  read   {h['name']:<34} {h['split']:>2}+{len(h['glyphs']) - h['split']:<2} glyphs  "
-              f"{total:5.1f}s  {h['_extent'][0]:7.2f} wide  [{flags}]")
-        if h["_build"] not in KNOWN_HERO_BUILDS:
-            print(f"  WARN   {f.name}: unknown hero-anim build {h['_build']} — "
-                  "typing logic may differ from the player in index.html")
+              f"{h['_extent'][0]:7.2f} wide{'  + ' + h['suffix']['kind'] if h['suffix'] else ''}")
         if f.stem not in LABELS:
             print(f"  WARN   {f.name}: no entry in LABELS — aria-label falls back to the file name")
         headlines.append(h)

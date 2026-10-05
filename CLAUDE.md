@@ -45,7 +45,8 @@ branding/             # STALE copy of the brand guidelines — read ../branding/
 - **Backend calls:** `CHAT_WEBHOOK_URL` and `CONTACT_WEBHOOK_URL` POST to n8n Cloud (`ozarensky.app.n8n.cloud`). Public by design.
 - **Landing hero:** `<svg class="brand-slogan">` plays typed headlines. The `LANDING HERO` IIFE at the end of the main script
   fetches `/hero-headlines.json`, shuffles the headlines (all shown before any repeats) and types / holds / backspaces each into a
-  `<g class="hero-live">`. Colour mode is CSS only (`.hero-live { fill: var(--ink) }`) — never add JS for it. The static paths in
+  `<g class="hero-live">`. Every headline is typed with one natural rhythm (55–115 ms per key, a beat at word breaks, a breath
+  at the line break; no letter effects) — the exports' own animation timing is deliberately ignored. Colour mode is CSS only (`.hero-live { fill: var(--ink) }`) — never add JS for it. The static paths in
   `<g class="hero-static">` (source `../branding/SVG/hero.svg`) are the fallback for no-JS and a failed fetch;
   `prefers-reduced-motion` gets one random headline fully typed, no caret, no loop. The loop stops while `#landing.hidden`.
   Keep `.brand-slogan` width in sync with `.chat-btn` offset.
@@ -123,13 +124,25 @@ React + Babel bundle around ~10 KB of real content — never deploy or iframe th
 
 1. Export the new headline from Claude Design into `../branding/hero animations/` (delete an export to retire its headline).
 2. Add its spoken text to `LABELS` in `tools/extract_hero_headlines.py` — the exports hold outlines, not text; it becomes the `aria-label`.
-3. `python tools/extract_hero_headlines.py` rewrites `hero-headlines.json`. Heed every `WARN`: an unknown hero-anim build means the
-   typing logic changed in Claude Design, and the player in `index.html` (ported from four known builds) must be re-checked.
+3. `python tools/extract_hero_headlines.py` rewrites `hero-headlines.json` (glyph outlines and positions only). Heed every `WARN`.
 4. Preview over HTTP (`.claude/launch.json` → `python -m http.server 8731`), then `git add hero-headlines.json` and deploy as usual.
 
 The extractor measures the caret position from the outlines (text left edge, cap top) and the player uses one caret height (56),
 so every headline starts from the same caret and the rotation has no jump. The exports' own `HERO_LAYOUT` caret values drift per file.
-Per-export typing behaviour (`chain`, `steady`, `pop`, `simpleBlink`) is detected from the export and kept as authored.
+The exports' typing (long pauses before each word, letters that "pop") was rejected on 2026-10-05 as unnatural — do not port it back.
+
+## Design system in index.html (aligned 2026-10-05 to `../branding/formattion Brand Guidelines.html`)
+
+- **Tokens** live in `:root` / `body.dark`: ink `#000000` on paper `#F4EFE6`; dark is paper-on-black. `--work` is the list-row surface,
+  `--acc` (`#6E8299`, slate) is the single accent in both modes. Never hard-code the old `#1C1814` / `#141618` inks.
+- **Two type families, no monospace.** Cormorant Infant is always italic (titles, card titles, callouts); everything else is
+  Helvetica Neue 300, 500 for emphasis. Labels, dates and prices are sentence-case Helvetica 13px muted with tabular figures.
+- **Buttons:** every pill (`.chat-btn`, `.contact-submit`, `.service-audit-btn`, `.article-callout-btn`) is the filled primary;
+  add `.btn-secondary` for an outlined one. Pills on image callout cards keep fixed ink-on-cream colours in both modes.
+- **Layout:** `.page-inner` is 1120px with 40px gutters (120px between 769–1260px so the fixed back / top controls clear the text);
+  text columns cap at 640px, cards and hero images span the container. Mobile overrides for `.outcomes-grid` / `.outcome-card`
+  sit *before* their base rules in the stylesheet — check order before patching rules by selector.
+- **Chat:** For's messages are prefixed by the mark (`FOR_MARK` in the script), no name label; the user bubble is `--bg3`.
 
 ## SEO / scraping policy
 

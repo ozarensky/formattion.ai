@@ -33,7 +33,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;1,300;1,400&family=DM+Mono:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <!-- Schema.org structured data: Organization -->
   <script type="application/ld+json">
   {
@@ -189,40 +189,37 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* formattion.ai brand tokens v1.0 — light mode */
-      --bg:           #F4EFE6;
-      --bg2:          #ECE6DC;
-      --bg3:          #E2DBD0;
-      --ink:          #1C1814;
-      --ink-body:     #4A4038;
+      /* formattion.ai brand tokens — light mode. Source: ../branding/formattion Brand Guidelines.html */
+      --bg:           #F4EFE6;   /* paper */
+      --bg2:          #ECE6DC;   /* panel: cards, callouts */
+      --bg3:          #E2DBD0;   /* raised: hover, user bubble */
+      --work:         #FBF9F5;   /* work surface: list rows */
+      --ink:          #000000;
+      --ink-body:     #000000;   /* ink carries all text */
       --muted:        #9A8F82;
-      --idle-border:  rgba(28,24,20,0.16);
-      --dim:          rgba(28,24,20,0.09);
-      --acc:          #4A6278;
-      --acc-lt:       #6E8299;
+      --idle-border:  rgba(0,0,0,0.16);
+      --dim:          rgba(0,0,0,0.09);
+      --acc:          #6E8299;   /* slate — the single accent, both modes */
       --sans:         'Helvetica Neue', Helvetica, Inter, sans-serif;
-      --dm:           'DM Mono', monospace;
-      --mono:         'DM Mono', monospace;
       /* border-radius tokens */
-      --rx-tight:     6px;   /* inputs, tags, inline code */
-      --rx-std:       12px;  /* cards, panels, modals — default */
-      --rx-feature:   20px;  /* hero blocks, full-bleed containers */
-      --rx-pill:      999px; /* CTA buttons, status badges, toggles */
+      --rx-tight:     6px;   /* tags, list rows, inline code */
+      --rx-std:       12px;  /* cards, panels, bubbles, portraits — default */
+      --rx-feature:   20px;  /* hero images, 3:1 cards, chat input */
+      --rx-pill:      999px; /* buttons, badges */
     }
 
     body.dark {
-      --bg:       #141618;
-      --bg2:      #1c1f22;
+      --bg:       #000000;   /* ground */
+      --bg2:      #1C1F22;
       --bg3:      #242729;
-      --ink:      #edecea;
-      --ink-body: #b4b2ae;
-      --muted:    #7a7875;
+      --work:     #181A1D;
+      --ink:      #F4EFE6;
+      --ink-body: #F4EFE6;
+      --muted:    #9A8F82;
       --dim:      rgba(237,236,234,0.07);
       --idle-border: rgba(237,236,234,0.12);
-      --acc:      #6e8299;
-      --acc-lt:   #8fa4bc;
-      background: #141618;
-      color: #edecea;
+      background: #000000;
+      color: #F4EFE6;
     }
     /* Dark mode component overrides */
     body.dark .page { background: var(--bg); }
@@ -235,33 +232,25 @@
     body.dark .message.user span { background: var(--bg3); color: var(--ink); }
     body.dark textarea { color: var(--ink); background: transparent; }
     body.dark .drop-item { color: var(--ink); }
-    body.dark #dropMenu { background: rgba(20,22,24,0.30); }
+    body.dark #dropMenu { background: rgba(0,0,0,0.30); }
     body.dark .landing { background: var(--bg); }
     body.dark #landing { background: var(--bg); }
-    body.dark .chat-btn { border-color: rgba(110,130,153,0.3); color: var(--acc); }
     body.dark .pricing-cell, body.dark .news-item { background: var(--bg2); color: var(--ink); }
     body.dark .news-card { box-shadow: 0 0 0 1px var(--dim); }
-    body.dark .news-card-title { color: #1C1814; }
-    body.dark .news-card-desc { color: #4A4038; }
+    body.dark .news-card-title { color: #000000; }
+    body.dark .news-card-desc { color: #000000; }
     body.dark .news-card-eyebrow { color: #9A8F82; }
     body.dark .news-card-date { color: #9A8F82; }
     body.dark .article-stat, body.dark .article-flow-cell, body.dark .article-checklist-cell { background: var(--bg2); }
     body.dark .contact-input { color: var(--ink); }
     body.dark .contact-input::placeholder { color: var(--muted); }
-    body.dark .contact-submit { border-color: rgba(237,236,234,0.2); color: var(--ink); }
-    body.dark .service-callout-card .service-audit-btn { border-color: #1C1814; color: #1C1814; background: rgba(28,24,20,0.04); }
-    body.dark .service-callout-card .service-audit-btn:hover { background: rgba(28,24,20,0.18); }
-    body.dark .contact-submit:hover { border-color: var(--ink); background: rgba(237,236,234,0.06); }
-    body.dark .service-card { background: var(--bg2); color: var(--ink-body); }
     body.dark .service-result-card { border-color: var(--idle-border); color: var(--ink-body); }
     body.dark .service-section-label { color: var(--ink); }
     body.dark .service-result-text { color: var(--ink); }
-    body.dark .service-cell-title { color: #1C1814; }
-    body.dark .service-cell-body { color: #4A4038; }
-    body.dark .service-audit-btn:hover { background: rgba(237,236,234,0.06); }
-    body.dark .article-callout-btn:hover { background: rgba(237,236,234,0.06); }
-    body.dark .service-callout-text { color: #1a1916; }
-    body.dark .service-callout-overlay p { color: #1a1916; }
+    body.dark .service-cell-title { color: #000000; }
+    body.dark .service-cell-body { color: #000000; }
+    body.dark .service-callout-text { color: #000000; }
+    body.dark .service-callout-overlay p { color: #000000; }
 
 
     html, body {
@@ -300,18 +289,23 @@
 
     /* ── page inner layout ── */
     .page-inner {
-      max-width: 900px;
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 140px 65px 100px;
+      padding: 140px 40px 100px;
+    }
+    /* 769–1260px: wider gutters so the fixed back / back-to-top controls stay clear of the text */
+    @media (min-width: 769px) and (max-width: 1260px) {
+      .page-inner { padding-left: 120px; padding-right: 120px; }
     }
 
 
     .page-title {
-      font-family: var(--sans);
-      font-weight: 400;
-      font-size: clamp(36px, 5vw, 56px);
-      letter-spacing: -0.025em;
-      line-height: 1.0;
+      font-family: 'Cormorant Infant', Georgia, serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(40px, 7.5vw, 56px);
+      letter-spacing: 0;
+      line-height: 1.05;
       color: var(--ink);
       margin-bottom: 64px;
     }
@@ -322,45 +316,20 @@
       font-weight: 300;
       line-height: 1.75;
       color: var(--ink-body);
-      max-width: 580px;
+      max-width: 640px;
     }
     .page-body p { margin-bottom: 28px; }
     .page-body p:last-child { margin-bottom: 0; }
-    .page-body strong { font-weight: 400; color: var(--ink); }
-    #page-services .page-body { max-width: none; }
-    #page-about .page-body { max-width: none; }
-    #page-about .page-title, #page-contact .page-title {
-      font-family: 'Cormorant Infant', Georgia, serif;
-      font-weight: 300;
-      font-style: italic;
-      font-size: clamp(48px, 6vw, 68px);
-      line-height: 1.0;
-      letter-spacing: 0;
-    }
+    .page-body strong { font-weight: 500; color: var(--ink); }
     .page-section-title {
       font-family: 'Cormorant Infant', Georgia, serif;
       font-weight: 300;
-      font-size: clamp(28px, 3.5vw, 42px);
+      font-style: italic;
+      font-size: clamp(32px, 4.4vw, 42px);
       letter-spacing: 0;
       line-height: 1.1;
       color: var(--ink);
       margin-bottom: 32px;
-    }
-    #page-services .page-title {
-      font-family: 'Cormorant Infant', Georgia, serif;
-      font-weight: 300;
-      font-style: italic;
-      font-size: clamp(48px, 6vw, 68px);
-      line-height: 1.0;
-      letter-spacing: 0;
-    }
-    #page-pricing .page-title {
-      font-family: 'Cormorant Infant', Georgia, serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: 59px;
-      line-height: 1.0;
-      letter-spacing: 0;
     }
     #page-services .page-body p { margin-bottom: 20px; }
     #page-services .method-steps { margin-bottom: 32px; }
@@ -376,7 +345,7 @@
     .services-grid {
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 16px;
       margin-bottom: 24px;
     }
     .service-cell {
@@ -386,7 +355,7 @@
       cursor: pointer;
       aspect-ratio: 3/1;
       min-height: 160px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08), 0 0 0 1px var(--dim);
       transition: transform .25s cubic-bezier(.25,.46,.45,.94), box-shadow .25s ease;
     }
     .service-cell:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
@@ -394,7 +363,7 @@
     .service-cell-image {
       position: absolute;
       inset: 0;
-      background: #1c1814;
+      background: var(--bg2);
     }
     .service-cell-image img {
       width: 100%;
@@ -421,8 +390,10 @@
     .service-cell-title {
       font-family: 'Cormorant Infant', Georgia, serif;
       font-weight: 400;
-      font-size: 32px;
-      letter-spacing: -0.01em;
+      font-style: italic;
+      font-size: 28px;
+      letter-spacing: 0;
+      line-height: 1.1;
       color: var(--ink);
       margin-bottom: 12px;
     }
@@ -447,15 +418,18 @@
       padding: 24px 0;
     }
     .method-n {
-      font-family: var(--mono);
-      font-size: 10px;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.5;
       color: var(--muted);
-      padding-top: 3px;
+      font-variant-numeric: tabular-nums;
+      padding-top: 4px;
     }
     .method-text { }
     .method-name {
       font-family: var(--sans);
-      font-weight: 400;
+      font-weight: 500;
       font-size: 18px;
       color: var(--ink);
       margin-bottom: 6px;
@@ -469,24 +443,25 @@
     }
 
     /* contact form */
+    #contact-form-wrap { max-width: 640px; }
     .contact-field {
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     .contact-input {
       width: 100%;
-      background: transparent;
+      background: var(--bg);
       border: 1px solid var(--idle-border);
-      border-radius: 8px;
-      padding: 16px 20px;
+      border-radius: 8px;   /* the one exception to the four-radius scale */
+      padding: 14px 16px;
       font-family: var(--sans);
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 300;
       color: var(--ink);
       outline: none;
       transition: border-color .2s ease;
     }
     .contact-input::placeholder { color: var(--muted); }
-    .contact-input:focus { border-color: var(--ink); }
+    .contact-input:focus { border-color: var(--acc); }
     .contact-textarea {
       resize: none;
       min-height: 140px;
@@ -497,20 +472,19 @@
       align-items: center;
       justify-content: center;
       margin-top: 32px;
-      padding: 14px 40px;
+      padding: 13px 27px;
       border-radius: 999px;
-      border: 1px solid var(--idle-border);
-      background: transparent;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: var(--bg);
       font-family: var(--sans);
-      font-weight: 300;
-      font-size: 15px;
-      color: var(--ink);
+      font-weight: 400;
+      font-size: 14px;
       cursor: pointer;
-      letter-spacing: 0.04em;
       white-space: nowrap;
-      transition: border-color .25s ease, background .25s ease;
+      transition: background .25s ease, border-color .25s ease, color .25s ease;
     }
-    .contact-submit:hover { border-color: var(--ink); background: rgba(28,24,20,0.04); }
+    .contact-submit:hover { background: var(--acc); border-color: var(--acc); }
     .contact-submit:active { transform: scale(0.97); }
 
     /* about section */
@@ -539,17 +513,18 @@
       display: block;
     }
     .founder-role {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.5;
       color: var(--muted);
     }
     .founder-name {
       font-family: 'Cormorant Infant', Georgia, serif;
       font-weight: 300;
+      font-style: italic;
       font-size: 32px;
-      letter-spacing: -0.01em;
+      letter-spacing: 0;
       color: var(--ink);
       line-height: 1.1;
     }
@@ -564,14 +539,6 @@
 
     /* news listing */
 
-    .news-page-title {
-      font-family: 'Cormorant Infant', Georgia, serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: clamp(36px, 5vw, 56px);
-      letter-spacing: -0.02em;
-      line-height: 1.0;
-    }
     /* ══ NEWS CARDS — full-image card with text overlay ══ */
     .news-grid {
       display: flex;
@@ -595,7 +562,7 @@
       position: absolute;
       inset: 0;
       overflow: hidden;
-      background: #1c1814;
+      background: var(--bg2);
     }
     .news-card-img {
       position: absolute;
@@ -627,20 +594,20 @@
       flex-direction: column;
     }
     .news-card-eyebrow {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
       color: var(--muted);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .news-card-title {
       font-family: 'Cormorant Infant', Georgia, serif;
       font-weight: 400;
+      font-style: italic;
       font-size: 28px;
       color: var(--ink);
       line-height: 1.2;
-      letter-spacing: -0.01em;
+      letter-spacing: 0;
       margin-bottom: 10px;
     }
     .news-card-desc {
@@ -657,10 +624,11 @@
       align-items: center;
     }
     .news-card-date {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.06em;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 400;
       color: var(--muted);
+      font-variant-numeric: tabular-nums;
     }
     .news-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
     .news-card:active { transform: scale(0.985); }
@@ -670,32 +638,35 @@
     .article-page-title {
       font-family: 'Cormorant Infant', Georgia, serif;
       font-weight: 300;
-      font-size: clamp(40px, 6vw, 68px);
-      letter-spacing: -0.02em;
-      line-height: 1.0;
+      font-style: italic;
+      font-size: clamp(40px, 7.5vw, 56px);
+      letter-spacing: 0;
+      line-height: 1.05;
       color: var(--ink);
       margin-bottom: 40px;
     }
     .article-meta {
-      font-family: var(--mono);
-      font-size: 10px;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.5;
       color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      font-variant-numeric: tabular-nums;
       margin-bottom: 64px;
     }
-    .article-meta span + span::before { content: ' / '; margin: 0 8px; color: var(--dim); }
+    .article-meta span + span::before { content: '·'; margin: 0 8px; }
     .article-intro {
       font-family: var(--sans);
       font-size: 18px;
       font-weight: 300;
       line-height: 1.75;
       color: var(--ink-body);
+      max-width: 640px;
     }
     .article-stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
+      gap: 16px;
       margin: 48px 0;
     }
     .article-stat {
@@ -705,24 +676,25 @@
     }
     .article-stat-val {
       font-family: var(--sans);
-      font-weight: 400;
-      font-size: 32px;
+      font-weight: 300;
+      font-size: 40px;
       letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
       color: var(--ink);
       margin-bottom: 8px;
     }
     .article-stat-key {
-      font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.5;
       color: var(--muted);
     }
     .article-topic-eyebrow {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.5;
       color: var(--muted);
       margin-bottom: 16px;
       display: flex;
@@ -733,8 +705,9 @@
     .article-topic-title {
       font-family: 'Cormorant Infant', Georgia, serif;
       font-weight: 300;
-      font-size: 36px;
-      letter-spacing: -0.02em;
+      font-style: italic;
+      font-size: 40px;
+      letter-spacing: 0;
       line-height: 1.1;
       color: var(--ink);
       margin-bottom: 40px;
@@ -748,12 +721,13 @@
     }
     .article-item-title {
       font-family: 'Cormorant Infant', Georgia, serif;
-      font-weight: 300;
-      font-size: 24px;
-      letter-spacing: -0.01em;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 28px;
+      letter-spacing: 0;
       color: var(--ink);
       margin-bottom: 12px;
-      line-height: 1.3;
+      line-height: 1.2;
     }
     .article-item-desc {
       font-family: var(--sans);
@@ -762,6 +736,7 @@
       color: var(--ink-body);
       line-height: 1.65;
       margin-bottom: 14px;
+      max-width: 640px;
     }
     .article-item-blurb {
       font-family: var(--sans);
@@ -774,18 +749,19 @@
       border-left: 1px solid var(--dim);
     }
     .article-item-date {
-      font-family: var(--mono);
-      font-size: 10px;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.5;
       color: var(--muted);
-      letter-spacing: 0.06em;
+      font-variant-numeric: tabular-nums;
       text-align: right;
-      padding-top: 4px;
-      line-height: 1.6;
+      padding-top: 6px;
     }
     .article-flow-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
+      gap: 16px;
       margin: 16px 0 32px;
     }
     .article-flow-cell {
@@ -794,16 +770,16 @@
       border-radius: 12px;
     }
     .article-flow-label {
-      font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.5;
       color: var(--muted);
       margin-bottom: 10px;
     }
     .article-flow-title {
       font-family: var(--sans);
-      font-weight: 400;
+      font-weight: 500;
       font-size: 15px;
       color: var(--ink);
       margin-bottom: 8px;
@@ -816,51 +792,57 @@
       line-height: 1.75;
     }
     .article-callout {
-      padding: 32px 0;
+      background: var(--bg2);
+      border-radius: 12px;
+      padding: 40px;
       margin: 64px 0;
     }
     .service-section { margin-bottom: 52px; }
     .service-section-label {
       font-family: 'Cormorant Infant', Georgia, serif;
       font-weight: 300;
-      font-size: 24px;
-      letter-spacing: -0.01em;
-      color: #1a1814;
+      font-style: italic;
+      font-size: 28px;
+      letter-spacing: 0;
+      color: var(--ink);
       margin-bottom: 16px;
       margin-top: 8px;
     }
-    .service-card-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 32px; }
+    .service-card-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 32px; max-width: 640px; }
     .service-card {
-      background: #e8e3da;
+      background: var(--work);
       border-radius: 6px;
-      padding: 16px 20px;
+      padding: 18px 22px;
       font-family: var(--sans);
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 300;
-      color: #3a3630;
+      color: var(--ink);
       line-height: 1.55;
+      transition: background .2s ease;
     }
+    .service-card:hover { background: var(--bg3); }
     .service-result-card {
       background: none;
-      border: 1px solid #d4cfc8;
-      border-radius: 8px;
-      padding: 28px 32px;
+      border: 1px solid var(--idle-border);
+      border-radius: 12px;
+      padding: 28px;
       margin-top: 16px;
       margin-bottom: 80px;
+      max-width: 640px;
     }
     .service-result-text {
       font-family: 'Cormorant Infant', Georgia, serif;
       font-weight: 300;
       font-style: italic;
-      font-size: 22px;
-      color: #1a1814;
-      line-height: 1.5;
+      font-size: 24px;
+      color: var(--ink);
+      line-height: 1.35;
       margin-bottom: 24px;
     }
     .service-callout-card {
       position: relative;
       width: 100%;
-      border-radius: 8px;
+      border-radius: 20px;
       overflow: hidden;
       margin-top: 32px;
       margin-bottom: 48px;
@@ -895,75 +877,80 @@
       font-family: 'Cormorant Infant', Georgia, serif;
       font-weight: 300;
       font-style: italic;
-      font-size: 22px;
-      line-height: 1.45;
-      color: #1a1916;
+      font-size: 24px;
+      line-height: 1.35;
+      color: #000000;
       margin: 0 0 24px 0;
     }
     .service-audit-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 14px 40px;
+      padding: 13px 27px;
       border-radius: 999px;
-      border: 1px solid var(--idle-border);
-      background: transparent;
-      color: var(--ink);
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: var(--bg);
       font-family: var(--sans);
-      font-weight: 300;
-      font-size: 15px;
-      letter-spacing: 0.04em;
+      font-weight: 400;
+      font-size: 14px;
       cursor: pointer;
       white-space: nowrap;
-      transition: border-color .25s ease, background .25s ease;
+      transition: background .25s ease, border-color .25s ease, color .25s ease;
     }
     .service-audit-btn:hover {
-      border-color: var(--ink);
-      background: rgba(28,24,20,0.04);
+      background: var(--acc);
+      border-color: var(--acc);
     }
     .service-audit-btn:active { transform: scale(0.97); }
     .service-callout-card .service-audit-btn {
-      border-color: #1C1814;
-      color: #1C1814;
-      background: rgba(28,24,20,0.04);
-      transition: background .25s ease;
+      background: #000000;
+      border-color: #000000;
+      color: #F4EFE6;
     }
     .service-callout-card .service-audit-btn:hover {
-      background: rgba(28,24,20,0.18);
+      background: #6E8299;
+      border-color: #6E8299;
     }
     .article-callout-text {
       font-family: 'Cormorant Infant', Georgia, serif;
       font-weight: 300;
-      font-size: 28px;
-      letter-spacing: -0.01em;
-      line-height: 1.4;
-      color: var(--ink);
       font-style: italic;
-      max-width: 640px;
+      font-size: 32px;
+      letter-spacing: 0;
+      line-height: 1.25;
+      color: var(--ink);
+      max-width: 680px;
     }
     .article-callout-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       margin-top: 28px;
-      padding: 14px 40px;
+      padding: 13px 27px;
       border-radius: 999px;
-      border: 1px solid var(--idle-border);
-      background: transparent;
-      color: var(--ink);
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: var(--bg);
       font-family: var(--sans);
-      font-weight: 300;
-      font-size: 15px;
-      letter-spacing: 0.04em;
+      font-weight: 400;
+      font-size: 14px;
       cursor: pointer;
       white-space: nowrap;
-      transition: border-color .25s ease, background .25s ease;
+      transition: background .25s ease, border-color .25s ease, color .25s ease;
     }
     .article-callout-btn:hover {
-      border-color: var(--ink);
-      background: rgba(28,24,20,0.04);
+      background: var(--acc);
+      border-color: var(--acc);
     }
     .article-callout-btn:active { transform: scale(0.97); }
+    /* Secondary pill — outlined. Add .btn-secondary to a pill that is not the page's main action. */
+    .contact-submit.btn-secondary,
+    .service-audit-btn.btn-secondary { background: transparent; color: var(--ink); border-color: var(--idle-border); }
+    .contact-submit.btn-secondary:hover,
+    .service-audit-btn.btn-secondary:hover { background: transparent; border-color: var(--ink); }
+    .service-callout-card .service-audit-btn.btn-secondary { background: transparent; color: #000000; border-color: rgba(0,0,0,0.16); }
+    .service-callout-card .service-audit-btn.btn-secondary:hover { background: transparent; border-color: #000000; }
 .article-hero {
       width: 100%;
       aspect-ratio: 16/7;
@@ -985,7 +972,7 @@
     .article-checklist-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
+      gap: 16px;
       margin: 16px 0 32px;
     }
     .article-checklist-cell {
@@ -994,16 +981,16 @@
       border-radius: 12px;
     }
     .article-checklist-label {
-      font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.5;
       color: var(--muted);
       margin-bottom: 10px;
     }
     .article-checklist-title {
       font-family: var(--sans);
-      font-weight: 400;
+      font-weight: 500;
       font-size: 15px;
       color: var(--ink);
       margin-bottom: 12px;
@@ -1020,7 +1007,7 @@
       line-height: 1.75;
       padding: 5px 0;
     }
-    .article-checklist-list li::before { content: '— '; color: var(--muted); font-family: var(--mono); font-size: 10px; }
+    .article-checklist-list li::before { content: '— '; color: var(--muted); }
 
     /* ══ TOP BAR ══ */
     #topBar {
@@ -1045,7 +1032,7 @@
       border-radius: inherit;
     }
     body.dark #topBar {
-      background: rgba(20,22,24,0.30);
+      background: rgba(0,0,0,0.30);
     }
     #topBar::before {
       content: '';
@@ -1057,7 +1044,7 @@
       border-radius: 0;
     }
     body.dark #topBar::before {
-      background: linear-gradient(to bottom, #141618, transparent);
+      background: linear-gradient(to bottom, var(--bg), transparent);
     }
 
     /* ══ TOP RIGHT LOGO ══ */
@@ -1127,7 +1114,7 @@
       border-radius: inherit;
     }
     body.dark #dropMenu {
-      background: rgba(20,22,24,0.30);
+      background: rgba(0,0,0,0.30);
     }
     #menuWrap.open #dropMenu {
       opacity: 1;
@@ -1150,7 +1137,6 @@
       transition: opacity .15s ease;
       position: relative; z-index: 1;
     }
-    body.dark .drop-item { color: #edecea; }
     .drop-item:hover { opacity: 0.45; }
 
     /* ══ LANDING ══ */
@@ -1197,38 +1183,30 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 14px 40px;
+      padding: 13px 27px;
       border-radius: 999px;
-      border: 1px solid var(--idle-border);
-      background: transparent;
-      color: var(--ink);
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: var(--bg);
       font-family: var(--sans);
-      font-weight: 300;
-      font-size: 15px;
-      letter-spacing: 0.04em;
+      font-weight: 400;
+      font-size: 14px;
       cursor: pointer;
       white-space: nowrap;
-      transition: border-color .25s ease, background .25s ease;
+      transition: background .25s ease, border-color .25s ease, color .25s ease;
       animation-delay: .4s !important;
     }
     .chat-btn:hover {
-      border-color: var(--ink);
-      background: rgba(28,24,20,0.04);
+      background: var(--acc);
+      border-color: var(--acc);
     }
     .chat-btn:active { transform: scale(0.97); }
     @keyframes btnPulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(28,24,20,0.08); }
-      50% { box-shadow: 0 0 0 8px rgba(28,24,20,0); }
+      0%, 100% { box-shadow: 0 0 0 0 rgba(0,0,0,0.10); }
+      50% { box-shadow: 0 0 0 8px rgba(0,0,0,0); }
     }
     #landing:not(.hidden) .chat-btn {
       animation: btnPulse 3s ease-in-out infinite;
-    }
-    body.dark .chat-btn {
-      border-color: rgba(237,236,234,0.2);
-      color: var(--ink);
-    }
-    body.dark .chat-btn:hover {
-      border-color: rgba(237,236,234,0.6);
     }
 
     /* ══ CHAT ══ */
@@ -1263,23 +1241,26 @@
     .msg-ai {
       width: 100%;
       padding: 20px 0 28px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
       animation: fadeUp .4s ease both;
     }
-    .msg-ai .sender {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--acc);
-      margin-bottom: 12px;
+    .msg-ai .mark {
+      width: 22px;
+      height: 22px;
+      margin-top: 5px;
+      flex-shrink: 0;
+      color: var(--ink);
     }
     .msg-ai .text {
+      flex: 1;
+      min-width: 0;
       font-family: var(--sans);
       font-size: 18px;
       font-weight: 300;
       line-height: 1.8;
-      color: var(--ink-body);
-      letter-spacing: 0.01em;
+      color: var(--ink);
     }
 
     /* typing indicator */
@@ -1287,7 +1268,7 @@
       display: inline-flex;
       gap: 6px;
       align-items: center;
-      height: 20px;
+      height: 32px;   /* one text line, so the dots sit level with the mark */
     }
     .msg-ai .typing span {
       width: 4px; height: 4px;
@@ -1310,7 +1291,7 @@
       animation: fadeUp .3s ease both;
     }
     .msg-user .bubble {
-      background: var(--bg2);
+      background: var(--bg3);
       border-radius: 12px;
       padding: 14px 20px;
       font-family: var(--sans);
@@ -1338,8 +1319,8 @@
       min-height: 100px;
       max-height: 300px;
       border-radius: 20px;
-      background: var(--bg2);
-      border: 1px solid var(--dim);
+      background: var(--bg);
+      border: 1px solid var(--idle-border);
       padding: 16px 0 0;
       display: flex;
       flex-direction: column;
@@ -1349,12 +1330,7 @@
       transition: border-color .2s ease;
     }
     .input-box:focus-within {
-      border-color: rgba(28,24,20,0.28);
-      box-shadow: 0 0 0 3px rgba(28,24,20,0.04);
-    }
-    body.dark .input-box:focus-within {
-      border-color: rgba(237,236,234,0.22);
-      box-shadow: 0 0 0 3px rgba(237,236,234,0.04);
+      border-color: var(--acc);
     }
 
     textarea {
@@ -1406,22 +1382,21 @@
       box-sizing: border-box;
       overflow: visible;
     }
-    .chat-icon:hover { opacity: 1; color: var(--ink); border-color: var(--idle-border); }
+    .chat-icon:hover { opacity: 1; color: var(--ink); }
     #micBtn.listening {
       color: var(--acc) !important;
       opacity: 1 !important;
       animation: micPulse 1.4s ease-in-out infinite;
-      border-color: rgba(74,98,120,0.3);
+      border-color: rgba(110,130,153,0.3);
     }
     @keyframes micPulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(74,98,120,0.25); }
-      50%       { box-shadow: 0 0 0 8px rgba(74,98,120,0); }
+      0%, 100% { box-shadow: 0 0 0 0 rgba(110,130,153,0.25); }
+      50%       { box-shadow: 0 0 0 8px rgba(110,130,153,0); }
     }
 
     /* dark mode chat */
     body.dark #chat { background: var(--bg); }
     body.dark .input-area { background: var(--bg); }
-    body.dark .input-box { background: var(--bg2); border-color: var(--dim); }
     body.dark .msg-user .bubble { background: var(--bg3); }
 
     /* ── BACK BUTTON ── */
@@ -1456,17 +1431,21 @@
     .pricing-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
+      gap: 16px;
       margin-bottom: 8px;
+      max-width: 640px;
     }
     .pricing-card {
       background: var(--bg2);
       border-radius: 12px;
-      padding: 28px 28px 32px;
+      padding: 32px;
       display: flex;
       flex-direction: column;
       gap: 0;
     }
+    .pricing-card--ink { background: var(--ink); }
+    .pricing-card--ink .pricing-price,
+    .pricing-card--ink .pricing-price-unit { color: var(--bg); }
     .pricing-card--pilot {
       background: var(--bg2);
       border: 1px solid var(--idle-border);
@@ -1478,47 +1457,47 @@
       margin-bottom: 20px;
     }
     .pricing-tier-label {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.5;
       color: var(--muted);
     }
     .pricing-tag {
-      font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 400;
       color: var(--muted);
       border: 1px solid var(--dim);
-      border-radius: 4px;
+      border-radius: 6px;
       padding: 3px 8px;
     }
     .pricing-tag--acc {
       color: var(--acc);
-      border-color: rgba(74,98,120,0.3);
+      border-color: rgba(110,130,153,0.3);
     }
     .pricing-price {
       font-family: var(--sans);
-      font-size: 36px;
-      font-weight: 400;
-      letter-spacing: -0.03em;
+      font-size: 48px;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
       color: var(--ink);
       line-height: 1;
-      margin-bottom: 4px;
+      margin-top: 14px;
     }
     .pricing-price-unit {
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--muted);
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--ink);
       letter-spacing: 0;
     }
     .pricing-setup {
-      font-family: var(--mono);
-      font-size: 11px;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.5;
       color: var(--muted);
-      letter-spacing: 0.04em;
-      margin-bottom: 0;
     }
     .pricing-divider {
       width: 100%;
@@ -1559,14 +1538,14 @@
       flex-shrink: 0;
     }
     .pricing-footnote {
-      font-family: var(--mono);
-      font-size: 10px;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.5;
       color: var(--muted);
-      letter-spacing: 0.06em;
       line-height: 1.9;
       margin: 32px 0 40px;
     }
-    body.dark .pricing-card { background: var(--bg2); }
     body.dark .pricing-card--pilot { border-color: rgba(237,236,234,0.13); }
 
 
@@ -1694,23 +1673,19 @@
        But padding was 65px desktop, now 20px — title fits.
        Reduce max slightly for comfort ── */
     .page-title {
-      font-size: clamp(30px, 7.5vw, 44px) !important;
+      font-size: 40px !important;
       margin-bottom: 32px !important;
     }
 
     /* ── PAGE TITLE SPECIFICITY FIX
        #page-services and #page-pricing override .page-title with higher specificity,
        so the generic mobile rule above doesn't reach them — override here explicitly ── */
-    #page-services .page-title,
-    #page-pricing .page-title {
-      font-size: clamp(30px, 7.5vw, 44px) !important;
-    }
 
     /* ── SECTION TITLES — no mobile override existed; desktop clamp floored at 28px
        which is too close to body text. Step it down for tighter hierarchy on 375px. ── */
     .page-section-title,
     .outcomes-title {
-      font-size: clamp(22px, 5.5vw, 30px) !important;
+      font-size: clamp(30px, 7vw, 40px) !important;
       margin-bottom: 20px !important;
     }
 
@@ -1729,7 +1704,7 @@
     .article-hero {
       aspect-ratio: 16 / 9 !important;
       margin-bottom: 32px !important;
-      border-radius: 16px !important;
+      border-radius: 20px !important;
     }
 
     /* ── SERVICES GRID — mobile; mirror news-card proportions so content doesn't
@@ -1790,7 +1765,7 @@
        Desktop: clamp(40px, 6vw, 68px) — 6vw on 375px = 22px, clamp gives 40px
        Reduce to something more comfortable ── */
     .article-page-title {
-      font-size: clamp(28px, 7vw, 44px) !important;
+      font-size: 40px !important;
     }
 
     /* ── ARTICLE META — spans fine on mobile ── */
@@ -1864,7 +1839,7 @@
       padding: 24px 22px 28px !important;
     }
     .pricing-price {
-      font-size: 30px !important;
+      font-size: 40px !important;
     }
 
     /* ── OUTCOMES GRID (folded from orphan 640px block) ── */
@@ -1948,10 +1923,11 @@
   /* ── SMALL PHONES (under 400px) ── */
   @media (max-width: 400px) {
     .brand-logo { width: 85vw !important; }
-    .page-title { font-size: 26px !important; }
+    /* guidelines, breakpoint 400: body steps to 16px, card padding to 20px */
+    .page-body, .article-intro, .article-item-desc { font-size: 16px !important; }
+    .pricing-card, .outcome-card, .article-callout, .service-result-card { padding: 20px !important; }
     .article-stats { grid-template-columns: 1fr !important; }
     .article-flow-grid { grid-template-columns: 1fr !important; }
-    .chat-btn { padding: 14px 28px !important; font-size: 15px !important; }
   }
 
   /* ── TOUCH DEVICES: translate :hover affordances to :active
@@ -1968,8 +1944,8 @@
     .article-callout-btn:active,
     .service-audit-btn:active,
     .contact-submit:active {
-      border-color: var(--ink);
-      background: rgba(28,24,20,0.06);
+      border-color: var(--acc);
+      background: var(--acc);
     }
     .drop-item:active,
     #topLogo:active {
@@ -1988,9 +1964,9 @@
     position: fixed;
     top: 0;
     left: 0;
-    height: 3px;
+    height: 2px;
     width: 0%;
-    background: var(--acc);
+    background: var(--ink);
     z-index: 9999;
     transition: width .1s linear;
     pointer-events: none;
@@ -2020,9 +1996,10 @@
 
   /* ── Reading time badge ── */
   .read-time-badge {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.1em;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
     color: var(--muted);
   }
 
@@ -2030,41 +2007,40 @@
   .outcomes-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+    gap: 16px;
     margin-bottom: 48px;
   }
   .outcome-card {
-    background: var(--bg2);
-    padding: 28px 24px;
+    border: 1px solid var(--idle-border);
+    padding: 28px;
     border-radius: 12px;
-    transition: background .2s ease;
+    transition: border-color .2s ease;
   }
-  .outcome-card:hover { background: var(--bg3); }
+  .outcome-card:hover { border-color: var(--ink); }
   .outcome-card-label {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
     color: var(--muted);
-    margin-bottom: 14px;
+    margin-bottom: 10px;
   }
   .outcome-card-result {
-    font-family: var(--sans);
-    font-weight: 400;
-    font-size: 20px;
-    letter-spacing: -0.01em;
+    font-family: 'Cormorant Infant', Georgia, serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 30px;
+    letter-spacing: 0;
     color: var(--ink);
-    line-height: 1.3;
+    line-height: 1.1;
     margin-bottom: 10px;
   }
   .outcome-card-desc {
     font-family: var(--sans);
     font-size: 14px;
     color: var(--ink-body);
-    line-height: 1.7;
+    line-height: 1.6;
   }
-  body.dark .outcome-card { background: var(--bg2); }
-  body.dark .outcome-card:hover { background: var(--bg3); }
 
   /* ══ COPY-PROTECTION LAYER ══
      Prevents casual text/image selection and copying across the site.
@@ -2104,7 +2080,7 @@
       top: 2cm; left: 2cm; right: 2cm;
       font-family: 'Helvetica Neue', Helvetica, sans-serif;
       font-size: 14pt;
-      color: #1C1814;
+      color: #000000;
     }
   }
 </style>
@@ -2491,14 +2467,14 @@
         <div class="contact-field">
           <textarea id="cf-pain" class="contact-input contact-textarea" placeholder="What's taking the most time right now" aria-label="What's taking the most time right now"></textarea>
         </div>
-        <div id="cf-error" style="display:none; font-family:var(--mono); font-size:11px; color:#b85c5c; margin-bottom:16px; letter-spacing:0.06em;"></div>
+        <div id="cf-error" style="display:none; font-size:13px; color:var(--ink); margin-bottom:16px;"></div>
         <button id="cf-submit" class="contact-submit">send</button>
       </div>
       <div id="contact-success" style="display:none;">
-        <div style="font-family:var(--mono); font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:24px;">received</div>
+        <div style="font-size:13px; font-weight:400; color:var(--muted); margin-bottom:24px;">received</div>
         <p style="font-family:var(--sans); font-size:22px; font-weight:400; color:var(--ink); line-height:1.4; margin-bottom:20px;">Thanks — we'll be in touch shortly.</p>
         <p style="font-family:var(--sans); font-size:18px; color:var(--ink-body); line-height:1.75; margin-bottom:32px;">We review every submission and respond within one business day. In the meantime, explore what we've written about AI automation in construction.</p>
-        <button class="contact-submit" onclick="showPage('page-news');">read our articles</button>
+        <button class="contact-submit btn-secondary" onclick="showPage('page-news');">read our articles</button>
       </div>
     </div>
   </div>
@@ -2542,7 +2518,7 @@
           <div class="pricing-tier-label">one-off setup — per system</div>
           <div class="pricing-price">£1,000</div>
         </div>
-        <div class="pricing-card">
+        <div class="pricing-card pricing-card--ink">
           <div class="pricing-tier-label">monthly retainer — per system</div>
           <div class="pricing-price">£500<span class="pricing-price-unit"> / mo</span></div>
         </div>
@@ -2570,7 +2546,7 @@
         <img loading="lazy" decoding="async" class="service-callout-img" src="images/services/services-page-callout.jpg" alt="A subcontractor director reviewing organised project dashboards at a site office desk." style="object-position: center 20%; transform: scaleX(-1);">
         <div class="service-callout-overlay">
           <p class="service-callout-text">See our services page for details on each automation system.</p>
-          <button class="service-audit-btn" onclick="showPage('page-services')">view our services</button>
+          <button class="service-audit-btn btn-secondary" onclick="showPage('page-services')">view our services</button>
         </div>
       </div>
 
@@ -2652,12 +2628,12 @@
       <!-- menu footer: toggle + privacy + copyright -->
       <div id="menuMode" style="position:absolute;bottom:20px;left:32px;right:20px;z-index:2;display:flex;flex-direction:column;gap:0;">
         <svg id="msToggleSvg" viewBox="0 0 274.28 178.65" xmlns="http://www.w3.org/2000/svg" style="width:44px;height:28px;cursor:pointer;display:block;flex-shrink:0;margin-bottom:18px;">
-          <rect id="togCircleEl" x="27.29" y="27.29" width="124.04" height="124.04" rx="62.02" ry="62.02" style="fill:#1c1814;transition:x .3s cubic-bezier(.4,0,.2,1)"/>
-          <path id="togPathEl" style="fill:#1c1814" d="M184.96,0h-95.64C39.99,0,0,39.99,0,89.32h0c0,49.33,39.99,89.32,89.32,89.32h95.64c49.33,0,89.32-39.99,89.32-89.32h0C274.28,39.99,234.29,0,184.96,0ZM262.71,89.33c0,42.94-34.81,77.75-77.75,77.75h-95.64c-42.94,0-77.75-34.81-77.75-77.75h0C11.57,46.39,46.38,11.58,89.32,11.58h95.64c42.94,0,77.75,34.81,77.75,77.75h0Z"/>
+          <rect id="togCircleEl" x="27.29" y="27.29" width="124.04" height="124.04" rx="62.02" ry="62.02" style="fill:#000000;transition:x .3s cubic-bezier(.4,0,.2,1)"/>
+          <path id="togPathEl" style="fill:#000000" d="M184.96,0h-95.64C39.99,0,0,39.99,0,89.32h0c0,49.33,39.99,89.32,89.32,89.32h95.64c49.33,0,89.32-39.99,89.32-89.32h0C274.28,39.99,234.29,0,184.96,0ZM262.71,89.33c0,42.94-34.81,77.75-77.75,77.75h-95.64c-42.94,0-77.75-34.81-77.75-77.75h0C11.57,46.39,46.38,11.58,89.32,11.58h95.64c42.94,0,77.75,34.81,77.75,77.75h0Z"/>
         </svg>
         <div style="display:flex;flex-direction:column;gap:5px;">
-          <span id="privacyLink" style="font-family:var(--dm);font-size:10px;letter-spacing:0.1em;color:var(--muted);cursor:pointer;transition:color .15s ease;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'" onclick="showPage('page-privacy')" onkeydown="if(event.key==='Enter'){showPage('page-privacy');}" tabindex="0" role="button">privacy</span>
-          <span style="font-family:var(--dm);font-size:10px;letter-spacing:0.1em;color:var(--muted);user-select:none;">formattion ai © 2026</span>
+          <span id="privacyLink" style="font-size:10px;letter-spacing:0.1em;color:var(--muted);cursor:pointer;transition:color .15s ease;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'" onclick="showPage('page-privacy')" onkeydown="if(event.key==='Enter'){showPage('page-privacy');}" tabindex="0" role="button">privacy</span>
+          <span style="font-size:10px;letter-spacing:0.1em;color:var(--muted);user-select:none;">formattion ai © 2026</span>
         </div>
       </div>
     </div>
@@ -2669,7 +2645,7 @@
   <defs>
     <style>
       .cls-1 {
-        fill: #1C1814;
+        fill: #000000;
       }
     </style>
   </defs>
@@ -2747,8 +2723,8 @@
   <!-- ═══ CHAT ═══ -->
   <div id="chat">
     <button id="chatClose" class="chat-close-btn" aria-label="Close chat" type="button">
-      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
-        <path d="M6 6l12 12M6 18L18 6"/>
+      <svg viewBox="0 0 219.54 219.53" width="20" height="20" aria-hidden="true">
+        <path fill="currentColor" d="M216.49,201.8l-74.03-74.03c-9.94-9.94-9.94-26.06,0-36L216.5,17.72c4.05-4.05,4.05-10.63,0-14.68h0c-4.05-4.05-10.63-4.05-14.68,0l-74.04,74.04c-9.94,9.94-26.06,9.94-36,0L17.72,3.04c-4.05-4.05-10.63-4.05-14.68,0h0c-4.05,4.05-4.05,10.63,0,14.68l75.29,75.29c9.25,9.25,9.25,24.25,0,33.5L3.05,201.8c-4.05,4.05-4.05,10.63,0,14.68h0c4.05,4.05,10.63,4.05,14.68,0l75.28-75.28c9.25-9.25,24.25-9.25,33.5,0l75.28,75.28c4.05,4.05,10.63,4.05,14.68,0h0c4.05-4.05,4.05-10.63,0-14.68Z"/>
       </svg>
     </button>
     <div class="messages" id="messages"><div class="messages-spacer"></div></div>
@@ -2844,6 +2820,8 @@
     const topLogo     = document.getElementById('topLogo');
     const openChatBtn = document.getElementById('openChat');
     const chatClose   = document.getElementById('chatClose');
+    // For's messages carry the brand mark instead of a name label
+    const FOR_MARK = '<svg class="mark" viewBox="0 0 284.21 284.21" role="img" aria-label="For"><path fill="currentColor" d="M274.11,132.33h-89.21c-7.09,0-10.63-8.57-5.62-13.58l63.04-63.04c3.7-3.7,4.16-9.74.68-13.65-3.77-4.25-10.28-4.4-14.24-.44l-63.3,63.3c-5.01,5.01-13.58,1.46-13.58-5.62V9.78c0-5.4-4.38-9.78-9.78-9.78h0c-5.4,0-9.78,4.38-9.78,9.78v89.54c0,7.09-8.57,10.63-13.58,5.62l-63.32-63.32c-3.97-3.97-10.5-3.81-14.27.47-3.44,3.91-3,9.9.68,13.59l63.08,63.08c5.01,5.01,1.46,13.58-5.62,13.58H10.1c-5.38,0-10,4.21-10.1,9.59-.1,5.48,4.31,9.96,9.77,9.96h89.53c7.09,0,10.63,8.57,5.62,13.58l-63.06,63.06c-3.68,3.68-4.12,9.67-.68,13.59,3.76,4.29,10.3,4.44,14.27.48l63.31-63.31c5.01-5.01,13.58-1.46,13.58,5.62v89.53c0,5.4,4.38,9.78,9.78,9.78h0c5.4,0,9.78-4.38,9.78-9.78v-89.52c0-7.09,8.57-10.63,13.58-5.62l63.06,63.06c3.68,3.68,9.67,4.12,13.59.68,4.29-3.77,4.44-10.3.48-14.27l-63.3-63.3c-5.01-5.01-1.46-13.58,5.62-13.58h89.53c5.46,0,9.87-4.48,9.77-9.96-.1-5.38-4.72-9.59-10.1-9.59Z"/></svg>';
 
     var chatStarted = false;
 
@@ -2859,7 +2837,7 @@
           if (msg.role === 'ai') {
             var wrap = document.createElement('div');
             wrap.className = 'msg-ai';
-            wrap.innerHTML = '<div class="text">' + renderMarkdown(escHtml(msg.text)) + '</div><div class="sender">For</div>';
+            wrap.innerHTML = FOR_MARK + '<div class="text">' + renderMarkdown(escHtml(msg.text)) + '</div>';
             messagesEl.appendChild(wrap);
           } else {
             var wrap = document.createElement('div');
@@ -2972,8 +2950,8 @@
       darkMode = dark;
       document.body.classList.toggle('dark', dark);
       togCircleEl.setAttribute('x', dark ? '122.94' : '27.29');
-      setToggleFill(dark ? '#edecea' : '#1c1814');
-      document.querySelectorAll('.brand-logo .cls-1').forEach(el => el.style.fill = dark ? '#EDECEA' : '#1C1814');
+      setToggleFill(dark ? '#F4EFE6' : '#000000');
+      document.querySelectorAll('.brand-logo .cls-1').forEach(el => el.style.fill = dark ? '#F4EFE6' : '#000000');
     }
 
     // Restore saved preference on load
@@ -3341,14 +3319,14 @@
       return text
         .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
         .replace(/\*(.+?)\*/g, '<em>$1</em>')
-        .replace(/`(.+?)`/g, '<code style="font-family:var(--mono);font-size:15px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:2px;">$1</code>')
+        .replace(/`(.+?)`/g, '<code style="font-family:inherit;font-size:15px;background:var(--bg2);padding:1px 6px;border-radius:6px;">$1</code>')
         .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener" style="color:var(--acc);text-decoration:underline;">$1</a>');
     }
 
     function addAiMessage(text) {
       var wrap = document.createElement('div');
       wrap.className = 'msg-ai';
-      wrap.innerHTML = '<div class="text">' + renderMarkdown(escHtml(text)) + '</div><div class="sender">For</div>';
+      wrap.innerHTML = FOR_MARK + '<div class="text">' + renderMarkdown(escHtml(text)) + '</div>';
       messagesEl.appendChild(wrap);
       chatHistory.push({ role: 'ai', text: text });
       saveChatHistory();
@@ -3359,7 +3337,7 @@
     function addAiTyping() {
       var wrap = document.createElement('div');
       wrap.className = 'msg-ai';
-      wrap.innerHTML = '<div class="typing"><span></span><span></span><span></span></div><div class="sender">For</div>';
+      wrap.innerHTML = FOR_MARK + '<div class="typing"><span></span><span></span><span></span></div>';
       messagesEl.appendChild(wrap);
       scrollBottom();
       return wrap;
@@ -3484,7 +3462,9 @@
 
       var NS = 'http://www.w3.org/2000/svg';
       var BLINK = 2 / 2.2;               // caret blink period, seconds
-      var POP = 0.22;                    // glyph settle time, seconds
+      var INTRO = BLINK * 1.5;           // caret alone on an empty line before the first key
+      var HOLD = BLINK * 4;              // finished headline stays on screen
+      var RESET = 2.2;                   // backspacing it away
       var CARET_W = 3, CARET_H = 56;
       var titleEl = svg.querySelector('title');
       var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -3493,13 +3473,6 @@
 
       function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
       function jitter(i) { return ((Math.sin(i * 12.9898) * 43758.5453) % 1 + 1) % 1; }   // deterministic 0..1
-      function easeOutBack(t) { var c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); }
-      function popScale(start, t) {      // 1.12 → 1 over POP seconds from `start`
-        if (t <= start) return 1.12;
-        if (t >= start + POP) return 1;
-        return 1.12 - 0.12 * easeOutBack((t - start) / POP);
-      }
-      function pivot(x, y, s) { return 'translate(' + x + ' ' + y + ') scale(' + s + ') translate(' + -x + ' ' + -y + ')'; }
       function el(name, attrs, parent) {
         var node = document.createElementNS(NS, name);
         for (var k in attrs) node.setAttribute(k, attrs[k]);
@@ -3525,55 +3498,43 @@
 
       // Build one headline's group and work out when each key lands. The group has to be
       // in the DOM first: word gaps and the caret position come from measured glyph boxes.
-      function build(h) {
+      function build(h, index) {
         var G = h.glyphs.length, split = h.split, i;
         h.g = el('g', { 'class': 'hero-live', transform: 'translate(' + h.shift[0] + ' ' + h.shift[1] + ')' }, svg);
         h.paths = h.glyphs.map(function(d) { return el('path', { d: d, opacity: 0 }, h.g); });
         h.boxes = h.paths.map(function(p) { var b = p.getBBox(); return { x: b.x, r: b.x + b.width, y: b.y, h: b.height }; });
 
         var wordStart = {}, avg = 0, n = 0;
-        wordStart[0] = wordStart[split] = true;
         for (i = 1; i < G; i++) if (i !== split) { avg += h.boxes[i].x - h.boxes[i - 1].r; n++; }
         avg /= Math.max(1, n);
         for (i = 1; i < G; i++) if (i !== split && h.boxes[i].x - h.boxes[i - 1].r > avg * 2.5) wordStart[i] = true;
+        function isStop(j) { var b = h.boxes[j]; return b.h < 12 && b.r - b.x < 12; }   // a full stop
 
-        // human rhythm: uneven key intervals, a pause after each word, the odd hesitation
-        var lastStart = 0;
-        var gaps = h.glyphs.map(function(_, i) {
-          if (wordStart[i]) lastStart = i;
-          if (i === 0 || i === split) return 0.3;                        // first key of a line
-          if (h.steady) {                                                // steady ~0.1s, slower on a word's first keys
-            if (wordStart[i]) return 0.12 + BLINK * 1.5;
-            return 0.09 + jitter(i) * 0.04 + (i - lastStart < 2 ? 0.05 : 0);
+        // Natural typing: one steady hand with small variations. Keys land 55–115 ms apart;
+        // a new word costs the space bar plus a beat; a full stop or a line break takes a
+        // breath. Nothing pops and nothing waits long enough to look staged.
+        function rnd(i, k) { return jitter(index * 31 + i * 3 + k); }   // per headline, so no two share a rhythm
+        var t = INTRO;
+        h.times = [];
+        h.spaceAt = [];                  // when the space bar lands before glyph i (the caret steps forward)
+        for (i = 0; i < G; i++) {
+          var key = 0.055 + rnd(i, 0) * 0.06;
+          if (i === split) {             // "Enter": caret drops to line two, then the next key
+            h.line2Start = t + 0.3 + rnd(i, 1) * 0.12;
+            t = h.line2Start + 0.22 + rnd(i, 2) * 0.1;
+          } else if (wordStart[i]) {
+            h.spaceAt[i] = t + key;
+            t += key + 0.07 + rnd(i, 1) * 0.09 + (isStop(i - 1) ? 0.3 : 0);
+          } else if (i > 0) {
+            t += key + (rnd(i, 2) > 0.94 ? 0.12 : 0);   // the odd hesitation
           }
-          var w = 0.07 + jitter(i) * 0.07;                               // 0.07–0.14s per key
-          if (wordStart[i]) w += BLINK * 1.5;                            // word gap ≥ 1.5 blinks
-          else if (jitter(i * 7 + 3) > 0.84) w += 0.25;                  // random hesitation
-          return w;
-        });
-        function sum(a, b) { var s = 0; for (var j = a; j < b; j++) s += gaps[j]; return s; }
-
-        var cues = {}, total = 0;
-        for (var name in h.scenes) { cues[name] = total; total += h.scenes[name]; }
-        var holdAt = cues.Hold != null ? cues.Hold : (cues.Reset != null ? cues.Reset : total);
-        var k1 = Math.max(0.1, cues.LineTwo - cues.LineOne - 0.4) / sum(0, split);
-        var k2 = Math.max(0.1, holdAt - cues.LineTwo - (h.suffix ? 0.9 : 0.4)) / sum(split, G);
-        var acc = cues.LineOne;
-        h.times = gaps.map(function(gap, i) {
-          if (h.chain) {                                                 // line two follows line one after an "Enter" pause
-            if (i === split) acc += BLINK * 1.5;
-            return acc += gap;
-          }
-          if (i === split) acc = cues.LineTwo;                           // each line fills its own scene
-          return acc += gap * (i < split ? k1 : k2);
-        });
-
-        h.total = total;
-        h.line2Start = h.chain ? h.times[split - 1] + BLINK * 1.2 : cues.LineTwo;
-        h.suffixTime = h.times[G - 1] + 0.42;
-        h.typedEnd = h.suffix ? h.suffixTime : h.times[G - 1];
-        h.resetStart = cues.Reset != null ? cues.Reset : total - 2.4;
-        h.resetDur = Math.max(0.5, total - h.resetStart);
+          h.times.push(t);
+        }
+        h.suffixSpace = t + 0.08;
+        h.suffixTime = t + 0.28;
+        h.typedEnd = h.suffix ? h.suffixTime : t;
+        h.resetStart = h.typedEnd + HOLD;
+        h.total = h.resetStart + RESET;
 
         if (h.suffix) {
           var lb = h.boxes[G - 1];
@@ -3587,7 +3548,7 @@
         var G = h.glyphs.length, split = h.split, N = G + (h.suffix ? 1 : 0), i;
         var inReset = T >= h.resetStart, del = 0;
         if (inReset) {                   // a short reaction pause, then a held backspace that speeds up
-          var p = clamp((T - h.resetStart - 0.35) / (h.resetDur - 0.5), 0, 1);
+          var p = clamp((T - h.resetStart - 0.35) / (RESET - 0.5), 0, 1);
           del = Math.min(N, Math.floor(p * p * (N + 0.999)));
         }
         var visible = N - del, last = -1;
@@ -3596,28 +3557,21 @@
         if (inReset) last = visible - 1;
         var suffixOn = !!h.suffix && last >= G;
 
-        for (i = 0; i < G; i++) {
-          var on = T >= h.times[i] && (!inReset || i < visible);
-          var b = h.boxes[i], s = on && h.pop ? popScale(h.times[i], T) : 1;
-          setAttr(h.paths[i], 'opacity', on ? '1' : '0');
-          setAttr(h.paths[i], 'transform', s === 1 ? '' : pivot((b.x + b.r) / 2, b.y + b.h, s));
-        }
-        if (h.flag) {
-          var fs = suffixOn && h.pop ? popScale(h.suffixTime, T) : 1;
-          setAttr(h.flag, 'opacity', suffixOn ? '1' : '0');
-          setAttr(h.flag, 'transform', fs === 1 ? '' : pivot(h.sfx.x + h.sfx.w / 2, h.sfx.y + h.sfx.h / 2, fs));
-        }
+        for (i = 0; i < G; i++) setAttr(h.paths[i], 'opacity', i <= last ? '1' : '0');
+        if (h.flag) setAttr(h.flag, 'opacity', suffixOn ? '1' : '0');
 
+        // caret: after the last glyph; one step on once the space bar lands; line two after "Enter"
         var line = last < split ? 0 : 1;
         var cx = last < 0 ? h.startX : (suffixOn ? h.sfx.x + h.sfx.w + 6 : h.boxes[last].r + 5);
-        if (last === split - 1 && T >= h.line2Start && !inReset) { cx = h.startX; line = 1; }   // "Enter": caret drops to line two
+        if (!inReset && last >= 0) {
+          if (last === split - 1) { if (T >= h.line2Start) { cx = h.startX; line = 1; } }
+          else if (last < G - 1) { if (T >= h.spaceAt[last + 1]) cx = h.boxes[last + 1].x - 6; }
+          else if (h.suffix && last === G - 1 && T >= h.suffixSpace) cx = h.sfx.x - 6;
+        }
         var blinkOn = true;
-        if (last < 0 || last === N - 1) {                                // idle: nothing typed yet, or everything typed
-          if (h.simpleBlink) blinkOn = Math.floor(T * 2.2) % 2 === 0;
-          else {                                                         // phase restarts when typing stops
-            var from = last < 0 ? (inReset ? h.resetStart + h.resetDur - 0.15 : 0) : h.typedEnd;
-            blinkOn = Math.floor(Math.max(0, T - from) / (BLINK / 2)) % 2 === 0;
-          }
+        if (last < 0 || last === N - 1) {                                // idle: the blink restarts when typing stops
+          var from = last < 0 ? (inReset ? h.total - 0.15 : 0) : h.typedEnd;
+          blinkOn = Math.floor(Math.max(0, T - from) / (BLINK / 2)) % 2 === 0;
         }
         setAttr(h.caret, 'x', String(cx));
         setAttr(h.caret, 'y', String(h.lineTops[line]));
@@ -3627,7 +3581,7 @@
       function show(i) {
         if (cur) svg.removeChild(cur.g);
         cur = headlines[i]; curIndex = i; T = 0;
-        if (cur.g) svg.appendChild(cur.g); else build(cur);
+        if (cur.g) svg.appendChild(cur.g); else build(cur, i);
         svg.setAttribute('aria-label', cur.label);
         if (titleEl) titleEl.textContent = cur.label;
       }
@@ -4216,7 +4170,7 @@
         <button class="article-callout-btn" onclick="showPage('page-contact')">contact us</button>
       </div>
 
-      <p style="margin-top:32px;font-family:var(--mono);font-size:11px;color:var(--muted);">This policy will be updated as our services evolve. Material changes will be reflected in the date above.</p>
+      <p style="margin-top:32px;font-size:13px;color:var(--muted);">This policy will be updated as our services evolve. Material changes will be reflected in the date above.</p>
 
     </div>
   </div>

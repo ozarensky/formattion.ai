@@ -118,18 +118,22 @@ ARTICLE_SHELL_CSS = """
     border-bottom: 1px solid var(--dim);
   }
   .article-shell-header a {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.08em;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 400;
     text-transform: lowercase;
     color: var(--ink);
     text-decoration: none;
   }
   .article-shell-header a:hover { color: var(--acc); }
   .article-shell-main {
-    max-width: 900px;
+    max-width: 1120px;
     margin: 0 auto;
-    padding: 60px 65px 80px;
+    padding: 60px 40px 80px;
+  }
+  @media (max-width: 768px) {
+    .article-shell-main { padding: 40px 20px 60px; }
+    .article-shell-header { padding: 18px 20px; }
   }
   .article-shell-main .page,
   .article-shell-main .page-inner {
@@ -145,9 +149,8 @@ ARTICLE_SHELL_CSS = """
     padding: 32px;
     text-align: center;
     color: var(--muted);
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.06em;
+    font-family: var(--sans);
+    font-size: 13px;
   }
   .article-shell-footer p { margin: 4px 0; }
   .article-shell-footer a { color: var(--ink); text-decoration: none; }
@@ -228,7 +231,7 @@ ARTICLE_TEMPLATE = """<!DOCTYPE html>
   <meta name="twitter:image" content="{og_image}" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;1,300;1,400&family=DM+Mono:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <script type="application/ld+json">{article_jsonld}</script>
   <script type="application/ld+json">{breadcrumb_jsonld}</script>
   <style>{styles}</style>
@@ -272,7 +275,7 @@ NEWS_INDEX_TEMPLATE = """<!DOCTYPE html>
   <meta property="og:locale" content="en_GB" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;1,300;1,400&family=DM+Mono:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <script type="application/ld+json">{{
     "@context": "https://schema.org",
     "@type": "CollectionPage",
