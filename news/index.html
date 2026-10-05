@@ -1026,6 +1026,11 @@
       from { opacity: 0; transform: translate(-50%, calc(-50% + 20px)); }
       to   { opacity: 1; transform: translate(-50%, -50%); }
     }
+    /* Typed hero — the player (LANDING HERO script) swaps the static headline for the live one */
+    .brand-slogan { overflow: visible; }
+    .brand-slogan.is-live .hero-static,
+    .brand-slogan:not(.is-live) .hero-live { display: none; }
+    .brand-slogan .hero-live { fill: var(--ink); }
 
     .chat-btn {
       position: absolute;

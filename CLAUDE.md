@@ -13,6 +13,7 @@ before any visual change, escalate before any push, never `git add -A`.
 index.html            # THE source of truth: landing, services, news cards, article pages, privacy, chat widget, contact form
 news/                 # BUILD OUTPUT — never hand-edit. news/index.html + news/<slug>/index.html per article
 sitemap.xml           # BUILD OUTPUT — never hand-edit
+hero-headlines.json   # BUILD OUTPUT — never hand-edit. Landing-hero headlines (glyph paths + timings), fetched by index.html
 images/               # about/, news/<slug>/image-1.jpg (+ image-2.jpg), services/, logo.svg, logo-email.png, landing-bg.jpg
 robots.txt            # Allows search engines, blocks ~30 AI/dataset crawlers. Intentional.
 .well-known/ai.txt    # Blanket AI-training opt-out. Intentional.
@@ -21,6 +22,7 @@ favicon.svg
 tools/
   validate_index.py   # Read-only audit of index.html. Run before every push. Exit 0 = safe.
   build_static.py     # index.html → news/<slug>/index.html + news/index.html + sitemap.xml. Needs beautifulsoup4.
+  extract_hero_headlines.py  # ../branding/hero animations/*.html (Claude Design exports) → hero-headlines.json. Stdlib only.
   sync_services.py    # Pull services from Google Sheet via n8n `service-sync` webhook, rewrite cards/pages, gen images (--force)
   generate_image.py   # Thin shim → ../../image generator/tools/generate_image.py (used by sync_services)
   seed_services_sheet.py  # One-off: seeded the services Google Sheet from the business plan. Historical.
@@ -41,8 +43,13 @@ branding/             # STALE copy of the brand guidelines — read ../branding/
   `page-article-<slug>` to it; never remove the other entries.
 - **Routing:** hash-based SPA (`showPage()`, `pushState`, `hashchange`).
 - **Backend calls:** `CHAT_WEBHOOK_URL` and `CONTACT_WEBHOOK_URL` POST to n8n Cloud (`ozarensky.app.n8n.cloud`). Public by design.
-- **Landing hero:** inline SVG (`class="brand-slogan"`, source `../branding/SVG/hero.svg`) with every path `fill="var(--ink)"`.
-  When inlining any brand SVG: strip xml header, `<defs><style>`, ids, `data-name`; keep `.brand-slogan` width in sync with `.chat-btn` offset.
+- **Landing hero:** `<svg class="brand-slogan">` plays typed headlines. The `LANDING HERO` IIFE at the end of the main script
+  fetches `/hero-headlines.json`, shuffles the headlines (all shown before any repeats) and types / holds / backspaces each into a
+  `<g class="hero-live">`. Colour mode is CSS only (`.hero-live { fill: var(--ink) }`) — never add JS for it. The static paths in
+  `<g class="hero-static">` (source `../branding/SVG/hero.svg`) are the fallback for no-JS and a failed fetch;
+  `prefers-reduced-motion` gets one random headline fully typed, no caret, no loop. The loop stops while `#landing.hidden`.
+  Keep `.brand-slogan` width in sync with `.chat-btn` offset.
+  When inlining any brand SVG: strip xml header, `<defs><style>`, ids, `data-name`.
 
 ## Adding a New Article
 
@@ -109,6 +116,21 @@ git push
 
 Never use `git add -A`. Never push without the build step — the article would be invisible to search engines.
 
+## Changing the landing headlines
+
+The headlines are Claude Design "typing hero" exports kept in `../branding/hero animations/` (outside this repo). Each is a 1 MB
+React + Babel bundle around ~10 KB of real content — never deploy or iframe them. Only glyph paths and timings ship.
+
+1. Export the new headline from Claude Design into `../branding/hero animations/` (delete an export to retire its headline).
+2. Add its spoken text to `LABELS` in `tools/extract_hero_headlines.py` — the exports hold outlines, not text; it becomes the `aria-label`.
+3. `python tools/extract_hero_headlines.py` rewrites `hero-headlines.json`. Heed every `WARN`: an unknown hero-anim build means the
+   typing logic changed in Claude Design, and the player in `index.html` (ported from four known builds) must be re-checked.
+4. Preview over HTTP (`.claude/launch.json` → `python -m http.server 8731`), then `git add hero-headlines.json` and deploy as usual.
+
+The extractor measures the caret position from the outlines (text left edge, cap top) and the player uses one caret height (56),
+so every headline starts from the same caret and the rotation has no jump. The exports' own `HERO_LAYOUT` caret values drift per file.
+Per-export typing behaviour (`chain`, `steady`, `pop`, `simpleBlink`) is detected from the export and kept as authored.
+
 ## SEO / scraping policy
 
 - `robots.txt` blocks AI training crawlers (GPTBot, ClaudeBot, Google-Extended, PerplexityBot, CCBot, Bytespider, etc.) while allowing real search engines.
@@ -122,4 +144,6 @@ Never weaken these signals without checking with Ion first. See `../workflows/se
 
 - `sitemap.xml` `lastmod` for `/` is derived from `index.html`'s filesystem mtime; a fresh clone rebuilds it to the clone date. Harmless.
 - `SHEET_ID` differs between `sync_services.py`, `seed_services_sheet.py` and the latter's docstring. `sync_services.py` is the one that matters; verify against the n8n `service-sync` workflow before running.
+- Opening `index.html` from `file://` shows the static hero headline, not the typed ones — `fetch` of `hero-headlines.json` fails there. Preview over HTTP.
+- `python -m http.server` lets the browser cache `hero-headlines.json`; hard-reload after re-extracting. Vercel revalidates on every request.
 - `validate_index.py` was broken from 2026-05-11 (markup change) to 2026-09-22 (regex fix). If it ever reports 0 cards on a site that clearly has cards, the card markup changed again — fix the regex, don't bypass.
