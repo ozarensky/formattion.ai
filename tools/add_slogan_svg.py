@@ -40,7 +40,7 @@ def clean_svg(raw: str) -> str:
 
 
 def main() -> None:
-    if len(sys.argv) != 3 or not re.fullmatch(r"(0[2-9]|10)", sys.argv[1]):
+    if len(sys.argv) != 3 or not re.fullmatch(r"\d{2}", sys.argv[1]):
         sys.exit(__doc__)
     num, src = sys.argv[1], Path(sys.argv[2])
     svg = clean_svg(src.read_text(encoding="utf-8"))
