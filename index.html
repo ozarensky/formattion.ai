@@ -289,13 +289,9 @@
 
     /* ── page inner layout ── */
     .page-inner {
-      max-width: 1120px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 140px 40px 100px;
-    }
-    /* 769–1260px: wider gutters so the fixed back / back-to-top controls stay clear of the text */
-    @media (min-width: 769px) and (max-width: 1260px) {
-      .page-inner { padding-left: 120px; padding-right: 120px; }
+      padding: 140px 65px 100px;
     }
 
 
@@ -316,11 +312,13 @@
       font-weight: 300;
       line-height: 1.75;
       color: var(--ink-body);
-      max-width: 640px;
+      max-width: 580px;
     }
     .page-body p { margin-bottom: 28px; }
     .page-body p:last-child { margin-bottom: 0; }
     .page-body strong { font-weight: 500; color: var(--ink); }
+    #page-services .page-body { max-width: none; }
+    #page-about .page-body { max-width: none; }
     .page-section-title {
       font-family: 'Cormorant Infant', Georgia, serif;
       font-weight: 300;
@@ -443,7 +441,6 @@
     }
 
     /* contact form */
-    #contact-form-wrap { max-width: 640px; }
     .contact-field {
       margin-bottom: 12px;
     }
@@ -661,7 +658,6 @@
       font-weight: 300;
       line-height: 1.75;
       color: var(--ink-body);
-      max-width: 640px;
     }
     .article-stats {
       display: grid;
@@ -736,7 +732,6 @@
       color: var(--ink-body);
       line-height: 1.65;
       margin-bottom: 14px;
-      max-width: 640px;
     }
     .article-item-blurb {
       font-family: var(--sans);
@@ -808,7 +803,7 @@
       margin-bottom: 16px;
       margin-top: 8px;
     }
-    .service-card-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 32px; max-width: 640px; }
+    .service-card-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 32px; }
     .service-card {
       background: var(--work);
       border-radius: 6px;
@@ -826,7 +821,6 @@
       padding: 28px;
       margin-top: 16px;
       margin-bottom: 80px;
-      max-width: 640px;
     }
     .service-result-text {
       font-family: 'Cormorant Infant', Georgia, serif;
@@ -918,7 +912,7 @@
       letter-spacing: 0;
       line-height: 1.25;
       color: var(--ink);
-      max-width: 680px;
+      max-width: 640px;
     }
     .article-callout-btn {
       display: inline-flex;
@@ -1431,7 +1425,6 @@
       grid-template-columns: 1fr 1fr;
       gap: 16px;
       margin-bottom: 8px;
-      max-width: 640px;
     }
     .pricing-card {
       background: var(--bg2);

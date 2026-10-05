@@ -127,9 +127,9 @@ ARTICLE_SHELL_CSS = """
   }
   .article-shell-header a:hover { color: var(--acc); }
   .article-shell-main {
-    max-width: 1120px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: 60px 40px 80px;
+    padding: 60px 65px 80px;
   }
   @media (max-width: 768px) {
     .article-shell-main { padding: 40px 20px 60px; }
