@@ -213,8 +213,8 @@ ARTICLE_TEMPLATE = """<!DOCTYPE html>
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1, noai, noimageai" />
   <meta name="googlebot" content="index, follow, noai, noimageai" />
   <link rel="canonical" href="{canonical}" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="apple-touch-icon" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+  <link rel="apple-touch-icon" href="/favicon.svg?v=2" />
   <meta name="theme-color" content="#F4EFE6" />
   <meta property="og:title" content="{title_esc}" />
   <meta property="og:description" content="{description_esc}" />
@@ -264,8 +264,8 @@ NEWS_INDEX_TEMPLATE = """<!DOCTYPE html>
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, noai, noimageai" />
   <meta name="googlebot" content="index, follow, noai, noimageai" />
   <link rel="canonical" href="{base}/news/" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="apple-touch-icon" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+  <link rel="apple-touch-icon" href="/favicon.svg?v=2" />
   <meta name="theme-color" content="#F4EFE6" />
   <meta property="og:title" content="From the field — formattion.ai news" />
   <meta property="og:description" content="Perspectives on automation, operational systems, and what's changing in the UK construction subcontract sector." />
