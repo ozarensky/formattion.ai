@@ -713,9 +713,7 @@
       font-weight: 300;
       color: var(--ink);
       line-height: 1.55;
-      transition: background .2s ease;
     }
-    .service-card:hover { background: var(--bg3); }
     .service-result-card {
       background: none;
       border: 1px solid var(--idle-border);
@@ -1831,8 +1829,7 @@
      so a press is immediately acknowledged. ── */
   @media (hover: none) {
     .news-card:active,
-    .service-cell:active,
-    .outcome-card:active {
+    .service-cell:active {
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(0,0,0,0.14);
     }
@@ -1845,12 +1842,6 @@
     .drop-item:active,
     #topLogo:active {
       opacity: 0.5;
-    }
-    /* Suppress the sticky hover state that can persist after tap on some
-       Android browsers — neutralise :hover entirely and rely on :active. ── */
-    .outcome-card:hover {
-      transform: none;
-      box-shadow: none;
     }
   }
 
@@ -1909,9 +1900,7 @@
     border: 1px solid var(--idle-border);
     padding: 28px;
     border-radius: 12px;
-    transition: border-color .2s ease;
   }
-  .outcome-card:hover { border-color: var(--ink); }
   .outcome-card-label {
     font-family: var(--sans);
     font-size: 13px;

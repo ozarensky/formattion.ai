@@ -142,6 +142,9 @@ The exports' typing (long pauses before each word, letters that "pop") was rejec
 - **Layout:** `.page-inner` is 1120px with 40px gutters (120px between 769–1260px so the fixed back / top controls clear the text);
   text columns cap at 640px, cards and hero images span the container. Mobile overrides for `.outcomes-grid` / `.outcome-card`
   sit *before* their base rules in the stylesheet — check order before patching rules by selector.
+- **Hover / press states are for clickable things only:** `.service-cell`, `.news-card`, the pills, menu items, icons. List rows
+  (`.service-card`) and `.outcome-card` are static — no `:hover`, no `:active`, no transition. The guidelines' own sample shows a
+  hover on list rows; it was copied in on 2026-10-05 and removed the same day because it reads as a link that goes nowhere.
 - **Chat:** For's messages are prefixed by the mark (`FOR_MARK` in the script), no name label; the user bubble is `--bg3`.
 
 ## SEO / scraping policy
