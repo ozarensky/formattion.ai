@@ -22,6 +22,7 @@ tools/
   validate_index.py   # Read-only audit of index.html. Run before every push. Exit 0 = safe.
   build_static.py     # index.html → news/<slug>/index.html + news/index.html + sitemap.xml. Needs beautifulsoup4.
   sync_services.py    # Pull services from Google Sheet via n8n `service-sync` webhook, rewrite cards/pages, gen images (--force)
+  add_slogan_svg.py   # Clean an Illustrator slogan export and insert it into its hero <template> in index.html
   generate_image.py   # Thin shim → ../../image generator/tools/generate_image.py (used by sync_services)
   seed_services_sheet.py  # One-off: seeded the services Google Sheet from the business plan. Historical.
 service-sync.json     # n8n export of the service-sync workflow
@@ -41,7 +42,12 @@ branding/             # STALE copy of the brand guidelines — read ../branding/
   `page-article-<slug>` to it; never remove the other entries.
 - **Routing:** hash-based SPA (`showPage()`, `pushState`, `hashchange`).
 - **Backend calls:** `CHAT_WEBHOOK_URL` and `CONTACT_WEBHOOK_URL` POST to n8n Cloud (`ozarensky.app.n8n.cloud`). Public by design.
-- **Landing hero:** inline SVG (`class="brand-slogan"`, source `../branding/SVG/hero.svg`) with every path `fill="var(--ink)"`.
+- **Landing hero:** ten slogans, one picked at random per page load. Slogan 01 is the inline `<svg class="brand-slogan">`
+  (source `../branding/SVG/hero.svg`, every path `fill="var(--ink)"`); slogans 02–10 are `<template class="hero-slogan">`
+  entries between `<!-- HERO-SLOGANS-START -->` / `END`, followed by the picker script. A template with no `<path>` is
+  skipped, so pending outlines never break the hero. Insert an Illustrator export with `python tools/add_slogan_svg.py <02-10> file.svg`
+  (export at slogan 01's type size — the picker scales by viewBox width via `--slogan-scale`). Copy lives in the brand
+  guideline's Slogans section; change it there first, then in `data-label`.
   When inlining any brand SVG: strip xml header, `<defs><style>`, ids, `data-name`; keep `.brand-slogan` width in sync with `.chat-btn` offset.
 
 ## Adding a New Article

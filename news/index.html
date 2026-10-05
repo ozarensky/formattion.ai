@@ -1015,7 +1015,9 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: min(900px, calc(100vw - 130px));
+      /* --slogan-scale is set per slogan by the hero-slogan script (viewBox width ÷ slogan 01's),
+         so every slogan renders at the same type size regardless of its length. */
+      width: min(calc(900px * var(--slogan-scale, 1)), calc(100vw - 130px));
       height: auto;
       display: block;
       color: var(--ink);
@@ -1428,7 +1430,7 @@
     .chat-btn { animation: mobileFadeIn .9s ease .45s both !important; }
 
     .brand-slogan {
-      width: calc(100vw - 40px);
+      width: calc((100vw - 40px) * min(1, var(--slogan-scale, 1)));
     }
     @keyframes mobileFadeIn { from { opacity:0; } to { opacity:1; } }
 
