@@ -42,7 +42,7 @@ branding/             # STALE copy of the brand guidelines — read ../branding/
   `page-article-<slug>` to it; never remove the other entries.
 - **Routing:** hash-based SPA (`showPage()`, `pushState`, `hashchange`).
 - **Backend calls:** `CHAT_WEBHOOK_URL` and `CONTACT_WEBHOOK_URL` POST to n8n Cloud (`ozarensky.app.n8n.cloud`). Public by design.
-- **Landing hero:** several slogans (currently four), one picked at random per page load. Slogan 01 is the inline `<svg class="brand-slogan">`
+- **Landing hero:** several slogans (currently seven), one picked at random per page load. Slogan 01 is the inline `<svg class="brand-slogan">`
   (source `../branding/SVG/hero.svg`, every path `fill="var(--ink)"`); the rest are `<template class="hero-slogan">`
   entries between `<!-- HERO-SLOGANS-START -->` / `END`, followed by the picker script. A template with no `<path>` is
   skipped, so pending outlines never break the hero. Insert an Illustrator export with `python tools/add_slogan_svg.py <nn> file.svg`
