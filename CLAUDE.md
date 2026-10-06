@@ -139,9 +139,10 @@ The exports' typing (long pauses before each word, letters that "pop") was rejec
   Helvetica Neue 300, 500 for emphasis. Labels, dates and prices are sentence-case Helvetica 13px muted with tabular figures.
 - **Buttons:** every pill (`.chat-btn`, `.contact-submit`, `.service-audit-btn`, `.article-callout-btn`) is the filled primary;
   add `.btn-secondary` for an outlined one. Pills on image callout cards keep fixed ink-on-cream colours in both modes.
-- **Layout:** `.page-inner` is 1120px with 40px gutters (120px between 769–1260px so the fixed back / top controls clear the text);
-  text columns cap at 640px, cards and hero images span the container. Mobile overrides for `.outcomes-grid` / `.outcome-card`
-  sit *before* their base rules in the stylesheet — check order before patching rules by selector.
+- **Layout:** `.page-inner` stays at 900px with 65px gutters (770px content). The guidelines' 1120px container was applied on
+  2026-10-05 and reverted the same evening — Ion rejected it because every hero image and 3:1 card grew by a third. Body text runs
+  the full column on services/about (`max-width: none`), 580px elsewhere; do not cap text at 640px. Mobile overrides for
+  `.outcomes-grid` / `.outcome-card` sit *before* their base rules in the stylesheet — check order before patching rules by selector.
 - **Hover / press states are for clickable things only:** `.service-cell`, `.news-card`, the pills, menu items, icons. List rows
   (`.service-card`) and `.outcome-card` are static — no `:hover`, no `:active`, no transition. The guidelines' own sample shows a
   hover on list rows; it was copied in on 2026-10-05 and removed the same day because it reads as a link that goes nowhere.
