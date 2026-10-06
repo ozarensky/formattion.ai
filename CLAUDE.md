@@ -23,6 +23,7 @@ tools/
   validate_index.py   # Read-only audit of index.html. Run before every push. Exit 0 = safe.
   build_static.py     # index.html → news/<slug>/index.html + news/index.html + sitemap.xml. Needs beautifulsoup4.
   extract_hero_headlines.py  # ../branding/hero animations/*.html (Claude Design exports) → hero-headlines.json. Stdlib only.
+  build_hero_embed.py # hero-headlines.json → ../branding/hero animations/formattion-typed-headline.html (self-contained, for the platform log-in page)
   sync_services.py    # Pull services from Google Sheet via n8n `service-sync` webhook, rewrite cards/pages, gen images (--force)
   generate_image.py   # Thin shim → ../../image generator/tools/generate_image.py (used by sync_services)
   seed_services_sheet.py  # One-off: seeded the services Google Sheet from the business plan. Historical.
@@ -126,6 +127,13 @@ React + Babel bundle around ~10 KB of real content — never deploy or iframe th
 2. Add its spoken text to `LABELS` in `tools/extract_hero_headlines.py` — the exports hold outlines, not text; it becomes the `aria-label`.
 3. `python tools/extract_hero_headlines.py` rewrites `hero-headlines.json` (glyph outlines and positions only). Heed every `WARN`.
 4. Preview over HTTP (`.claude/launch.json` → `python -m http.server 8731`), then `git add hero-headlines.json` and deploy as usual.
+5. `python tools/build_hero_embed.py` — regenerates the standalone copy used outside this site (see below).
+
+**Standalone copy for the platform log-in page** — `../branding/hero animations/formattion-typed-headline.html`, built by
+`tools/build_hero_embed.py`. One file, data baked in, no fetch: on each page load it picks one headline at random, types it with
+the same rhythm, then leaves the caret blinking (CSS animation, frame loop stopped). No rotation, no backspace, no Union Jack.
+Colour is `currentColor`, width is the container's. Copy the block between `EMBED START` and `EMBED END` into the host page.
+Glyph boxes are measured at build time, so it also works when mounted inside a hidden container.
 
 The extractor measures the caret position from the outlines (text left edge, cap top) and the player uses one caret height (56),
 so every headline starts from the same caret and the rotation has no jump. The exports' own `HERO_LAYOUT` caret values drift per file.
